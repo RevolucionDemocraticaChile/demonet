@@ -14,6 +14,11 @@ class User < ActiveRecord::Base
 	validates :name,     presence:   true,
 	                     length:     { maximum: NAME_MAX_LENGTH }
 
-	before_save { self.email = email.downcase }
+  # Hooks:
+
+	before_save do
+		self.username = username.downcase
+		self.email    = email.downcase
+	end
 
 end

@@ -4,7 +4,7 @@ USERNAME_MAX_LENGTH = 50
 EMAIL_MAX_LENGTH = 50
 NAME_MAX_LENGTH = 50
 
-describe User do
+RSpec.describe User, type: :model do
 
   before { @user = User.new(username: "asdf", email: "asdf@foo.com", name: "asdf") }
 

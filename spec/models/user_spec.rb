@@ -2,13 +2,18 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  before { @user = User.new(username: "asdf", email: "asdf@foo.com", name: "asdf") }
+  before { @user = User.new(username: "asdf", email: "asdf@foo.com", name: "asdf",
+    password: "thepass", password_confirmation: "thepass") }
 
   subject { @user }
 
   it { should respond_to(:username) }
   it { should respond_to(:email) }
   it { should respond_to(:name) }
+  it { should respond_to(:password_digest) }
+  it { should respond_to(:password) }
+  it { should respond_to(:password_confirmation) }
+  it { should respond_to(:authenticate) }
 
   it { should be_valid }
 
@@ -70,7 +75,7 @@ RSpec.describe User, type: :model do
 
   describe "when username is already taken" do
     before do
-      user_with_same_username = User.new(username: @user.username, email:"asdf@aasdfs.asa", name: "asd")
+      user_with_same_username = User.new(username: @user.username, email:"asdf@aasdfs.asa", name: "asd", password: "thepass1", password_confirmation: "thepass1")
       user_with_same_username.save
     end
 
@@ -79,7 +84,7 @@ RSpec.describe User, type: :model do
 
   describe "when username is already taken" do
     before do
-      user_with_same_username = User.new(username: @user.username, email:"asdf@aasdfs.asa", name: "asd")
+      user_with_same_username = User.new(username: @user.username, email:"asdf@aasdfs.asa", name: "asd", password: "thepass1", password_confirmation: "thepass1")
       user_with_same_username.username = @user.username.upcase
       user_with_same_username.save
     end
@@ -89,7 +94,7 @@ RSpec.describe User, type: :model do
 
   describe "when email is already taken" do
     before do
-      user_with_same_email = User.new(username: "76245", email:@user.email, name: "asda")
+      user_with_same_email = User.new(username: "76245", email:@user.email, name: "asda", password: "thepass1", password_confirmation: "thepass1")
       user_with_same_email.save
     end
 
@@ -98,13 +103,53 @@ RSpec.describe User, type: :model do
 
   describe "when email is already taken" do
     before do
-      user_with_same_email = User.new(username: "76245", email:@user.email, name: "asda")
+      user_with_same_email = User.new(username: "76245", email:@user.email, name: "asda", password: "thepass1", password_confirmation: "thepass1")
       user_with_same_email.email = @user.email.upcase
       user_with_same_email.save
     end
 
     it { should_not be_valid }
   end
+
+  # Password validations
+
+  describe "when password is not present" do
+    before do
+      @user = User.new(username: "asdf", email: "asdf@foo.com", name: "asdf",
+        password: " ", password_confirmation: " ")
+    end
+    it { should_not be_valid }
+  end
+
+  describe "when password and password_confirmation don't match" do
+    before { @user.password_confirmation = "theWRONGpass" }
+    it { should_not be_valid }
+  end
+
+  describe "return value of authenticate method" do
+    before { @user.save }
+    let(:found_user) { User.find_by(email: @user.email) }
+
+    describe "with valid password" do
+      it { should eq found_user.authenticate(@user.password) }
+    end
+
+    describe "with invalid password" do
+      let(:user_for_invalid_password) { found_user.authenticate("invalid") }
+
+      it { should_not eq user_for_invalid_password }
+      specify { expect(user_for_invalid_password).to eq false }
+    end
+  end
+
+  describe "with a password that's too short" do
+    before do
+      @user.password = @user.password_confirmation = "a" * (User::PASSWORD_MIN_LENGTH - 1)
+    end
+
+    it { should be_invalid }
+  end
+
 
 
 

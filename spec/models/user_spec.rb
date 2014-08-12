@@ -1,9 +1,5 @@
 require 'rails_helper'
 
-USERNAME_MAX_LENGTH = 50
-EMAIL_MAX_LENGTH = 50
-NAME_MAX_LENGTH = 50
-
 RSpec.describe User, type: :model do
 
   before { @user = User.new(username: "asdf", email: "asdf@foo.com", name: "asdf") }
@@ -34,17 +30,17 @@ RSpec.describe User, type: :model do
   # length validation
 
   describe "when username is too long" do
-    before { @user.username = "a" * (USERNAME_MAX_LENGTH+1) }
+    before { @user.username = "a" * (User::USERNAME_MAX_LENGTH+1) }
     it { should_not be_valid }
   end
 
   describe "when email is too long" do
-    before { @user.email = "a" * (EMAIL_MAX_LENGTH+1) }
+    before { @user.email = "a" * (User::EMAIL_MAX_LENGTH+1) }
     it { should_not be_valid }
   end
 
   describe "when name is too long" do
-    before { @user.name = "a" * (NAME_MAX_LENGTH+1) }
+    before { @user.name = "a" * (User::NAME_MAX_LENGTH+1) }
     it { should_not be_valid }
   end
 

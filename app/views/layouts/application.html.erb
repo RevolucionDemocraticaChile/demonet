@@ -5,19 +5,29 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 </head>
 <body>
-  <%= render 'layouts/header' %>
 
   <div class="container">
+    <%= render 'layouts/header' %>
+
     <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>"><%= value %></div>
+      <div class="alert alert-<%= key %> <%= "alert-danger" if key == "error" %> alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <%= value %>
+      </div>
     <% end %>
+
+    <%= yield %>
+
+    <%= render 'layouts/footer' %>
+
+    <%= debug(params) if Rails.env.development? %>
   </div>
-
-  <%= yield %>
-
-  <%= debug(params) if Rails.env.development? %>
 
 </body>
 </html>

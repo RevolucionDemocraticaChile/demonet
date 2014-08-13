@@ -31,7 +31,7 @@ describe "Authentication" do
       it { should have_selector("div.alert.alert-error") }
 
       describe "after visiting another page" do
-        before { click_link "Home" }
+        before { click_link "Rev Dem" }
         it { should_not have_selector("div.alert.alert-error") }
       end
     end

@@ -21,19 +21,21 @@ require 'rails_helper'
 RSpec.describe UsersController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # Admin. As you add validations to Admin, be sure to
+  # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    # skip("Add a hash of attributes valid for your model")
+    { username: "username", email: "email@email.com", name: "Name Surname", password: "thepass", password_confirmation: "thepass" }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    # skip("Add a hash of attributes invalid for your model")
+    { username: "username", email: "email@email.com", name: "Name Surname", password: "thepass", password_confirmation: "thepass1" }
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # AdminsController. Be sure to keep this updated too.
+  # UsersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET index" do
@@ -103,14 +105,16 @@ RSpec.describe UsersController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        # skip("Add a hash of attributes valid for your model")
+        { username: "username", email: "email2@email.com", name: "Name Surname", password: "thepass", password_confirmation: "thepass" }
       }
 
-      it "updates the requested admin" do
+      it "updates the requested user" do
         user = User.create! valid_attributes
         put :update, {:id => user.to_param, :user => new_attributes}, valid_session
         user.reload
-        skip("Add assertions for updated state")
+        # skip("Add assertions for updated state")
+        expect(user.email).to eq new_attributes[:email]
       end
 
       it "assigns the requested user as @user" do

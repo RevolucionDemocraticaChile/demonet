@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
-	def new
 
+	# skip_before_filter :check_session, only: [:new, :create]
+
+	def new
 	end
 
 	def create

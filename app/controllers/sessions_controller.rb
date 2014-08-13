@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 
 		if user && user.authenticate(params[:session][:password])
 			# Sign in and redirect to user show
+			flash[:success] = 'User successfully signed in.'
 			sign_in user
 			redirect_to user
 		else
@@ -18,6 +19,6 @@ class SessionsController < ApplicationController
 
 	def destroy
 		sign_out
-		redirect_to root_url
+		redirect_to signin_path
 	end
 end

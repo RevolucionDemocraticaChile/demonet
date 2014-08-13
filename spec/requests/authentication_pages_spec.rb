@@ -31,7 +31,7 @@ describe "Authentication" do
       it { should have_selector("div.alert.alert-error") }
 
       describe "after visiting another page" do
-        before { click_link "Rev Dem" }
+        before { click_link "RevDem" }
         it { should_not have_selector("div.alert.alert-error") }
       end
     end
@@ -53,8 +53,10 @@ describe "Authentication" do
       describe "followed by signout" do
         before { click_link "Sign out" }
         it { should have_link("Sign in") }
+        specify { expect(current_path).to eq signin_path }
       end
 
     end
   end
+
 end

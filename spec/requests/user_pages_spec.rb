@@ -11,6 +11,9 @@ describe "User pages" do
 		it { should have_content(user.username) }
 		it { should have_content(user.email) }
 		it { should have_content(user.name) }
+
+		
+
 	end
 
 	describe "new" do

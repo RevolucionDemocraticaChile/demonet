@@ -62,16 +62,18 @@ describe "User pages" do
 			it { should have_content(signed_in_user.username) }
 			it { should have_content(signed_in_user.email) }
 			it { should have_content(signed_in_user.name) }
+			it { should have_link("Editar") }
 		end
 
 		describe "show another_user" do
 			let(:another_user) { FactoryGirl.create(:user) }
 			before { visit user_path(another_user) }
 
-			it { should have_content("Profile") }
+			it { should have_content("Perfil") }
 			it { should have_content(another_user.username) }
 			it { should have_content(another_user.email) }
 			it { should have_content(another_user.name) }
+			it { should_not have_link("Editar") }
 		end
 
 		# describe "create new user" do

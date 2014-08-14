@@ -1,12 +1,36 @@
-<div class="center hero-unit">
-	<h1>Territorio <%= @territorio.name %></h1>
+<div class="row">
+	<div class="col-lg-8 col-lg-offset-2">
+		<h1>Territorio <%= @territorio.name %></h1>
 
-	<p>
-		<strong>Nombre:</strong>
-		<%= @territorio.name %>
-	</p>
+		<p>
+			<strong>Nombre:</strong>
+			<%= @territorio.name %>
+		</p>
 
-	<% if can? :edit, @territorio %>
-		<%= link_to 'Edit', edit_territorio_path(@territorio) %>
-	<% end %>
+		<% if can? :edit, @territorio %>
+			<%= link_to 'Editar', edit_territorio_path(@territorio) %>
+		<% end %>
+
+		<h2>Miembros</h2>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nombre</th>
+					<th>Email</th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @territorio.members.each do |member| %>
+					<tr>
+						<td><%= link_to member.name, member %></td>
+						<td><%= member.email %></td>
+						<td><%= link_to 'Eliminar Miembro', '#', class: "btn btn-danger disabled" %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
 </div>

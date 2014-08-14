@@ -1,24 +1,46 @@
-<div class="center hero-unit">
-  <h1>Profile for <%= @user.name %></h1>
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-3">
+    <h1>Perfil: <%= @user.name %></h1>
 
-  <p id="notice"><%= notice %></p>
+    <p>
+      <strong>Username:</strong>
+      <%= @user.username %>
+    </p>
 
-  <p>
-    <strong>Username:</strong>
-    <%= @user.username %>
-  </p>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
+    <p>
+      <strong>Name:</strong>
+      <%= @user.name %>
+    </p>
 
-  <p>
-    <strong>Name:</strong>
-    <%= @user.name %>
-  </p>
+    <% if can? :edit, @user %>
+      <%= link_to 'Editar', edit_user_path(@user) %>
+    <% end %>
 
-  <% if can? :edit, @user %>
-    <%= link_to 'Edit', edit_user_path(@user) %>
-  <% end %>
+    <h2>Territorios</h2>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @user.territorios.each do |territorio| %>
+          <tr>
+            <td><%= territorio.name %></td>
+            <td><%= link_to 'Ver', territorio %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+
+  </div>
 </div>

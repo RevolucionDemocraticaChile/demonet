@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     def check_session
       if current_user.nil?
         flash[:error] = "Debes ingresar primero."
-        redirect_to signin_path
+        redirect_to ingresar_path
       end
     end
 

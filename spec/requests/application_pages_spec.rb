@@ -5,5 +5,5 @@ describe "root" do
 
 	before { visit root_path }
 
-	specify { expect(current_path).to eq signin_path }
+	specify { expect(current_path).to eq ingresar_path }
 end

@@ -9,22 +9,22 @@ describe "User pages" do
 
 		describe "index" do
 			before { visit users_path }
-			specify { expect(current_path).to eq signin_path }
+			specify { expect(current_path).to eq ingresar_path }
 		end
 
 		describe "new" do
 			before { visit new_user_path }
-			specify { expect(current_path).to eq signin_path }
+			specify { expect(current_path).to eq ingresar_path }
 		end
 
 		describe "show" do
 			before { visit user_path(user) }
-			specify { expect(current_path).to eq signin_path }
+			specify { expect(current_path).to eq ingresar_path }
 		end
 
 		describe "edit" do
 			before { visit edit_user_path(user) }
-			specify { expect(current_path).to eq signin_path }
+			specify { expect(current_path).to eq ingresar_path }
 		end
 	end # end without signing in
 
@@ -32,7 +32,7 @@ describe "User pages" do
 		let(:signed_in_user) { FactoryGirl.create(:user) }
 
 		before do
-			visit signin_path
+			visit ingresar_path
 			fill_in "Email",    with: signed_in_user.email
 			fill_in "Password", with: signed_in_user.password
 			click_button "Ingresar"

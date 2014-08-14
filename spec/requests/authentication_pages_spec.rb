@@ -21,7 +21,7 @@ describe "Authentication" do
   end
 
   describe "signin" do
-    before { visit signin_path }
+    before { visit ingresar_path }
 
     it { should have_content('Ingresar') }
 
@@ -48,11 +48,11 @@ describe "Authentication" do
       it { should have_content(user.name) }
       it { should have_link('Perfil',  href: user_path(user)) }
       it { should have_link('Salir', href: signout_path)    }
-      it { should_not have_link('Ingresar', href: signin_path) }
+      it { should_not have_link('Ingresar', href: ingresar_path) }
 
       describe "followed by signout" do
         before { click_link "Salir" }
-        specify { expect(current_path).to eq signin_path }
+        specify { expect(current_path).to eq ingresar_path }
       end
 
     end

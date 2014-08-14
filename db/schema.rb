@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814151835) do
+ActiveRecord::Schema.define(version: 20140814153248) do
+
+  create_table "member_territorios", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "territorio_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "territorios", force: true do |t|
     t.string   "name"

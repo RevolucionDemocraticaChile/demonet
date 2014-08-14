@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
 	PASSWORD_MIN_LENGTH = 6
 	VALID_EMAIL_REGEX   = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
+	has_many :member_territorios
+	has_many :territorios, foreign_key: "member_id", through: :member_territorios
+
 	validates :username, presence:   true,
                        uniqueness: { case_sensitive: false },
 	                     length:     { maximum: USERNAME_MAX_LENGTH }

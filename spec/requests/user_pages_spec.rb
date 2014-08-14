@@ -12,7 +12,15 @@ describe "User pages" do
 		it { should have_content(user.email) }
 		it { should have_content(user.name) }
 
-		
+		describe "without being logged in" do
+			let(:user) { FactoryGirl.create(:user) }
+			before { visit user_path(user) }
+
+			it { should_not have_content("Profile") }
+			it { should_not have_content(user.username) }
+			it { should_not have_content(user.email) }
+			it { should_not have_content(user.name) }
+		end
 
 	end
 

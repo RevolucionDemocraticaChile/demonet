@@ -40,18 +40,14 @@ describe "User pages" do
 
 		describe "index" do
 			before { visit users_path }
-			it { should have_content("Listing all users") }
+			it { should_not have_content("Listing all users") } # normal users cannot index users
 		end
 
 		describe "new" do
 			before { visit new_user_path }
 
-			it { should have_content("Username") }
-			it { should have_content("Name") }
-			it { should have_content("Email") }
-			it { should have_content("Password") }
-			it { should have_content("Password confirmation") }
-			it { should have_button("Create User") }
+			it { should have_selector('div.alert.alert-error') }
+			specify { expect(current_path).not_to eq new_user_path }
 		end
 
 		describe "show signed_in_user" do
@@ -73,39 +69,39 @@ describe "User pages" do
 			it { should have_content(another_user.name) }
 		end
 
-		describe "create new user" do
-			let(:submit) { "Create User" }
-			before { visit new_user_path }
-
-			describe "with invalid information" do
-				it "should not create a user" do
-					expect { click_button submit }.not_to change(User, :count)
-				end
-			end
-
-			describe "with valid information" do
-				before do
-					fill_in "Username",              with: "username"
-					fill_in "Email",                 with: "email@email.com"
-					fill_in "Name",                  with: "Name Surname"
-					fill_in "Password",              with: "thepass"
-					fill_in "Password confirmation", with: "thepass"
-				end
-
-				it "should create a user" do
-					expect { click_button submit }.to change(User, :count).by(1)
-				end
-
-				describe "after creating the user" do
-					before { click_button submit }
-					let(:user) { User.find_by(email: "email@email.com") }
-
-					it { should have_link("Salir") }
-					it { should have_content(user.name) }
-					it { should have_selector('div.alert.alert-success', text: 'User created successfully') }
-				end
-			end
-		end
+		# describe "create new user" do
+		# 	let(:submit) { "Create User" }
+		# 	before { visit new_user_path }
+		#
+		# 	describe "with invalid information" do
+		# 		it "should not create a user" do
+		# 			expect { click_button submit }.not_to change(User, :count)
+		# 		end
+		# 	end
+		#
+		# 	describe "with valid information" do
+		# 		before do
+		# 			fill_in "Username",              with: "username"
+		# 			fill_in "Email",                 with: "email@email.com"
+		# 			fill_in "Name",                  with: "Name Surname"
+		# 			fill_in "Password",              with: "thepass"
+		# 			fill_in "Password confirmation", with: "thepass"
+		# 		end
+		#
+		# 		it "should create a user" do
+		# 			expect { click_button submit }.to change(User, :count).by(1)
+		# 		end
+		#
+		# 		describe "after creating the user" do
+		# 			before { click_button submit }
+		# 			let(:user) { User.find_by(email: "email@email.com") }
+		#
+		# 			it { should have_link("Salir") }
+		# 			it { should have_content(user.name) }
+		# 			it { should have_selector('div.alert.alert-success', text: 'User created successfully') }
+		# 		end
+		# 	end
+		# end
 
 	end # end with signin first
 

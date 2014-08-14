@@ -6,11 +6,18 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_session
 
+  check_authorization
+
+  rescue_from CanCan::AccessDenied do |e|
+    flash[:error] = e.message
+    redirect_to root_path
+  end
+
   private
 
     def check_session
       if current_user.nil?
-        flash[:error] = "Debes registrarte para entrar."
+        flash[:error] = "Debes ingresar primero."
         redirect_to signin_path
       end
     end

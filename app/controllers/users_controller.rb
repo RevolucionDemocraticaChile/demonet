@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  authorize_resource
+
   # GET /users
-  # GET /users.json
   def index
     @users = User.all
+
+    authorize! :index, @user, message: "No estás autorizado."
   end
 
   # GET /users/1
@@ -19,6 +22,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    authorize! :edit, @user, message: "No estás autorizado."
   end
 
   # POST /users

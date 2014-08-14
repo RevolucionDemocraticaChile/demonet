@@ -2,6 +2,8 @@ class SessionsController < ApplicationController
 
 	skip_before_filter :check_session, only: [:new, :create]
 
+	skip_authorization_check
+
 	def new
 	end
 
@@ -10,11 +12,11 @@ class SessionsController < ApplicationController
 
 		if user && user.authenticate(params[:session][:password])
 			# Sign in and redirect to user show
-			flash[:success] = 'User successfully signed in.'
+			flash[:success] = 'Has ingresado exitosamente.'
 			sign_in user
 			redirect_to user
 		else
-			flash.now[:error] = 'Invalid email/password combination'
+			flash.now[:error] = 'Combinación email/contraseña invalida'
 			render 'new'
 		end
 	end

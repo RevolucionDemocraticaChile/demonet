@@ -18,6 +18,7 @@
 				<tr>
 					<th>Nombre</th>
 					<th>Email</th>
+					<th class="text-center">Admin</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -27,7 +28,14 @@
 					<tr>
 						<td><%= link_to member.name, member %></td>
 						<td><%= member.email %></td>
-						<td><%= link_to 'Eliminar Miembro', '#', class: "btn btn-danger disabled" %></td>
+						<td class="text-center">
+							<% if @territorio.admins.include?(member) %>
+								<span class="glyphicon glyphicon-ok"></span>
+							<% end %>
+						</td>
+						<td class="text-center">
+							<%= link_to 'Eliminar Miembro', '#', class: "btn btn-danger disabled" %>
+						</td>
 					</tr>
 				<% end %>
 			</tbody>

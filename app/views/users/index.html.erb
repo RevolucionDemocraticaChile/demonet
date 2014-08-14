@@ -18,8 +18,16 @@
             <td><%= link_to user.name, user %></td>
             <td><%= user.email %></td>
             <td><%= user.username %></td>
-            <td class="text-center"><%= link_to 'Editar', edit_user_path(user), class: "btn btn-info" %></td>
-            <td class="text-center"><%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+            <td class="text-center">
+              <% if can? :edit, user %>
+                <%= link_to 'Editar', edit_user_path(user), class: "btn btn-info" %>
+              <% end %>
+            </td>
+            <td class="text-center">
+              <% if can? :destroy, user %>
+                <%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
@@ -27,6 +35,9 @@
 
     <br>
 
-    <%= link_to 'New User', new_user_path, class: "btn btn-primary" %>
+    <% if can? :new, User %>
+      <%= link_to 'New User', new_user_path, class: "btn btn-primary" %>
+    <% end %>
+
   </div>
 </div>

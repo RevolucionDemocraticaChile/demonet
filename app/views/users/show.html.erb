@@ -18,6 +18,7 @@
     <%= @user.name %>
   </p>
 
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %>
+  <% if can? :edit, @user %>
+    <%= link_to 'Edit', edit_user_path(@user) %>
+  <% end %>
 </div>

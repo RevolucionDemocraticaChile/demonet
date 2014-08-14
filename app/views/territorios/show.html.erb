@@ -1,0 +1,12 @@
+<div class="center hero-unit">
+	<h1>Territorio <%= @territorio.name %></h1>
+
+	<p>
+		<strong>Nombre:</strong>
+		<%= @territorio.name %>
+	</p>
+
+	<% if can? :edit, @territorio %>
+		<%= link_to 'Edit', edit_territorio_path(@territorio) %>
+	<% end %>
+</div>

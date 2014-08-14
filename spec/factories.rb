@@ -8,6 +8,6 @@ FactoryGirl.define do
 	end
 
 	factory :territorio do |t|
-		t.name = "Europa Norte"
+		t.sequence(:name) { |n| "Nombre Territorio #{n}" }
 	end
 end

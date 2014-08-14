@@ -1,0 +1,35 @@
+<h1>Todos los territorios</h1>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Nombre</th>
+			<th colspan="3"></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @territorios.each do |territorio| %>
+			<tr>
+				<td><%= territorio.name %></td>
+				<td><%= link_to 'Show', territorio %></td>
+				<td>
+					<% if can? :edit, territorio %>
+						<%= link_to 'Edit', edit_territorio_path(territorio) %>
+					<% end %>
+				</td>
+				<td>
+					<% if can? :destroy, territorio %>
+						<%= link_to 'Destroy', territorio, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<br>
+
+<% if can? :new, Territorio %>
+	<%= link_to 'Nuevo Territorio', new_territorio_path %>
+<% end %>

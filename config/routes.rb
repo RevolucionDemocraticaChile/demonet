@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: redirect('/ingresar')
 
   resources :users
+  resources :territorios
 
   resources :sessions, only: [:new, :create, :destroy]
 

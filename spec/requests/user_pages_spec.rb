@@ -9,21 +9,25 @@ describe "User pages" do
 
 		describe "index" do
 			before { visit users_path }
+			it { should have_selector('div.alert.alert-error') }
 			specify { expect(current_path).to eq ingresar_path }
 		end
 
 		describe "new" do
 			before { visit new_user_path }
+			it { should have_selector('div.alert.alert-error') }
 			specify { expect(current_path).to eq ingresar_path }
 		end
 
 		describe "show" do
 			before { visit user_path(user) }
+			it { should have_selector('div.alert.alert-error') }
 			specify { expect(current_path).to eq ingresar_path }
 		end
 
 		describe "edit" do
 			before { visit edit_user_path(user) }
+			it { should have_selector('div.alert.alert-error') }
 			specify { expect(current_path).to eq ingresar_path }
 		end
 	end # end without signing in

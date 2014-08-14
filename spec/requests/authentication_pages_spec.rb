@@ -47,7 +47,7 @@ describe "Authentication" do
 
       it { should have_content(user.name) }
       it { should have_link('Perfil',  href: user_path(user)) }
-      it { should have_link('Salir', href: signout_path)    }
+      it { should have_link('Salir', href: salir_path)    }
       it { should_not have_link('Ingresar', href: ingresar_path) }
 
       describe "followed by signout" do

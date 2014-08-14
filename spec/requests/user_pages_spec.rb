@@ -32,6 +32,7 @@ describe "User pages" do
 		end
 	end # end without signing in
 
+
 	describe "with signin in first" do
 		let(:signed_in_user) { FactoryGirl.create(:user) }
 
@@ -57,7 +58,7 @@ describe "User pages" do
 		describe "show signed_in_user" do
 			before { visit user_path(signed_in_user) }
 
-			it { should have_content("Profile") }
+			it { should have_content("Perfil") }
 			it { should have_content(signed_in_user.username) }
 			it { should have_content(signed_in_user.email) }
 			it { should have_content(signed_in_user.name) }

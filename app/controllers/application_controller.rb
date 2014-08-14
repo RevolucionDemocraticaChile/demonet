@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
     def check_session
       if current_user.nil?
-        # raise ActionController::RoutingError.new('Not Found')
+        flash[:error] = "Debes registrarte para entrar."
         redirect_to signin_path
       end
     end

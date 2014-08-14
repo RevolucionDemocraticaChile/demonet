@@ -46,13 +46,12 @@ describe "Authentication" do
       end
 
       it { should have_content(user.name) }
-      it { should have_link('Profile',  href: user_path(user)) }
-      it { should have_link('Sign out', href: signout_path)    }
+      it { should have_link('Perfil',  href: user_path(user)) }
+      it { should have_link('Salir', href: signout_path)    }
       it { should_not have_link('Sign in', href: signin_path) }
 
       describe "followed by signout" do
-        before { click_link "Sign out" }
-        it { should have_link("Sign in") }
+        before { click_link "Salir" }
         specify { expect(current_path).to eq signin_path }
       end
 

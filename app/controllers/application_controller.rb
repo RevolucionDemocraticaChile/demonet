@@ -4,13 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
-  # before_filter :check_session
+  before_filter :check_session
 
   private
 
     def check_session
       if current_user.nil?
-        raise ActionController::RoutingError.new('Not Found')
+        # raise ActionController::RoutingError.new('Not Found')
+        redirect_to signin_path
       end
     end
 

@@ -45,7 +45,7 @@ describe "User pages" do
 
 		describe "index" do
 			before { visit users_path }
-			it { should_not have_content("Listing all users") } # normal users cannot index users
+			it { should_not have_selector('div.alert.alert-error') }
 		end
 
 		describe "new" do

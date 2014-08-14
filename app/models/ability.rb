@@ -4,8 +4,9 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    can :show, User
-    can :edit, User, id: user.id
+    can :index, User
+    can :show,  User
+    can :edit,  User, id: user.id
 
     can :index, Territorio
     can :show, Territorio

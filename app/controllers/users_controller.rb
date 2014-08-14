@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    authorize! :index, @user, message: "No estás autorizado."
+    # authorize! :index, @user, message: "No estás autorizado."
   end
 
   # GET /users/1

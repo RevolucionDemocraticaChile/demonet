@@ -8,7 +8,9 @@
           <th>Nombre</th>
           <th>Email</th>
           <th>Username</th>
-          <th colspan="2"></th>
+          <% if current_user.admin? %>
+            <th colspan="2"></th>
+          <% end %>
         </tr>
       </thead>
 
@@ -18,25 +20,21 @@
             <td><%= link_to user.name, user %></td>
             <td><%= user.email %></td>
             <td><%= user.username %></td>
-            <td class="text-center">
-              <% if can? :edit, user %>
+            <% if current_user.admin? %>
+              <td class="text-center">
                 <%= link_to 'Editar', edit_user_path(user), class: "btn btn-info" %>
-              <% end %>
-            </td>
-            <td class="text-center">
-              <% if can? :destroy, user %>
+              </td>
+              <td class="text-center">
                 <%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-              <% end %>
-            </td>
+              </td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
     </table>
 
-    <br>
-
     <% if can? :new, User %>
-      <%= link_to 'New User', new_user_path, class: "btn btn-primary" %>
+      <%= link_to 'Nuevo Usuario', new_user_path, class: "btn btn-primary" %>
     <% end %>
 
   </div>

@@ -1,12 +1,14 @@
 <div class="row">
-	<div class="col-lg-8 col-lg-offset-2">
+	<div class="col-lg-6 col-lg-offset-3">
 		<h1>Territorios</h1>
 
 		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
 					<th>Nombre</th>
-					<th colspan="2"></th>
+					<% if current_user.admin? %>
+						<th colspan="2"></th>
+					<% end %>
 				</tr>
 			</thead>
 
@@ -14,25 +16,21 @@
 				<% @territorios.each do |territorio| %>
 					<tr>
 						<td><%= link_to territorio.name, territorio %></td>
-						<td>
-							<% if can? :edit, territorio %>
-								<%= link_to 'Editar', edit_territorio_path(territorio) %>
-							<% end %>
-						</td>
-						<td>
-							<% if can? :destroy, territorio %>
+						<% if current_user.admin? %>
+							<td class="text-center">
+								<%= link_to 'Editar', edit_territorio_path(territorio), class: "btn btn-info" %>
+							</td>
+							<td class="text-center">
 								<%= link_to 'Eliminar', territorio, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-							<% end %>
-						</td>
+							</td>
+						<% end %>
 					</tr>
 				<% end %>
 			</tbody>
 		</table>
 
-		<br>
-
 		<% if can? :new, Territorio %>
-			<%= link_to 'Nuevo Territorio', new_territorio_path %>
+			<%= link_to 'Nuevo Territorio', new_territorio_path, class: "btn btn-primary" %>
 		<% end %>
 	</div>
 </div>

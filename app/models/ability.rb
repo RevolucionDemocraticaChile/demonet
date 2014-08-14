@@ -9,7 +9,16 @@ class Ability
     can :edit,  User, id: user.id
 
     can :index, Territorio
-    can :show, Territorio
+    can :show,  Territorio
+    # can :edit,  Territorio, id: { ids: user.aterritorios.ids }
+
+    # if
+
+    if user.admin?
+      can :manage, User
+      can :manage, Territorio
+      can :manage, MemberTerritorio
+    end
 
     # Define abilities for the passed in user here. For example:
     #

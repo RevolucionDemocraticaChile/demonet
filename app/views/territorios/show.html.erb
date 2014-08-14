@@ -8,7 +8,7 @@
 		</p>
 
 		<% if can? :edit, @territorio %>
-			<%= link_to 'Editar', edit_territorio_path(@territorio) %>
+			<%= link_to 'Editar', edit_territorio_path(@territorio), class: "btn btn-primary" %>
 		<% end %>
 
 		<h2>Miembros</h2>
@@ -18,7 +18,9 @@
 				<tr>
 					<th>Nombre</th>
 					<th>Email</th>
-					<th></th>
+					<% if current_user.admin? || current_user.aterritorios.include?(@territorio) %>
+						<th></th>
+					<% end %>
 				</tr>
 			</thead>
 
@@ -29,12 +31,31 @@
 							<%= link_to member.name, member %><% if @territorio.admins.include?(member) %> <strong>(admin)</strong><% end %>
 						</td>
 						<td><%= member.email %></td>
-						<td class="text-center">
-							<%= link_to 'Eliminar Miembro', '#', class: "btn btn-danger disabled" %>
-						</td>
+						<% if current_user.admin? || current_user.aterritorios.include?(@territorio) %>
+							<td class="text-center">
+								<%= link_to 'Eliminar Miembro', '#', class: "btn btn-danger" %>
+							</td>
+						<% end %>
 					</tr>
 				<% end %>
 			</tbody>
 		</table>
+
+		<% if current_user.admin? || current_user.aterritorios.include?(@territorio) %>
+			<form class="form-inline" role="form">
+				<div class="form-group">
+					<label class="sr-only" for="exampleInputEmail2">Nombre del Usuario</label>
+					<select class="form-control">
+						<% User.all.each do |user| %>
+							<% if !@territorio.members.include?(user) %>
+								<option><%= user.name %></option>
+							<% end %>
+						<% end %>
+					</select>
+				</div>
+
+				<%= link_to "Agregar Usuario", '#', class: "btn btn-primary" %>
+			</form>
+		<% end %>
 	</div>
 </div>

@@ -11,6 +11,17 @@ class TerritoriosController < ApplicationController
 		@territorio = Territorio.new
 	end
 
+	def create
+		@territorio = Territorio.new(territorio_params)
+
+		if @territorio.save
+			flash[:success] = "Territorio creado exitosamente."
+			redirect_to @territorio
+		else
+			render 'new'
+		end
+	end
+
 	def show
 	end
 
@@ -21,6 +32,10 @@ class TerritoriosController < ApplicationController
 
 		def set_territorio
 			@territorio = Territorio.find(params[:id])
+		end
+
+		def territorio_params
+			params.require(:territorio).permit(:name)
 		end
 
 end

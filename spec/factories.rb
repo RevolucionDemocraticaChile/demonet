@@ -6,4 +6,8 @@ FactoryGirl.define do
 		u.password "secret"
 		u.password_confirmation "secret"
 	end
+
+	factory :territorio do |t|
+		t.name = "Europa Norte"
+	end
 end

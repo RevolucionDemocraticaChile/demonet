@@ -35,7 +35,7 @@ describe "User pages" do
 			visit signin_path
 			fill_in "Email",    with: signed_in_user.email
 			fill_in "Password", with: signed_in_user.password
-			click_button "Sign in"
+			click_button "Ingresar"
 		end
 
 		describe "index" do

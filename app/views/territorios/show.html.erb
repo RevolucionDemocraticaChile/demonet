@@ -18,7 +18,6 @@
 				<tr>
 					<th>Nombre</th>
 					<th>Email</th>
-					<th class="text-center">Admin</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -26,13 +25,10 @@
 			<tbody>
 				<% @territorio.members.each do |member| %>
 					<tr>
-						<td><%= link_to member.name, member %></td>
-						<td><%= member.email %></td>
-						<td class="text-center">
-							<% if @territorio.admins.include?(member) %>
-								<span class="glyphicon glyphicon-ok"></span>
-							<% end %>
+						<td>
+							<%= link_to member.name, member %><% if @territorio.admins.include?(member) %> <strong>(admin)</strong><% end %>
 						</td>
+						<td><%= member.email %></td>
 						<td class="text-center">
 							<%= link_to 'Eliminar Miembro', '#', class: "btn btn-danger disabled" %>
 						</td>

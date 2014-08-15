@@ -44,7 +44,7 @@
 					<select name="user_acta[user_id]" class="form-control">
 						<option value="nil">Seleccionar Usuario</option>
 						<% User.all.each do |user| %>
-							<% if !@acta.territorio.members.include?(user) %>
+							<% if !@acta.users.include?(user) %>
 								<option value="<%= user.id %>"><%= user.name %></option>
 							<% end %>
 						<% end %>

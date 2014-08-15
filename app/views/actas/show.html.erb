@@ -12,6 +12,11 @@
 			<%= link_to @acta.territorio.name, @acta.territorio %>
 		</p>
 
+		<p>
+			<strong>Resumen:</strong>
+			<%= @acta.summary %>
+		</p>
+
 		<% if can? :edit, @user %>
 			<%= link_to 'Editar', edit_acta_path(@acta), class: "btn btn-primary" %>
 		<% end %>

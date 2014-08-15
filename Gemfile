@@ -6,6 +6,7 @@ gem 'rails', '4.1.4'
 
 group	:development, :test do
 	gem 'rspec-rails', '~> 3.0.2'
+	gem 'sqlite3'
 end
 
 group :test do
@@ -13,7 +14,10 @@ group :test do
 	gem 'capybara',           '~> 2.4.1'
 end
 
-gem 'sqlite3'
+group :production do
+	gem 'pg',             '~> 0.17.1'
+	gem 'rails_12factor', '~> 0.0.2'
+end
 
 gem 'sass-rails',     '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.2.0.1'

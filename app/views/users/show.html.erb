@@ -3,7 +3,7 @@
     <h1>Perfil: <%= @user.name %></h1>
 
     <p>
-      Aasdf <%= Acta.where(date: (DateTime.now-6.months)..(DateTime.now) ).count %>
+      Actas recientes: <%= @user.actas.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>
     </p>
 
     <p>

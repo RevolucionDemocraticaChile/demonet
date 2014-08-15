@@ -1,10 +1,10 @@
 <div class="row">
 	<div class="col-lg-8 col-lg-offset-2">
-		<h1>Acta <%= @acta.territorio.name %> <%= @acta.date %></h1>
+		<h1><%= format_acta_name(@acta) %></h1>
 
 		<p>
 			<strong>Date:</strong>
-			<%= @acta.date %>
+			<%= l Date.parse(@acta.date.to_s) %>
 		</p>
 
 		<p>

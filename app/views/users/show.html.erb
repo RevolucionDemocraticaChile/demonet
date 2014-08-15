@@ -92,7 +92,7 @@
         <% @user.actas.each do |acta| %>
           <tr>
             <td>
-              <%= link_to "#{acta.name}", acta %>
+              <%= link_to format_acta_name(acta), acta %>
             </td>
           </tr>
         <% end %>

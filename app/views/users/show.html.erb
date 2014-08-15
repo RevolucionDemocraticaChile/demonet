@@ -1,9 +1,31 @@
 <div class="row">
-  <div class="col-lg-6 col-lg-offset-3">
+  <div class="col-lg-12">
     <h1 class="text-center">
       <%= gravatar_for @user %>
       <%= @user.name %>
     </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-3">
+    <% if @user.actas.where(date: (DateTime.now-6.months)..(DateTime.now)).count >= 6 %>
+      <div class="alert alert-success text-center">
+        <strong>Miembro Activo</strong>
+      </div>
+    <% else %>
+      <div class="alert alert-warning text-center">
+        <strong>Miembro Adherente</strong>
+      </div>
+    <% end %>
+    <% @user.territorios.each do |territorio| %>
+      <div class="alert alert-info text-center">
+        Miembro del Territorio<br />
+        <strong><%= territorio.name %></strong>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-6">
 
     <p>
       Actas recientes: <%= @user.actas.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>

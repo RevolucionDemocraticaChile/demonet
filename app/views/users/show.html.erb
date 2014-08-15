@@ -92,7 +92,7 @@
         <% @user.actas.each do |acta| %>
           <tr>
             <td>
-              <%= link_to "#{acta.territorio.name} #{acta.date}", acta %>
+              <%= link_to "#{acta.name}", acta %>
             </td>
           </tr>
         <% end %>

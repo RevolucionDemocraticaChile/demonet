@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-lg-6 col-lg-offset-3">
-    <h1>Perfil: <%= @user.name %></h1>
+    <h1 class="text-center">
+      <%= gravatar_for @user %>
+      <%= @user.name %>
+    </h1>
 
     <p>
       Actas recientes: <%= @user.actas.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>

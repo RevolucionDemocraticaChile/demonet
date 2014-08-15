@@ -6,6 +6,7 @@
 			<thead>
 				<tr>
 					<th>Nombre</th>
+					<th class="text-center">Miembros</th>
 					<% if current_user.admin? %>
 						<th colspan="2"></th>
 					<% end %>
@@ -16,6 +17,7 @@
 				<% @territorios.each do |territorio| %>
 					<tr>
 						<td><%= link_to territorio.name, territorio %></td>
+						<td class="text-center"><%= territorio.members.count %></td>
 						<% if current_user.admin? %>
 							<td class="text-center">
 								<%= link_to 'Editar', edit_territorio_path(territorio), class: "btn btn-info" %>

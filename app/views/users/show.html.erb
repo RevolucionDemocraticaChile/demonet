@@ -8,8 +8,13 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-3">
-    <% if @user.actas.where(date: (DateTime.now-6.months)..(DateTime.now)).count >= 6 %>
+  <div class="col-lg-3 text-center">
+    <% if @user.admin? %>
+      <div class="alert alert-danger text-center" style="position: relative;">
+        <span class="glyphicon glyphicon-flash" > <strong>Administrador</strong>
+      </div>
+    <% end %>
+    <% if actas_recientes_count_for(@user) >= 6 %>
       <div class="alert alert-success text-center">
         <strong>Miembro Activo</strong>
       </div>
@@ -18,12 +23,17 @@
         <strong>Miembro Adherente</strong>
       </div>
     <% end %>
+    <hr />
     <% @user.territorios.each do |territorio| %>
       <div class="alert alert-info text-center">
         Miembro del Territorio<br />
-        <strong><%= territorio.name %></strong>
+        <strong><%= link_to territorio.name, territorio %></strong>
       </div>
     <% end %>
+    <% if current_user.admin? %>
+      <%= link_to "Agregar usuario a otro Territorio", new_member_territorio_path, class: "btn btn-primary" %>
+    <% end %>
+    <hr />
   </div>
   <div class="col-lg-6">
 
@@ -40,17 +50,6 @@
       <strong>Email:</strong>
       <%= @user.email %>
     </p>
-
-    <p>
-      <strong>Name:</strong>
-      <%= @user.name %>
-    </p>
-
-    <% if @user.admin? %>
-      <p>
-        <strong>Admin</strong>
-      </p>
-    <% end %>
 
     <% if can? :edit, @user %>
       <%= link_to 'Editar', edit_user_path(@user), class: "btn btn-primary" %>

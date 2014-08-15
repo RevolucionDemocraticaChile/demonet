@@ -69,7 +69,7 @@
 			</thead>
 
 			<tbody>
-				<% @territorio.actas.each do |acta| %>
+				<% @territorio.actas.order(:date).each do |acta| %>
 					<tr>
 						<td>
 							<%= link_to format_acta_name(acta), acta %>

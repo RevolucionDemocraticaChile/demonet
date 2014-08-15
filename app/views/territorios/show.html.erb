@@ -42,20 +42,20 @@
 		</table>
 
 		<% if current_user.admin? || current_user.aterritorios.include?(@territorio) %>
-			<form class="form-inline" role="form">
+			<%= form_for MemberTerritorio.new, html: { class: "form-inline" } do |f| %>
+				<%= f.hidden_field :territorio_id, value: @territorio.id %>
 				<div class="form-group">
-					<label class="sr-only" for="exampleInputEmail2">Nombre del Usuario</label>
-					<select class="form-control">
+					<label class="sr-only">Nombre del Usuario</label>
+					<select name="member_territorio[user_id]" class="form-control">
 						<% User.all.each do |user| %>
 							<% if !@territorio.members.include?(user) %>
-								<option><%= user.name %></option>
+								<option value="<%= user.id %>"><%= user.name %></option>
 							<% end %>
 						<% end %>
 					</select>
 				</div>
-
-				<%= link_to "Agregar Usuario", '#', class: "btn btn-primary" %>
-			</form>
+				<%= f.submit "Agregar Miembro", class: "btn btn-primary" %>
+			<% end %>
 		<% end %>
 
 		<h2>Actas</h2>

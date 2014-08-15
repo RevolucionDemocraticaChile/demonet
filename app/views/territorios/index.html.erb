@@ -7,6 +7,7 @@
 				<tr>
 					<th>Nombre</th>
 					<th class="text-center">Miembros</th>
+					<th class="text-center">Actas</th>
 					<% if current_user.admin? %>
 						<th colspan="2"></th>
 					<% end %>
@@ -18,6 +19,7 @@
 					<tr>
 						<td><%= link_to territorio.name, territorio %></td>
 						<td class="text-center"><%= territorio.members.count %></td>
+						<td class="text-center"><%= territorio.actas.count %></td>
 						<% if current_user.admin? %>
 							<td class="text-center">
 								<%= link_to 'Editar', edit_territorio_path(territorio), class: "btn btn-info" %>

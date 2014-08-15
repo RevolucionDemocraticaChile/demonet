@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @member_territorio = MemberTerritorio.new
   end
 
   # GET /users/new

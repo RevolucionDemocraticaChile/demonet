@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814204701) do
+ActiveRecord::Schema.define(version: 20140815095323) do
+
+  create_table "acta", force: true do |t|
+    t.integer  "territorio_id"
+    t.datetime "date"
+    t.string   "summary"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "admin_territorios", force: true do |t|
     t.integer  "user_id"

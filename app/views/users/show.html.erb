@@ -17,6 +17,12 @@
       <%= @user.name %>
     </p>
 
+    <% if @user.admin? %>
+      <p>
+        <strong>Admin</strong>
+      </p>
+    <% end %>
+
     <% if can? :edit, @user %>
       <%= link_to 'Editar', edit_user_path(@user), class: "btn btn-primary" %>
     <% end %>
@@ -50,19 +56,22 @@
       </tbody>
     </table>
 
+
     <% if current_user.admin? %>
-      <form class="form-inline" role="form">
+      <%= form_for @member_territorio, html: { class: "form-inline" } do |f| %>
+        <%= f.hidden_field :user_id, value: @user.id %>
         <div class="form-group">
-          <label class="sr-only" for="exampleInputEmail2">Nombre del Territorio</label>
-          <select class="form-control">
+          <label class="sr-only">Nombre del Territorio</label>
+          <select name="member_territorio[territorio_id]" class="form-control">
             <% Territorio.all.each do |territorio| %>
-            <option><%= territorio.name %></option>
+              <% if !@user.territorios.include?(territorio) %>
+                <option value="<%= territorio.id %>"><%= territorio.name %></option>
+              <% end %>
             <% end %>
           </select>
         </div>
-
-        <%= link_to "Agregar Territorio", '#', class: "btn btn-primary" %>
-      </form>
+        <%= f.submit "Agregar Territorio", class: "btn btn-primary" %>
+      <% end %>
     <% end %>
 
 

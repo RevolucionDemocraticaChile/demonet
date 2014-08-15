@@ -57,5 +57,34 @@
 				<%= link_to "Agregar Usuario", '#', class: "btn btn-primary" %>
 			</form>
 		<% end %>
+
+		<h2>Actas</h2>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Fecha</th>
+					<th>Resumen</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @territorio.actas.each do |acta| %>
+					<tr>
+						<td>
+							<%= link_to acta.date, acta %>
+						</td>
+						<td>
+							<%= acta.summary %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+		<% if current_user.admin? || current_user.aterritorios.include?(@territorio) %>
+			<%= link_to "Agregar Acta", '#', class: "btn btn-primary" %>
+		<% end %>
+
 	</div>
 </div>

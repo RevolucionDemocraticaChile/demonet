@@ -3,6 +3,10 @@
     <h1>Perfil: <%= @user.name %></h1>
 
     <p>
+      Aasdf <%= Acta.where(date: (DateTime.now-6.months)..(DateTime.now) ).count %>
+    </p>
+
+    <p>
       <strong>Username:</strong>
       <%= @user.username %>
     </p>
@@ -74,6 +78,26 @@
       <% end %>
     <% end %>
 
+
+    <h2>Actas</h2>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Acta</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @user.actas.each do |acta| %>
+          <tr>
+            <td>
+              <%= link_to "#{acta.territorio.name} #{acta.date}", acta %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
   </div>
 </div>

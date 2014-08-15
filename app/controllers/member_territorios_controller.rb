@@ -1,5 +1,5 @@
 class MemberTerritoriosController < ApplicationController
-	before_action :set_territorio, only: [:show, :edit, :update, :destroy]
+	before_action :set_member_territorio, only: [:show, :edit, :update, :destroy]
 
 	authorize_resource
 
@@ -23,7 +23,7 @@ class MemberTerritoriosController < ApplicationController
 
 	private
 
-		def set_territorio
+		def set_member_territorio
 			@member_territorio = MemberTerritorio.find(params[:id])
 		end
 

@@ -19,6 +19,7 @@ class Ability
       can :manage, Territorio
       can :manage, MemberTerritorio
       can :manage, Acta
+      can :manage, UserActa
     end
 
     # Define abilities for the passed in user here. For example:

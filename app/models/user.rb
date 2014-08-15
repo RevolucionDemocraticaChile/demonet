@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
 	has_many :admin_territorios
 	has_many :aterritorios, foreign_key: "admin_id", through: :admin_territorios
 
+	has_many :user_actas
+	has_many :actas, through: :user_actas
+
 	validates :username, presence:   true,
                        uniqueness: { case_sensitive: false },
 	                     length:     { maximum: USERNAME_MAX_LENGTH }

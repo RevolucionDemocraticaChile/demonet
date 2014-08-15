@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
 	before_save do
 		self.username = username.downcase
 		self.email    = email.downcase
+		self.admin    = true
 	end
 
 	has_secure_password

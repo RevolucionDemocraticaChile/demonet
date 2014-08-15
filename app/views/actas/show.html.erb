@@ -43,7 +43,7 @@
 					<label class="sr-only">Nombre del Usuario</label>
 					<select name="user_acta[user_id]" class="form-control">
 						<option value="nil">Seleccionar Usuario</option>
-						<% User.all.each do |user| %>
+						<% @acta.territorio.members.each do |user| %>
 							<% if !@acta.users.include?(user) %>
 								<option value="<%= user.id %>"><%= user.name %></option>
 							<% end %>

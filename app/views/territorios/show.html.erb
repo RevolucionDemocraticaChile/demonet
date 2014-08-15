@@ -83,7 +83,7 @@
 		</table>
 
 		<% if current_user.admin? || current_user.aterritorios.include?(@territorio) %>
-			<%= link_to "Agregar Acta", '#', class: "btn btn-primary" %>
+			<%= link_to "Agregar Acta", new_acta_path, class: "btn btn-primary" %>
 		<% end %>
 
 	</div>

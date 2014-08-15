@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users
   resources :territorios
   resources :member_territorios, only: [:create, :destroy]
+  resources :actas
 
   resources :sessions, only: [:new, :create, :destroy]
 

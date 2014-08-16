@@ -3,12 +3,15 @@ class ActasController < ApplicationController
 
 	authorize_resource
 
+	def index
+		@actas = Acta.all
+	end
+
 	def new
 		@acta = Acta.new
 	end
 
 	def show
-
 	end
 
 	def create

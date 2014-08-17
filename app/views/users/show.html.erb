@@ -14,7 +14,7 @@
         <span class="glyphicon glyphicon-flash" > <strong>Administrador</strong>
       </div>
     <% end %>
-    <% if actas_recientes_count_for(@user) >= 6 %>
+    <% if meetings_recientes_count_for(@user) >= 6 %>
       <div class="alert alert-success text-center">
         <strong>Miembro Activo</strong>
       </div>
@@ -38,7 +38,7 @@
   <div class="col-lg-6">
 
     <p>
-      Actas recientes: <%= @user.actas.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>
+      Meetings recientes: <%= @user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>
     </p>
 
     <p>
@@ -103,20 +103,20 @@
     <% end %>
 
 
-    <h2>Actas</h2>
+    <h2>Meetings</h2>
 
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th>Acta</th>
+          <th>Meeting</th>
         </tr>
       </thead>
 
       <tbody>
-        <% @user.actas.each do |acta| %>
+        <% @user.meetings.each do |meeting| %>
           <tr>
             <td>
-              <%= link_to format_acta_name(acta), acta %>
+              <%= link_to format_meeting_name(meeting), meeting %>
             </td>
           </tr>
         <% end %>

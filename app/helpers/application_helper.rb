@@ -1,7 +1,7 @@
 module ApplicationHelper
 
-	def format_acta_name(acta)
-		"Acta #{acta.territorio.name} #{l(Date.parse(acta.date.to_s))}"
+	def format_meeting_name(meeting)
+		"Meeting #{meeting.territorio.name} #{l(Date.parse(meeting.date.to_s))}"
 	end
 
 end

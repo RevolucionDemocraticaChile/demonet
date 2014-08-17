@@ -13,14 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140817140851) do
 
-  create_table "actas", force: true do |t|
-    t.integer  "territorio_id"
-    t.datetime "date"
-    t.string   "summary"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "admin_territorios", force: true do |t|
     t.integer  "user_id"
     t.integer  "territorio_id"
@@ -33,6 +25,14 @@ ActiveRecord::Schema.define(version: 20140817140851) do
     t.string   "desc"
     t.string   "type"
     t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "meetings", force: true do |t|
+    t.integer  "territorio_id"
+    t.datetime "date"
+    t.string   "summary"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(version: 20140817140851) do
     t.datetime "updated_at"
   end
 
-  create_table "user_actas", force: true do |t|
+  create_table "user_meetings", force: true do |t|
     t.integer  "user_id"
-    t.integer  "acta_id"
+    t.integer  "meeting_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -3,7 +3,3 @@ require File.expand_path('../application', __FILE__)
 
 # Initialize the Rails application.
 Rails.application.initialize!
-
-ActiveSupport::Inflector.inflections do |inflect|
-  inflect.irregular 'acta', 'actas'
-end

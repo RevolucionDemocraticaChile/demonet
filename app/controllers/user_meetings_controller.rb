@@ -1,12 +1,12 @@
-class UserActasController < ApplicationController
+class UserMeetingsController < ApplicationController
 	before_action :set_territorio, only: [:show, :edit, :update, :destroy]
 
 	authorize_resource
 
 	def create
-		@user_acta = UserActa.new(user_acta_params)
+		@user_meeting = UserMeeting.new(user_meeting_params)
 
-		if @user_acta.save
+		if @user_meeting.save
 			flash[:success] = "Asociación fue creada exitosamente."
 			redirect_to root_path
 		else
@@ -16,19 +16,19 @@ class UserActasController < ApplicationController
 	end
 
 	def destroy
-		@user_acta.destroy
+		@user_meeting.destroy
 		flash[:success] = "Asociación fue eliminada exitosamente."
 		redirect_to root_path
 	end
 
 	private
 
-		def set_user_acta
-			@user_acta = UserActa.find(params[:id])
+		def set_user_meeting
+			@user_meeting = UserMeeting.find(params[:id])
 		end
 
-		def user_acta_params
-			params.require(:user_acta).permit(:user_id, :acta_id)
+		def user_meeting_params
+			params.require(:user_meeting).permit(:user_id, :meeting_id)
 		end
 
 end

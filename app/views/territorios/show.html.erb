@@ -58,7 +58,7 @@
 			<% end %>
 		<% end %>
 
-		<h2>Actas</h2>
+		<h2>Meetings</h2>
 
 		<table class="table table-striped">
 			<thead>
@@ -69,13 +69,13 @@
 			</thead>
 
 			<tbody>
-				<% @territorio.actas.order(:date).each do |acta| %>
+				<% @territorio.meetings.order(:date).each do |meeting| %>
 					<tr>
 						<td>
-							<%= link_to format_acta_name(acta), acta %>
+							<%= link_to format_meeting_name(meeting), meeting %>
 						</td>
 						<td>
-							<%= acta.summary %>
+							<%= meeting.summary %>
 						</td>
 					</tr>
 				<% end %>
@@ -83,7 +83,7 @@
 		</table>
 
 		<% if current_user.admin? || current_user.aterritorios.include?(@territorio) %>
-			<%= link_to "Agregar Acta", new_acta_path, class: "btn btn-primary" %>
+			<%= link_to "Agregar Meeting", new_meeting_path, class: "btn btn-primary" %>
 		<% end %>
 
 	</div>

@@ -24,10 +24,10 @@
             <td><%= user.username %></td>
             <% if current_user.admin? %>
               <td class="text-center">
-                <%= user.actas.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>
+                <%= user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>
               </td>
               <td class="text-center">
-                <% if user.actas.where(date: (DateTime.now-6.months)..(DateTime.now)).count >= 6 %>
+                <% if user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count >= 6 %>
                   <span class="glyphicon glyphicon-ok"></span>
                 <% end %>
               </td>

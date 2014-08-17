@@ -1,24 +1,24 @@
 <div class="row">
 	<div class="col-lg-8 col-lg-offset-2">
-		<h1><%= format_acta_name(@acta) %></h1>
+		<h1><%= format_meeting_name(@meeting) %></h1>
 
 		<p>
 			<strong>Date:</strong>
-			<%= l Date.parse(@acta.date.to_s) %>
+			<%= l Date.parse(@meeting.date.to_s) %>
 		</p>
 
 		<p>
 			<strong>Territorio:</strong>
-			<%= link_to @acta.territorio.name, @acta.territorio %>
+			<%= link_to @meeting.territorio.name, @meeting.territorio %>
 		</p>
 
 		<p>
 			<strong>Resumen:</strong>
-			<%= @acta.summary %>
+			<%= @meeting.summary %>
 		</p>
 
 		<% if can? :edit, @user %>
-			<%= link_to 'Editar', edit_acta_path(@acta), class: "btn btn-primary" %>
+			<%= link_to 'Editar', edit_meeting_path(@meeting), class: "btn btn-primary" %>
 		<% end %>
 
 		<h2>Asistentes</h2>
@@ -31,7 +31,7 @@
 			</thead>
 
 			<tbody>
-				<% @acta.users.each do |user| %>
+				<% @meeting.users.each do |user| %>
 					<tr>
 						<td>
 							<%= link_to user.name, user %>
@@ -41,15 +41,15 @@
 			</tbody>
 		</table>
 
-		<% if current_user.admin? || current_user.aterritorios.include?(@acta.territorio) %>
-			<%= form_for UserActa.new, html: {class: "form-inline"} do |f| %>
-				<%= f.hidden_field :acta_id, value: @acta.id %>
+		<% if current_user.admin? || current_user.aterritorios.include?(@meeting.territorio) %>
+			<%= form_for UserMeeting.new, html: {class: "form-inline"} do |f| %>
+				<%= f.hidden_field :meeting_id, value: @meeting.id %>
 				<div class="form-group">
 					<label class="sr-only">Nombre del Usuario</label>
-					<select name="user_acta[user_id]" class="form-control">
+					<select name="user_meeting[user_id]" class="form-control">
 						<option value="nil">Seleccionar Usuario</option>
-						<% @acta.territorio.members.each do |user| %>
-							<% if !@acta.users.include?(user) %>
+						<% @meeting.territorio.members.each do |user| %>
+							<% if !@meeting.users.include?(user) %>
 								<option value="<%= user.id %>"><%= user.name %></option>
 							<% end %>
 						<% end %>

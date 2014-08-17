@@ -7,7 +7,7 @@ class Territorio < ActiveRecord::Base
 	has_many :admin_territorios
 	has_many :admins, class_name: "User", through: :admin_territorios
 
-	has_many :actas
+	has_many :meetings
 
 	validates :name, presence: true,
 	                 length:   { maximum: NAME_MAX_LENGTH },

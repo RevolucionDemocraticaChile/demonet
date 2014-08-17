@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-6 col-lg-offset-3">
-		<h1>Actas</h1>
+		<h1>Meetings</h1>
 
 		<table class="table table-striped table-bordered">
 			<thead>
@@ -14,16 +14,16 @@
 			</thead>
 
 			<tbody>
-				<% @actas.each do |acta| %>
+				<% @meetings.each do |meeting| %>
 					<tr>
-						<td><%= link_to format_acta_name(acta), acta %></td>
-						<td class="text-center"><%= acta.users.count %></td>
+						<td><%= link_to format_meeting_name(meeting), meeting %></td>
+						<td class="text-center"><%= meeting.users.count %></td>
 						<% if current_user.admin? %>
 							<td class="text-center">
-								<%= link_to 'Editar', edit_acta_path(acta), class: "btn btn-info" %>
+								<%= link_to 'Editar', edit_meeting_path(meeting), class: "btn btn-info" %>
 							</td>
 							<td class="text-center">
-								<%= link_to 'Eliminar', acta, method: :delete, data: { confirm: 'Estás seguro?' }, class: "btn btn-danger" %>
+								<%= link_to 'Eliminar', meeting, method: :delete, data: { confirm: 'Estás seguro?' }, class: "btn btn-danger" %>
 							</td>
 						<% end %>
 					</tr>
@@ -31,8 +31,8 @@
 			</tbody>
 		</table>
 
-		<% if can? :new, Acta %>
-			<%= link_to 'Nueva Acta', new_acta_path, class: "btn btn-primary" %>
+		<% if can? :new, Meeting %>
+			<%= link_to 'Nueva Meeting', new_meeting_path, class: "btn btn-primary" %>
 		<% end %>
 	</div>
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815133127) do
+ActiveRecord::Schema.define(version: 20140817140851) do
 
   create_table "actas", force: true do |t|
     t.integer  "territorio_id"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20140815133127) do
   create_table "admin_territorios", force: true do |t|
     t.integer  "user_id"
     t.integer  "territorio_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "espacios", force: true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.string   "type"
+    t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

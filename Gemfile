@@ -7,11 +7,22 @@ gem 'rails', '4.1.4'
 group	:development, :test do
 	gem 'rspec-rails', '~> 3.0.2'
 	gem 'sqlite3'
+	gem 'guard-rspec', '~> 4.3.1'
 end
 
 group :test do
 	gem 'factory_girl_rails', '~> 4.4.1'
 	gem 'capybara',           '~> 2.4.1'
+
+	# Uncomment this line on OS X.
+  gem 'growl',              '~> 1.0.3'
+
+  # Uncomment these lines on Linux.
+  # gem 'libnotify', '0.8.0'
+
+  # Uncomment these lines on Windows.
+  # gem 'rb-notifu', '0.0.4'
+  # gem 'wdm', '0.1.0'
 end
 
 group :production do

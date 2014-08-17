@@ -8,16 +8,15 @@ class Ability
     can :show,  User
     can :edit,  User, id: user.id
 
-    can :index, Territorio
-    can :show,  Territorio
-    # can :edit,  Territorio, id: { ids: user.aterritorios.ids }
+    can :index, Territory
+    can :show,  Territory
 
     # if
 
     if user.admin?
       can :manage, User
-      can :manage, Territorio
-      can :manage, MemberTerritorio
+      can :manage, Territory
+      can :manage, MemberTerritory
       can :manage, Meeting
       can :manage, UserMeeting
     end

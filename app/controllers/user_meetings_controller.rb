@@ -1,5 +1,5 @@
 class UserMeetingsController < ApplicationController
-	before_action :set_territorio, only: [:show, :edit, :update, :destroy]
+	before_action :set_territory, only: [:show, :edit, :update, :destroy]
 
 	authorize_resource
 

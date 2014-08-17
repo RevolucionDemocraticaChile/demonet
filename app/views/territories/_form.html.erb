@@ -1,5 +1,5 @@
-<%= form_for @territorio, html: { class: "form-horizontal" } do |f| %>
-	<% if @territorio.errors.any? %>
+<%= form_for @territory, html: { class: "form-horizontal" } do |f| %>
+	<% if @territory.errors.any? %>
 		<div id="error_explanation" class="alert alert-danger">
 			<h2>Se encontraron <%= pluralize(@user.errors.count, "error") %>:</h2>
 

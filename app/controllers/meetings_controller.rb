@@ -32,7 +32,7 @@ class MeetingsController < ApplicationController
 		end
 
 		def meeting_params
-			params.require(:meeting).permit(:date, :territorio_id, :summary)
+			params.require(:meeting).permit(:date, :territory_id, :summary)
 		end
 
 end

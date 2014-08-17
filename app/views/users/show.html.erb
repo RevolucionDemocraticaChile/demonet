@@ -24,14 +24,14 @@
       </div>
     <% end %>
     <hr />
-    <% @user.territorios.each do |territorio| %>
+    <% @user.territories.each do |territory| %>
       <div class="alert alert-info text-center">
-        Miembro del Territorio<br />
-        <strong><%= link_to territorio.name, territorio %></strong>
+        Miembro del Territory<br />
+        <strong><%= link_to territory.name, territory %></strong>
       </div>
     <% end %>
     <% if current_user.admin? %>
-      <%= link_to "Agregar usuario a otro Territorio", new_member_territorio_path, class: "btn btn-primary" %>
+      <%= link_to "Agregar usuario a otro Territory", new_member_territory_path, class: "btn btn-primary" %>
     <% end %>
     <hr />
   </div>
@@ -55,7 +55,7 @@
       <%= link_to 'Editar', edit_user_path(@user), class: "btn btn-primary" %>
     <% end %>
 
-    <h2>Territorios</h2>
+    <h2>Territories</h2>
 
     <table class="table table-striped table-bordered">
       <thead>
@@ -68,15 +68,15 @@
       </thead>
 
       <tbody>
-        <% @user.member_territorios.each do |member_territorio| %>
-        <% territorio = member_territorio.territorio %>
+        <% @user.member_territories.each do |member_territory| %>
+        <% territory = member_territory.territory %>
           <tr>
             <td>
-              <%= link_to territorio.name, territorio %><% if @user.aterritorios.include?(territorio) %> <strong>(admin)</strong><% end %>
+              <%= link_to territory.name, territory %><% if @user.aterritories.include?(territory) %> <strong>(admin)</strong><% end %>
             </td>
             <% if current_user.admin? %>
               <td class="text-center">
-                <%= link_to "Eliminar", member_territorio, method: :delete, data: { confirm: 'Estás seguro?' }, class: "btn btn-danger" %>
+                <%= link_to "Eliminar", member_territory, method: :delete, data: { confirm: 'Estás seguro?' }, class: "btn btn-danger" %>
               </td>
             <% end %>
           </tr>
@@ -86,19 +86,19 @@
 
 
     <% if current_user.admin? %>
-      <%= form_for @member_territorio, html: { class: "form-inline" } do |f| %>
+      <%= form_for @member_territory, html: { class: "form-inline" } do |f| %>
         <%= f.hidden_field :user_id, value: @user.id %>
         <div class="form-group">
-          <label class="sr-only">Nombre del Territorio</label>
-          <select name="member_territorio[territorio_id]" class="form-control">
-            <% Territorio.all.each do |territorio| %>
-              <% if !@user.territorios.include?(territorio) %>
-                <option value="<%= territorio.id %>"><%= territorio.name %></option>
+          <label class="sr-only">Nombre del Territory</label>
+          <select name="member_territory[territory_id]" class="form-control">
+            <% Territory.all.each do |territory| %>
+              <% if !@user.territories.include?(territory) %>
+                <option value="<%= territory.id %>"><%= territory.name %></option>
               <% end %>
             <% end %>
           </select>
         </div>
-        <%= f.submit "Agregar Territorio", class: "btn btn-primary" %>
+        <%= f.submit "Agregar Territory", class: "btn btn-primary" %>
       <% end %>
     <% end %>
 

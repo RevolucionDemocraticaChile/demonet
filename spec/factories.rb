@@ -7,7 +7,7 @@ FactoryGirl.define do
 		u.password_confirmation "secret"
 	end
 
-	factory :territorio do |t|
-		t.sequence(:name) { |n| "Nombre Territorio #{n}" }
+	factory :territory do |t|
+		t.sequence(:name) { |n| "Nombre Territory #{n}" }
 	end
 end

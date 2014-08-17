@@ -1,7 +1,7 @@
 class CreateMeetings < ActiveRecord::Migration
   def change
     create_table :meetings do |t|
-      t.belongs_to :territorio
+      t.belongs_to :territory
       t.datetime :date
       t.string :summary
 

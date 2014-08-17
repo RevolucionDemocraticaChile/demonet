@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
 	PASSWORD_MIN_LENGTH = 6
 	VALID_EMAIL_REGEX   = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-	has_many :member_territorios
-	has_many :territorios, foreign_key: "member_id", through: :member_territorios
+	has_many :member_territories
+	has_many :territories, foreign_key: "member_id", through: :member_territories
 
-	has_many :admin_territorios
-	has_many :aterritorios, foreign_key: "admin_id", through: :admin_territorios
+	has_many :admin_territories
+	has_many :aterritories, foreign_key: "admin_id", through: :admin_territories
 
 	has_many :user_meetings
 	has_many :meetings, through: :user_meetings

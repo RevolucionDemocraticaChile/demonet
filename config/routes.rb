@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   root to: redirect('/ingresar')
 
   resources :users
-  resources :territorios
-  resources :member_territorios, only: [:new, :create, :destroy]
+  resources :territories
+  resources :member_territories, only: [:new, :create, :destroy]
   resources :meetings
   resources :user_meetings
 

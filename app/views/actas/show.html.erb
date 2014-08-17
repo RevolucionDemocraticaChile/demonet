@@ -8,8 +8,8 @@
 		</p>
 
 		<p>
-			<strong>Territorio:</strong>
-			<%= link_to @meeting.territorio.name, @meeting.territorio %>
+			<strong>Territory:</strong>
+			<%= link_to @meeting.territory.name, @meeting.territory %>
 		</p>
 
 		<p>
@@ -41,14 +41,14 @@
 			</tbody>
 		</table>
 
-		<% if current_user.admin? || current_user.aterritorios.include?(@meeting.territorio) %>
+		<% if current_user.admin? || current_user.aterritories.include?(@meeting.territory) %>
 			<%= form_for UserMeeting.new, html: {class: "form-inline"} do |f| %>
 				<%= f.hidden_field :meeting_id, value: @meeting.id %>
 				<div class="form-group">
 					<label class="sr-only">Nombre del Usuario</label>
 					<select name="user_meeting[user_id]" class="form-control">
 						<option value="nil">Seleccionar Usuario</option>
-						<% @meeting.territorio.members.each do |user| %>
+						<% @meeting.territory.members.each do |user| %>
 							<% if !@meeting.users.include?(user) %>
 								<option value="<%= user.id %>"><%= user.name %></option>
 							<% end %>

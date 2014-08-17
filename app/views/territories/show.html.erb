@@ -1,14 +1,14 @@
 <div class="row">
 	<div class="col-lg-8 col-lg-offset-2">
-		<h1>Territorio <%= @territorio.name %></h1>
+		<h1>Territory <%= @territory.name %></h1>
 
 		<p>
 			<strong>Nombre:</strong>
-			<%= @territorio.name %>
+			<%= @territory.name %>
 		</p>
 
-		<% if can? :edit, @territorio %>
-			<%= link_to 'Editar', edit_territorio_path(@territorio), class: "btn btn-primary" %>
+		<% if can? :edit, @territory %>
+			<%= link_to 'Editar', edit_territory_path(@territory), class: "btn btn-primary" %>
 		<% end %>
 
 		<h2>Miembros</h2>
@@ -18,20 +18,20 @@
 				<tr>
 					<th>Nombre</th>
 					<th>Email</th>
-					<% if current_user.admin? || current_user.aterritorios.include?(@territorio) %>
+					<% if current_user.admin? || current_user.aterritories.include?(@territory) %>
 						<th></th>
 					<% end %>
 				</tr>
 			</thead>
 
 			<tbody>
-				<% @territorio.members.each do |member| %>
+				<% @territory.members.each do |member| %>
 					<tr>
 						<td>
-							<%= link_to member.name, member %><% if @territorio.admins.include?(member) %> <strong>(admin)</strong><% end %>
+							<%= link_to member.name, member %><% if @territory.admins.include?(member) %> <strong>(admin)</strong><% end %>
 						</td>
 						<td><%= member.email %></td>
-						<% if current_user.admin? || current_user.aterritorios.include?(@territorio) %>
+						<% if current_user.admin? || current_user.aterritories.include?(@territory) %>
 							<td class="text-center">
 								<%= link_to 'Eliminar Miembro', '#', class: "btn btn-danger" %>
 							</td>
@@ -41,14 +41,14 @@
 			</tbody>
 		</table>
 
-		<% if current_user.admin? || current_user.aterritorios.include?(@territorio) %>
-			<%= form_for MemberTerritorio.new, html: { class: "form-inline" } do |f| %>
-				<%= f.hidden_field :territorio_id, value: @territorio.id %>
+		<% if current_user.admin? || current_user.aterritories.include?(@territory) %>
+			<%= form_for MemberTerritory.new, html: { class: "form-inline" } do |f| %>
+				<%= f.hidden_field :territory_id, value: @territory.id %>
 				<div class="form-group">
 					<label class="sr-only">Nombre del Usuario</label>
-					<select name="member_territorio[user_id]" class="form-control">
+					<select name="member_territory[user_id]" class="form-control">
 						<% User.all.each do |user| %>
-							<% if !@territorio.members.include?(user) %>
+							<% if !@territory.members.include?(user) %>
 								<option value="<%= user.id %>"><%= user.name %></option>
 							<% end %>
 						<% end %>
@@ -69,7 +69,7 @@
 			</thead>
 
 			<tbody>
-				<% @territorio.meetings.order(:date).each do |meeting| %>
+				<% @territory.meetings.order(:date).each do |meeting| %>
 					<tr>
 						<td>
 							<%= link_to format_meeting_name(meeting), meeting %>
@@ -82,7 +82,7 @@
 			</tbody>
 		</table>
 
-		<% if current_user.admin? || current_user.aterritorios.include?(@territorio) %>
+		<% if current_user.admin? || current_user.aterritories.include?(@territory) %>
 			<%= link_to "Agregar Meeting", new_meeting_path, class: "btn btn-primary" %>
 		<% end %>
 

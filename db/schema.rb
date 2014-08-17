@@ -13,9 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140817140851) do
 
-  create_table "admin_territorios", force: true do |t|
+  create_table "admin_territories", force: true do |t|
     t.integer  "user_id"
-    t.integer  "territorio_id"
+    t.integer  "territory_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -30,21 +30,21 @@ ActiveRecord::Schema.define(version: 20140817140851) do
   end
 
   create_table "meetings", force: true do |t|
-    t.integer  "territorio_id"
+    t.integer  "territory_id"
     t.datetime "date"
     t.string   "summary"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "member_territorios", force: true do |t|
+  create_table "member_territories", force: true do |t|
     t.integer  "user_id"
-    t.integer  "territorio_id"
+    t.integer  "territory_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "territorios", force: true do |t|
+  create_table "territories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

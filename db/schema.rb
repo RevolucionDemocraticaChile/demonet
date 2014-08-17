@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20140817140851) do
     t.datetime "updated_at"
   end
 
-  create_table "espacios", force: true do |t|
+  create_table "groups", force: true do |t|
     t.string   "name"
     t.string   "desc"
     t.string   "type"

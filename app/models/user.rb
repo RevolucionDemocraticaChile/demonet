@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  username        :string(255)
+#  email           :string(255)
+#  name            :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean
+#
+
 class User < ActiveRecord::Base
 	USERNAME_MAX_LENGTH = 50
 	EMAIL_MAX_LENGTH    = 50

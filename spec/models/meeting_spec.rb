@@ -10,11 +10,10 @@
 #  updated_at   :datetime
 #
 
-class Meeting < ActiveRecord::Base
+require 'rails_helper'
 
-	belongs_to :territory
+RSpec.describe User, type: :model do
 
-	has_many :user_meetings
-	has_many :users, through: :user_meetings
+	before { @meeting = Meeting.new() }
 
 end

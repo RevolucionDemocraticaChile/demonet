@@ -5,16 +5,16 @@ ruby '2.0.0'
 gem 'rails', '4.1.4'
 
 group	:development, :test do
-	gem 'rspec-rails', '~> 3.0.2'
-	gem 'sqlite3'
-	gem 'guard-rspec', '~> 4.3.1'
+  gem 'rspec-rails', '~> 3.0.2'
+  gem 'sqlite3'
+  gem 'guard-rspec', '~> 4.3.1'
 end
 
 group :test do
-	gem 'factory_girl_rails', '~> 4.4.1'
-	gem 'capybara',           '~> 2.4.1'
+  gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'capybara',           '~> 2.4.1'
 
-	# Uncomment this line on OS X.
+  # Uncomment this line on OS X.
   gem 'growl',              '~> 1.0.3'
 
   # Uncomment these lines on Linux.
@@ -26,8 +26,8 @@ group :test do
 end
 
 group :production do
-	gem 'pg',             '~> 0.17.1'
-	gem 'rails_12factor', '~> 0.0.2'
+  gem 'pg',             '~> 0.17.1'
+  gem 'rails_12factor', '~> 0.0.2'
 end
 
 gem 'sass-rails',     '~> 4.0.3'

@@ -17,6 +17,7 @@ class Meeting < ActiveRecord::Base
   has_many :user_meetings
   has_many :users, through: :user_meetings
 
-  validates :group, presence: true
+  validates :group,
+    presence: true
 
 end

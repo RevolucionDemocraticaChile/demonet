@@ -45,10 +45,10 @@ RSpec.describe Group, type: :model do
     it { should be_valid }
   end
 
-  # describe "when desc is not present" do
-  # 	before { @group.desc = " " }
-  # 	it { should_not be_valid }
-  # end
+  describe "when desc is not present" do
+    before { @group.desc = " " }
+    it { should be_valid }
+  end
 
   describe "when desc is too long" do
     before { @group.desc = "a" * (Group::DESC_MAX_LENGTH + 1) }

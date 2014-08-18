@@ -33,7 +33,7 @@ describe "Territory pages" do
 
   end
 
-  describe "with signin first" do
+  describe "signing in first" do
     let(:signed_in_user) { FactoryGirl.create(:user) }
     let(:territory) { FactoryGirl.create(:territory) }
 

@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-3">
+    <h1><%= t(:groups).titleize %></h1>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th><%= t(:name) %></th>
+          <th class="text-center"><%= t(:members).titleize %></th>
+          <th class="text-center"><%= t(:meetings).titleize %></th>
+          <% if current_user.admin? %>
+            <th colspan="2"></th>
+          <% end %>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @groups.each do |group| %>
+          <tr>
+            <td><%= link_to group.name, group %></td>
+            <td class="text-center"><%= group.members.count %></td>
+            <td class="text-center"><%= group.meetings.count %></td>
+            <% if current_user.admin? %>
+              <td class="text-center">
+                <%= link_to t(:edit), edit_group_path(group), class: "btn btn-info" %>
+              </td>
+              <td class="text-center">
+                <%= link_to t(:destroy), group, method: :delete, data: { confirm: t(:are_you_sure) }, class: "btn btn-danger" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <% if can? :new, Group %>
+      <%= link_to t(:new_group).titleize, new_group_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

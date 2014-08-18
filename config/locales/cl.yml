@@ -5,6 +5,7 @@ cl:
   signin_success: Has ingresado exitosamente.
   not_signed_in: No estás ingresado.
   invalid_email_pass: Combinación email/clave inválida.
+  group_create_successfully: Espacio creado exitosamente.
   user_created_successfully: Usuario creado exitosamente.
   user_updated_successfully: Usuario actualizado exitosamente.
   user_destroyed_successfully: Usuario eliminado exitosamente.
@@ -19,6 +20,7 @@ cl:
   add_meeting: agregar reunión
   add_territory: agregar territorio
   new_meeting: nueva reunión
+  new_group: nuevo espacio
   new_territory: nuevo territorio
   new_user: nuevo usuario
   password_confirmation: confirmar contraseña
@@ -36,11 +38,14 @@ cl:
   attendants: asistentes
   back: atrás
   create: crear
+  comission: comisión
   demonet: demonet
   description: descripción
   destroy: eliminar
   edit: editar
   email: email
+  group: grupo
+  groups: grupos
   meeting: reunión
   meetings: reuniones
   members: miembros
@@ -48,11 +53,14 @@ cl:
   password: contraseña
   profile: perfil
   show: ver
+  territory: territorio
   territories: territorios
+  type: tipo
   user: usuario
   username: usuario
   users: usuarios
   date_lit: fecha
+  welcome: bienvenido
   date:
     abbr_day_names:
     - dom

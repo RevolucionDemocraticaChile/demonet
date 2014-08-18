@@ -1,16 +1,16 @@
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
-    <h1>Usuarios</h1>
+    <h1><%= t(:users).titleize %></h1>
 
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Username</th>
+          <th><%= t(:name).titleize %></th>
+          <th><%= t(:email).titleize %></th>
+          <th><%= t(:username).titleize %></th>
           <% if current_user.admin? %>
-            <th class="text-center">Asistencias recientes</th>
-            <th class="text-center">Activo?</th>
+            <th class="text-center"><%= t(:recent_attendances).titleize %></th>
+            <th class="text-center"><%= t(:active).titleize %>?</th>
             <th colspan="2"></th>
           <% end %>
         </tr>
@@ -32,10 +32,10 @@
                 <% end %>
               </td>
               <td class="text-center">
-                <%= link_to 'Editar', edit_user_path(user), class: "btn btn-info" %>
+                <%= link_to t(:edit).titleize, edit_user_path(user), class: "btn btn-info" %>
               </td>
               <td class="text-center">
-                <%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                <%= link_to t(:destroy).titleize, user, method: :delete, data: { confirm: t(:are_you_sure).titleize }, class: "btn btn-danger" %>
               </td>
             <% end %>
           </tr>
@@ -44,7 +44,7 @@
     </table>
 
     <% if can? :new, User %>
-      <%= link_to 'Nuevo Usuario', new_user_path, class: "btn btn-primary" %>
+      <%= link_to t(:new_user).titleize, new_user_path, class: "btn btn-primary" %>
     <% end %>
 
   </div>

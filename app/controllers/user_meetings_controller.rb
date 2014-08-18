@@ -7,17 +7,16 @@ class UserMeetingsController < ApplicationController
     @user_meeting = UserMeeting.new(user_meeting_params)
 
     if @user_meeting.save
-      flash[:success] = "Asociación fue creada exitosamente."
+      flash[:success] = t(:association_created_successfully)
       redirect_to root_path
     else
-      flash[:error] = "Error."
-      redirect_to root_path
+      flash[:error] = t(:error_creating_association)
     end
   end
 
   def destroy
     @user_meeting.destroy
-    flash[:success] = "Asociación fue eliminada exitosamente."
+    flash[:success] = t(:association_destroyed_successfully)
     redirect_to root_path
   end
 

@@ -12,11 +12,11 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
       # Sign in and redirect to user show
-      flash[:success] = 'Has ingresado exitosamente.'
+      flash[:success] = t(:signin_success)
       sign_in user
       redirect_to user
     else
-      flash.now[:error] = 'Combinación email/contraseña invalida'
+      flash.now[:error] = t(:invalid_email_pass)
       render 'new'
     end
   end

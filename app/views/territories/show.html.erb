@@ -1,23 +1,23 @@
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2">
-    <h1>Territorio <%= @territory.name %></h1>
+    <h1><%= t(:territory).titleize %>: <%= @territory.name %></h1>
 
     <p>
-      <strong>Nombre:</strong>
+      <strong><%= t(:name).titleize %>:</strong>
       <%= @territory.name %>
     </p>
 
     <% if can? :edit, @territory %>
-      <%= link_to 'Editar', edit_territory_path(@territory), class: "btn btn-primary" %>
+      <%= link_to t(:edit).titleize, edit_territory_path(@territory), class: "btn btn-primary" %>
     <% end %>
 
-    <h2>Miembros</h2>
+    <h2><%= t(:members).titleize %></h2>
 
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Email</th>
+          <th><%= t(:name).titleize %></th>
+          <th><%= t(:email).titleize %></th>
           <% if current_user.admin? || current_user.aterritories.include?(@territory) %>
             <th></th>
           <% end %>
@@ -33,7 +33,7 @@
             <td><%= member.email %></td>
             <% if current_user.admin? || current_user.aterritories.include?(@territory) %>
               <td class="text-center">
-                <%= link_to 'Eliminar Miembro', '#', class: "btn btn-danger" %>
+                <%= link_to t(:destroy).titleize, '#', class: "btn btn-danger" %>
               </td>
             <% end %>
           </tr>
@@ -45,7 +45,7 @@
       <%= form_for MemberTerritory.new, html: { class: "form-inline" } do |f| %>
         <%= f.hidden_field :territory_id, value: @territory.id %>
         <div class="form-group">
-          <label class="sr-only">Nombre del Usuario</label>
+          <label class="sr-only"><%= t(:name).titleize %></label>
           <select name="member_territory[user_id]" class="form-control">
             <% User.all.each do |user| %>
               <% if !@territory.members.include?(user) %>
@@ -54,17 +54,17 @@
             <% end %>
           </select>
         </div>
-        <%= f.submit "Agregar Miembro", class: "btn btn-primary" %>
+        <%= f.submit t(:add_member).titleize, class: "btn btn-primary" %>
       <% end %>
     <% end %>
 
-    <h2>Actas</h2>
+    <h2><%= t(:meetings).titleize %></h2>
 
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Fecha</th>
-          <th>Resumen</th>
+          <th><%= t(:date_lit).titleize %></th>
+          <th><%= t(:description).titleize %></th>
         </tr>
       </thead>
 
@@ -83,7 +83,7 @@
     </table>
 
     <% if current_user.admin? || current_user.aterritories.include?(@territory) %>
-      <%= link_to "Agregar Acta", new_meeting_path, class: "btn btn-primary" %>
+      <%= link_to t(:add_meeting), new_meeting_path, class: "btn btn-primary" %>
     <% end %>
 
   </div>

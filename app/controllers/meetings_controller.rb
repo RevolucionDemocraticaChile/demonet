@@ -19,7 +19,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new(meeting_params)
 
     if @meeting.save
-      flash[:success] = "Acta creada exitosamente"
+      flash[:success] = t(:meeting_created_successfully)
       redirect_to @meeting
     else
       render 'new'

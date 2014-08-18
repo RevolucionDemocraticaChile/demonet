@@ -5,9 +5,9 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th class="text-center">Miembros</th>
-          <th class="text-center">Actas</th>
+          <th><%= t(:name) %></th>
+          <th class="text-center"><%= t(:members).titleize %></th>
+          <th class="text-center"><%= t(:meetings).titleize %></th>
           <% if current_user.admin? %>
             <th colspan="2"></th>
           <% end %>
@@ -22,10 +22,10 @@
             <td class="text-center"><%= territory.meetings.count %></td>
             <% if current_user.admin? %>
               <td class="text-center">
-                <%= link_to 'Editar', edit_territory_path(territory), class: "btn btn-info" %>
+                <%= link_to t(:edit), edit_territory_path(territory), class: "btn btn-info" %>
               </td>
               <td class="text-center">
-                <%= link_to 'Eliminar', territory, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                <%= link_to t(:destroy), territory, method: :delete, data: { confirm: t(:are_you_sure) }, class: "btn btn-danger" %>
               </td>
             <% end %>
           </tr>
@@ -34,7 +34,7 @@
     </table>
 
     <% if can? :new, Territory %>
-      <%= link_to 'Nuevo Territorio', new_territory_path, class: "btn btn-primary" %>
+      <%= link_to t(:new_territory).titleize, new_territory_path, class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

@@ -15,7 +15,7 @@ class TerritoriesController < ApplicationController
     @territory = Territory.new(territory_params)
 
     if @territory.save
-      flash[:success] = "Territorio creado exitosamente."
+      flash[:success] = t(:territory_created_successfully)
       redirect_to @territory
     else
       render 'new'

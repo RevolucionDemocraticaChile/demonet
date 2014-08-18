@@ -8,17 +8,17 @@ class MemberTerritoriesController < ApplicationController
     @member_territory = MemberTerritory.new(member_territory_params)
 
     if @member_territory.save
-      flash[:success] = "Asociación fue creada exitosamente."
+      flash[:success] = t(:association_created_successfully)
       redirect_to root_path
     else
-      flash[:error] = "Error."
+      flash[:error] = t(:error_creating_association)
       redirect_to root_path
     end
   end
 
   def destroy
     @member_territory.destroy
-    flash[:success] = "Asociación fue eliminada exitosamente."
+    flash[:success] = t(:association_destroyed_successfully)
     redirect_to root_path
   end
 

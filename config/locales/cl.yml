@@ -1,4 +1,58 @@
 cl:
+  signin: ingresar
+  signout: salir
+  signin_first: Debes ingresar primero.
+  signin_success: Has ingresado exitosamente.
+  not_signed_in: No estás ingresado.
+  invalid_email_pass: Combinación email/clave inválida.
+  user_created_successfully: Usuario creado exitosamente.
+  user_updated_successfully: Usuario actualizado exitosamente.
+  user_destroyed_successfully: Usuario eliminado exitosamente.
+  meeting_created_successfully: Reunión creada exitosamente.
+  territory_created_successfully: Territorio creado exitosamente.
+  association_created_successfully: Asociación creada exitosamente.
+  error_creating_association: Hubo un error al crear la asociación.
+  association_destroyed_successfully: Asociación eliminada exitosamente.
+  not_authorized: No estás autorizado.
+  are_you_sure: Estás seguro?
+  add_member: agregar miembro
+  add_meeting: agregar reunión
+  add_territory: agregar territorio
+  new_meeting: nueva reunión
+  new_territory: nuevo territorio
+  new_user: nuevo usuario
+  password_confirmation: confirmar contraseña
+  select_user: seleccionar usuario
+  recent_attendances: asistencias recientes
+  active_member: miembro activo
+  supporting_member: miembro adherente
+  member_of_territory: miembro de territorio
+  add_user_to_territory: agregar usuario a territorio
+  recent_meetings: reuniones recientes
+  territory_name: nombre del territorio
+  account: cuenta
+  active: activo
+  administrator: administrador
+  attendants: asistentes
+  back: atrás
+  create: crear
+  demonet: demonet
+  description: descripción
+  destroy: eliminar
+  edit: editar
+  email: email
+  meeting: reunión
+  meetings: reuniones
+  members: miembros
+  name: nombre
+  password: contraseña
+  profile: perfil
+  show: ver
+  territories: territorios
+  user: usuario
+  username: usuario
+  users: usuarios
+  date_lit: fecha
   date:
     abbr_day_names:
     - dom

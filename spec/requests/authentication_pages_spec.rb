@@ -26,7 +26,7 @@ describe "Authentication" do
     it { should have_content('Ingresar') }
 
     describe "with invalid information" do
-      before { click_button "Ingresar" }
+      before { click_button 'Ingresar' }
 
       it { should have_selector("div.alert.alert-error") }
 
@@ -41,7 +41,7 @@ describe "Authentication" do
 
       before do
         fill_in "Email",    with: user.email.upcase
-        fill_in "Password", with: user.password
+        fill_in "Contraseña", with: user.password
         click_button "Ingresar"
       end
 

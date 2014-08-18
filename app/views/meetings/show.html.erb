@@ -1,66 +1,66 @@
 <div class="row">
-	<div class="col-lg-8 col-lg-offset-2">
-		<h1><%= format_meeting_name(@meeting) %></h1>
+  <div class="col-lg-8 col-lg-offset-2">
+    <h1><%= format_meeting_name(@meeting) %></h1>
 
-		<p>
-			<strong>Fecha:</strong>
-			<%= l Date.parse(@meeting.date.to_s) %>
-		</p>
+    <p>
+      <strong>Fecha:</strong>
+      <%= l Date.parse(@meeting.date.to_s) %>
+    </p>
 
-		<p>
-			<strong>Territorio:</strong>
-			<%= link_to @meeting.territory.name, @meeting.territory %>
-		</p>
+    <p>
+      <strong>Territorio:</strong>
+      <%= link_to @meeting.territory.name, @meeting.territory %>
+    </p>
 
-		<p>
-			<strong>Resumen:</strong>
-			<%= @meeting.summary %>
-		</p>
+    <p>
+      <strong>Resumen:</strong>
+      <%= @meeting.summary %>
+    </p>
 
-		<% if can? :edit, @user %>
-			<%= link_to 'Editar', edit_meeting_path(@meeting), class: "btn btn-primary" %>
-		<% end %>
+    <% if can? :edit, @user %>
+      <%= link_to 'Editar', edit_meeting_path(@meeting), class: "btn btn-primary" %>
+    <% end %>
 
-		<h2>Asistentes</h2>
+    <h2>Asistentes</h2>
 
-		<table class="table table-striped table-bordered">
-			<thead>
-				<tr>
-					<th>Nombre</th>
-				</tr>
-			</thead>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+        </tr>
+      </thead>
 
-			<tbody>
-				<% @meeting.users.each do |user| %>
-					<tr>
-						<td>
-							<%= link_to user.name, user %>
-						</td>
-					</tr>
-				<% end %>
-			</tbody>
-		</table>
+      <tbody>
+        <% @meeting.users.each do |user| %>
+          <tr>
+            <td>
+              <%= link_to user.name, user %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-		<% if current_user.admin? || current_user.aterritories.include?(@meeting.territory) %>
-			<%= form_for UserMeeting.new, html: {class: "form-inline"} do |f| %>
-				<%= f.hidden_field :meeting_id, value: @meeting.id %>
-				<div class="form-group">
-					<label class="sr-only">Nombre del Usuario</label>
-					<select name="user_meeting[user_id]" class="form-control">
-						<option value="nil">Seleccionar Usuario</option>
-						<% @meeting.territory.members.each do |user| %>
-							<% if !@meeting.users.include?(user) %>
-								<option value="<%= user.id %>"><%= user.name %></option>
-							<% end %>
-						<% end %>
-					</select>
-				</div>
-				<div class="form-group">
-					<%= f.submit "Agregar", class: "btn btn-primary" %>
-				</div>
-			<% end %>
-		<% end %>
+    <% if current_user.admin? || current_user.aterritories.include?(@meeting.territory) %>
+      <%= form_for UserMeeting.new, html: {class: "form-inline"} do |f| %>
+        <%= f.hidden_field :meeting_id, value: @meeting.id %>
+        <div class="form-group">
+          <label class="sr-only">Nombre del Usuario</label>
+          <select name="user_meeting[user_id]" class="form-control">
+            <option value="nil">Seleccionar Usuario</option>
+            <% @meeting.territory.members.each do |user| %>
+              <% if !@meeting.users.include?(user) %>
+                <option value="<%= user.id %>"><%= user.name %></option>
+              <% end %>
+            <% end %>
+          </select>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Agregar", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    <% end %>
 
 
-	</div>
+  </div>
 </div>

@@ -30,9 +30,9 @@ ActiveRecord::Schema.define(version: 20140817140851) do
   end
 
   create_table "meetings", force: true do |t|
-    t.integer  "territory_id"
+    t.integer  "group_id"
     t.datetime "date"
-    t.string   "summary"
+    t.string   "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

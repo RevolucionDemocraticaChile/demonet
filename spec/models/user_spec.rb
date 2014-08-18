@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  username        :string(255)
+#  email           :string(255)
+#  name            :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean
+#
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -151,7 +166,6 @@ RSpec.describe User, type: :model do
     it { should be_invalid }
   end
 
-
   # Remember token validations
 
   describe "remember token" do
@@ -162,7 +176,5 @@ RSpec.describe User, type: :model do
     specify { expect(@user.remember_token).not_to be_blank }
 
   end
-
-
 
 end

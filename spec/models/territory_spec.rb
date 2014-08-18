@@ -1,32 +1,42 @@
+# == Schema Information
+#
+# Table name: territories
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'rails_helper'
 
 RSpec.describe Territory, type: :model do
 
-	before { @territory = Territory.new(name: "Europa Norte") }
+  before { @territory = Territory.new(name: "Europa Norte") }
 
-	subject { @territory }
+  subject { @territory }
 
-	it { should respond_to(:name) }
+  it { should respond_to(:name) }
 
-	it { should be_valid }
+  it { should be_valid }
 
-	describe "when name is not present" do
-		before { @territory.name = " " }
-		it { should_not be_valid }
-	end
+  describe "when name is not present" do
+    before { @territory.name = " " }
+    it { should_not be_valid }
+  end
 
-	describe "when name is too long" do
-		before { @territory.name = "a" * (Territory::NAME_MAX_LENGTH + 1) }
-		it { should_not be_valid }
-	end
+  describe "when name is too long" do
+    before { @territory.name = "a" * (Territory::NAME_MAX_LENGTH + 1) }
+    it { should_not be_valid }
+  end
 
-	describe "when name is taken" do
-		before do
-			territory_with_same_name = Territory.new(name: @territory.name.upcase)
-			territory_with_same_name.save
-		end
+  describe "when name is taken" do
+    before do
+      territory_with_same_name = Territory.new(name: @territory.name.upcase)
+      territory_with_same_name.save
+    end
 
-		it { should_not be_valid }
-	end
+    it { should_not be_valid }
+  end
 
 end

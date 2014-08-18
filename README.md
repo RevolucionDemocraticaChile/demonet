@@ -34,8 +34,35 @@
     bundle exec rake db:migrate
     bundle exec rake test:prepare
     ```
+    Nota: una de las _gems_ del `Gemfile` es `rb-readline`, que puede que
+    dependa de `libreadline`. Si tu sistema no incluye `libreadline`, tendrás
+    que instalarla a mano. En Ubuntu, puedes hacerlo con
 
-4.  Iniciar el servidor y probar
+    ```bash
+    sudo apt-get install libreadline-dev
+    ```
+
+4.  Crear el usuario inicial
+
+    A través de la consola de ruby, accesible con `rails console`:
+
+    ```ruby
+    user  = User.new(
+      username: "admin",
+      name: "Fulano de Tal",
+      email: "mi@correo.com",
+      password: "miclave",
+      password_confirmation: "miclave",
+      admin: true
+    )
+    if user.valid?
+      user.save
+    else
+      user.errors.full_messages
+    end
+    ```
+
+5.  Iniciar el servidor y probar
 
     ```bash
     rails server

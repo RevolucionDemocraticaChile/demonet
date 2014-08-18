@@ -1,48 +1,48 @@
 <%= form_for @meeting, html: {class: "form-horizontal"} do |f| %>
 
-	<% if @meeting.errors.any? %>
-		<div id="error_explanation" class="alert alert-danger">
-			<h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
+  <% if @meeting.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
 
-			<ul>
-			<% @meeting.errors.full_messages.each do |message| %>
-				<li><%= message %></li>
-			<% end %>
-			</ul>
-		</div>
-	<% end %>
+      <ul>
+      <% @meeting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-	<div class="form-group">
-		<%= f.label :date, class: "col-sm-2 control-label" %>
-		<div class="col-sm-10">
-			<%= f.date_select :date, :order => [:year, :month, :day], class: "form-control" %>
-		</div>
-	</div>
-	<div class="form-group">
-		<%= f.label :territory_id, class: "col-sm-2 control-label" %>
-		<div class="col-sm-10">
-			<select name="meeting[territory_id]" class="form-control">
-				<option value="nil" disabled>Seleccionar Territory</option>
-				<% Territory.all.each do |territory| %>
-					<% if current_user.admin? || current_user.aterritories.include?(territory) %>
-						<option value="<%= territory.id %>"><%= territory.name %></option>
-					<% else %>
-						<option value="<%= territory.id %>"><%= territory.name %></option>
-					<% end %>
-				<% end %>
-			</select>
-		</div>
-	</div>
-	<div class="form-group">
-		<%= f.label :summary, class: "col-sm-2 control-label" %>
-		<div class="col-sm-10">
-			<%= f.text_area :summary, class: "form-control" %>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-10">
-			<%= f.submit "Enviar", class: "btn btn-primary" %>
-		</div>
-	</div>
+  <div class="form-group">
+    <%= f.label :date, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.date_select :date, :order => [:year, :month, :day], class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :territory_id, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <select name="meeting[territory_id]" class="form-control">
+        <option value="nil" disabled>Seleccionar Territory</option>
+        <% Territory.all.each do |territory| %>
+          <% if current_user.admin? || current_user.aterritories.include?(territory) %>
+            <option value="<%= territory.id %>"><%= territory.name %></option>
+          <% else %>
+            <option value="<%= territory.id %>"><%= territory.name %></option>
+          <% end %>
+        <% end %>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :summary, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :summary, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit "Enviar", class: "btn btn-primary" %>
+    </div>
+  </div>
 
 <% end %>

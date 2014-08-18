@@ -1,90 +1,90 @@
 <div class="row">
-	<div class="col-lg-8 col-lg-offset-2">
-		<h1>Territorio <%= @territory.name %></h1>
+  <div class="col-lg-8 col-lg-offset-2">
+    <h1>Territorio <%= @territory.name %></h1>
 
-		<p>
-			<strong>Nombre:</strong>
-			<%= @territory.name %>
-		</p>
+    <p>
+      <strong>Nombre:</strong>
+      <%= @territory.name %>
+    </p>
 
-		<% if can? :edit, @territory %>
-			<%= link_to 'Editar', edit_territory_path(@territory), class: "btn btn-primary" %>
-		<% end %>
+    <% if can? :edit, @territory %>
+      <%= link_to 'Editar', edit_territory_path(@territory), class: "btn btn-primary" %>
+    <% end %>
 
-		<h2>Miembros</h2>
+    <h2>Miembros</h2>
 
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Email</th>
-					<% if current_user.admin? || current_user.aterritories.include?(@territory) %>
-						<th></th>
-					<% end %>
-				</tr>
-			</thead>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <% if current_user.admin? || current_user.aterritories.include?(@territory) %>
+            <th></th>
+          <% end %>
+        </tr>
+      </thead>
 
-			<tbody>
-				<% @territory.members.each do |member| %>
-					<tr>
-						<td>
-							<%= link_to member.name, member %><% if @territory.admins.include?(member) %> <strong>(admin)</strong><% end %>
-						</td>
-						<td><%= member.email %></td>
-						<% if current_user.admin? || current_user.aterritories.include?(@territory) %>
-							<td class="text-center">
-								<%= link_to 'Eliminar Miembro', '#', class: "btn btn-danger" %>
-							</td>
-						<% end %>
-					</tr>
-				<% end %>
-			</tbody>
-		</table>
+      <tbody>
+        <% @territory.members.each do |member| %>
+          <tr>
+            <td>
+              <%= link_to member.name, member %><% if @territory.admins.include?(member) %> <strong>(admin)</strong><% end %>
+            </td>
+            <td><%= member.email %></td>
+            <% if current_user.admin? || current_user.aterritories.include?(@territory) %>
+              <td class="text-center">
+                <%= link_to 'Eliminar Miembro', '#', class: "btn btn-danger" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-		<% if current_user.admin? || current_user.aterritories.include?(@territory) %>
-			<%= form_for MemberTerritory.new, html: { class: "form-inline" } do |f| %>
-				<%= f.hidden_field :territory_id, value: @territory.id %>
-				<div class="form-group">
-					<label class="sr-only">Nombre del Usuario</label>
-					<select name="member_territory[user_id]" class="form-control">
-						<% User.all.each do |user| %>
-							<% if !@territory.members.include?(user) %>
-								<option value="<%= user.id %>"><%= user.name %></option>
-							<% end %>
-						<% end %>
-					</select>
-				</div>
-				<%= f.submit "Agregar Miembro", class: "btn btn-primary" %>
-			<% end %>
-		<% end %>
+    <% if current_user.admin? || current_user.aterritories.include?(@territory) %>
+      <%= form_for MemberTerritory.new, html: { class: "form-inline" } do |f| %>
+        <%= f.hidden_field :territory_id, value: @territory.id %>
+        <div class="form-group">
+          <label class="sr-only">Nombre del Usuario</label>
+          <select name="member_territory[user_id]" class="form-control">
+            <% User.all.each do |user| %>
+              <% if !@territory.members.include?(user) %>
+                <option value="<%= user.id %>"><%= user.name %></option>
+              <% end %>
+            <% end %>
+          </select>
+        </div>
+        <%= f.submit "Agregar Miembro", class: "btn btn-primary" %>
+      <% end %>
+    <% end %>
 
-		<h2>Actas</h2>
+    <h2>Actas</h2>
 
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Fecha</th>
-					<th>Resumen</th>
-				</tr>
-			</thead>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Resumen</th>
+        </tr>
+      </thead>
 
-			<tbody>
-				<% @territory.meetings.order(:date).each do |meeting| %>
-					<tr>
-						<td>
-							<%= link_to format_meeting_name(meeting), meeting %>
-						</td>
-						<td>
-							<%= meeting.summary %>
-						</td>
-					</tr>
-				<% end %>
-			</tbody>
-		</table>
+      <tbody>
+        <% @territory.meetings.order(:date).each do |meeting| %>
+          <tr>
+            <td>
+              <%= link_to format_meeting_name(meeting), meeting %>
+            </td>
+            <td>
+              <%= meeting.summary %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-		<% if current_user.admin? || current_user.aterritories.include?(@territory) %>
-			<%= link_to "Agregar Acta", new_meeting_path, class: "btn btn-primary" %>
-		<% end %>
+    <% if current_user.admin? || current_user.aterritories.include?(@territory) %>
+      <%= link_to "Agregar Acta", new_meeting_path, class: "btn btn-primary" %>
+    <% end %>
 
-	</div>
+  </div>
 </div>

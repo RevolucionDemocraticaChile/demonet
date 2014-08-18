@@ -1,38 +1,39 @@
 class MeetingsController < ApplicationController
-	before_action :set_meeting, only: [:show, :edit, :update, :destroy]
 
-	authorize_resource
+  before_action :set_meeting, only: [:show, :edit, :update, :destroy]
 
-	def index
-		@meetings = Meeting.all
-	end
+  authorize_resource
 
-	def new
-		@meeting = Meeting.new
-	end
+  def index
+    @meetings = Meeting.all
+  end
 
-	def show
-	end
+  def new
+    @meeting = Meeting.new
+  end
 
-	def create
-		@meeting = Meeting.new(meeting_params)
+  def show
+  end
 
-		if @meeting.save
-			flash[:success] = "Meeting creada exitosamente"
-			redirect_to @meeting
-		else
-			render 'new'
-		end
-	end
+  def create
+    @meeting = Meeting.new(meeting_params)
 
-	private
+    if @meeting.save
+      flash[:success] = "Acta creada exitosamente"
+      redirect_to @meeting
+    else
+      render 'new'
+    end
+  end
 
-		def set_meeting
-			@meeting = Meeting.find(params[:id])
-		end
+  private
 
-		def meeting_params
-			params.require(:meeting).permit(:date, :territory_id, :summary)
-		end
+    def set_meeting
+      @meeting = Meeting.find(params[:id])
+    end
+
+    def meeting_params
+      params.require(:meeting).permit(:date, :territory_id, :summary)
+    end
 
 end

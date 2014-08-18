@@ -47,8 +47,8 @@ describe "Territory pages" do
 		describe "index" do
 			before { visit territories_path }
 			it { should_not have_selector('div.alert.alert-error') }
-			it { should have_content("Territories") }
-			it { should_not have_link("Nuevo Territory") }
+			it { should have_content("Territorios") }
+			it { should_not have_link("Nuevo Territorio") }
 		end
 
 		describe "new" do

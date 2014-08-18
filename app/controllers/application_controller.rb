@@ -1,25 +1,25 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
-  include SessionsHelper
+	# Prevent CSRF attacks by raising an exception.
+	# For APIs, you may want to use :null_session instead.
+	protect_from_forgery with: :exception
+	include SessionsHelper
 
-  before_filter :check_session
+	before_filter :check_session
 
-  check_authorization
+	check_authorization
 
-  rescue_from CanCan::AccessDenied do |e|
-    flash[:error] = e.message
-    redirect_to root_path
-  end
+	rescue_from CanCan::AccessDenied do |e|
+		flash[:error] = e.message
+		redirect_to root_path
+	end
 
-  private
+	private
 
-    def check_session
-      if current_user.nil?
-        flash[:error] = "Debes ingresar primero."
-        redirect_to ingresar_path
-      end
-    end
+		def check_session
+			if current_user.nil?
+				flash[:error] = "Debes ingresar primero."
+				redirect_to ingresar_path
+			end
+		end
 
 end

@@ -3,12 +3,12 @@
 		<h1><%= format_meeting_name(@meeting) %></h1>
 
 		<p>
-			<strong>Date:</strong>
+			<strong>Fecha:</strong>
 			<%= l Date.parse(@meeting.date.to_s) %>
 		</p>
 
 		<p>
-			<strong>Territory:</strong>
+			<strong>Territorio:</strong>
 			<%= link_to @meeting.territory.name, @meeting.territory %>
 		</p>
 

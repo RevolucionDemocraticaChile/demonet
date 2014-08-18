@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
 	USERNAME_MAX_LENGTH = 50
 	EMAIL_MAX_LENGTH    = 50
 	NAME_MAX_LENGTH     = 50
@@ -14,18 +15,26 @@ class User < ActiveRecord::Base
 	has_many :user_meetings
 	has_many :meetings, through: :user_meetings
 
-	validates :username, presence:   true,
-                       uniqueness: { case_sensitive: false },
-	                     length:     { maximum: USERNAME_MAX_LENGTH }
-	validates :email,    presence:   true,
-                       uniqueness: { case_sensitive: false },
-	                     length:     { maximum: EMAIL_MAX_LENGTH },
-	                     format:     { with: VALID_EMAIL_REGEX   }
-	validates :name,     presence:   true,
-	                     length:     { maximum: NAME_MAX_LENGTH }
-	validates :password, length:     { minimum: PASSWORD_MIN_LENGTH }
+	validates :username,
+		presence:   true,
+		uniqueness: { case_sensitive: false },
+		length:     { maximum: USERNAME_MAX_LENGTH }
 
-  # Hooks:
+	validates :email,
+# 		presence:   true,
+		presence:   true,
+		uniqueness: { case_sensitive: false },
+		length:     { maximum: EMAIL_MAX_LENGTH },
+		format:     { with: VALID_EMAIL_REGEX   }
+
+	validates :name,
+		presence:   true,
+		length:     { maximum: NAME_MAX_LENGTH }
+
+	validates :password,
+		length:     { minimum: PASSWORD_MIN_LENGTH }
+
+	# Hooks:
 
 	before_create :create_remember_token
 

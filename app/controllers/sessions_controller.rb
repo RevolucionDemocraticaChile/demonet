@@ -25,4 +25,5 @@ class SessionsController < ApplicationController
 		sign_out
 		redirect_to ingresar_path
 	end
+
 end

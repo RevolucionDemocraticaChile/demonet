@@ -6,7 +6,7 @@ module UsersHelper
 		image_tag(gravatar_url, alt: user.name, class: "gravatar img-circle")
 	end
 
-	def meetings_recientes_count_for(user)
+	def recent_attendance_for(user)
 		user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count
 	end
 

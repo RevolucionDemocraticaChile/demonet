@@ -1,4 +1,5 @@
 class Territory < ActiveRecord::Base
+
 	NAME_MAX_LENGTH = 100
 
 	has_many :member_territories
@@ -9,7 +10,9 @@ class Territory < ActiveRecord::Base
 
 	has_many :meetings
 
-	validates :name, presence: true,
-	                 length:   { maximum: NAME_MAX_LENGTH },
-									 uniqueness: { case_sensitive: false }
+	validates :name,
+		presence: true,
+		length:     { maximum: NAME_MAX_LENGTH },
+		uniqueness: { case_sensitive: false }
+
 end

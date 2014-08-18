@@ -10,4 +10,11 @@ FactoryGirl.define do
 	factory :territory do |t|
 		t.sequence(:name) { |n| "Nombre Territory #{n}" }
 	end
+
+	factory :group do |g|
+		g.sequence(:name) { |n| "Group Name #{n}" }
+		g.sequence(:desc) { |n| "Desc #{n}" }
+		g.type  nil
+		g.state "active"
+	end
 end

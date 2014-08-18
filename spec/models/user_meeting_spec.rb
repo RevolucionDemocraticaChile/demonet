@@ -11,6 +11,6 @@
 
 require 'rails_helper'
 
-RSpec.describe UserMeeting, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+# RSpec.describe UserMeeting, :type => :model do
+#   pending "add some examples to (or delete) #{__FILE__}"
+# end

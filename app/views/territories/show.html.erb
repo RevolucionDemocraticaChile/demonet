@@ -75,7 +75,7 @@
               <%= link_to format_meeting_name(meeting), meeting %>
             </td>
             <td>
-              <%= meeting.summary %>
+              <%= meeting.desc %>
             </td>
           </tr>
         <% end %>
@@ -83,7 +83,7 @@
     </table>
 
     <% if current_user.admin? || current_user.aterritories.include?(@territory) %>
-      <%= link_to t(:add_meeting), new_meeting_path, class: "btn btn-primary" %>
+      <%= link_to t(:add_meeting).titleize, new_meeting_path, class: "btn btn-primary" %>
     <% end %>
 
   </div>

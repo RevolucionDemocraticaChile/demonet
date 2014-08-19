@@ -1,13 +1,3 @@
-# == Schema Information
-#
-# Table name: territories
-#
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 class Territory < Group
 
   NAME_MAX_LENGTH = 100

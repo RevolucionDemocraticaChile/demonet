@@ -11,6 +11,7 @@ cl:
   user_destroyed_successfully: Usuario eliminado exitosamente.
   meeting_created_successfully: Reunión creada exitosamente.
   territory_created_successfully: Territorio creado exitosamente.
+  territory_updated_successfully: Territorio actualizado exitosamente.
   association_created_successfully: Asociación creada exitosamente.
   error_creating_association: Hubo un error al crear la asociación.
   association_destroyed_successfully: Asociación eliminada exitosamente.
@@ -52,6 +53,7 @@ cl:
   name: nombre
   password: contraseña
   profile: perfil
+  send: enviar
   show: ver
   territory: territorio
   territories: territorios

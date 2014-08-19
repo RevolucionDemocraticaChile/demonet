@@ -66,4 +66,40 @@ describe "Meeting pages" do
 
   end
 
+  describe "signing in as admin" do
+    let(:signed_in_user) { FactoryGirl.create(:user) }
+    before { signed_in_user.update_attribute(:admin, true) }
+
+    before do
+      visit ingresar_path
+      fill_in "Email",      with: signed_in_user.email
+      fill_in "Contraseña", with: signed_in_user.password
+      click_button "Ingresar"
+    end
+
+    describe "new" do
+      before { visit new_meeting_path }
+      it { should_not have_selector('div.alert.alert-error') }
+      it { should have_content("Nueva Reunión") }
+      it { should have_button("Enviar") }
+
+      # describe "send valid meeting" do
+      #   let(:group) { FactoryGirl.create(:group) }
+      #
+      #   before do
+      #     select "2014",     from: "meeting_date_1i"
+      #     select "agosto",   from: "meeting_date_2i"
+      #     select "1",        from: "meeting_date_3i"
+      #     select group.name, from: "meeting[territory_id]"
+      #
+      #     click_button "Enviar"
+      #   end
+      #
+      #   it { should_not have_selector('div.alert.alert-error') }
+      # end
+
+    end
+
+  end
+
 end

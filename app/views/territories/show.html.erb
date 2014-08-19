@@ -1,23 +1,18 @@
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2">
-    <h1><%= t(:territory).titleize %>: <%= @territory.name %></h1>
-
-    <p>
-      <strong><%= t(:name).titleize %>:</strong>
-      <%= @territory.name %>
-    </p>
+    <h1><%= t(:territory).humanize %> <%= @territory.name %></h1>
 
     <% if can? :edit, @territory %>
-      <%= link_to t(:edit).titleize, edit_territory_path(@territory), class: "btn btn-primary" %>
+      <%= link_to t(:edit).humanize, edit_territory_path(@territory), class: "btn btn-primary" %>
     <% end %>
 
-    <h2><%= t(:members).titleize %></h2>
+    <h2><%= t(:members).humanize %></h2>
 
     <table class="table table-striped">
       <thead>
         <tr>
-          <th><%= t(:name).titleize %></th>
-          <th><%= t(:email).titleize %></th>
+          <th><%= t(:name).humanize %></th>
+          <th><%= t(:email).humanize %></th>
           <% if current_user.admin? || current_user.aterritories.include?(@territory) %>
             <th></th>
           <% end %>
@@ -33,7 +28,7 @@
             <td><%= member.email %></td>
             <% if current_user.admin? || current_user.aterritories.include?(@territory) %>
               <td class="text-center">
-                <%= link_to t(:destroy).titleize, '#', class: "btn btn-danger" %>
+                <%= link_to t(:destroy).humanize, '#', class: "btn btn-danger" %>
               </td>
             <% end %>
           </tr>
@@ -45,7 +40,7 @@
       <%= form_for MemberTerritory.new, html: { class: "form-inline" } do |f| %>
         <%= f.hidden_field :territory_id, value: @territory.id %>
         <div class="form-group">
-          <label class="sr-only"><%= t(:name).titleize %></label>
+          <label class="sr-only"><%= t(:name).humanize %></label>
           <select name="member_territory[user_id]" class="form-control">
             <% User.all.each do |user| %>
               <% if !@territory.members.include?(user) %>
@@ -54,17 +49,17 @@
             <% end %>
           </select>
         </div>
-        <%= f.submit t(:add_member).titleize, class: "btn btn-primary" %>
+        <%= f.submit t(:add_member).humanize, class: "btn btn-primary" %>
       <% end %>
     <% end %>
 
-    <h2><%= t(:meetings).titleize %></h2>
+    <h2><%= t(:meetings).humanize %></h2>
 
     <table class="table table-striped">
       <thead>
         <tr>
-          <th><%= t(:date_lit).titleize %></th>
-          <th><%= t(:description).titleize %></th>
+          <th><%= t(:title).humanize %></th>
+          <th><%= t(:date_lit).humanize %></th>
         </tr>
       </thead>
 
@@ -75,7 +70,7 @@
               <%= link_to format_meeting_name(meeting), meeting %>
             </td>
             <td>
-              <%= meeting.desc %>
+              <%= Date.parse(meeting.date.to_s) %>
             </td>
           </tr>
         <% end %>
@@ -83,7 +78,7 @@
     </table>
 
     <% if current_user.admin? || current_user.aterritories.include?(@territory) %>
-      <%= link_to t(:add_meeting).titleize, new_meeting_path, class: "btn btn-primary" %>
+      <%= link_to t(:add_meeting).humanize, new_meeting_path, class: "btn btn-primary" %>
     <% end %>
 
   </div>

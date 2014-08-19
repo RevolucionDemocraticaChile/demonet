@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2">
-    <h1><%= t(:group).titleize %>: <%= @group.name %></h1>
+    <h1><%= t(:group).humanize %>: <%= @group.name %></h1>
 
     <p>
-      <strong><%= t(:name).titleize %>:</strong>
+      <strong><%= t(:name).humanize %>:</strong>
       <%= @group.name %>
     </p>
 
     <% if can? :edit, @group %>
-      <%= link_to t(:edit).titleize, edit_group_path(@group), class: "btn btn-primary" %>
+      <%= link_to t(:edit).humanize, edit_group_path(@group), class: "btn btn-primary" %>
     <% end %>
 
   </div>

@@ -7,7 +7,7 @@ module UsersHelper
   def gravatar_for(user, size = GRAVATAR_DEFAULT_SIZE)
     gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}.png?s=#{size}&d=#{u(RD_FACES_BW_URL)}"
-    image_tag(gravatar_url, alt: user.name, class: "gravatar img-circle", size: "#{GRAVATAR_DEFAULT_SIZE}")
+    image_tag(gravatar_url, alt: user.name, class: "gravatar img-circle", size: "#{size}")
   end
 
   def recent_attendance_for(user)

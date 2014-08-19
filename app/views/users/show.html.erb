@@ -11,62 +11,53 @@
   <div class="col-lg-3 text-center">
     <% if @user.admin? %>
       <div class="alert alert-danger text-center" style="position: relative;">
-        <span class="glyphicon glyphicon-flash" > <strong><%= t(:administrator).titleize %></strong>
+        <span class="glyphicon glyphicon-flash" > <strong><%= t(:administrator).humanize%></strong>
       </div>
     <% end %>
     <% if recent_attendance_for(@user) >= 6 %>
       <div class="alert alert-success text-center">
-        <strong><%= t(:active_member).titleize %></strong>
+        <strong><%= t(:active_member).humanize%></strong>
       </div>
     <% else %>
       <div class="alert alert-warning text-center">
-        <strong><%= t(:supporting_member).titleize %></strong>
+        <strong><%= t(:supporting_member).humanize%></strong>
       </div>
     <% end %>
     <hr />
     <% @user.territories.each do |territory| %>
       <div class="alert alert-info text-center">
-        <%= t(:member_of_territory).titleize %><br />
+        <%= t(:member_of_territory).humanize %><br />
         <strong><%= link_to territory.name, territory %></strong>
       </div>
     <% end %>
     <% if current_user.admin? %>
-      <%= link_to t(:add_user_to_territory).titleize, new_member_territory_path, class: "btn btn-primary" %>
+      <%= link_to t(:add_user_to_territory).humanize, new_member_territory_path, class: "btn btn-primary" %>
     <% end %>
     <hr />
   </div>
   <div class="col-lg-6">
 
     <p>
-      <%= t(:recent_meetings).titleize %>: <%= @user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>
+      <%= t(:recent_meetings).humanize %>: <%= @user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>
     </p>
 
     <p>
-      <strong><%= t(:username).titleize %>:</strong>
+      <strong><%= t(:username).humanize %>:</strong>
       <%= @user.username %>
     </p>
 
     <p>
-      <strong><%= t(:email).titleize %>:</strong>
+      <strong><%= t(:email).humanize %>:</strong>
       <%= @user.email %>
     </p>
 
     <% if can? :edit, @user %>
-      <%= link_to t(:edit).titleize, edit_user_path(@user), class: "btn btn-primary" %>
+      <%= link_to t(:edit).humanize, edit_user_path(@user), class: "btn btn-primary" %>
     <% end %>
 
-    <h2><%= t(:territories).titleize %></h2>
+    <h2><%= t(:territories).humanize %></h2>
 
     <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th><%= t(:name).titleize %></th>
-          <% if current_user.admin? %>
-            <th></th>
-          <% end %>
-        </tr>
-      </thead>
-
       <tbody>
         <% @user.member_territories.each do |member_territory| %>
         <% territory = member_territory.territory %>
@@ -76,7 +67,7 @@
             </td>
             <% if current_user.admin? %>
               <td class="text-center">
-                <%= link_to t(:destroy).titleize, member_territory, method: :delete, data: { confirm: t(:are_you_sure).titleize }, class: "btn btn-danger" %>
+                <%= link_to t(:destroy).humanize, member_territory, method: :delete, data: { confirm: t(:are_you_sure).humanize }, class: "btn btn-danger" %>
               </td>
             <% end %>
           </tr>
@@ -84,12 +75,11 @@
       </tbody>
     </table>
 
-
     <% if current_user.admin? %>
       <%= form_for @member_territory, html: { class: "form-inline" } do |f| %>
         <%= f.hidden_field :user_id, value: @user.id %>
         <div class="form-group">
-          <label class="sr-only"><%= t(:territory_name).titleize %></label>
+          <label class="sr-only"><%= t(:territory_name).humanize %></label>
           <select name="member_territory[territory_id]" class="form-control">
             <% Territory.all.each do |territory| %>
               <% if !@user.territories.include?(territory) %>
@@ -98,30 +88,38 @@
             <% end %>
           </select>
         </div>
-        <%= f.submit t(:add_territory).titleize, class: "btn btn-primary" %>
+        <%= f.submit t(:add_territory).humanize, class: "btn btn-primary" %>
       <% end %>
     <% end %>
 
 
-    <h2><%= t(:meetings).titleize %></h2>
+    <h2><%= t(:meetings).humanize %></h2>
 
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th><%= t(:meeting).titleize %></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @user.meetings.each do |meeting| %>
+    <% if @user.meetings.count >= 1%>
+      <table class="table table-striped table-bordered">
+        <thead>
           <tr>
-            <td>
-              <%= link_to format_meeting_name(meeting), meeting %>
-            </td>
+            <th><%= t(:title).humanize %></th>
+            <th><%= t(:date_lit).humanize %></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          <% @user.meetings.each do |meeting| %>
+            <tr>
+              <td>
+                <%= link_to format_meeting_name(meeting), meeting %>
+              </td>
+              <td>
+                <%= Date.parse(meeting.date.to_s) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p><%= t(:has_no_meetings).humanize %></p>
+    <% end %>
 
   </div>
 </div>

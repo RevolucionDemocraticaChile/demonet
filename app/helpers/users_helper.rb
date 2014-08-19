@@ -1,7 +1,7 @@
 module UsersHelper
 
   GRAVATAR_DEFAULT_SIZE = 100
-  LOGO_RD_SMALL_URL = "https://s3.amazonaws.com/demonet/Logo_RD_small.png"
+  LOGO_RD_SMALL_URL = "https://github.com/RevolucionDemocraticaChile/demonet/blob/development/app/assets/images/rd_faces.bw-trans.png"
 
   def gravatar_for(user, size = GRAVATAR_DEFAULT_SIZE)
     gravatar_id = Digest::MD5::hexdigest(user.email.downcase)

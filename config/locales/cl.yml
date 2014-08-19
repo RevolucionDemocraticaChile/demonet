@@ -10,6 +10,7 @@ cl:
   user_updated_successfully: Usuario actualizado exitosamente.
   user_destroyed_successfully: Usuario eliminado exitosamente.
   meeting_created_successfully: Reunión creada exitosamente.
+  meeting_updated_successfully: Reunión actualizada exitosamente.
   territory_created_successfully: Territorio creado exitosamente.
   territory_updated_successfully: Territorio actualizado exitosamente.
   association_created_successfully: Asociación creada exitosamente.

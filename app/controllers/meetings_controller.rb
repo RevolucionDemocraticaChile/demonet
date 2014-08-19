@@ -29,6 +29,16 @@ class MeetingsController < ApplicationController
   def edit
   end
 
+  # PATCH/PUT /meetings/1
+  def update
+    if @meeting.update(meeting_params)
+      flash[:success] = t(:meeting_updated_successfully)
+      redirect_to @meeting
+    else
+      render :edit
+    end
+  end
+
   private
 
     def set_meeting

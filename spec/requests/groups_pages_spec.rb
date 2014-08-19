@@ -35,11 +35,11 @@ describe "Group pages" do
 
   describe "signing in as regular user" do
     let(:signed_in_user) { FactoryGirl.create(:user) }
-    let(:group) { FactoryGirl.create(:group) }
+    let(:group)          { FactoryGirl.create(:group) }
 
     before do
       visit ingresar_path
-      fill_in "Email",    with: signed_in_user.email
+      fill_in "Email",      with: signed_in_user.email
       fill_in "Contraseña", with: signed_in_user.password
       click_button "Ingresar"
     end
@@ -47,7 +47,7 @@ describe "Group pages" do
     describe "index" do
       before { visit groups_path }
       it { should_not have_selector('div.alert.alert-error') }
-      it { should have_content("Grupos") }
+      it { should have_content("Espacios") }
       it { should_not have_link("Nuevo Grupo") }
     end
 

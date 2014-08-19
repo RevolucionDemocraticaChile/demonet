@@ -5,7 +5,7 @@ cl:
   signin_success: Has ingresado exitosamente.
   not_signed_in: No estás ingresado.
   invalid_email_pass: Combinación email/clave inválida.
-  group_create_successfully: Espacio creado exitosamente.
+  group_created_successfully: Espacio creado exitosamente.
   user_created_successfully: Usuario creado exitosamente.
   user_updated_successfully: Usuario actualizado exitosamente.
   user_destroyed_successfully: Usuario eliminado exitosamente.
@@ -44,8 +44,8 @@ cl:
   destroy: eliminar
   edit: editar
   email: email
-  group: grupo
-  groups: grupos
+  group: espacio
+  groups: espacios
   meeting: reunión
   meetings: reuniones
   members: miembros

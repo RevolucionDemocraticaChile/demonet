@@ -39,7 +39,7 @@ describe "User pages" do
     before do
       visit ingresar_path
       fill_in "Email",    with: signed_in_user.email
-      fill_in "Password", with: signed_in_user.password
+      fill_in "Contraseña", with: signed_in_user.password
       click_button "Ingresar"
     end
 
@@ -79,13 +79,13 @@ describe "User pages" do
     # describe "create new user" do
     #   let(:submit) { "Create User" }
     #   before { visit new_user_path }
-    # 
+    #
     #   describe "with invalid information" do
     #     it "should not create a user" do
     #       expect { click_button submit }.not_to change(User, :count)
     #     end
     #   end
-    # 
+    #
     #   describe "with valid information" do
     #     before do
     #       fill_in "Username",              with: "username"
@@ -94,15 +94,15 @@ describe "User pages" do
     #       fill_in "Password",              with: "thepass"
     #       fill_in "Password confirmation", with: "thepass"
     #     end
-    # 
+    #
     #     it "should create a user" do
     #       expect { click_button submit }.to change(User, :count).by(1)
     #     end
-    # 
+    #
     #     describe "after creating the user" do
     #       before { click_button submit }
     #       let(:user) { User.find_by(email: "email@email.com") }
-    # 
+    #
     #       it { should have_link("Salir") }
     #       it { should have_content(user.name) }
     #       it { should have_selector('div.alert.alert-success', text: 'User created successfully') }

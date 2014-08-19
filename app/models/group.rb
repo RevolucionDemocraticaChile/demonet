@@ -24,7 +24,9 @@ class Group < ActiveRecord::Base
     # presence: true,
     length:   { maximum: DESC_MAX_LENGTH }
 
-  validates :state,
-    presence: true
+  # validates :state,
+  #   presence: true
+
+  before_create { self.state = "created" }
 
 end

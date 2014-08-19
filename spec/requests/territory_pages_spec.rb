@@ -33,14 +33,14 @@ describe "Territory pages" do
 
   end
 
-  describe "signing in first" do
+  describe "signing in as regular user" do
     let(:signed_in_user) { FactoryGirl.create(:user) }
-    let(:territory) { FactoryGirl.create(:territory) }
+    let(:territory)      { FactoryGirl.create(:territory) }
 
     before do
       visit ingresar_path
-      fill_in "Email",    with: signed_in_user.email
-      fill_in "Password", with: signed_in_user.password
+      fill_in "Email",      with: signed_in_user.email
+      fill_in "Contraseña", with: signed_in_user.password
       click_button "Ingresar"
     end
 
@@ -54,7 +54,7 @@ describe "Territory pages" do
     describe "new" do
       before { visit new_territory_path }
       it { should have_selector('div.alert.alert-error') }
-      specify { expect(current_path).to eq ingresar_path }
+      specify { expect(current_path).to eq root_path }
     end
 
     describe "show" do

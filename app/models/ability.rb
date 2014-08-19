@@ -14,8 +14,6 @@ class Ability
     can :index, Territory
     can :show,  Territory
 
-
-
     # if
 
     if user.admin?

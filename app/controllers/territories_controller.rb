@@ -28,6 +28,16 @@ class TerritoriesController < ApplicationController
   def edit
   end
 
+  # PATCH/PUT /users/1
+  def update
+    if @territory.update(territory_params)
+      flash[:success] = t(:territory_updated_successfully)
+      redirect_to @territory
+    else
+      render :edit
+    end
+  end
+
   private
 
     def set_territory

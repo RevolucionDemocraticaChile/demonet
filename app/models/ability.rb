@@ -15,7 +15,8 @@ class Ability
     can :index, Territory
     can :show,  Territory
 
-
+    can :index, Meeting
+    can :show,  Meeting
 
     # if
 

@@ -18,4 +18,9 @@ FactoryGirl.define do
     g.type  nil
     g.state "active"
   end
+
+  factory :meeting do |m|
+    m.sequence(:date) { |n| DateTime.now }
+    m.sequence(:desc) { |n| "Desc #{n}" }
+  end
 end

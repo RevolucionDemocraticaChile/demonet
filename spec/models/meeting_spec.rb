@@ -12,7 +12,7 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe Meeting, type: :model do
 
   before do
     @group = FactoryGirl.create(:group)

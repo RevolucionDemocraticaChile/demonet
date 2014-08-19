@@ -9,9 +9,5 @@ module UsersHelper
   def recent_attendance_for(user)
     user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count
   end
-  
-  def is_active(user)
-    recent_attendance_for(user) >= 6
-  end
 
 end

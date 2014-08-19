@@ -14,7 +14,7 @@
         <span class="glyphicon glyphicon-flash" > <strong><%= t(:administrator).titleize %></strong>
       </div>
     <% end %>
-    <% if is_active(@user) %>
+    <% if recent_attendance_for(@user) >= 6 %>
       <div class="alert alert-success text-center">
         <strong><%= t(:active_member).titleize %></strong>
       </div>

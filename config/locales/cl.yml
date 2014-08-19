@@ -17,6 +17,7 @@ cl:
   association_destroyed_successfully: Asociación eliminada exitosamente.
   not_authorized: No estás autorizado.
   are_you_sure: Estás seguro?
+  add: añadir
   add_member: agregar miembro
   add_meeting: agregar reunión
   add_territory: agregar territorio

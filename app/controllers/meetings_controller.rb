@@ -12,9 +12,6 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new
   end
 
-  def show
-  end
-
   def create
     @meeting = Meeting.new(meeting_params)
 
@@ -24,6 +21,12 @@ class MeetingsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def show
+  end
+
+  def edit
   end
 
   private

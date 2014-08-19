@@ -10,9 +10,13 @@ class Ability
     can :edit,  User, id: user.id
 
     can :index, Group
+    can :show,  Group
 
     can :index, Territory
     can :show,  Territory
+
+    can :index, Meeting
+    can :show,  Meeting
 
     # if
 

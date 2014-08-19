@@ -12,7 +12,7 @@ class GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.new(territory_params)
+    @group = Group.new(group_params)
 
     if @group.save
       flash[:success] = t(:group_created_successfully)
@@ -23,6 +23,9 @@ class GroupsController < ApplicationController
   end
 
   def show
+    # if @group.type == "Territory"
+    #   redirect_to controller: "territories", action: "show", params: params
+    # end
   end
 
   def edit

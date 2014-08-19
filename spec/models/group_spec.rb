@@ -47,10 +47,10 @@ RSpec.describe Group, type: :model do
 
   # Validate state:
 
-  describe "when state is not present" do
-    before { @group.state = " " }
-    it { should_not be_valid }
-  end
+  # describe "when state is not present" do
+  #   before { @group.state = " " }
+  #   it { should_not be_valid }
+  # end
 
 
 

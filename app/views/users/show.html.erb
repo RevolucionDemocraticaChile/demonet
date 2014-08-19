@@ -14,7 +14,7 @@
         <span class="glyphicon glyphicon-flash" > <strong><%= t(:administrator).titleize %></strong>
       </div>
     <% end %>
-    <% if recent_attendance_for(@user) >= 6 %>
+    <% if is_active(@user) %>
       <div class="alert alert-success text-center">
         <strong><%= t(:active_member).titleize %></strong>
       </div>
@@ -103,12 +103,12 @@
     <% end %>
 
 
-    <h2>Actas</h2>
+    <h2><%= t(:meetings).titleize %></h2>
 
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th>Acta</th>
+          <th><%= t(:meeting).titleize %></th>
         </tr>
       </thead>
 

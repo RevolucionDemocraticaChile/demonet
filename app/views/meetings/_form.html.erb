@@ -2,7 +2,7 @@
 
   <% if @meeting.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
+      <h2><%= pluralize(@meeting.errors.count, "error") %> impidieron que se grabara la reunións:</h2>
 
       <ul>
       <% @meeting.errors.full_messages.each do |message| %>
@@ -22,7 +22,7 @@
     <%= f.label :territory_id, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
       <select name="meeting[territory_id]" class="form-control">
-        <option value="nil" disabled>Seleccionar Territory</option>
+        <option value="nil" disabled><%= t(:select_territory).titleize %></option>
         <% Territory.all.each do |territory| %>
           <% if current_user.admin? || current_user.aterritories.include?(territory) %>
             <option value="<%= territory.id %>"><%= territory.name %></option>
@@ -41,7 +41,7 @@
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit "Enviar", class: "btn btn-primary" %>
+      <%= f.submit t(:create).titleize, class: "btn btn-primary" %>
     </div>
   </div>
 

@@ -12,7 +12,7 @@ require 'rails_helper'
 
 RSpec.describe Territory, type: :model do
 
-  before { @territory = Territory.new(name: "Europa Norte") }
+  before { @territory = Territory.new(name: "Europa Norte", desc: "A Desc") }
 
   subject { @territory }
 

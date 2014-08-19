@@ -8,7 +8,7 @@
 #  updated_at :datetime
 #
 
-class Territory < ActiveRecord::Base
+class Territory < Group
 
   NAME_MAX_LENGTH = 100
 

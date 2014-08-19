@@ -1,32 +1,32 @@
 require 'rails_helper'
 
-describe "Territory pages" do
+describe "Group pages" do
 
   subject { page }
 
   describe "without signing in" do
-    let(:territory) { FactoryGirl.create(:territory) }
+    let(:group) { FactoryGirl.create(:group) }
 
     describe "index" do
-      before { visit territories_path }
+      before { visit groups_path }
       it { should have_selector('div.alert.alert-error') }
       specify { expect(current_path).to eq ingresar_path }
     end
 
     describe "new" do
-      before { visit new_territory_path }
+      before { visit new_group_path }
       it { should have_selector('div.alert.alert-error') }
       specify { expect(current_path).to eq ingresar_path }
     end
 
     describe "show" do
-      before { visit territory_path(territory) }
+      before { visit group_path(group) }
       it { should have_selector('div.alert.alert-error') }
       specify { expect(current_path).to eq ingresar_path }
     end
 
     describe "edit" do
-      before { visit edit_territory_path(territory) }
+      before { visit edit_group_path(group) }
       it { should have_selector('div.alert.alert-error') }
       specify { expect(current_path).to eq ingresar_path }
     end
@@ -35,7 +35,7 @@ describe "Territory pages" do
 
   describe "signing in as regular user" do
     let(:signed_in_user) { FactoryGirl.create(:user) }
-    let(:territory)      { FactoryGirl.create(:territory) }
+    let(:group)          { FactoryGirl.create(:group) }
 
     before do
       visit ingresar_path
@@ -45,20 +45,20 @@ describe "Territory pages" do
     end
 
     describe "index" do
-      before { visit territories_path }
+      before { visit groups_path }
       it { should_not have_selector('div.alert.alert-error') }
-      it { should have_content("Territorios") }
-      it { should_not have_link("Nuevo Territorio") }
+      it { should have_content("Espacios") }
+      it { should_not have_link("Nuevo Grupo") }
     end
 
     describe "new" do
-      before { visit new_territory_path }
+      before { visit new_group_path }
       it { should have_selector('div.alert.alert-error') }
       specify { expect(current_path).to eq root_path }
     end
 
     describe "show" do
-      before { visit territory_path(territory) }
+      before { visit group_path(group) }
       it { should_not have_selector('div.alert.alert-error') }
       it { should_not have_link("Editar") }
     end

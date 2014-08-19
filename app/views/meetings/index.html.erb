@@ -6,10 +6,8 @@
       <thead>
         <tr>
           <th><%= t(:name).titleize %></th>
+          <th><%= t(:group).titleize %></th>
           <th class="text-center"><%= t(:attendants).titleize %></th>
-          <% if current_user.admin? %>
-            <th colspan="2"></th>
-          <% end %>
         </tr>
       </thead>
 
@@ -17,15 +15,8 @@
         <% @meetings.each do |meeting| %>
           <tr>
             <td><%= link_to format_meeting_name(meeting), meeting %></td>
+            <td><%= link_to meeting.group.name, meeting.group %></td>
             <td class="text-center"><%= meeting.users.count %></td>
-            <% if current_user.admin? %>
-              <td class="text-center">
-                <%= link_to t(:edit).titleize, edit_meeting_path(meeting), class: "btn btn-info" %>
-              </td>
-              <td class="text-center">
-                <%= link_to t(:destroy).titleize, meeting, method: :delete, data: { confirm: t(:are_you_sure) }, class: "btn btn-danger" %>
-              </td>
-            <% end %>
           </tr>
         <% end %>
       </tbody>

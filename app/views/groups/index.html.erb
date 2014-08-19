@@ -6,11 +6,9 @@
       <thead>
         <tr>
           <th><%= t(:name).titleize %></th>
+          <th><%= t(:type).titleize %></th>
           <th class="text-center"><%= t(:members).titleize %></th>
           <th class="text-center"><%= t(:meetings).titleize %></th>
-          <% if current_user.admin? %>
-            <th colspan="2"></th>
-          <% end %>
         </tr>
       </thead>
 
@@ -18,16 +16,9 @@
         <% @groups.each do |group| %>
           <tr>
             <td><%= link_to group.name, group %></td>
+            <td><%= t(group.type.downcase.to_sym).titleize %></td>
             <td class="text-center"><%= group.members.count %></td>
             <td class="text-center"><%= group.meetings.count %></td>
-            <% if current_user.admin? %>
-              <td class="text-center">
-                <%= link_to t(:edit), edit_group_path(group), class: "btn btn-info" %>
-              </td>
-              <td class="text-center">
-                <%= link_to t(:destroy), group, method: :delete, data: { confirm: t(:are_you_sure) }, class: "btn btn-danger" %>
-              </td>
-            <% end %>
           </tr>
         <% end %>
       </tbody>

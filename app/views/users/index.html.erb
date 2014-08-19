@@ -2,6 +2,10 @@
   <div class="col-lg-10 col-lg-offset-1">
     <h1><%= t(:users).titleize %></h1>
 
+    <% if can? :new, User %>
+      <%= link_to t(:new_user).titleize, new_user_path, class: "btn btn-primary" %>
+    <% end %>
+
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
@@ -11,7 +15,6 @@
           <% if current_user.admin? %>
             <th class="text-center"><%= t(:recent_attendances).titleize %></th>
             <th class="text-center"><%= t(:active).titleize %>?</th>
-            <th colspan="2"></th>
           <% end %>
         </tr>
       </thead>
@@ -30,12 +33,6 @@
                 <% if user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count >= 6 %>
                   <span class="glyphicon glyphicon-ok"></span>
                 <% end %>
-              </td>
-              <td class="text-center">
-                <%= link_to t(:edit).titleize, edit_user_path(user), class: "btn btn-info" %>
-              </td>
-              <td class="text-center">
-                <%= link_to t(:destroy).titleize, user, method: :delete, data: { confirm: t(:are_you_sure).titleize }, class: "btn btn-danger" %>
               </td>
             <% end %>
           </tr>

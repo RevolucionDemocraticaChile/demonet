@@ -17,13 +17,19 @@ class UserMeetingsController < ApplicationController
     respond_to do |format|
       if @user_meeting.save
         @success = true
-        flash[:success] = t(:association_created_successfully)
-        format.html { redirect_to root_path, notice: t(:association_created_successfully) }
+
+        format.html do
+          flash[:success] = t(:association_created_successfully)
+          redirect_to root_path, notice: t(:association_created_successfully)
+        end
         format.js
       else
         @success = false
-        flash[:error] = t(:error_creating_association)
-        format.html { render :new }
+
+        format.html do
+          flash[:error] = t(:error_creating_association)
+          render :new
+        end
         format.js
       end
     end
@@ -31,10 +37,12 @@ class UserMeetingsController < ApplicationController
 
   def destroy
     @user_meeting.destroy
-    flash[:success] = t(:association_destroyed_successfully)
 
     respond_to do |format|
-      format.html { redirect_to root_path, notice: t(:association_destroyed_successfully) }
+      format.html do
+        flash[:success] = t(:association_destroyed_successfully)
+        redirect_to root_path, notice: t(:association_destroyed_successfully)
+      end
       format.js
     end
   end

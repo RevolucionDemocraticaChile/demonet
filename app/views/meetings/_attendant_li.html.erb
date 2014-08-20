@@ -1,9 +1,12 @@
 <li data-user-id="<%= user_meeting.user_id %>">
   <span class="attendant">
+    <span class="glyphicon glyphicon-user"></span>
     <%= link_to user_meeting.user.name, user_meeting.user %>
-    <%= form_for user_meeting, html: { method: :delete }, remote: true do |f| %>
-      <%= f.button type: "submit" do %>
-        <span class="glyphicon glyphicon-remove"></span>
+    <% if removable %>
+      <%= form_for user_meeting, html: { method: :delete }, remote: true do |f| %>
+        <%= f.button type: "submit" do %>
+          <span class="glyphicon glyphicon-remove"></span>
+        <% end %>
       <% end %>
     <% end %>
   </span>

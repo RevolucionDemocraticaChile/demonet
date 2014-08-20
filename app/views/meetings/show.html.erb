@@ -47,7 +47,7 @@
 
     <ul id="attendants_ul">
       <% @meeting.user_meetings.each do |user_meeting| %>
-        <%= render partial: "attendant_li", locals: {user_meeting: user_meeting} %>
+        <%= render partial: "attendant_li", locals: {user_meeting: user_meeting, removable: can?(:edit, @meeting) } %>
       <% end %>
     </ul>
 

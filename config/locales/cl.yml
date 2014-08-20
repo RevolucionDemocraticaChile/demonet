@@ -6,11 +6,13 @@ cl:
   add_meeting: agregar reunión
   add_member: agregar miembro
   add_territory: agregar territorio
+  add_group: agregar espacio
   add_user_to_territory: agregar usuario a territorio
   administrator: administrador
   are_you_sure: Estás seguro?
   association_created_successfully: Asociación creada exitosamente.
   association_destroyed_successfully: Asociación eliminada exitosamente.
+  administration: administración
   attendants: asistentes
   back: atrás
   comission: comisión
@@ -19,7 +21,13 @@ cl:
   demonet: demonet
   description: descripción
   destroy: eliminar
+  destroy_user: eliminar usuario
+  destroy_group: eliminar espacio
+  destroy_meeting: eliminar reunión
   edit: editar
+  edit_user: editar usuario
+  edit_group: editar espacio
+  edit_meeting: editar reunión
   email: email
   error_creating_association: Hubo un error al crear la asociación.
   group: espacio
@@ -32,6 +40,7 @@ cl:
   meeting_updated_successfully: Reunión actualizada exitosamente.
   meetings: reuniones
   member_of_territory: miembro de territorio
+  member_of_group: miembro de espacio
   members: miembros
   name: nombre
   new_group: nuevo espacio

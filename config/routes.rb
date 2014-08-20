@@ -3,10 +3,9 @@
 
     resources :users
     resources :groups
-    resources :territories
-    resources :member_territories, only: [:new, :create, :destroy]
     resources :meetings
     resources :user_meetings
+    resources :member_groups
 
     resources :sessions, only: [:new, :create, :destroy]
 

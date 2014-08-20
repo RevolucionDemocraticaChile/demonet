@@ -5,7 +5,7 @@ describe "Meeting pages" do
   subject { page }
 
   let(:group)   { FactoryGirl.create(:group)   }
-  let(:meeting) { Meeting.create(date: DateTime.now, desc: "A Desc", group_id: group.id) }
+  let(:meeting) { Meeting.create(date: DateTime.now.to_date, desc: "A Desc") }
 
   describe "without signing in" do
 
@@ -90,7 +90,6 @@ describe "Meeting pages" do
       #     select "2014",     from: "meeting_date_1i"
       #     select "agosto",   from: "meeting_date_2i"
       #     select "1",        from: "meeting_date_3i"
-      #     select group.name, from: "meeting[territory_id]"
       #
       #     click_button "Enviar"
       #   end

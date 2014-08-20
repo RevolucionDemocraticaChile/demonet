@@ -12,9 +12,20 @@
 #
 
 class Group < ActiveRecord::Base
+  # Don't use the type column for inheritance
+  self.inheritance_column = nil
 
   NAME_MAX_LENGTH = 200
   DESC_MAX_LENGTH = 10000
+
+  has_many :meeting_groups
+  has_many :meetings, through: :meeting_groups
+
+  has_many :admin_groups
+  has_many :admins, through: :admin_groups
+
+  has_many :member_groups
+  has_many :members, through: :member_groups
 
   validates :name,
     presence: true,
@@ -27,6 +38,6 @@ class Group < ActiveRecord::Base
   # validates :state,
   #   presence: true
 
-  before_create { self.state = "created" }
+  # before_create { self.state = "created" }
 
 end

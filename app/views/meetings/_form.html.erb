@@ -22,13 +22,8 @@
     <%= label_tag :group_id, t(:group).humanize, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
       <select name="meeting[group_id]" class="form-control">
-        <!-- <option value="nil" disabled><%= t(:select_territory).humanize %></option> -->
-        <% Territory.all.each do |territory| %>
-          <% if current_user.admin? || current_user.aterritories.include?(territory) %>
-            <option value="<%= territory.id %>"><%= territory.name %></option>
-          <% else %>
-            <option value="<%= territory.id %>"><%= territory.name %></option>
-          <% end %>
+        <% Group.all.each do |group| %>
+          <option value="<%= group.id %>"><%= group.name %></option>
         <% end %>
       </select>
     </div>

@@ -45,6 +45,15 @@ h1 {
   text-align: center;
 }
 
+.admin-panel {
+  text-align: center;
+  
+  .btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
 
 /*section {
   overflow: auto;

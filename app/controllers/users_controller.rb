@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    @member_territory = MemberTerritory.new
+    @member_group = MemberGroup.new
   end
 
   # GET /users/new

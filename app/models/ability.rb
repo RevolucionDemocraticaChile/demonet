@@ -12,21 +12,11 @@ class Ability
     can :index, Group
     can :show,  Group
 
-    can :index, Territory
-    can :show,  Territory
-
     can :index, Meeting
     can :show,  Meeting
 
-    # if
-
     if user.admin?
-      # can :manage, User
       can :manage, :all
-      # can :manage, Territory
-      # can :manage, MemberTerritory
-      # can :manage, Meeting
-      # can :manage, UserMeeting
     end
 
     # Define abilities for the passed in user here. For example:

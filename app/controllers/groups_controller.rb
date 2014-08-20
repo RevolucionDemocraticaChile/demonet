@@ -23,9 +23,6 @@ class GroupsController < ApplicationController
   end
 
   def show
-    # if @group.type == "Territory"
-    #   redirect_to controller: "territories", action: "show", params: params
-    # end
   end
 
   def edit

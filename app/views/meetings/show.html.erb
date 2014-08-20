@@ -1,25 +1,30 @@
 <div class="row">
-  <div class="col-lg-8 col-lg-offset-2">
+  <div class="col-lg-12">
     <h1><%= format_meeting_name(@meeting) %></h1>
+  </div>
+</div>
 
-    <p>
-      <strong><%= t(:date_lit).humanize %>:</strong>
-      <%= l Date.parse(@meeting.date.to_s) %>
-    </p>
+<div class="row">
+  <div class="col-lg-2">
+    <% if can?(:edit, @meeting) || can?(:destroy, @meeting) %>
+      <div class="alert alert-info admin-panel">
+        <strong><%= t(:administration).humanize %></strong>
+        <% if can?(:edit, @meeting) %>
+          <%= link_to t(:edit_meeting).humanize, edit_meeting_path(@meeting), class: "btn btn-primary" %>
+        <% end %>
+        <% if can?(:destroy, @meeting) %>
+          <%= link_to t(:destroy_meeting).humanize, meeting_path(@meeting), method: :delete, class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
-    <p>
-      <strong><%= t(:group).humanize %>:</strong>
-      <%= link_to @meeting.group.name, @meeting.group %>
-    </p>
+  <div class="col-lg-8">
 
     <p>
       <strong><%= t(:description).humanize %>:</strong>
       <%= @meeting.desc %>
     </p>
-
-    <% if can? :edit, @user %>
-      <%= link_to t(:edit).humanize, edit_meeting_path(@meeting), class: "btn btn-primary" %>
-    <% end %>
 
     <h2><%= t(:attendants).humanize %></h2>
 
@@ -35,14 +40,14 @@
       </tbody>
     </table>
 
-    <% if current_user.admin? || current_user.aterritories.include?(@meeting.group) %>
+    <% if current_user.admin? %>
       <%= form_for UserMeeting.new, html: {class: "form-inline"} do |f| %>
         <%= f.hidden_field :meeting_id, value: @meeting.id %>
         <div class="form-group">
           <label class="sr-only"><%= t(:name).humanize %></label>
           <select name="user_meeting[user_id]" class="form-control">
             <option value="nil"><%= t(:select_user).humanize %></option>
-            <% @meeting.group.members.each do |user| %>
+            <% @meeting.users.each do |user| %>
               <% if !@meeting.users.include?(user) %>
                 <option value="<%= user.id %>"><%= user.name %></option>
               <% end %>

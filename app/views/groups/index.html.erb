@@ -1,6 +1,20 @@
 <div class="row">
-  <div class="col-lg-8 col-lg-offset-2">
+  <div class="col-lg-12">
     <h1><%= t(:groups).humanize %></h1>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-lg-2">
+    <% if can? :new, Group %>
+      <div class="alert alert-info admin-panel">
+        <strong><%= t(:administration).humanize %></strong>
+        <%= link_to t(:new_group).humanize, new_group_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-lg-8">
 
     <table class="table table-striped table-bordered">
       <thead>
@@ -23,9 +37,5 @@
         <% end %>
       </tbody>
     </table>
-
-    <% if can? :new, Group %>
-      <%= link_to t(:new_group).humanize, new_group_path, class: "btn btn-primary" %>
-    <% end %>
   </div>
 </div>

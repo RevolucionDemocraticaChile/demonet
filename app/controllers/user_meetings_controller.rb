@@ -6,14 +6,6 @@ class UserMeetingsController < ApplicationController
   def create
     @user_meeting = UserMeeting.new(user_meeting_params)
 
-    # if @user_meeting.save
-    #   flash[:success] = t(:association_created_successfully)
-    #   redirect_to root_path
-    #   format.html {  }
-    # else
-    #   flash[:error] = t(:error_creating_association)
-    # end
-
     respond_to do |format|
       if @user_meeting.save
         @success = true

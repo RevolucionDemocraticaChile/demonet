@@ -7,6 +7,7 @@
       get :autocomplete_user_name, on: :collection
     end
     resources :user_meetings
+    resources :meeting_groups
     resources :member_groups
 
     resources :sessions, only: [:new, :create, :destroy]

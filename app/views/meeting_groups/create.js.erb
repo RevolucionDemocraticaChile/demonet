@@ -1,0 +1,5 @@
+<% if @success %>
+  $("#organizing_groups_ul").append("<%= escape_javascript(render partial: 'meetings/organizing_group_li', locals: {meeting_group: @meeting_group, removable: true}) %>");
+<% else %>
+  alert("Error");
+<% end %>

@@ -6,19 +6,45 @@ class MeetingGroupsController < ApplicationController
   def create
     @meeting_group = MeetingGroup.new(meeting_group_params)
 
-    if @meeting_group.save
-      flash[:success] = t(:association_created_successfully)
-      redirect_to root_path
-    else
-      flash[:error] = t(:error_creating_association)
-      redirect_to root_path
+    # if @meeting_group.save
+    #   flash[:success] = t(:association_created_successfully)
+    #   redirect_to root_path
+    # else
+    #   flash[:error] = t(:error_creating_association)
+    #   redirect_to root_path
+    # end
+
+    respond_to do |format|
+      if @meeting_group.save
+        @success = true
+
+        format.html do
+          flash[:success] = t(:association_created_successfully)
+          redirect_to root_path, notice: t(:association_created_successfully)
+        end
+        format.js
+      else
+        @success = false
+
+        format.html do
+          flash[:error] = t(:error_creating_association)
+          render :new
+        end
+        format.js
+      end
     end
   end
 
   def destroy
     @meeting_group.destroy
-    flash[:success] = t(:association_destroyed_successfully)
-    redirect_to root_path
+
+    respond_to do |format|
+      format.html do
+        flash[:success] = t(:association_destroyed_successfully)
+        redirect_to root_path, notice: t(:association_destroyed_successfully)
+      end
+      format.js
+    end
   end
 
   private

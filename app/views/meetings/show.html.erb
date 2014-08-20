@@ -16,6 +16,14 @@
           <%= link_to t(:destroy_meeting).humanize, meeting_path(@meeting), method: :delete, class: "btn btn-danger", data: { confirm: t(:are_you_sure).humanize } %>
         <% end %>
         <hr />
+        <%= form_for MeetingGroup.new, remote: true, html: {class: "form-inline"} do |f| %>
+          <%= f.hidden_field :meeting_id, value: @meeting.id %>
+            <%= f.collection_select :group_id, Group.all, :id, :name, {}, {class: "form-control"} %>
+          <div class="form-group">
+            <%= f.submit t(:add_group).humanize, class: "btn btn-primary" %>
+          </div>
+        <% end %>
+        <hr />
         <%= form_for UserMeeting.new, remote: true, html: {class: "form-inline"} do |f| %>
           <%= f.hidden_field :meeting_id, value: @meeting.id %>
           <!-- <div class="form-group"> -->
@@ -36,12 +44,13 @@
       <%= @meeting.desc %>
     </p>
 
-    <p>
-      <strong><%= t(:groups).humanize %>:</strong>
-      <% @meeting.groups.each do |group| %>
-        <%= link_to group.name, group %>
+    <h2><%= t(:groups).humanize %></h2>
+
+    <ul id="organizing_groups_ul">
+      <% @meeting.meeting_groups.each do |meeting_group| %>
+        <%= render partial: "organizing_group_li", locals: {meeting_group: meeting_group, removable: can?(:edit, @meeting) } %>
       <% end %>
-    </p>
+    </ul>
 
     <h2><%= t(:attendants).humanize %></h2>
 

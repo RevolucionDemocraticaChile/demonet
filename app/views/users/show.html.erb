@@ -30,10 +30,6 @@
         <strong><%= link_to territory.name, territory %></strong>
       </div>
     <% end %>
-    <% if current_user.admin? %>
-      <%= link_to t(:add_user_to_territory).humanize, new_member_territory_path, class: "btn btn-primary" %>
-    <% end %>
-    <hr />
   </div>
   <div class="col-lg-6">
 

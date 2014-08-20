@@ -80,8 +80,8 @@ describe "Meeting pages" do
     describe "new" do
       before { visit new_meeting_path }
       it { should_not have_selector('div.alert.alert-error') }
-      it { should have_content("Nueva Reunión") }
-      it { should have_button("Enviar") }
+      it { should have_content("Nueva reunión") }
+      it { should have_button( "Guardar" ) }
 
       # describe "send valid meeting" do
       #   let(:group) { FactoryGirl.create(:group) }

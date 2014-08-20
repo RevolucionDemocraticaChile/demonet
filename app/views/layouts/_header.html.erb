@@ -8,17 +8,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to t(:demonet).titleize, root_path, class: "navbar-brand" %>
+      <%= link_to t(:demonet).humanize, root_path, class: "navbar-brand" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to t(:users).titleize,       users_path %></li>
-        <li><%= link_to t(:groups).titleize,      groups_path %></li>
-        <li><%= link_to t(:meetings).titleize,    meetings_path %></li>
-        <li><%= link_to t(:territories).titleize, territories_path %></li>
-
+        <li><%= link_to t(:users).humanize,       users_path %></li>
+        <li><%= link_to t(:groups).humanize,      groups_path %></li>
+        <li><%= link_to t(:territories).humanize, territories_path %></li>
+        <li><%= link_to t(:meetings).humanize,    meetings_path %></li>
         <!-- <li class="active"><%= link_to "Usuarios", users_path %></li> -->
       </ul>
 
@@ -26,11 +25,11 @@
         <% if signed_in? %>
           <li><%= link_to current_user.name, current_user %></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t(:account).titleize %> <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t(:account).humanize %> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><%= link_to t(:profile).titleize, current_user %></li>
+              <li><%= link_to t(:profile).humanize, current_user %></li>
               <li class="divider"></li>
-              <li><%= link_to t(:signout).titleize, salir_path, method: "delete" %></li>
+              <li><%= link_to t(:signout).humanize, salir_path, method: "delete" %></li>
             </ul>
           </li>
         <% else %>

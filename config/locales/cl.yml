@@ -1,68 +1,73 @@
 cl:
-  signin: ingresar
-  signout: salir
-  signin_first: Debes ingresar primero.
-  signin_success: Has ingresado exitosamente.
-  not_signed_in: No estás ingresado.
-  invalid_email_pass: Combinación email/clave inválida.
-  group_created_successfully: Espacio creado exitosamente.
-  user_created_successfully: Usuario creado exitosamente.
-  user_updated_successfully: Usuario actualizado exitosamente.
-  user_destroyed_successfully: Usuario eliminado exitosamente.
-  meeting_created_successfully: Reunión creada exitosamente.
-  meeting_updated_successfully: Reunión actualizada exitosamente.
-  territory_created_successfully: Territorio creado exitosamente.
-  territory_updated_successfully: Territorio actualizado exitosamente.
-  association_created_successfully: Asociación creada exitosamente.
-  error_creating_association: Hubo un error al crear la asociación.
-  association_destroyed_successfully: Asociación eliminada exitosamente.
-  not_authorized: No estás autorizado.
-  are_you_sure: Estás seguro?
-  add_member: agregar miembro
-  add_meeting: agregar reunión
-  add_territory: agregar territorio
-  new_meeting: nueva reunión
-  new_group: nuevo espacio
-  new_territory: nuevo territorio
-  new_user: nuevo usuario
-  password_confirmation: confirmar contraseña
-  select_user: seleccionar usuario
-  recent_attendances: asistencias recientes
-  active_member: miembro activo
-  supporting_member: miembro adherente
-  member_of_territory: miembro de territorio
-  add_user_to_territory: agregar usuario a territorio
-  recent_meetings: reuniones recientes
-  territory_name: nombre del territorio
   account: cuenta
   active: activo
+  active_member: miembro activo
+  add: añadir
+  add_meeting: agregar reunión
+  add_member: agregar miembro
+  add_territory: agregar territorio
+  add_user_to_territory: agregar usuario a territorio
   administrator: administrador
+  are_you_sure: Estás seguro?
+  association_created_successfully: Asociación creada exitosamente.
+  association_destroyed_successfully: Asociación eliminada exitosamente.
   attendants: asistentes
   back: atrás
-  create: crear
   comission: comisión
+  create: crear
+  date_lit: fecha
   demonet: demonet
   description: descripción
   destroy: eliminar
   edit: editar
   email: email
+  error_creating_association: Hubo un error al crear la asociación.
   group: espacio
+  group_created_successfully: Espacio creado exitosamente.
   groups: espacios
+  has_no_meetings: no tiene reuniones
+  invalid_email_pass: Combinación email/clave inválida.
   meeting: reunión
+  meeting_created_successfully: Reunión creada exitosamente.
+  meeting_updated_successfully: Reunión actualizada exitosamente.
   meetings: reuniones
+  member_of_territory: miembro de territorio
   members: miembros
   name: nombre
+  new_group: nuevo espacio
+  new_meeting: nueva reunión
+  new_territory: nuevo territorio
+  new_user: nuevo usuario
+  not_authorized: No estás autorizado.
+  not_signed_in: No estás ingresado.
   password: contraseña
+  password_confirmation: confirmar contraseña
   profile: perfil
+  recent_attendances: asistencias recientes
+  recent_meetings: reuniones recientes
+  save: guardar
+  select_territory: seleccionar territorio
+  select_user: seleccionar usuario
   send: enviar
   show: ver
-  territory: territorio
+  signin: ingresar
+  signin_first: Debes ingresar primero.
+  signin_success: Has ingresado exitosamente.
+  signout: salir
+  supporting_member: miembro adherente
   territories: territorios
+  territory: territorio
+  territory_created_successfully: Territorio creado exitosamente.
+  territory_name: nombre del territorio
+  territory_updated_successfully: Territorio actualizado exitosamente.
+  title: título
   type: tipo
   user: usuario
-  username: usuario
+  user_created_successfully: Usuario creado exitosamente.
+  user_destroyed_successfully: Usuario eliminado exitosamente.
+  user_updated_successfully: Usuario actualizado exitosamente.
+  username: nombre de usuario
   users: usuarios
-  date_lit: fecha
   welcome: bienvenido
   date:
     abbr_day_names:

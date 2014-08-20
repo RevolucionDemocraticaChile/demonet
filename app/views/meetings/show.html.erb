@@ -3,33 +3,27 @@
     <h1><%= format_meeting_name(@meeting) %></h1>
 
     <p>
-      <strong><%= t(:date_lit).titleize %>:</strong>
+      <strong><%= t(:date_lit).humanize %>:</strong>
       <%= l Date.parse(@meeting.date.to_s) %>
     </p>
 
     <p>
-      <strong><%= t(:group).titleize %>:</strong>
+      <strong><%= t(:group).humanize %>:</strong>
       <%= link_to @meeting.group.name, @meeting.group %>
     </p>
 
     <p>
-      <strong><%= t(:description).titleize %>:</strong>
+      <strong><%= t(:description).humanize %>:</strong>
       <%= @meeting.desc %>
     </p>
 
     <% if can? :edit, @user %>
-      <%= link_to t(:edit).titleize, edit_meeting_path(@meeting), class: "btn btn-primary" %>
+      <%= link_to t(:edit).humanize, edit_meeting_path(@meeting), class: "btn btn-primary" %>
     <% end %>
 
-    <h2><%= t(:attendants).titleize %></h2>
+    <h2><%= t(:attendants).humanize %></h2>
 
     <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th><%= t(:name).titleize %></th>
-        </tr>
-      </thead>
-
       <tbody>
         <% @meeting.users.each do |user| %>
           <tr>
@@ -45,9 +39,9 @@
       <%= form_for UserMeeting.new, html: {class: "form-inline"} do |f| %>
         <%= f.hidden_field :meeting_id, value: @meeting.id %>
         <div class="form-group">
-          <label class="sr-only"><%= t(:name).titleize %></label>
+          <label class="sr-only"><%= t(:name).humanize %></label>
           <select name="user_meeting[user_id]" class="form-control">
-            <option value="nil"><%= t(:select_user).titleize %></option>
+            <option value="nil"><%= t(:select_user).humanize %></option>
             <% @meeting.group.members.each do |user| %>
               <% if !@meeting.users.include?(user) %>
                 <option value="<%= user.id %>"><%= user.name %></option>
@@ -56,7 +50,7 @@
           </select>
         </div>
         <div class="form-group">
-          <%= f.submit t(:create).titleize, class: "btn btn-primary" %>
+          <%= f.submit t(:add).humanize, class: "btn btn-primary" %>
         </div>
       <% end %>
     <% end %>

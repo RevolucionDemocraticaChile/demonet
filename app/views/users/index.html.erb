@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1">
-    <h1><%= t(:users).titleize %></h1>
+    <h1><%= t(:users).humanize %></h1>
 
     <% if can? :new, User %>
       <%= link_to t(:new_user).titleize, new_user_path, class: "btn btn-primary" %>
@@ -9,12 +9,13 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
-          <th><%= t(:name).titleize %></th>
-          <th><%= t(:email).titleize %></th>
-          <th><%= t(:username).titleize %></th>
+          <th><%= t(:name).humanize %></th>
+          <th><%= t(:email).humanize %></th>
+          <th><%= t(:username).humanize %></th>
           <% if current_user.admin? %>
-            <th class="text-center"><%= t(:recent_attendances).titleize %></th>
-            <th class="text-center"><%= t(:active).titleize %>?</th>
+            <th class="text-center"><%= t(:recent_attendances).humanize %></th>
+            <th class="text-center"><%= t(:active).humanize %>?</th>
+            <th colspan="2"></th>
           <% end %>
         </tr>
       </thead>
@@ -41,7 +42,7 @@
     </table>
 
     <% if can? :new, User %>
-      <%= link_to t(:new_user).titleize, new_user_path, class: "btn btn-primary" %>
+      <%= link_to t(:new_user).humanize, new_user_path, class: "btn btn-primary" %>
     <% end %>
 
   </div>

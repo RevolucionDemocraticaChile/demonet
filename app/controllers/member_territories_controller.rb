@@ -9,7 +9,7 @@ class MemberTerritoriesController < ApplicationController
 
     if @member_territory.save
       flash[:success] = t(:association_created_successfully)
-      redirect_to root_path
+      redirect_to Territory.find_by(id: @member_territory.territory_id)
     else
       flash[:error] = t(:error_creating_association)
       redirect_to root_path
@@ -19,7 +19,7 @@ class MemberTerritoriesController < ApplicationController
   def destroy
     @member_territory.destroy
     flash[:success] = t(:association_destroyed_successfully)
-    redirect_to root_path
+    redirect_to Territory.find_by(id: @member_territory.territory_id)
   end
 
   private

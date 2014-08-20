@@ -3,7 +3,9 @@
 
     resources :users
     resources :groups
-    resources :meetings
+    resources :meetings do
+      get :autocomplete_user_name, on: :collection
+    end
     resources :user_meetings
     resources :member_groups
 

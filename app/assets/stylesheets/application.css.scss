@@ -47,11 +47,48 @@ h1 {
 
 .admin-panel {
   text-align: center;
-  
+
   .btn {
     width: 100%;
     margin-top: 10px;
   }
+
+  .form-control {
+    width: 100%;
+  }
+}
+
+#attendants_ul {
+
+  li {
+    padding: 2px;
+
+    .attendant {
+      border: 1px solid #aaaaaa;
+      border-radius: 2px;
+      background: #eeeeee;
+      padding: 2px;
+
+      button {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        color: #ffaaaa;
+
+        :hover {
+          color: #ff0000;
+        }
+      }
+    }
+
+    form {
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
 }
 
 

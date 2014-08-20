@@ -1,0 +1,5 @@
+<% if @success %>
+  $("#attendants_ul").append("<%= escape_javascript(render partial: 'meetings/attendant_li', locals: {user_meeting: @user_meeting}) %>");
+<% else %>
+  alert("Error");
+<% end %>

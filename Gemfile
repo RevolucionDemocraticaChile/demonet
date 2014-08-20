@@ -30,17 +30,18 @@ group :production do
   gem 'rails_12factor', '~> 0.0.2'
 end
 
-gem 'sass-rails',     '~> 4.0.3'
-gem 'bootstrap-sass', '~> 3.2.0.1'
-gem 'sprockets',      '~> 2.11.0'
-gem 'uglifier',       '>= 1.3.0'
-gem 'coffee-rails',   '~> 4.0.0'
+gem 'sass-rails',      '~> 4.0.3'
+gem 'bootstrap-sass',  '~> 3.2.0.1'
+gem 'sprockets',       '~> 2.11.0'
+gem 'uglifier',        '>= 1.3.0'
+gem 'coffee-rails',    '~> 4.0.0'
 gem 'jquery-rails'
+gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'turbolinks'
-gem 'jbuilder',       '~> 2.0'
-gem 'bcrypt',         '~> 3.1.7'
-gem 'cancancan',      '~> 1.9'
-gem 'annotate',       '~> 2.6.5'
+gem 'jbuilder',        '~> 2.0'
+gem 'bcrypt',          '~> 3.1.7'
+gem 'cancancan',       '~> 1.9'
+gem 'annotate',        '~> 2.6.5'
 
 gem 'sdoc', '~> 0.4.0',          group: :doc
 

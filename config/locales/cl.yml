@@ -10,8 +10,15 @@ cl:
   add_user_to_territory: agregar usuario a territorio
   administrator: administrador
   are_you_sure: Estás seguro?
+  add_attendant: agregar asistente
   association_created_successfully: Asociación creada exitosamente.
   association_destroyed_successfully: Asociación eliminada exitosamente.
+  group_created_successfully: Espacio creado exitosamente.
+  group_updated_successfully: Espacio actualizado exitosamente.
+  group_destroyed_successfully: Espacio eliminado exitosamente.
+  meeting_created_successfully: Reunión creada exitosamente.
+  meeting_updated_successfully: Reunión actualizada exitosamente.
+  meeting_destroyed_successfully: Reunión eliminada exitosamente.
   administration: administración
   attendants: asistentes
   back: atrás
@@ -31,13 +38,10 @@ cl:
   email: email
   error_creating_association: Hubo un error al crear la asociación.
   group: espacio
-  group_created_successfully: Espacio creado exitosamente.
   groups: espacios
   has_no_meetings: no tiene reuniones
   invalid_email_pass: Combinación email/clave inválida.
   meeting: reunión
-  meeting_created_successfully: Reunión creada exitosamente.
-  meeting_updated_successfully: Reunión actualizada exitosamente.
   meetings: reuniones
   member_of_territory: miembro de territorio
   member_of_group: miembro de espacio

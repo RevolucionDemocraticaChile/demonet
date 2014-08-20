@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140820131800) do
+ActiveRecord::Schema.define(version: 20140820185513) do
 
   create_table "admin_groups", force: true do |t|
     t.integer  "admin_id"
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 20140820131800) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "user_meetings", ["user_id", "meeting_id"], name: "index_user_meetings_on_user_id_and_meeting_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "username"

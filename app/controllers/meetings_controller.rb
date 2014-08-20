@@ -4,6 +4,8 @@ class MeetingsController < ApplicationController
 
   authorize_resource
 
+  autocomplete :user, :name, full: true
+
   def index
     @meetings = Meeting.all
   end
@@ -37,6 +39,13 @@ class MeetingsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  # DELETE /meetings/1
+  def destroy
+    @meeting.destroy
+    flash[:success] = t(:meeting_destroyed_successfully)
+    redirect_to meetings_url
   end
 
   private

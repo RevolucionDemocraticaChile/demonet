@@ -28,6 +28,13 @@ class GroupsController < ApplicationController
   def edit
   end
 
+  # DELETE /groups/1
+  def destroy
+    @group.destroy
+    flash[:success] = t(:group_destroyed_successfully)
+    redirect_to groups_url
+  end
+
   private
 
     def set_group

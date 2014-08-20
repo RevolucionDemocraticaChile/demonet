@@ -4,8 +4,6 @@ class MeetingsController < ApplicationController
 
   authorize_resource
 
-  autocomplete :user, :name, full: true
-
   def index
     @meetings = Meeting.all
   end

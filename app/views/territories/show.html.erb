@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-8 col-lg-offset-2">
-    <h1><%= t(:territory).humanize %> <%= @territory.name %></h1>
+    <h1><%= @territory.name %></h1>
 
     <% if can? :edit, @territory %>
       <%= link_to t(:edit).humanize, edit_territory_path(@territory), class: "btn btn-primary" %>

@@ -8,9 +8,6 @@
           <th><%= t(:name).humanize %></th>
           <th class="text-center"><%= t(:members).humanize %></th>
           <th class="text-center"><%= t(:meetings).humanize %></th>
-          <% if current_user.admin? %>
-            <th colspan="2"></th>
-          <% end %>
         </tr>
       </thead>
 
@@ -20,14 +17,6 @@
             <td><%= link_to territory.name, territory %></td>
             <td class="text-center"><%= territory.members.count %></td>
             <td class="text-center"><%= territory.meetings.count %></td>
-            <% if current_user.admin? %>
-              <td class="text-center">
-                <%= link_to t(:edit), edit_territory_path(territory), class: "btn btn-info" %>
-              </td>
-              <td class="text-center">
-                <%= link_to t(:destroy), territory, method: :delete, data: { confirm: t(:are_you_sure) }, class: "btn btn-danger" %>
-              </td>
-            <% end %>
           </tr>
         <% end %>
       </tbody>

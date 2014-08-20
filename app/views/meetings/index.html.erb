@@ -6,11 +6,9 @@
       <thead>
         <tr>
           <th><%= t(:title).humanize %></th>
+          <th><%= t(:group).humanize %></th>
           <th><%= t(:attendants).humanize %></th>
           <th><%= t(:date_lit).humanize %></th>
-          <% if current_user.admin? %>
-            <th colspan="2"></th>
-          <% end %>
         </tr>
       </thead>
 
@@ -20,20 +18,15 @@
             <td>
               <%= link_to format_meeting_name(meeting), meeting %>
             </td>
+            <td>
+              <%= link_to meeting.group.name, meeting.group %>
+            </td>
             <td class="text-center">
               <%= meeting.users.count %>
             </td>
             <td>
               <%= Date.parse(meeting.date.to_s) %>
             </td>
-            <% if current_user.admin? %>
-              <td class="text-center">
-                <%= link_to t(:edit).humanize, edit_meeting_path(meeting), class: "btn btn-info" %>
-              </td>
-              <td class="text-center">
-                <%= link_to t(:destroy).humanize, meeting, method: :delete, data: { confirm: t(:are_you_sure) }, class: "btn btn-danger" %>
-              </td>
-            <% end %>
           </tr>
         <% end %>
       </tbody>

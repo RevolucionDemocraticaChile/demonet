@@ -2,6 +2,10 @@
   <div class="col-lg-10 col-lg-offset-1">
     <h1><%= t(:users).humanize %></h1>
 
+    <% if can? :new, User %>
+      <%= link_to t(:new_user).titleize, new_user_path, class: "btn btn-primary" %>
+    <% end %>
+
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
@@ -30,12 +34,6 @@
                 <% if user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count >= 6 %>
                   <span class="glyphicon glyphicon-ok"></span>
                 <% end %>
-              </td>
-              <td class="text-center">
-                <%= link_to t(:edit).humanize, edit_user_path(user), class: "btn btn-info" %>
-              </td>
-              <td class="text-center">
-                <%= link_to t(:destroy).humanize, user, method: :delete, data: { confirm: t(:are_you_sure).humanize }, class: "btn btn-danger" %>
               </td>
             <% end %>
           </tr>

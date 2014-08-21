@@ -6,5 +6,7 @@ class CreateUserMeetings < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :user_meetings, [:user_id, :meeting_id], unique: true
   end
 end

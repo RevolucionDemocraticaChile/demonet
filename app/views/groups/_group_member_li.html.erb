@@ -1,0 +1,13 @@
+<li data-member-id="<%= member_group.user_id %>">
+  <span class="group_member">
+    <span class="glyphicon glyphicon-user"></span>
+    <%= link_to member_group.user.name, member_group.user %>
+    <% if removable %>
+      <%= form_for member_group, html: { method: :delete }, remote: true do |f| %>
+        <%= f.button type: "submit" do %>
+          <span class="glyphicon glyphicon-remove"></span>
+        <% end %>
+      <% end %>
+    <% end %>
+  </span>
+</li>

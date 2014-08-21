@@ -1,0 +1,5 @@
+<% if @success %>
+  $("#group_admins_ul").append("<%= escape_javascript(render partial: 'groups/group_admin_li', locals: {admin_group: @admin_group, removable: true}) %>");
+<% else %>
+  alert("Error");
+<% end %>

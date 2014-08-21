@@ -1,0 +1,5 @@
+<% if @success %>
+  $("#group_members_ul").append("<%= escape_javascript(render partial: 'groups/group_member_li', locals: {member_group: @member_group, removable: true}) %>");
+<% else %>
+  alert("Error");
+<% end %>

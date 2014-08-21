@@ -14,4 +14,12 @@ class MeetingGroup < ActiveRecord::Base
   belongs_to :meeting
   belongs_to :group
 
+  validates :meeting,
+    presence: true
+
+  validates :group,
+    presence: true
+
+  validates :meeting_id, :uniqueness => { :scope => :group_id }
+
 end

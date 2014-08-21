@@ -11,21 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140820185513) do
+ActiveRecord::Schema.define(version: 20140821193043) do
 
   create_table "admin_groups", force: true do |t|
-    t.integer  "admin_id"
+    t.integer  "user_id"
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "admin_territories", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "territory_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "admin_groups", ["user_id", "group_id"], name: "index_admin_groups_on_user_id_and_group_id", unique: true
 
   create_table "groups", force: true do |t|
     t.string   "name"
@@ -43,6 +38,8 @@ ActiveRecord::Schema.define(version: 20140820185513) do
     t.datetime "updated_at"
   end
 
+  add_index "meeting_groups", ["meeting_id", "group_id"], name: "index_meeting_groups_on_meeting_id_and_group_id", unique: true
+
   create_table "meetings", force: true do |t|
     t.date     "date"
     t.string   "desc"
@@ -51,24 +48,13 @@ ActiveRecord::Schema.define(version: 20140820185513) do
   end
 
   create_table "member_groups", force: true do |t|
-    t.integer  "member_id"
+    t.integer  "user_id"
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "member_territories", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "territory_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "territories", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "member_groups", ["user_id", "group_id"], name: "index_member_groups_on_user_id_and_group_id", unique: true
 
   create_table "user_meetings", force: true do |t|
     t.integer  "user_id"
@@ -88,6 +74,10 @@ ActiveRecord::Schema.define(version: 20140820185513) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin"
+    t.string   "first_name"
+    t.string   "second_name"
+    t.string   "last_name"
+    t.string   "rut"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

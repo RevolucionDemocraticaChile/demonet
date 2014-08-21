@@ -11,6 +11,10 @@
 #  password_digest :string(255)
 #  remember_token  :string(255)
 #  admin           :boolean
+#  first_name      :string(255)
+#  second_name     :string(255)
+#  last_name       :string(255)
+#  rut             :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -20,11 +24,11 @@ class User < ActiveRecord::Base
   PASSWORD_MIN_LENGTH = 6
   VALID_EMAIL_REGEX   = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  has_many :member_groups, foreign_key: "member_id"
-  has_many :groups, foreign_key: "member_id", through: :member_groups
+  has_many :member_groups
+  has_many :groups, through: :member_groups
 
   has_many :admin_groups
-  has_many :agroups, foreign_key: "admin_id", through: :admin_groups
+  has_many :agroups, through: :admin_groups, source: :group
 
   has_many :user_meetings
   has_many :meetings, through: :user_meetings

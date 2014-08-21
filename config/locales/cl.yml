@@ -8,6 +8,7 @@ cl:
   add_territory: agregar territorio
   add_group: agregar espacio
   add_user_to_territory: agregar usuario a territorio
+  add_administrator: agregar administrador
   administrator: administrador
   are_you_sure: Estás seguro?
   add_attendant: agregar asistente
@@ -20,6 +21,7 @@ cl:
   meeting_updated_successfully: Reunión actualizada exitosamente.
   meeting_destroyed_successfully: Reunión eliminada exitosamente.
   administration: administración
+  administrators: administradores
   attendants: asistentes
   back: atrás
   comission: comisión

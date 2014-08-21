@@ -9,6 +9,7 @@
     resources :user_meetings
     resources :meeting_groups
     resources :member_groups
+    resources :admin_groups, only: [:create, :destroy]
 
     resources :sessions, only: [:new, :create, :destroy]
 

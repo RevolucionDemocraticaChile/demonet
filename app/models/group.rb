@@ -25,7 +25,7 @@ class Group < ActiveRecord::Base
   has_many :admins, through: :admin_groups
 
   has_many :member_groups
-  has_many :members, through: :member_groups
+  has_many :members, through: :member_groups, source: :user
 
   validates :name,
     presence: true,

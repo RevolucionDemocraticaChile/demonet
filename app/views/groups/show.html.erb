@@ -15,11 +15,43 @@
         <% if can?(:destroy, @group) %>
           <%= link_to t(:destroy_group).humanize, group_path(@group), method: :delete, class: "btn btn-danger" %>
         <% end %>
+        <hr />
+        <%= form_for AdminGroup.new, remote: true, html: {class: "form-inline"} do |f| %>
+          <%= f.hidden_field :group_id, value: @group.id %>
+            <%= f.collection_select :user_id, User.all, :id, :name, {}, {class: "form-control"} %>
+          <div class="form-group">
+            <%= f.submit t(:add_administrator).humanize, class: "btn btn-primary" %>
+          </div>
+        <% end %>
+        <hr />
+        <%= form_for MemberGroup.new, remote: true, html: {class: "form-inline"} do |f| %>
+          <%= f.hidden_field :group_id, value: @group.id %>
+            <%= f.collection_select :user_id, User.all, :id, :name, {}, {class: "form-control"} %>
+          <div class="form-group">
+            <%= f.submit t(:add_member).humanize, class: "btn btn-primary" %>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>
 
   <div class="col-lg-8">
+
+    <h2><%= t(:administrators).humanize %></h2>
+
+    <ul id="group_admins_ul">
+      <% @group.admin_groups.each do |admin_group| %>
+        <%= render partial: "group_admin_li", locals: {admin_group: admin_group, removable: can?(:edit, @group) } %>
+      <% end %>
+    </ul>
+
+    <h2><%= t(:members).humanize %></h2>
+
+    <ul id="group_members_ul">
+      <% @group.member_groups.each do |member_group| %>
+        <%= render partial: "group_member_li", locals: {member_group: member_group, removable: can?(:edit, @group) } %>
+      <% end %>
+    </ul>
 
   </div>
 </div>

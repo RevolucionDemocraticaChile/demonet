@@ -11,6 +11,10 @@
 #  password_digest :string(255)
 #  remember_token  :string(255)
 #  admin           :boolean
+#  first_name      :string(255)
+#  second_name     :string(255)
+#  last_name       :string(255)
+#  rut             :string(255)
 #
 
 require 'rails_helper'

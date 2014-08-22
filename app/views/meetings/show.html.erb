@@ -82,12 +82,13 @@
           function Editor(input, preview) {
             this.update = function () {
               preview.innerHTML = markdown.toHTML(input.value);
+              // preview.html( markdown.toHTML(input.value() ));
             };
             input.editor = this;
             this.update();
           }
-          var $ = function (id) { return document.getElementById(id); };
-          new Editor($("minutes_textarea"), $("minutes_preview"));
+          // var $ = function (id) { return document.getElementById(id); };
+          new Editor(document.getElementById("minutes_textarea"), document.getElementById("minutes_preview"));
         </script>
 
         <div class="meeting_time">

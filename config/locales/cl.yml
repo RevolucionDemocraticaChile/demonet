@@ -39,6 +39,7 @@ cl:
   edit_meeting: editar reunión
   email: email
   error_creating_association: Hubo un error al crear la asociación.
+  finish_time: hora de término
   group: espacio
   groups: espacios
   has_no_meetings: no tiene reuniones
@@ -48,6 +49,7 @@ cl:
   member_of_territory: miembro de territorio
   member_of_group: miembro de espacio
   members: miembros
+  minutes: acta
   name: nombre
   new_group: nuevo espacio
   new_meeting: nueva reunión
@@ -69,6 +71,7 @@ cl:
   signin_first: Debes ingresar primero.
   signin_success: Has ingresado exitosamente.
   signout: salir
+  start_time: hora de inicio
   supporting_member: miembro adherente
   territories: territorios
   territory: territorio

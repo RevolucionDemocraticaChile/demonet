@@ -1,0 +1,35 @@
+.meeting_time {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #000000;
+  padding: 20px;
+  background: #bbbbbb;
+
+  text-align: center;
+
+  h2 {
+    font-variant: small-caps;
+    margin: 0;
+    margin-bottom: 0.5em;
+    padding: 0;
+  }
+
+  input.meeting_time_field {
+    line-height: 1em;
+    border: 1px solid #888888;
+    border-radius: 5px;
+  }
+}
+
+.meeting_minutes_field {
+  width: 100%;
+  resize: none;
+}
+
+#minutes_preview {
+  border: 5px outset #aaaaaa;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 20px;
+}

@@ -7,6 +7,12 @@
 #  desc       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  state      :string(255)
+#  minutes    :string(255)
+#  place      :string(255)
+#  title      :string(255)
+#  start      :datetime
+#  finish     :datetime
 #
 
 class Meeting < ActiveRecord::Base

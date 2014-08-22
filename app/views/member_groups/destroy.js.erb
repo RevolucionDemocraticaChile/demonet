@@ -1,1 +1,5 @@
-$("li[data-member-id='" + <%= @member_group.user_id %> + "']").remove();
+<% if @original_controller == "users" %>
+  $("li[data-group-id='" + <%= @member_group.group_id %> + "']").remove();
+<% elsif @original_controller == "groups" %>
+  $("li[data-member-id='" + <%= @member_group.user_id %> + "']").remove();
+<% end %>

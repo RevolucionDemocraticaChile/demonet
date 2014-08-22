@@ -2,5 +2,82 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.gravatar {
+#membered_groups_ul {
+  border: 1px solid #888888;
+  border-radius: 5px;
+  padding: 10px;
+  list-style-type: none;
+  line-height: 2.5em;
+  display: block;
+
+  li {
+    padding: 3px;
+    display: inline-block;
+
+    .membered_group {
+      border: 1px solid #aaaaaa;
+      border-radius: 2px;
+      background: #eeeeee;
+      padding: 3px;
+
+      button {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        color: #ffaaaa;
+
+        :hover {
+          color: #ff0000;
+        }
+      }
+
+      .glyphicon {
+        vertical-align: center;
+      }
+
+      .glyphicon-user {
+        color: #aaaaaa;
+      }
+    }
+
+    form {
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+}
+
+.member_status_panel_warning {
+  text-align: center;
+
+  strong {
+    display: block;
+    font-size: 1.5em;
+  }
+
+  small {
+    display: block;
+    margin-top: 0.1em;
+    margin-left: 2em;
+    margin-right: 2em;
+  }
+}
+
+.member_status_panel_success {
+  text-align: center;
+
+  strong {
+    display: block;
+    font-size: 1.5em;
+  }
+
+  small {
+    display: block;
+    margin-top: 0.1em;
+    margin-left: 2em;
+    margin-right: 2em;
+  }
 }

@@ -14,7 +14,7 @@ class MemberGroupsController < ApplicationController
           flash[:success] = t(:association_created_successfully)
           redirect_to root_path, notice: t(:association_created_successfully)
         end
-        format.js
+        format.js { @original_controller = params[:original_controller] }
       else
         @success = false
 
@@ -35,7 +35,7 @@ class MemberGroupsController < ApplicationController
         flash[:success] = t(:association_destroyed_successfully)
         redirect_to root_path, notice: t(:association_destroyed_successfully)
       end
-      format.js
+      format.js { @original_controller = params[:original_controller] }
     end
   end
 
@@ -46,7 +46,7 @@ class MemberGroupsController < ApplicationController
     end
 
     def member_group_params
-      params.require(:member_group).permit(:user_id, :group_id)
+      params.require(:member_group).permit(:user_id, :group_id, :original_controller)
     end
 
 end

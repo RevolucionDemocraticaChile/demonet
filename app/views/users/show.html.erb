@@ -10,7 +10,7 @@
 <div class="row">
 
   <div class="col-lg-2">
-    <% if can?(:edit, @user) || can?(:destoy, @user) %>
+    <% if can?(:edit, @user) || can?(:destroy, @user) %>
       <div class="alert alert-info admin-panel">
         <strong><%= t(:administration).humanize %></strong>
         <% if can?(:edit, @user) %>
@@ -19,6 +19,15 @@
         <% if can?(:destroy, @user) %>
           <%= link_to t(:destroy_user).humanize, user_path(@user), method: :delete, class: "btn btn-danger" %>
         <% end %>
+        <hr />
+        <%= form_for MemberGroup.new, remote: true, html: {class: "form-inline"} do |f| %>
+          <%= hidden_field_tag :original_controller, "users" %>
+          <%= f.hidden_field :user_id, value: @user.id %>
+          <%= f.collection_select :group_id, Group.all, :id, :name, {}, {class: "form-control"} %>
+          <div class="form-group">
+            <%= f.submit t(:add_group).humanize, class: "btn btn-primary" %>
+          </div>
+        <% end %>
       </div>
     <% end %>
     <% if @user.admin? %>
@@ -26,72 +35,79 @@
         <span class="glyphicon glyphicon-flash" > <strong><%= t(:administrator).humanize%></strong>
       </div>
     <% end %>
-    <% if recent_attendance_for(@user) >= 6 %>
-      <div class="alert alert-success text-center">
-        <strong><%= t(:active_member).humanize%></strong>
-      </div>
-    <% else %>
-      <div class="alert alert-warning text-center">
-        <strong><%= t(:supporting_member).humanize%></strong>
-      </div>
-    <% end %>
-    <hr />
-    <% @user.groups.each do |group| %>
-      <div class="alert alert-info text-center">
-        <%= t(:member_of_group).humanize %><br />
-        <strong><%= link_to group.name, group %></strong>
-      </div>
-    <% end %>
   </div>
+
 
   <div class="col-lg-8">
 
-    <p>
-      <strong><%= t(:username).humanize %>:</strong>
-      <%= @user.username %>
-    </p>
+    <div class="row">
 
-    <p>
-      <strong><%= t(:email).humanize %>:</strong>
-      <%= @user.email %>
-    </p>
+      <div class="col-sm-7">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= t(:user_information).humanize %></h3>
+          </div>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td class="text-right">
+                  <strong><%= t(:username).humanize %>:</strong>
+                </td>
+                <td>
+                  <%= @user.username %>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-right">
+                  <strong><%= t(:email).humanize %>:</strong>
+                </td>
+                <td>
+                  <%= @user.email %>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-right">
+                  <strong><%= t(:name).humanize %>:</strong>
+                </td>
+                <td>
+                  <%= @user.name %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-sm-5">
+        <% if recent_attendance_for(@user) >= 6 %>
+          <div class="alert alert-success member_status_panel_success">
+            <strong><span class="glyphicon glyphicon-user"></span> <%= t(:active_member).humanize%></strong>
+          </div>
+        <% else %>
+          <div class="alert alert-warning member_status_panel_warning">
+            <strong><span class="glyphicon glyphicon-exclamation-sign"></span> <%= t(:supporting_member).humanize%></strong><br />
+            <small>
+              <%= t(:need_more_attendances, number: ApplicationHelper::MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP) %>
+            </small>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+
+
+
+
 
     <h2><%= t(:groups).humanize %></h2>
 
-    <table class="table table-striped table-bordered">
-      <tbody>
-        <% @user.member_groups.each do |member_group| %>
-        <% group = member_group.group %>
-          <tr>
-            <td>
-              <%= link_to group.name, group %><% if @user.agroups.include?(group) %> <strong>(admin)</strong><% end %>
-            </td>
-            <% if current_user.admin? %>
-              <td class="text-center">
-                <%= link_to t(:destroy).humanize, member_group, method: :delete, data: { confirm: t(:are_you_sure).humanize }, class: "btn btn-danger" %>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-    <% if current_user.admin? %>
-      <%= form_for @member_group, html: { class: "form-inline" } do |f| %>
-        <%= f.hidden_field :user_id, value: @user.id %>
-        <div class="form-group">
-          <label class="sr-only"><%= t(:group_name).humanize %></label>
-          <select name="member_group[group_id]" class="form-control">
-            <% Group.all.each do |group| %>
-              <% if !@user.groups.include?(group) %>
-                <option value="<%= group.id %>"><%= group.name %></option>
-              <% end %>
-            <% end %>
-          </select>
-        </div>
-        <%= f.submit t(:add_group).humanize, class: "btn btn-primary" %>
+    <ul id="membered_groups_ul">
+      <% @user.member_groups.each do |member_group| %>
+        <%= render partial: "membered_group_li", locals: {member_group: member_group, removable: can?(:edit, @user) } %>
       <% end %>
-    <% end %>
+    </ul>
+
+
 
 
     <h2><%= t(:meetings).humanize %></h2>

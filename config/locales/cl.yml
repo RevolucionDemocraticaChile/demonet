@@ -55,6 +55,7 @@ cl:
   new_meeting: nueva reunión
   new_territory: nuevo territorio
   new_user: nuevo usuario
+  need_more_attendances: "Necesitas más de %{number} asistencias recientes para ser miembro activo."
   not_authorized: No estás autorizado.
   not_signed_in: No estás ingresado.
   password: contraseña
@@ -81,6 +82,7 @@ cl:
   title: título
   type: tipo
   user: usuario
+  user_information: información del usuario
   user_created_successfully: Usuario creado exitosamente.
   user_destroyed_successfully: Usuario eliminado exitosamente.
   user_updated_successfully: Usuario actualizado exitosamente.

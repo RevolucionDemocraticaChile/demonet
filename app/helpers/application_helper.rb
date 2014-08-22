@@ -8,4 +8,6 @@ module ApplicationHelper
   #   groups.join(',')
   # end
 
+  MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP = 6
+
 end

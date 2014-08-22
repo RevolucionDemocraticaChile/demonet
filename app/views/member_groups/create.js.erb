@@ -1,5 +1,9 @@
 <% if @success %>
-  $("#group_members_ul").append("<%= escape_javascript(render partial: 'groups/group_member_li', locals: {member_group: @member_group, removable: true}) %>");
+  <% if @original_controller == "users" %>
+    $("#membered_groups_ul").append("<%= escape_javascript(render partial: 'users/membered_group_li', locals: {member_group: @member_group, removable: true}) %>");
+  <% elsif @original_controller == "groups" %>
+    $("#group_members_ul").append("<%= escape_javascript(render partial: 'groups/group_member_li', locals: {member_group: @member_group, removable: true}) %>");
+  <% end %>
 <% else %>
   alert("Error");
 <% end %>

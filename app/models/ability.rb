@@ -11,13 +11,46 @@ class Ability
 
     can :index, Group
     can :show,  Group
+    can :edit,  Group do |group|
+      user.agroups.include?(group)
+    end
+
+    # Meetings
 
     can :index, Meeting
     can :show,  Meeting
 
+    can [:new, :create], Meeting do |meeting|
+      user.agroups.any?
+    end
+
+    can :edit,  Meeting do |meeting|
+      ans = false
+      user.agroups.each do |group|
+        if meeting.groups.include?(group)
+          ans = true
+        end
+      end
+      ans
+    end
+
+
+    # MeetingGroups
+
+    can :create, MeetingGroup do |meeting_group|
+      can? :edit, meeting_group.meeting
+    end
+
+    can :destroy, MeetingGroup do |meeting_group|
+      can? :edit, meeting_group.meeting && group.admins.include?(user)
+    end
+
     if user.admin?
       can :manage, :all
     end
+
+
+    # UserMeetings
 
     # Define abilities for the passed in user here. For example:
     #

@@ -9,19 +9,8 @@
     <% if can?(:edit, @meeting) || can?(:destroy, @meeting) %>
       <div class="alert alert-info admin-panel">
         <strong><%= t(:administration).humanize %></strong>
-        <% if can?(:edit, @meeting) %>
-          <%= link_to t(:edit_meeting).humanize, edit_meeting_path(@meeting), class: "btn btn-primary" %>
-        <% end %>
         <% if can?(:destroy, @meeting) %>
           <%= link_to t(:destroy_meeting).humanize, meeting_path(@meeting), method: :delete, class: "btn btn-danger", data: { confirm: t(:are_you_sure).humanize } %>
-        <% end %>
-        <hr />
-        <%= form_for MeetingGroup.new, remote: true, html: {class: "form-inline"} do |f| %>
-          <%= f.hidden_field :meeting_id, value: @meeting.id %>
-            <%= f.collection_select :group_id, Group.all, :id, :name, {}, {class: "form-control"} %>
-          <div class="form-group">
-            <%= f.submit t(:add_group).humanize, class: "btn btn-primary" %>
-          </div>
         <% end %>
         <hr />
         <%= form_for UserMeeting.new, remote: true, html: {class: "form-inline"} do |f| %>
@@ -44,12 +33,48 @@
       <%= @meeting.desc %>
     </p>
 
-    <h2><%= t(:groups).humanize %></h2>
+    <h2><%= t(:organized_by).humanize %></h2>
 
     <ul id="organizing_groups_ul">
       <% @meeting.meeting_groups.each do |meeting_group| %>
-        <%= render partial: "organizing_group_li", locals: {meeting_group: meeting_group, removable: can?(:edit, @meeting) } %>
+        <!-- <%= render partial: "organizing_group_li", locals: {meeting_group: meeting_group, removable: can?(:edit, @meeting) } %> -->
+        <li data-group-id="<%= meeting_group.group_id %>">
+          <div class="form-inline">
+            <div class="input-group">
+              <div class="form-control">
+                <%= link_to meeting_group.group.name, meeting_group.group %>
+              </div>
+
+              <% if can?(:destroy,meeting_group) %>
+                <span class="input-group-btn">
+                  <%= form_for meeting_group, html: { method: :delete, class:"form-inline" }, remote: true do |f| %>
+                    <button name="commit" type="submit" class="btn btn-danger">
+                      <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                  <% end %>
+                </span>
+
+              <% end %>
+            </div>
+          </div>
+        </li>
       <% end %>
+      <% if can? :edit, @meeting %>
+        <li>
+          <%= form_for MeetingGroup.new, remote: true, html: {class: "form-inline", id: "add_organizing_group"} do |f| %>
+            <%= f.hidden_field :meeting_id, value: @meeting.id %>
+              <div class="input-group">
+                <%= f.text_field :group_id, class: "form-control", onfocus: "alert('asdf')" %>
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit">
+                    <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                </span>
+              </div>
+          <% end %>
+        </li>
+      <% end %>
+
     </ul>
 
     <h2><%= t(:attendants).humanize %></h2>

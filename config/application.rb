@@ -21,7 +21,5 @@ module Demonet
     config.i18n.default_locale = :cl
 
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-
-    DEMONET_VERSION = 0.1.0
   end
 end

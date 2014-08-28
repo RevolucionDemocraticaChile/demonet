@@ -42,7 +42,9 @@ class Ability
     end
 
     can :destroy, MeetingGroup do |meeting_group|
-      can? :edit, meeting_group.meeting && group.admins.include?(user)
+      meeting = meeting_group.meeting
+      group   = meeting_group.group
+      can?(:edit, meeting) && group.admins.include?(user)
     end
 
     if user.admin?

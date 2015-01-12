@@ -15,9 +15,10 @@
 #  second_name     :string(255)
 #  last_name       :string(255)
 #  rut             :string(255)
-#
 
 class User < ActiveRecord::Base
+  include RunCl::ActAsRun
+
   USERNAME_MAX_LENGTH = 50
   EMAIL_MAX_LENGTH    = 50
   NAME_MAX_LENGTH     = 50
@@ -51,6 +52,8 @@ class User < ActiveRecord::Base
   validates :password,
     length:     { minimum: PASSWORD_MIN_LENGTH }
 
+  has_run_cl :rut, uniq_run: true, run: true
+
   # Hooks:
 
   before_create :create_remember_token
@@ -58,6 +61,7 @@ class User < ActiveRecord::Base
   before_save do
     self.username = username.downcase
     self.email    = email.downcase
+    self.rut      = Run.format(rut)
   end
 
   has_secure_password

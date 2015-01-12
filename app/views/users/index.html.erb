@@ -20,6 +20,7 @@
           <th><%= t(:name).humanize %></th>
           <th><%= t(:email).humanize %></th>
           <th><%= t(:username).humanize %></th>
+          <th><%= t(:rut).humanize %></th>
           <% if current_user.admin? %>
             <th><%= t(:recent_attendances).humanize %></th>
             <th><%= t(:active).humanize %>?</th>
@@ -33,6 +34,7 @@
             <td><%= link_to user.name, user %></td>
             <td><%= user.email %></td>
             <td><%= user.username %></td>
+            <td><%= user.rut %></td>
             <% if current_user.admin? %>
               <td class="text-center">
                 <%= user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>

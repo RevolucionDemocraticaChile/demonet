@@ -15,6 +15,8 @@ gem 'bcrypt',          '~> 3.1.7'
 gem 'cancancan',       '~> 1.9'
 gem 'annotate',        '~> 2.6.5'
 gem 'rb-readline'
+gem 'run_cl',          '~> 1.6'
+
 
 group :production do
   gem 'pg',             '~> 0.17.1'

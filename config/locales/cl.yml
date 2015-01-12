@@ -44,6 +44,7 @@ cl:
   groups: espacios
   has_no_meetings: no tiene reuniones
   invalid_email_pass: Combinación email/clave inválida.
+  invalid_rut: Rut inválido
   meeting: reunión
   meetings: reuniones
   member_of_territory: miembro de territorio
@@ -63,6 +64,7 @@ cl:
   profile: perfil
   recent_attendances: asistencias recientes
   recent_meetings: reuniones recientes
+  rut: rut
   save: guardar
   select_territory: seleccionar territorio
   select_user: seleccionar usuario

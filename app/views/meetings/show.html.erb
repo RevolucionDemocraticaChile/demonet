@@ -27,7 +27,7 @@
         <%= form_for UserMeeting.new, remote: true, html: {class: "form-inline"} do |f| %>
           <%= f.hidden_field :meeting_id, value: @meeting.id %>
           <!-- <div class="form-group"> -->
-            <%= f.collection_select :user_id, User.all, :id, :name, {}, {class: "form-control"} %>
+            <%= f.collection_select :user_id, User.all, :id, :full_name, {}, {class: "form-control"} %>
           <!-- </div> -->
           <div class="form-group">
             <%= f.submit t(:add_attendant).humanize, class: "btn btn-primary" %>

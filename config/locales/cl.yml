@@ -2,6 +2,7 @@ cl:
   account: cuenta
   active: activo
   active_member: miembro activo
+  action: acción
   add: añadir
   add_meeting: agregar reunión
   add_member: agregar miembro
@@ -40,11 +41,13 @@ cl:
   email: email
   error_creating_association: Hubo un error al crear la asociación.
   finish_time: hora de término
+  first_name: Primer nombre
   group: espacio
   groups: espacios
   has_no_meetings: no tiene reuniones
   invalid_email_pass: Combinación email/clave inválida.
   invalid_rut: Rut inválido
+  last_name: Apellido
   meeting: reunión
   meetings: reuniones
   member_of_territory: miembro de territorio
@@ -66,6 +69,7 @@ cl:
   recent_meetings: reuniones recientes
   rut: rut
   save: guardar
+  second_name: Segundo nombre
   select_territory: seleccionar territorio
   select_user: seleccionar usuario
   send: enviar
@@ -282,3 +286,9 @@ cl:
       long: ! '%A %d de %B de %Y %H:%M'
       short: ! '%d de %b %H:%M'
     pm: pm
+  activerecord:
+    attributes:
+      user:
+        first_name: "Primer nombre"
+        second_name: "Segundo nombre"
+        last_name: "Apellido"

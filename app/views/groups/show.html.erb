@@ -18,7 +18,7 @@
         <hr />
         <%= form_for AdminGroup.new, remote: true, html: {class: "form-inline"} do |f| %>
           <%= f.hidden_field :group_id, value: @group.id %>
-            <%= f.collection_select :user_id, User.all, :id, :name, {}, {class: "form-control"} %>
+            <%= f.collection_select :user_id, User.all, :id, :full_name, {}, {class: "form-control"} %>
           <div class="form-group">
             <%= f.submit t(:add_administrator).humanize, class: "btn btn-primary" %>
           </div>
@@ -27,7 +27,7 @@
         <%= form_for MemberGroup.new, remote: true, html: {class: "form-inline"} do |f| %>
           <%= hidden_field_tag :original_controller, "groups" %>
           <%= f.hidden_field :group_id, value: @group.id %>
-          <%= f.collection_select :user_id, User.all, :id, :name, {}, {class: "form-control"} %>
+          <%= f.collection_select :user_id, User.all, :id, :full_name, {}, {class: "form-control"} %>
           <div class="form-group">
             <%= f.submit t(:add_member).humanize, class: "btn btn-primary" %>
           </div>

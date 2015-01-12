@@ -19,11 +19,13 @@
 class User < ActiveRecord::Base
   include RunCl::ActAsRun
 
-  USERNAME_MAX_LENGTH = 50
-  EMAIL_MAX_LENGTH    = 50
-  NAME_MAX_LENGTH     = 50
-  PASSWORD_MIN_LENGTH = 6
-  VALID_EMAIL_REGEX   = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  USERNAME_MAX_LENGTH    = 50
+  EMAIL_MAX_LENGTH       = 50
+  FIRSTNAME_MAX_LENGTH  = 50
+  SECONDNAME_MAX_LENGTH = 50
+  LASTNAME_MAX_LENGTH   = 50
+  PASSWORD_MIN_LENGTH    = 6
+  VALID_EMAIL_REGEX      = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   has_many :member_groups
   has_many :groups, through: :member_groups
@@ -45,9 +47,17 @@ class User < ActiveRecord::Base
     length:     { maximum: EMAIL_MAX_LENGTH },
     format:     { with: VALID_EMAIL_REGEX   }
 
-  validates :name,
+  validates :first_name,
     presence:   true,
-    length:     { maximum: NAME_MAX_LENGTH }
+    length:     { maximum: FIRSTNAME_MAX_LENGTH }
+
+  validates :second_name,
+    presence:   true,
+    length:     { maximum: SECONDNAME_MAX_LENGTH}
+
+  validates :last_name,
+    presence:   true,
+    length:     { maximum: LASTNAME_MAX_LENGTH }
 
   validates :password,
     length:     { minimum: PASSWORD_MIN_LENGTH }
@@ -76,6 +86,10 @@ class User < ActiveRecord::Base
 
   def User.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
   end
 
   private

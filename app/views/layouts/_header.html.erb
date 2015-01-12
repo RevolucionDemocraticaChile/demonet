@@ -22,7 +22,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <% if signed_in? %>
-          <li><%= link_to current_user.name, current_user %></li>
+          <li><%= link_to current_user.full_name, current_user %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t(:account).humanize %> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">

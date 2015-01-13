@@ -39,6 +39,8 @@ cl:
   edit_group: editar espacio
   edit_meeting: editar reunión
   email: email
+  email_password_recovery: Email enviado con instrucciones de reinicio de contraseña
+  email_not_found: Email no encontrado
   error_creating_association: Hubo un error al crear la asociación.
   finish_time: hora de término
   first_name: Primer nombre
@@ -64,6 +66,8 @@ cl:
   not_signed_in: No estás ingresado.
   password: contraseña
   password_confirmation: confirmar contraseña
+  password_reset: Contraseña ha sido reseteada
+  password_expired: El plazo para cambiar la contraseña ha expirado
   profile: perfil
   recent_attendances: asistencias recientes
   recent_meetings: reuniones recientes

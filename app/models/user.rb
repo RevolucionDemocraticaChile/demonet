@@ -18,7 +18,7 @@
 
 class User < ActiveRecord::Base
   include RunCl::ActAsRun
-  attr_accessor :reset_token
+  attr_accessor :remember_token, :reset_token
 
   USERNAME_MAX_LENGTH    = 50
   EMAIL_MAX_LENGTH       = 50
@@ -68,8 +68,6 @@ class User < ActiveRecord::Base
 
   # Hooks:
 
-  before_create :create_remember_token
-
   before_save do
     self.username = username.downcase
     self.email    = email.downcase
@@ -82,12 +80,28 @@ class User < ActiveRecord::Base
     admin
   end
 
-  def User.new_remember_token
+  def remember
+    puts "algo"
+    t = User.digest( User.new_token )
+    update_attribute(:remember_token,  t)
+  end
+
+  def forget
+    puts "forget"
+    update_attribute(:remember_token, nil)
+  end
+
+  def User.new_token
     SecureRandom.urlsafe_base64
   end
 
   def User.digest(token)
-    Digest::SHA1.hexdigest(token.to_s)
+    puts 'token'
+    puts token
+
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+      BCrypt::Engine.cost
+    BCrypt::Password.create(token, cost: cost)
   end
 
   def full_name
@@ -95,7 +109,7 @@ class User < ActiveRecord::Base
   end
 
   def create_reset_digest
-    self.reset_token = User.new_remember_token
+    self.reset_token = User.new_token
     update_attribute(:reset_digest,  User.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
   end
@@ -109,14 +123,16 @@ class User < ActiveRecord::Base
   end
 
   def authenticated?(token)
-    return false if token.nil?
+    return false if remember_token.nil?
+    BCrypt::Password.new(remember_token).is_password?(token)
+  end
+
+  def authenticated_reset?(token)
+    puts 'reset token'
+    puts reset_digest
+    return false if reset_digest.nil?
     BCrypt::Password.new(reset_digest).is_password?(token)
   end
 
-  private
-
-    def create_remember_token
-      self.remember_token = User.digest(User.new_remember_token)
-    end
 
 end

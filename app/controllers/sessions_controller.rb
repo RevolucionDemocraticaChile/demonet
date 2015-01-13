@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
       # Sign in and redirect to user show
       flash[:success] = t(:signin_success)
       sign_in user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to user
     else
       flash.now[:error] = t(:invalid_email_pass)
@@ -22,7 +23,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    sign_out
+    sign_out if signed_in?
     redirect_to ingresar_path
   end
 

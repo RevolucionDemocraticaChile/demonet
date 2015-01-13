@@ -18,6 +18,7 @@
 
 class User < ActiveRecord::Base
   include RunCl::ActAsRun
+  attr_accessor :reset_token
 
   USERNAME_MAX_LENGTH    = 50
   EMAIL_MAX_LENGTH       = 50
@@ -60,6 +61,7 @@ class User < ActiveRecord::Base
     length:     { maximum: LASTNAME_MAX_LENGTH }
 
   validates :password,
+    presence:   true,
     length:     { minimum: PASSWORD_MIN_LENGTH }
 
   has_run_cl :rut, uniq_run: true, run: true
@@ -89,7 +91,26 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{self.first_name} #{self.last_name}"
+    "#{first_name} #{last_name}"
+  end
+
+  def create_reset_digest
+    self.reset_token = User.new_remember_token
+    update_attribute(:reset_digest,  User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver
+  end
+
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
+  def authenticated?(token)
+    return false if token.nil?
+    BCrypt::Password.new(reset_digest).is_password?(token)
   end
 
   private

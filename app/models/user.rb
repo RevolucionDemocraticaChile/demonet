@@ -81,14 +81,12 @@ class User < ActiveRecord::Base
   end
 
   def remember
-    puts "algo"
-    t = User.digest( User.new_token )
-    update_attribute(:remember_token,  t)
+    self.remember_token = User.digest( User.new_token )
+    update_column(:remember_token, remember_token)
   end
 
   def forget
-    puts "forget"
-    update_attribute(:remember_token, nil)
+    update_column(:remember_token, nil)
   end
 
   def User.new_token
@@ -96,9 +94,6 @@ class User < ActiveRecord::Base
   end
 
   def User.digest(token)
-    puts 'token'
-    puts token
-
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
       BCrypt::Engine.cost
     BCrypt::Password.create(token, cost: cost)
@@ -128,11 +123,8 @@ class User < ActiveRecord::Base
   end
 
   def authenticated_reset?(token)
-    puts 'reset token'
-    puts reset_digest
     return false if reset_digest.nil?
     BCrypt::Password.new(reset_digest).is_password?(token)
   end
-
 
 end

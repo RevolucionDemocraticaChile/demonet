@@ -31,9 +31,8 @@ module SessionsHelper
   end
 
   def remember(user)
-    puts 'remember user ......'
-    puts user.inspect
     user.remember
+    puts user.errors.inspect
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end

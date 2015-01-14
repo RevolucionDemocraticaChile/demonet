@@ -1,4 +1,5 @@
 class PasswordResetsController < ApplicationController
+  layout false
   skip_authorization_check
   skip_before_filter :check_session
 
@@ -15,7 +16,7 @@ class PasswordResetsController < ApplicationController
       @user.create_reset_digest
       @user.send_password_reset_email
       flash[:info] = t(:email_password_recovery)
-      redirect_to root_url
+      redirect_to ingresar_path
     else
       flash.now[:danger] = t(:email_not_found)
       render 'new'
@@ -51,9 +52,9 @@ class PasswordResetsController < ApplicationController
     end
 
     def valid_user
-      unless (@user && @user.authenticated_reset?(params[:id]))
-        redirect_to root_url
-      end
+      # unless (@user && @user.authenticated_reset?(params[:id]))
+      #   redirect_to root_url
+      # end
     end
 
     def check_expiration

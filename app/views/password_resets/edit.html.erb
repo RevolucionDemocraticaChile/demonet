@@ -1,31 +1,64 @@
-<% provide(:title, 'Reset password') %>
-<h1>Reset password</h1>
+<!DOCTYPE html>
+<html lang="es" >
+  <head>
+    <title>Reset Contraseña</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
+  <body style="background-color: #eee">
 
-    <% if @user.errors.any? %>
-      <div id="error_explanation" class="alert alert-danger">
-        <h2><%= pluralize(@user.errors.count, "error") %>:</h2>
+    <div class="container">
 
-        <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+      <div class="col-md-6 col-md-offset-3">
+
+        <%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
+          <div class="center">
+            <%= link_to image_tag("RD-logo.png") %>
+
+            <% flash.each do |key, value| %>
+              <div class="form-control alert alert-<%= key %> <%= "alert-danger" if key == "error" %> " role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <%= value %>
+              </div>
+            <% end %>
+            <h2 class="form-signin-heading"><%= t(:password_recovery).humanize %></h2>
+          </div>
+
+          <% if @user.errors.any? %>
+            <div id="error_explanation" class="alert alert-danger">
+              <h2><%= pluralize(@user.errors.count, "error") %>:</h2>
+
+              <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <%= hidden_field_tag :email, @user.email %>
+
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control' %>
+
+          <%= f.label :password_confirmation, "Confirmation" %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+          <%= f.submit "Actualizar password", class: "btn btn-primary" %>
         <% end %>
-        </ul>
+        <%= debug(params) if Rails.env.development? %>
       </div>
-    <% end %>
 
-      <%= hidden_field_tag :email, @user.email %>
+    </div> <!-- /container -->
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+  </body>
+</html>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-
-      <%= f.submit "Update password", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>

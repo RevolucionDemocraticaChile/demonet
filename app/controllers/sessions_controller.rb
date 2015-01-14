@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
-
+  layout false
   skip_before_filter :check_session, only: [:new, :create]
-
   skip_authorization_check
 
   def new

@@ -1,13 +1,45 @@
-<% provide(:title, "Reseteo de contraseña") %>
-<h1>Reseteo  de contraseña</h1>
+<!DOCTYPE html>
+<html lang="es" >
+  <head>
+    <title>Reset Contraseña</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(:password_reset, url: password_resets_path) do |f| %>
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+  <body style="background-color: #eee">
 
-      <%= f.submit "Submit", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
+    <div class="container">
+
+      <div class="col-md-6 col-md-offset-3">
+
+        <%= form_for(:password_reset, url: password_resets_path) do |f| %>
+          <div class="center">
+            <%= link_to image_tag("RD-logo.png") %>
+
+            <% flash.each do |key, value| %>
+              <div class="form-control alert alert-<%= key %> <%= "alert-danger" if key == "error" %> " role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+                <%= value %>
+              </div>
+            <% end %>
+            <h2 class="form-signin-heading"><%= t(:password_recovery).humanize %></h2>
+          </div>
+
+          <%= f.email_field :email, class: 'form-control', placeholder: t(:email).humanize %>
+          <%= f.submit "Submit", class: "btn btn-primary btn-block signup-btn" %>
+
+        <% end %>
+        <%= debug(params) if Rails.env.development? %>
+      </div>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>

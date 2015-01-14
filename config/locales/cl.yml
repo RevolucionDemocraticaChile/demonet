@@ -8,6 +8,7 @@ cl:
   add_member: agregar miembro
   add_territory: agregar territorio
   add_group: agregar espacio
+  add_user: agregar usuario
   add_user_to_territory: agregar usuario a territorio
   add_administrator: agregar administrador
   administrator: administrador
@@ -28,7 +29,7 @@ cl:
   comission: comisión
   create: crear
   date_lit: fecha
-  demonet: demonet
+  demonet: Demonet - Revolución Democrática
   description: descripción
   destroy: eliminar
   destroy_user: eliminar usuario
@@ -50,6 +51,7 @@ cl:
   invalid_email_pass: Combinación email/clave inválida.
   invalid_rut: Rut inválido
   last_name: Apellido
+  list: Lista
   meeting: reunión
   meetings: reuniones
   member_of_territory: miembro de territorio
@@ -68,6 +70,7 @@ cl:
   password_confirmation: confirmar contraseña
   password_reset: Contraseña ha sido reseteada
   password_expired: El plazo para cambiar la contraseña ha expirado
+  password_recovery: recuperar contraseña
   profile: perfil
   recent_attendances: asistencias recientes
   recent_meetings: reuniones recientes

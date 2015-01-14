@@ -51,9 +51,6 @@ class PasswordResetsController < ApplicationController
     end
 
     def valid_user
-      puts params.inspect
-      puts 'user'
-      puts @user.inspect
       unless (@user && @user.authenticated_reset?(params[:id]))
         redirect_to root_url
       end

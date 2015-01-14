@@ -16,7 +16,7 @@ gem 'cancancan',       '~> 1.9'
 gem 'annotate',        '~> 2.6.5'
 gem 'rb-readline'
 gem 'run_cl',          '~> 1.6'
-
+gem 'jquery-datatables-rails', '~> 3.1.1'
 
 group :production do
   gem 'pg',             '~> 0.17.1'

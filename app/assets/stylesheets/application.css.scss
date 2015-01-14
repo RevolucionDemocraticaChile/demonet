@@ -10,8 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require dataTables/jquery.dataTables
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require dataTables/extras/dataTables.tableTools
  *= require_self
+ *= require_tree .
  */
 
 @import "bootstrap-sprockets";
@@ -694,4 +697,13 @@ a.botonera{
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
   color: #FFEFCC;
+}
+
+/** datatable */
+table.dataTable.no-footer {
+  border-bottom: 1px solid #FFF;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0;
+  margin-left: 0;
 }

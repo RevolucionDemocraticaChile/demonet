@@ -28,6 +28,7 @@ group	:development, :test do
   gem 'sqlite3'
   gem 'guard-rspec', '~> 4.3.1'
   gem 'spring'
+  gem 'awesome_print'
 end
 
 group :test do

@@ -83,6 +83,7 @@ h1 {
   margin-left: 80px;
   padding: 15px 15px;
   font-size: 13px;
+  color: #fff;
 }
 
 
@@ -691,13 +692,6 @@ a.botonera{
   color: #fff;
 }
 
-.navbar-default .navbar-brand {
-  color: #FFEFCC /*#D7980F; */
-}
-
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
   color: #FFEFCC;
-}
-.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-  color: #FFF;
 }

@@ -8,7 +8,8 @@ class UsersController < ApplicationController
     @from = params['from'] || DateTime.now.to_date - 12.months
     @to = params['to'] || DateTime.now.to_date
     @n = params['n'] || 12
-    @users = User.all
+    @labels = ['default', 'primary', 'success', 'info', 'warning', 'danger']
+    @users = User.eager_load(:groups, :agroups).all
   end
 
   # GET /users/1

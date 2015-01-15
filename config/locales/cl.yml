@@ -11,6 +11,7 @@ cl:
   add_user: agregar usuario
   add_user_to_territory: agregar usuario a territorio
   add_administrator: agregar administrador
+  admin_group: administrador de espacio
   administrator: administrador
   are_you_sure: Estás seguro?
   add_attendant: agregar asistente

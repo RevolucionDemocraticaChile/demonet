@@ -27,6 +27,8 @@
                 <th><%= t(:last_name).humanize %></th>
                 <th><%= t(:email).humanize %></th>
                 <th><%= t(:rut).humanize %></th>
+                <th><%= t(:admin_group).humanize %></th>
+                <th><%= t(:member_of_group).humanize %></th>
                 <% if current_user.admin? %>
                   <th><%= t(:recent_attendances).humanize %></th>
                   <th><%= t(:active).humanize %>?</th>
@@ -43,6 +45,16 @@
                   <td><%= user.last_name %></td>
                   <td><%= user.email %></td>
                   <td><%= user.rut %></td>
+                  <td>
+                    <% user.agroups.each do |g| %>
+                      <span class="label label-<%=@labels.sample%>"><%= g.name %></span>
+                    <% end %>
+                  </td>
+                  <td>
+                    <% user.groups.each do |g| %>
+                      <span class="label label-primary"><%= g.name %></span>
+                    <% end %>
+                  </td>
                   <% if current_user.admin? %>
                     <td class="text-center">
                       <% asistances = user.meetings.where(date: (@from)..(@to)).count %>

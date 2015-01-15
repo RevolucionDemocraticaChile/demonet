@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def index
     @from = params['from'] || DateTime.now.to_date - 12.months
     @to = params['to'] || DateTime.now.to_date
-    @n = params['n'].to_i || 12
+    @n = params['n'] || 12
     @users = User.all
   end
 

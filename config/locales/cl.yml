@@ -60,6 +60,7 @@ cl:
   members: miembros
   minutes: acta
   name: nombre
+  names: nombres
   new_group: nuevo espacio
   new_meeting: nueva reunión
   new_territory: nuevo territorio

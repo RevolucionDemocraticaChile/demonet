@@ -83,6 +83,7 @@
           "mColumns": [3],
           "bHeader": false,
           "sNewLine": ",",
+          "oSelectorOpts": { filter: 'applied', order: 'current' },
           "fnComplete": function(nButton, oConfig, flash, text) {
             var lines = text.split(oConfig.sNewLine).length;
             if (oConfig.bHeader) lines--;

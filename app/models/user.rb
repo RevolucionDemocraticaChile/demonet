@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  username        :string(255)
 #  email           :string(255)
 #  name            :string(255)
 #  created_at      :datetime
@@ -20,7 +19,6 @@ class User < ActiveRecord::Base
   include RunCl::ActAsRun
   attr_accessor :remember_token, :reset_token
 
-  USERNAME_MAX_LENGTH    = 50
   EMAIL_MAX_LENGTH       = 50
   FIRSTNAME_MAX_LENGTH  = 50
   SECONDNAME_MAX_LENGTH = 50
@@ -36,11 +34,6 @@ class User < ActiveRecord::Base
 
   has_many :user_meetings
   has_many :meetings, through: :user_meetings
-
-  validates :username,
-    presence:   true,
-    uniqueness: { case_sensitive: false },
-    length:     { maximum: USERNAME_MAX_LENGTH }
 
   validates :email,
     presence:   true,
@@ -69,7 +62,6 @@ class User < ActiveRecord::Base
   # Hooks:
 
   before_save do
-    self.username = username.downcase
     self.email    = email.downcase
     self.rut      = Run.format(rut)
   end

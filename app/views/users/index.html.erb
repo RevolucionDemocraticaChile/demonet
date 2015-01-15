@@ -25,7 +25,6 @@
                 <th><%= t(:second_name).humanize %></th>
                 <th><%= t(:last_name).humanize %></th>
                 <th><%= t(:email).humanize %></th>
-                <th><%= t(:username).humanize %></th>
                 <th><%= t(:rut).humanize %></th>
                 <% if current_user.admin? %>
                   <th><%= t(:recent_attendances).humanize %></th>
@@ -42,7 +41,6 @@
                   <td><%= user.second_name %></td>
                   <td><%= user.last_name %></td>
                   <td><%= user.email %></td>
-                  <td><%= user.username %></td>
                   <td><%= user.rut %></td>
                   <% if current_user.admin? %>
                     <td class="text-center">

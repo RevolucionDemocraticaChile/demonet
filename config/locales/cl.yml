@@ -99,7 +99,6 @@ cl:
   user_created_successfully: Usuario creado exitosamente.
   user_destroyed_successfully: Usuario eliminado exitosamente.
   user_updated_successfully: Usuario actualizado exitosamente.
-  username: nombre de usuario
   users: usuarios
   welcome: bienvenido
   date:

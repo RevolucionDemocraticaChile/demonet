@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  username        :string(255)
 #  email           :string(255)
 #  name            :string(255)
 #  created_at      :datetime
@@ -21,12 +20,11 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  before { @user = User.new(username: "asdf", email: "asdf@foo.com", name: "asdf",
+  before { @user = User.new(email: "asdf@foo.com", name: "asdf",
     password: "thepass", password_confirmation: "thepass") }
 
   subject { @user }
 
-  it { should respond_to(:username) }
   it { should respond_to(:email) }
   it { should respond_to(:name) }
   it { should respond_to(:password_digest) }
@@ -36,11 +34,6 @@ RSpec.describe User, type: :model do
   it { should respond_to(:authenticate) }
 
   it { should be_valid }
-
-  describe "when username is not present" do
-    before { @user.username = " " }
-    it { should_not be_valid }
-  end
 
   describe "when email is not present" do
     before { @user.email = " " }
@@ -53,11 +46,6 @@ RSpec.describe User, type: :model do
   end
 
   # length validation
-
-  describe "when username is too long" do
-    before { @user.username = "a" * (User::USERNAME_MAX_LENGTH+1) }
-    it { should_not be_valid }
-  end
 
   describe "when email is too long" do
     before { @user.email = "a" * (User::EMAIL_MAX_LENGTH+1) }
@@ -93,28 +81,9 @@ RSpec.describe User, type: :model do
 
   # Uniqueness validation
 
-  describe "when username is already taken" do
-    before do
-      user_with_same_username = User.new(username: @user.username, email:"asdf@aasdfs.asa", name: "asd", password: "thepass1", password_confirmation: "thepass1")
-      user_with_same_username.save
-    end
-
-    it { should_not be_valid }
-  end
-
-  describe "when username is already taken" do
-    before do
-      user_with_same_username = User.new(username: @user.username, email:"asdf@aasdfs.asa", name: "asd", password: "thepass1", password_confirmation: "thepass1")
-      user_with_same_username.username = @user.username.upcase
-      user_with_same_username.save
-    end
-
-    it { should_not be_valid }
-  end
-
   describe "when email is already taken" do
     before do
-      user_with_same_email = User.new(username: "76245", email:@user.email, name: "asda", password: "thepass1", password_confirmation: "thepass1")
+      user_with_same_email = User.new(email:@user.email, name: "asda", password: "thepass1", password_confirmation: "thepass1")
       user_with_same_email.save
     end
 
@@ -123,7 +92,7 @@ RSpec.describe User, type: :model do
 
   describe "when email is already taken" do
     before do
-      user_with_same_email = User.new(username: "76245", email:@user.email, name: "asda", password: "thepass1", password_confirmation: "thepass1")
+      user_with_same_email = User.new(email:@user.email, name: "asda", password: "thepass1", password_confirmation: "thepass1")
       user_with_same_email.email = @user.email.upcase
       user_with_same_email.save
     end
@@ -135,7 +104,7 @@ RSpec.describe User, type: :model do
 
   describe "when password is not present" do
     before do
-      @user = User.new(username: "asdf", email: "asdf@foo.com", name: "asdf",
+      @user = User.new(email: "asdf@foo.com", name: "asdf",
         password: " ", password_confirmation: " ")
     end
     it { should_not be_valid }

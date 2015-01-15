@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 20150113041434) do
   add_index "user_meetings", ["user_id", "meeting_id"], name: "index_user_meetings_on_user_id_and_meeting_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "username"
     t.string   "email"
     t.string   "name"
     t.datetime "created_at"
@@ -93,6 +92,5 @@ ActiveRecord::Schema.define(version: 20150113041434) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

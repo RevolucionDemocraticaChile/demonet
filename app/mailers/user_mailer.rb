@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   default from: "admin@demonet.cl"
 
   def welcome_email(user, password)
-    @url = 'demonet.herokuapp.com'
+    @url = ENV['APP_NAME']
     @password = password
     @user = user
     mail to: user.email, subject: "Contraseña para demonet"

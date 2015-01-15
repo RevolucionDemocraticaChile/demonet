@@ -13,6 +13,7 @@
  *= require dataTables/jquery.dataTables
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require dataTables/extras/dataTables.tableTools
+ *= require jquery-ui/datepicker
  *= require_self
  *= require_tree .
  */
@@ -697,6 +698,10 @@ a.botonera{
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
   color: #FFEFCC;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+  z-index: 1;
 }
 
 /** datatable */

@@ -15,7 +15,8 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require dataTables/extras/dataTables.tableTools
-//= require jquery-ui
+//= require jquery-ui/datepicker
+//= require jquery-ui/datepicker-es
 //= require bootstrap
 //= require turbolinks
 //= require_tree .

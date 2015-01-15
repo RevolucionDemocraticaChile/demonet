@@ -10,21 +10,15 @@
         <div class="panel-heading clearfix">
           <h4><%= t(:users).humanize %></h4>
           <div class="pull-right">
-            <% if can? :new, User %>
-              <%= link_to t(:new_user).humanize, new_user_path, class: "pull-right btn btn-primary btn-sm" %>
-            <% end %>
+            <form action="<%= users_path %>" method="get" class="form-inline">
+              <%= text_field_tag :from, @from, class: "form-control datepicker", placeholder: @from %>
+              <%= text_field_tag :to, @to, class: "form-control datepicker", placeholder: @to %>
+              <%= submit_tag "Enviar", :name => nil, class: "btn btn-default" %>
+            </form>
           </div>
         </div>
         <div class="panel-body">
-
-          <%# <%= form_tag users_path, :method => :get, :class => "form-inline" do  %1> %>
-          <%#       <%= text_field_tag :from, "value", class: "form-control", placeholder: 'desde' %1> %>
-          <%#       <%= text_field_tag :to, "value", class: "form-control", placeholder: 'hasta' %1> %>
-          <%#       <%= submit_tag "Enviar", class: "btn btn-default" %1> %>
-          <%# <% end %1> %>
-
           <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-
             <thead>
               <tr>
                 <th><%= t(:first_name).humanize %></th>
@@ -39,19 +33,6 @@
                 <% end %>
                 <th><%= t(:action) %></th>
               </tr>
-              <%# <tr> %>
-                <%#   <th> <%= text_field :d_first_name, class: "form-control", placeholder: t(:first_name).humanize %1> </th> %>
-                <%#   <th><%= text_field :d_second_name , class: "form-control", placeholder: t(:second_name).humanize %1></th> %>
-                <%#   <th><%= t(:last_name).humanize %1></th> %>
-                <%#   <th><%= t(:email).humanize %1></th> %>
-                <%#   <th><%= t(:username).humanize %1></th> %>
-                <%#   <th><%= t(:rut).humanize %1></th> %>
-                <%#   <% if current_user.admin? %1> %>
-                  <%#     <th><%= t(:recent_attendances).humanize %1></th> %>
-                  <%#     <th><%= t(:active).humanize %1>?</th> %>
-                  <%#   <% end %1> %>
-                <%#   <th></th> %>
-                <%# </tr> %>
             </thead>
 
             <tbody>
@@ -65,10 +46,11 @@
                   <td><%= user.rut %></td>
                   <% if current_user.admin? %>
                     <td class="text-center">
-                      <%= user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>
+                      <% asistances = user.meetings.where(date: (@from)..(@to)).count %>
+                      <%= asistances %>
                     </td>
                     <td class="text-center">
-                      <% if user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count >= 6 %>
+                      <% if asistances >= 6 %>
                         <span class="glyphicon glyphicon-ok"></span>
                       <% end %>
                     </td>
@@ -86,46 +68,70 @@
 </div>
 
 <script>
-  $('#datatable').DataTable({
-    "sDom": '<"pull-left"T>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
-    "tableTools": {
-      "sRowSelect": "multi",
-      "sSwfPath": "swf/copy_csv_xls.swf",
-      "aButtons": [{
-        "sExtends": "csv",
-        "sButtonText": "Exportar Todo CSV",
+  $(function() {
+    $('#datatable').DataTable({
+      "sDom": '<"pull-left"T>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
+      "tableTools": {
+        "sRowSelect": "multi",
+        "sSwfPath": "swf/copy_csv_xls.swf",
+        "aButtons": [{
+          "sExtends": "csv",
+          "sButtonText": "Exportar Todo CSV",
 
-      }, {
-        "sExtends": "copy",
-        "sButtonText": "Copiar lista de correos",
-        "mColumns": [3],
-        "bHeader": false,
-        "sNewLine": ",",
-        "fnComplete": function(nButton, oConfig, flash, text) {
-          var lines = text.split(oConfig.sNewLine).length;
-          if (oConfig.bHeader) lines--;
-          if (this.s.dt.nTFoot !== null && oConfig.bFooter) lines--;
-          var plural = (lines==1) ? "" : "s";
-          this.fnInfo( '<h6>Lista de correos</h6>'+ '<p>Copiado '+lines+' fila'+plural+' al portapapeles.</p>', 1500);
+        }, {
+          "sExtends": "copy",
+          "sButtonText": "Copiar lista de correos",
+          "mColumns": [3],
+          "bHeader": false,
+          "sNewLine": ",",
+          "fnComplete": function(nButton, oConfig, flash, text) {
+            var lines = text.split(oConfig.sNewLine).length;
+            if (oConfig.bHeader) lines--;
+            if (this.s.dt.nTFoot !== null && oConfig.bFooter) lines--;
+            var plural = (lines==1) ? "" : "s";
+            this.fnInfo( '<h6>Lista de correos</h6>'+ '<p>Copiado '+lines+' fila'+plural+' al portapapeles.</p>', 1500);
+          }
         }
-      }
-      ]},
-      "oLanguage": {
-        "sSearch": "Filtrar: ",
-        "sZeroRecords": "No se encontraron usuarios",
-        "sInfo": "Mostrando _START_ a _END_ usuarios de un total de _TOTAL_ ",
-        "sInfoEmpty": "Mostrando 0 a 0 usuarios de un total de 0",
-        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-        "oPaginate": {
-          "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right'></span>",
-          "sPrevious": "<span class='glyphicon glyphicon-chevron-left'></span> Anterior",
+        ]},
+        "oLanguage": {
+          "sSearch": "Filtrar: ",
+          "sZeroRecords": "No se encontraron usuarios",
+          "sInfo": "Mostrando _START_ a _END_ usuarios de un total de _TOTAL_ ",
+          "sInfoEmpty": "Mostrando 0 a 0 usuarios de un total de 0",
+          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+          "oPaginate": {
+            "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right'></span>",
+            "sPrevious": "<span class='glyphicon glyphicon-chevron-left'></span> Anterior",
+          }
         }
+    });
+
+    // Custom search by columns
+    //    $("thead input").keyup( function () {
+    //      oTable.fnFilter( this.value, $("thead input").index(this) );
+    //    });
+
+
+    $( "#from" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      dateFormat: 'yy-mm-dd',
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+
       }
+    });
+    $( "#to" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      dateFormat: 'yy-mm-dd',
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+
   });
-
-  // Custom search by columns
-  <%# $("thead input").keyup( function () { %>
-    <%#     oTable.fnFilter( this.value, $("thead input").index(this) ); %>
-    <%# }); %>
 
 </script>

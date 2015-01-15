@@ -5,8 +5,8 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    from = params['from'] || DateTime.now - 12.months
-    to = params['to'] || DateTime.now
+    @from = params['from'] || DateTime.now.to_date - 12.months
+    @to = params['to'] || DateTime.now.to_date
     @users = User.all
     # @users = User.eager_load(:meetings).where("meetings.date BETWEEN ? AND ?", from, to)
     # @users = User.includes(:meetings).where("meetings.date BETWEEN ? AND ?", from, to).references(:meetings)

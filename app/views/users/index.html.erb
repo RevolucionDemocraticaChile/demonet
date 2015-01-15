@@ -13,6 +13,7 @@
             <form action="<%= users_path %>" method="get" class="form-inline">
               <%= text_field_tag :from, @from, class: "form-control datepicker", placeholder: @from %>
               <%= text_field_tag :to, @to, class: "form-control datepicker", placeholder: @to %>
+              <%= text_field_tag :n, @n, class: "form-control", placeholder: @n %>
               <%= submit_tag "Enviar", :name => nil, class: "btn btn-default" %>
             </form>
           </div>
@@ -48,7 +49,7 @@
                       <%= asistances %>
                     </td>
                     <td class="text-center">
-                      <% if asistances >= 6 %>
+                      <% if asistances >= @n %>
                         <span class="glyphicon glyphicon-ok"></span>
                       <% end %>
                     </td>

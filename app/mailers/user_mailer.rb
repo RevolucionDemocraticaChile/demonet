@@ -1,11 +1,13 @@
 class UserMailer < ActionMailer::Base
-  default from: "saigo.getsuga@gmail.com"
+  default from: "admin@demonet.cl"
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.user_mailer.password_reset.subject
-  #
+  def welcome_email(user, password)
+    @url = 'demonet.herokuapp.com'
+    @password = password
+    @user = user
+    mail to: user.email, subject: "Contraseña para demonet"
+  end
+
   def password_reset(user)
     @user = user
     mail to: user.email, subject: "Reseteo de contraseña"

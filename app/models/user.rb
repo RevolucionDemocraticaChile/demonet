@@ -54,19 +54,26 @@ class User < ActiveRecord::Base
     length:     { maximum: LASTNAME_MAX_LENGTH }
 
   validates :password,
-    presence:   true,
-    length:     { minimum: PASSWORD_MIN_LENGTH }
+    presence: true, on: :update,
+    length:     { minimum: PASSWORD_MIN_LENGTH },
+    confirmation: true,
+    unless:      'password.nil?'
 
-  has_run_cl :rut, uniq_run: true, run: true
+  has_secure_password validations: false
+
+  has_run_cl :rut, uniq_run: true, run: true, if: 'rut.present?'
 
   # Hooks:
+  before_create do
+    t = User.new_token
+    send_welcome_email(t)
+    self.password = t
+  end
 
   before_save do
     self.email    = email.downcase
     self.rut      = Run.format(rut)
   end
-
-  has_secure_password
 
   def admin?
     admin
@@ -99,6 +106,10 @@ class User < ActiveRecord::Base
     self.reset_token = User.new_token
     update_attribute(:reset_digest,  User.digest(reset_token))
     update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  def send_welcome_email(password)
+    UserMailer.welcome_email(self, password).deliver
   end
 
   def send_password_reset_email

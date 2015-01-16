@@ -23,7 +23,7 @@
           <%= form_for @group, html: { class: "form-horizontal" } do |f| %>
             <% if @group.errors.any? %>
               <div id="error_explanation" class="alert alert-danger">
-                <h2><%= pluralize(@group.errors.count, "error") %>:</h2>
+                <h4><%= pluralize(@group.errors.count, "error") %>:</h4>
 
                 <ul>
                   <% @group.errors.full_messages.each do |message| %>
@@ -49,6 +49,21 @@
               </div>
             </div>
             <div class="form-group">
+              <label class="col-sm-2 control-label" for="group_type">Moderadores</label>
+              <div class="col-sm-10">
+                <%= collection_select(:adminGroup, :users, User.all, :id, :full_name, {:selected => @group.admin_groups.map(&:user_id), include_hidden: false}, {multiple: "multiple",class: "select2-container select2-container-multi form-control ng-valid ng-dirty"}) %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="group_type">Miembros
+              </label>
+              <div class="col-sm-10">
+                <%= collection_select(:memberGroup, :users, User.all, :id, :full_name, {:selected => @group.member_groups.map(&:user_id), include_hidden: false}, {multiple: "multiple", class: "select2-container select2-container-multi form-control ng-valid ng-dirty"}) %>
+              </div>
+            </div>
+            <div class="form-group">
+            </div>
+            <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <%= f.submit t(:send).humanize, class: "btn btn-primary" %>
               </div>
@@ -58,5 +73,21 @@
       </div>
     </div>
   </div>
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#adminGroup_users').select2({
+        placeholder: "Selecciona moderadores",
+        allowClear: true
+      });
+      $('#memberGroup_users').select2({
+        placeholder: "Selecciona miembros",
+        allowClear: true
+      });
+
+      // $('#adminGroup_users').select2('val',['2','3']);
+    });
+  </script>
 </div>
 

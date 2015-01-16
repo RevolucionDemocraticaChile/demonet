@@ -16,23 +16,29 @@
           </div>
         </div>
         <div class="panel-body">
-            <table id="datatable" class="table table-striped table-bordered">
+          <table class="table">
+            <table class="table table-striped table-bordered">
               <thead>
                 <tr>
                   <th><%= t(:name).humanize %></th>
                   <th><%= t(:type).titleize %></th>
                   <th><%= t(:members).humanize %></th>
                   <th><%= t(:meetings).humanize %></th>
+                  <th>Acciones</th>
                 </tr>
               </thead>
 
               <tbody>
                 <% @groups.each do |group| %>
                   <tr>
-                    <td><%= link_to group.name, group %></td>
+                    <td><%= group.name %></td>
                     <td><%= t(group.type.downcase.to_sym).titleize %></td>
                     <td class="text-center"><%= group.members.count %></td>
                     <td class="text-center"><%= group.meetings.count %></td>
+                    <td>
+                      <%= link_to "Ver", group %>
+                      <%= link_to "Editar", [:edit, group] %>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
@@ -43,30 +49,3 @@
     </div>
   </div>
 
-<script>
-  $(function() {
-    $('#datatable').DataTable({
-      "sDom": '<"pull-left"T>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
-      "tableTools": {
-        "sRowSelect": "multi",
-        "sSwfPath": "swf/copy_csv_xls.swf",
-        "aButtons": [{
-          "sExtends": "csv",
-          "sButtonText": "Exportar Todo CSV",
-        },
-        ]},
-        "oLanguage": {
-          "sZeroRecords": "No se encontraron espacios",
-          "sInfo": "Mostrando _START_ a _END_ espacios de un total de _TOTAL_ ",
-          "sInfoEmpty": "Mostrando 0 a 0 espacios de un total de 0",
-          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-          "oPaginate": {
-            "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right'></span>",
-            "sPrevious": "<span class='glyphicon glyphicon-chevron-left'></span> Anterior",
-          }
-        }
-    });
-
-  });
-
-</script>

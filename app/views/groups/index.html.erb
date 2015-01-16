@@ -16,36 +16,82 @@
           </div>
         </div>
         <div class="panel-body">
-          <table class="table">
-            <table class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th><%= t(:name).humanize %></th>
-                  <th><%= t(:type).titleize %></th>
-                  <th><%= t(:members).humanize %></th>
-                  <th><%= t(:meetings).humanize %></th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
+          <table id="datatable" class="table table-bordered responsive no-wrap">
+            <thead>
+              <tr>
+                <th><%= t(:name).humanize %></th>
+                <th><%= t(:type).titleize %></th>
+                <th><%= t(:members).humanize %></th>
+                <th><%= t(:meetings).humanize %></th>
+                <th width="90px">Acciones</th>
+              </tr>
+            </thead>
 
-              <tbody>
-                <% @groups.each do |group| %>
-                  <tr>
-                    <td><%= group.name %></td>
-                    <td><%= t(group.type.downcase.to_sym).titleize %></td>
-                    <td class="text-center"><%= group.members.count %></td>
-                    <td class="text-center"><%= group.meetings.count %></td>
-                    <td>
-                      <%= link_to "Ver", group %>
-                      <%= link_to "Editar", [:edit, group] %>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
+            <tbody>
+              <% @groups.each do |group| %>
+                <tr>
+                  <td><%= group.name %></td>
+                  <td><%= t(group.type.downcase.to_sym).titleize %></td>
+                  <td class="text-center"><%= group.members.count %></td>
+                  <td class="text-center"><%= group.meetings.count %></td>
+                  <td>
+
+                    <%= link_to group_path(group), class: "btn btn-default btn-sm" do %> <span class="glyphicon glyphicon-zoom-in"></span> <% end %>
+                    <% if can?(:edit, group) %>
+                      <%= link_to edit_group_path(group), class: "btn btn-default btn-sm" do %> <span class="glyphicon glyphicon-edit"></span> <% end %>
+                      <%= link_to group_path(group.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: t(:are_you_sure).humanize } do %> <span class="glyphicon glyphicon-trash"></span> <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
+</div>
 
+<script>
+  $(function() {
+    var dt = $('#datatable').DataTable({
+      "autoWidth": true,
+      "responsive": true,
+      "sDom": '<"pull-left"T>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
+      "tableTools": {
+        "sSwfPath": "swf/copy_csv_xls.swf",
+        "aButtons": [{
+          "sExtends": "csv",
+          "sButtonText": "Exportar Todo CSV",
+
+        }, {
+          "sExtends": "copy",
+          "sButtonText": "Copiar lista de correos",
+          "mColumns": [2],
+          "bHeader": false,
+          "sNewLine": ",",
+          "oSelectorOpts": { filter: 'applied', order: 'current' },
+          "fnComplete": function(nButton, oConfig, flash, text) {
+            var lines = text.split(oConfig.sNewLine).length;
+            if (oConfig.bHeader) lines--;
+            if (this.s.dt.nTFoot !== null && oConfig.bFooter) lines--;
+            var plural = (lines==1) ? "" : "s";
+            this.fnInfo( '<h6>Lista de correos</h6>'+ '<p>Copiado '+lines+' fila'+plural+' al portapapeles.</p>', 1500);
+          }
+        }
+        ]},
+        "oLanguage": {
+          "sSearch": "Filtrar: ",
+          "sZeroRecords": "No se encontraron grupos",
+          "sInfo": "Mostrando _START_ a _END_ grupos de un total de _TOTAL_ ",
+          "sInfoEmpty": "Mostrando 0 a 0 grupos de un total de 0",
+          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+          "oPaginate": {
+            "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right'></span>",
+            "sPrevious": "<span class='glyphicon glyphicon-chevron-left'></span> Anterior",
+          }
+        }
+    });
+  });
+
+</script>

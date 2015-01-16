@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/ifad/data-confirm-modal.git
+  revision: 209afd0f05500b36e43b1ea601da3937ac275d7c
+  specs:
+    data-confirm-modal (1.0.1)
+      railties (>= 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -212,6 +219,7 @@ DEPENDENCIES
   cancancan (~> 1.9)
   capybara (~> 2.4.1)
   coffee-rails (~> 4.0.0)
+  data-confirm-modal!
   factory_girl_rails (~> 4.4.1)
   growl (~> 1.0.3)
   guard-rspec (~> 4.3.1)

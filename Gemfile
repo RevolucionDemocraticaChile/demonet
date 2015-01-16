@@ -18,6 +18,7 @@ gem 'rb-readline'
 gem 'run_cl',          '~> 1.6'
 gem 'jquery-datatables-rails', '~> 3.1.1'
 gem "select2-rails",   '~> 3.5.9.1'
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
 group :production do
   gem 'pg',             '~> 0.17.1'

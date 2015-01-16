@@ -19,6 +19,7 @@
 //= require dataTables/extras/dataTables.tableTools
 //= require jquery-ui/datepicker
 //= require jquery-ui/datepicker-es
+//= require data-confirm-modal
 //= require select2
 //= require bootstrap
 //= require turbolinks

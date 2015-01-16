@@ -22,7 +22,7 @@
     <span class="pull-right"><small><span class="glyphicon glyphicon-chevron-right"></span></small></span>
   </a>
   <ul id="groups_menu" class="panel-collapse collapse">
-    <% if can? :new, Meeting %>
+    <% if can? :new, Group %>
       <li> <%= link_to t(:new_group).humanize, new_group_path %> </li>
     <% end %>
     <li> <%= link_to t(:list), groups_path %> </li>

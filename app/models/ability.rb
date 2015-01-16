@@ -20,8 +20,8 @@ class Ability
     can :index, Meeting
     can :show,  Meeting
 
-    can [:new, :create], Meeting do |meeting|
-      user.agroups.any?
+    if user.agroups.any?
+      can [:new, :create], Meeting
     end
 
     can :edit,  Meeting do |meeting|

@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
   skip_authorization_check
 
   def new
+    redirect_to root_path if signed_in?
   end
 
   def create

@@ -300,3 +300,6 @@ cl:
         first_name: "Primer nombre"
         second_name: "Segundo nombre"
         last_name: "Apellido"
+  unauthorized:
+    manage:
+      all: "No tienes acceso a esta area!"

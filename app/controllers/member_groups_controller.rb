@@ -41,8 +41,9 @@ class MemberGroupsController < ApplicationController
 
   def mails
     @values = params[:data].split(',')
-    @users_id = MemberGroup.where(:group_id => @values).map(&:user_id)
-    @users = User.where(:id => @users_id).pluck(:email)
+    @members_id = MemberGroup.where(:group_id => @values).map(&:user_id)
+    @moderators_id = AdminGroup.where(:group_id => @values).map(&:user_id)
+    @users = User.where(:id => @members_id | @moderators_id).pluck(:email)
     respond_to do |format|
       format.json { render :json => @users}
     end

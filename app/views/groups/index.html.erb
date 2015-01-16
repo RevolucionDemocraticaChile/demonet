@@ -54,6 +54,24 @@
   </div>
 </div>
 
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><span class="glyphicon glyphicon-warning-sign"></span> Lista de Correos</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <script>
   $(function() {
     var dt = $('#datatable').DataTable({
@@ -65,42 +83,36 @@
         "aButtons": [{
           "sExtends": "csv",
           "sButtonText": "Exportar Todo CSV",
-        },
-        {
-          "sExtends":    "ajax",
+        },{
+          "sExtends": "ajax",
           "mColumns": [0],
           "bHeader": false,
           "sNewLine": ",",
-          "bProcessing": true,
-          "sButtonText": "Correos usuarios",
+          "sButtonText": "Ver lista de correos (grupos seleccionados)",
+          "oSelectorOpts": { filter: 'applied', order: 'current' },
           "sAjaxUrl": "/mails_user_groups.json",
-          "fnAjaxComplete": function ( data, textStatus ) {
-            console.log(data);
-            console.log(textStatus);
-          },
-          "fnClick": function( nButton, oConfig, flash ) {
+          "fnClick": function( nButton, oConfig) {
             var sData = this.fnGetTableData(oConfig);
-            console.log(sData);
-            $.ajax( {
+            $.when(
+              $.ajax({
               "url": oConfig.sAjaxUrl,
               "data": [ { "name": "data", "value": sData }],
-              "success": oConfig.fnAjaxComplete,
               "dataType": "json",
               "type": "GET",
-              "cache": false,
-              "error": function () {
-                alert( "Error detected when sending table data to server" );
-              }
-            } );
-          },
-
+              "cache": false
+            })).then(function(data) {
+              var modal = $('#myModal');
+              modal.find(".modal-body").text(data)
+              modal.modal('show');
+            });
+          }
         }
         ]},
         "oLanguage": {
           "sSearch": "Filtrar: ",
-          "sZeroRecords": "No se encontraron grupos",
-          "sInfo": "Mostrando _START_ a _END_ grupos de un total de _TOTAL_ ",
-          "sInfoEmpty": "Mostrando 0 a 0 grupos de un total de 0",
+          "sZeroRecords": "No se encontraron espacios",
+          "sInfo": "Mostrando _START_ a _END_ espacios de un total de _TOTAL_ ",
+          "sInfoEmpty": "Mostrando 0 a 0 espacios de un total de 0",
           "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
           "oPaginate": {
             "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right'></span>",

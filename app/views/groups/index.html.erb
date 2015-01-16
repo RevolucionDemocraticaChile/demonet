@@ -64,21 +64,7 @@
           "sExtends": "csv",
           "sButtonText": "Exportar Todo CSV",
 
-        }, {
-          "sExtends": "copy",
-          "sButtonText": "Copiar lista de correos",
-          "mColumns": [2],
-          "bHeader": false,
-          "sNewLine": ",",
-          "oSelectorOpts": { filter: 'applied', order: 'current' },
-          "fnComplete": function(nButton, oConfig, flash, text) {
-            var lines = text.split(oConfig.sNewLine).length;
-            if (oConfig.bHeader) lines--;
-            if (this.s.dt.nTFoot !== null && oConfig.bFooter) lines--;
-            var plural = (lines==1) ? "" : "s";
-            this.fnInfo( '<h6>Lista de correos</h6>'+ '<p>Copiado '+lines+' fila'+plural+' al portapapeles.</p>', 1500);
-          }
-        }
+        },
         ]},
         "oLanguage": {
           "sSearch": "Filtrar: ",

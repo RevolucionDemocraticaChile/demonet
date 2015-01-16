@@ -66,7 +66,7 @@ class GroupsController < ApplicationController
               member_group.save
             end
 
-            flash[:success] = t(:group_created_successfully)
+            flash[:success] = action_name == 'create' ? t(:group_created_successfully) : t(:group_updated_successfully)
             # redirect_to @group
             redirect_to groups_url
           else

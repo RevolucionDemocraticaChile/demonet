@@ -2,12 +2,5 @@
   <span class="attendant">
     <span class="glyphicon glyphicon-user"></span>
     <%= link_to user_meeting.user.full_name, user_meeting.user %>
-    <% if removable %>
-      <%= form_for user_meeting, html: { method: :delete }, remote: true do |f| %>
-        <%= f.button type: "submit" do %>
-          <span class="glyphicon glyphicon-remove"></span>
-        <% end %>
-      <% end %>
-    <% end %>
   </span>
 </li>

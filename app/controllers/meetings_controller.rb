@@ -14,13 +14,7 @@ class MeetingsController < ApplicationController
 
   def create
     @meeting = Meeting.new(meeting_params)
-
-    if @meeting.save
-      flash[:success] = t(:meeting_created_successfully)
-      redirect_to @meeting
-    else
-      render 'new'
-    end
+    create_or_update
   end
 
   def show
@@ -31,12 +25,8 @@ class MeetingsController < ApplicationController
 
   # PATCH/PUT /meetings/1
   def update
-    if @meeting.update(meeting_params)
-      flash[:success] = t(:meeting_updated_successfully)
-      redirect_to @meeting
-    else
-      render :edit
-    end
+    @meeting.update(meeting_params)
+    create_or_update
   end
 
   # DELETE /meetings/1
@@ -47,6 +37,44 @@ class MeetingsController < ApplicationController
   end
 
   private
+
+    def create_or_update()
+
+      if params["userMeeting"].nil?
+        @meeting.errors.add(:asistente, " es necesario")
+        render 'new'
+      else
+        if params["meetingGroup"].nil?
+          @meeting.errors.add(:espacio, " es necesario")
+          render 'new'
+        else
+
+          if @meeting.save
+            UserMeeting.where(:meeting_id => @meeting.id).destroy_all
+            params["userMeeting"]["users"].each do |user|
+              admin_group = UserMeeting.new
+              admin_group.user_id = user
+              admin_group.meeting_id = @meeting.id
+              admin_group.save
+            end
+
+            MeetingGroup.where(:meeting_id => @meeting.id).destroy_all
+            params["meetingGroup"]["groups"].each do |group|
+              member_group = MeetingGroup.new
+              member_group.group_id = group
+              member_group.meeting_id = @meeting.id
+              member_group.save
+            end
+
+            flash[:success] = action_name == 'create' ? t(:meeting_created_successfully) : t(:meeting_updated_successfully)
+            # redirect_to @group
+            redirect_to meetings_url
+          else
+            render 'new'
+          end
+        end
+      end
+    end
 
     def set_meeting
       @meeting = Meeting.find(params[:id])

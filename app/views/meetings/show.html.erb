@@ -1,56 +1,27 @@
-<div class="row">
-  <div class="col-lg-12">
-    <h1><%= format_meeting_name(@meeting) %></h1>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-lg-2">
-    <% if can?(:edit, @meeting) || can?(:destroy, @meeting) %>
-      <div class="alert alert-info admin-panel">
-        <strong><%= t(:administration).humanize %></strong>
-        <% if can?(:edit, @meeting) %>
-          <%= link_to t(:edit_meeting).humanize, edit_meeting_path(@meeting), class: "btn btn-primary" %>
-        <% end %>
-        <% if can?(:destroy, @meeting) %>
-          <%= link_to t(:destroy_meeting).humanize, meeting_path(@meeting), method: :delete, class: "btn btn-danger", data: { confirm: t(:are_you_sure).humanize } %>
-        <% end %>
-        <hr />
-        <%= form_for MeetingGroup.new, remote: true, html: {class: "form-inline"} do |f| %>
-          <%= f.hidden_field :meeting_id, value: @meeting.id %>
-            <%= f.collection_select :group_id, Group.all, :id, :name, {}, {class: "form-control"} %>
-          <div class="form-group">
-            <%= f.submit t(:add_group).humanize, class: "btn btn-primary" %>
-          </div>
-        <% end %>
-        <hr />
-        <%= form_for UserMeeting.new, remote: true, html: {class: "form-inline"} do |f| %>
-          <%= f.hidden_field :meeting_id, value: @meeting.id %>
-          <!-- <div class="form-group"> -->
-            <%= f.collection_select :user_id, User.all, :id, :full_name, {}, {class: "form-control"} %>
-          <!-- </div> -->
-          <div class="form-group">
-            <%= f.submit t(:add_attendant).humanize, class: "btn btn-primary" %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+  <ol class="breadcrumb">
+    <li > <%= link_to t(:groups).humanize, groups_path %> </li>
+    <li class="active"></li>
+  </ol>
 
-  <div class="col-lg-8">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <%= t(:meeting).humanize %>:
+        </div>
+        <div class="panel-body">
 
-    <p>
       <strong><%= t(:description).humanize %>:</strong>
       <%= @meeting.desc %>
-    </p>
 
-    <h2><%= t(:groups).humanize %></h2>
+      <h2><%= t(:groups).humanize %></h2>
 
-    <ul id="organizing_groups_ul">
-      <% @meeting.meeting_groups.each do |meeting_group| %>
-        <%= render partial: "organizing_group_li", locals: {meeting_group: meeting_group, removable: can?(:edit, @meeting) } %>
-      <% end %>
-    </ul>
+      <ul id="organizing_groups_ul">
+        <% @meeting.meeting_groups.each do |meeting_group| %>
+          <%= render partial: "organizing_group_li", locals: {meeting_group: meeting_group, removable: can?(:edit, @meeting) } %>
+        <% end %>
+      </ul>
 
     <h2><%= t(:attendants).humanize %></h2>
 

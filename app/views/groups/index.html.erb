@@ -19,7 +19,7 @@
           <table id="datatable" class="table table-bordered responsive no-wrap">
             <thead>
               <tr>
-                <th><%= t(:id) %>
+                <th width="10px"></th>
                 <th><%= t(:name).humanize %></th>
                 <th><%= t(:type).titleize %></th>
                 <th><%= t(:members).humanize %></th>
@@ -31,10 +31,12 @@
             <tbody>
               <% @groups.each do |group| %>
                 <tr>
-                  <td><%= group.id %></td>
+                  <td>
+                    <input type="checkbox" name="selected" class="check" value="<%= group.id %>">
+                  </td>
                   <td><%= group.name %></td>
                   <td><%= t(group.type.downcase.to_sym).titleize %></td>
-                  <td class="text-center"><%= group.members.count %></td>
+                  <td class="text-center"><%= group.members.count  %></td>
                   <td class="text-center"><%= group.meetings.count %></td>
                   <td>
 
@@ -92,7 +94,10 @@
           "oSelectorOpts": { filter: 'applied', order: 'current' },
           "sAjaxUrl": "/mails_user_groups.json",
           "fnClick": function( nButton, oConfig) {
-            var sData = this.fnGetTableData(oConfig);
+            var sData = [];
+            $( "input:checkbox:checked" ).each(function(i,item){
+              sData.push($(item).val());
+            });
             $.when(
               $.ajax({
               "url": oConfig.sAjaxUrl,
@@ -102,6 +107,9 @@
               "cache": false
             })).then(function(data) {
               var modal = $('#myModal');
+              if (data.length == 0) {
+                data = "No hay correos por mostrar. Asegurese de seleccionar los grupos";
+              }
               modal.find(".modal-body").text(data)
               modal.modal('show');
             });

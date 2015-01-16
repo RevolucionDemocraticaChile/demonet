@@ -62,7 +62,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title"><span class="glyphicon glyphicon-warning-sign"></span> Lista de Correos</h4>
+        <h4 class="modal-title"><span class="glyphicon glyphicon-warning-sign"></span> Lista de Correos (Copiados al portapeles)</h4>
       </div>
       <div class="modal-body">
       </div>
@@ -93,8 +93,11 @@
           "sButtonText": "Ver lista de correos (grupos seleccionados)",
           "oSelectorOpts": { filter: 'applied', order: 'current' },
           "sAjaxUrl": "/mails_user_groups.json",
-          "fnClick": function( nButton, oConfig) {
+          "sAction": "flash_copy",
+          "fnClick": function( nButton, oConfig, flash) {
             var sData = [];
+            var self = this;
+            var f = flash;
             $( "input:checkbox:checked" ).each(function(i,item){
               sData.push($(item).val());
             });
@@ -104,8 +107,12 @@
               "data": [ { "name": "data", "value": sData }],
               "dataType": "json",
               "type": "GET",
-              "cache": false
+              "cache": false,
+              "async": false,
             })).then(function(data) {
+              var lines = 1
+              var plural = (lines==1) ? "" : "s";
+              f.setText(data);
               var modal = $('#myModal');
               if (data.length == 0) {
                 data = "No hay correos por mostrar. Asegurese de seleccionar los grupos";

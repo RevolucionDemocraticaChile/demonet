@@ -16,56 +16,63 @@
           </div>
         </div>
         <div class="panel-body">
-            <table id="datatable" class="table table-striped table-bordered">
-              <thead>
+          <table id="datatable" class="table table-bordered responsive no-wrap">
+            <thead>
+              <tr>
+                <th><%= t(:title).humanize %></th>
+                <th><%= t(:group).humanize %></th>
+                <th><%= t(:attendants).humanize %></th>
+                <th><%= t(:date_lit).humanize %></th>
+                <th width="100px">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @meetings.each do |meeting| %>
                 <tr>
-                  <th><%= t(:title).humanize %></th>
-                  <th><%= t(:group).humanize %></th>
-                  <th><%= t(:attendants).humanize %></th>
-                  <th><%= t(:date_lit).humanize %></th>
+                  <td>
+                    <%= link_to format_meeting_name(meeting), meeting %>
+                  </td>
+                  <td>
+                    <% meeting.groups.each do |group| %>
+                      <%= link_to group.name, group %>
+                    <% end %>
+                  </td>
+
+                  <td class="text-center">
+                    <%= meeting.users.count %>
+                  </td>
+                  <td>
+                    <%= l Date.parse(meeting.date.to_s) %>
+                  </td>
+                  <td>
+
+                    <%= link_to meeting_path(meeting), class: "btn btn-default btn-sm" do %> <span class="glyphicon glyphicon-zoom-in"></span> <% end %>
+                    <% if can?(:edit, meeting) %>
+                      <%= link_to edit_meeting_path(meeting), class: "btn btn-default btn-sm" do %> <span class="glyphicon glyphicon-edit"></span> <% end %>
+                      <%= link_to meeting_path(meeting.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: t(:are_you_sure).humanize }, title: t(:destroy_meeting).humanize do %> <span class="glyphicon glyphicon-trash"></span> <% end %>
+                    <% end %>
+                  </td>
                 </tr>
-              </thead>
+              <% end %>
+            </tbody>
+          </table>
 
-              <tbody>
-                <% @meetings.each do |meeting| %>
-                  <tr>
-                    <td>
-                      <%= link_to format_meeting_name(meeting), meeting %>
-                    </td>
-                    <td>
-                      <% meeting.groups.each do |group| %>
-                        <%= link_to group.name, group %>
-                      <% end %>
-                    </td>
-
-                    <td class="text-center">
-                      <%= meeting.users.count %>
-                    </td>
-                    <td>
-                      <%= l Date.parse(meeting.date.to_s) %>
-                    </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-
-          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
 <script>
   $(function() {
     $('#datatable').DataTable({
       "sDom": '<"pull-left"T>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
       "tableTools": {
-        "sRowSelect": "multi",
         "sSwfPath": "swf/copy_csv_xls.swf",
         "aButtons": [{
           "sExtends": "csv",
           "sButtonText": "Exportar Todo CSV",
-
         },
         ]},
         "oLanguage": {

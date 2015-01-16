@@ -21,6 +21,7 @@
 //= require jquery-ui/datepicker-es
 //= require data-confirm-modal
 //= require select2
+//= require select2_locale_es
 //= require bootstrap
 //= require turbolinks
 //= require_tree .

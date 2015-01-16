@@ -19,6 +19,7 @@
           <table id="datatable" class="table table-bordered responsive no-wrap">
             <thead>
               <tr>
+                <th><%= t(:id) %>
                 <th><%= t(:name).humanize %></th>
                 <th><%= t(:type).titleize %></th>
                 <th><%= t(:members).humanize %></th>
@@ -30,6 +31,7 @@
             <tbody>
               <% @groups.each do |group| %>
                 <tr>
+                  <td><%= group.id %></td>
                   <td><%= group.name %></td>
                   <td><%= t(group.type.downcase.to_sym).titleize %></td>
                   <td class="text-center"><%= group.members.count %></td>
@@ -63,8 +65,36 @@
         "aButtons": [{
           "sExtends": "csv",
           "sButtonText": "Exportar Todo CSV",
-
         },
+        {
+          "sExtends":    "ajax",
+          "mColumns": [0],
+          "bHeader": false,
+          "sNewLine": ",",
+          "bProcessing": true,
+          "sButtonText": "Correos usuarios",
+          "sAjaxUrl": "/mails_user_groups.json",
+          "fnAjaxComplete": function ( data, textStatus ) {
+            console.log(data);
+            console.log(textStatus);
+          },
+          "fnClick": function( nButton, oConfig, flash ) {
+            var sData = this.fnGetTableData(oConfig);
+            console.log(sData);
+            $.ajax( {
+              "url": oConfig.sAjaxUrl,
+              "data": [ { "name": "data", "value": sData }],
+              "success": oConfig.fnAjaxComplete,
+              "dataType": "json",
+              "type": "GET",
+              "cache": false,
+              "error": function () {
+                alert( "Error detected when sending table data to server" );
+              }
+            } );
+          },
+
+        }
         ]},
         "oLanguage": {
           "sSearch": "Filtrar: ",

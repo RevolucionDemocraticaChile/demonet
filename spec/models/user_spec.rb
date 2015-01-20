@@ -20,7 +20,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  before { @user = User.new(email: "asdf@foo.com", name: "asdf",
+  before { @user = User.new(email: "asdf@foo.com", first_name: "asdf", second_name: "arst", last_name: "arstarst",
     password: "thepass", password_confirmation: "thepass") }
 
   subject { @user }

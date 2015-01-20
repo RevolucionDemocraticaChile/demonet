@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "admin@demonet.cl"
+  default from: "equipoweb@revoluciondemocractica.cl"
 
   def welcome_email(user, password)
     @url = ENV['APP_NAME']

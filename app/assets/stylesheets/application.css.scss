@@ -715,3 +715,14 @@ table.dataTable.no-footer {
   padding: 0;
   margin-left: 0;
 }
+
+/* Hack tablas-responsive */
+.table-responsive {
+  font-size: 10px;
+  overflow-x: auto;
+
+  .btn-sm, .btn-group-sm > .btn {
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+}

@@ -19,70 +19,66 @@
           </div>
         </div>
         <div class="panel-body">
-          <table id="datatable" class="table table-bordered responsive no-wrap">
-            <thead>
-              <tr>
-                <th colspan="4"></th>
-                <th><%= text_field_tag :filter_moderators, "", class: "form-control", placeholders: t(:moderators).humanize %></th>
-                <th><%= text_field_tag :filter_members, "", class: "form-control", placeholders: t(:members).humanize %></th>
-                <% if current_user.admin? %>
-                  <th colspan="2"></th>
-                <% end %>
-              </tr>
-              <tr>
-                <th><%= t(:names).humanize %></th>
-                <th><%= t(:last_name).humanize %></th>
-                <th><%= t(:email).humanize %></th>
-                <th><%= t(:rut).humanize %></th>
-                <th><%= t(:admin_group).humanize %></th>
-                <th><%= t(:member_of_group).humanize %></th>
-                <% if current_user.admin? %>
-                  <th style="width: 40px"><%= t(:recent_attendances).humanize %></th>
-                  <th><%= t(:active).humanize %>?</th>
-                <% end %>
-                <th width="100px"><%= t(:action) %></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <% @users.each do |user| %>
+          <div class="table-responsive">
+            <table id="datatable" class="table table-bordered">
+              <thead>
                 <tr>
-                  <td><%= user.first_name + " " + user.second_name%></td>
-                  <td><%= user.last_name %></td>
-                  <td><%= user.email %></td>
-                  <td><%= user.rut %></td>
-                  <td>
-                    <% user.agroups.each do |g| %>
-                      <span class="label label-<%=@labels.sample%>"><%= g.name %></span>
-                    <% end %>
-                  </td>
-                  <td>
-                    <% user.groups.each do |g| %>
-                      <span class="label label-primary"><%= g.name %></span>
-                    <% end %>
-                  </td>
+                  <th colspan="<%= current_user.admin? ? "6" : '4' %>"></th>
+                  <th style="width:100px"><%= text_field_tag :filter_moderators, "", class: "col-sm-12", placeholders: t(:moderators).humanize %></th>
+                  <th style="width:100px"><%= text_field_tag :filter_members, "", class: "col-sm-12", placeholders: t(:members).humanize %></th>
+                  <th></th>
+                </tr>
+                <tr>
+                  <th><%= t(:names).humanize %></th>
+                  <th><%= t(:last_name).humanize %></th>
+                  <th><%= t(:email).humanize %></th>
+                  <th><%= t(:rut).humanize %></th>
                   <% if current_user.admin? %>
-                    <td class="text-center">
-                      <% asistances = user.meetings.where(date: (@from)..(@to)).count %>
-                      <%= asistances %>
+                    <th ><%= t(:recent_attendances).humanize %></th>
+                    <th><%= t(:active).humanize %>?</th>
+                  <% end %>
+                  <th><%= t(:moderator_of).humanize %></th>
+                  <th><%= t(:member_of).humanize %></th>
+                  <th ><%= t(:action) %></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @users.each do |user| %>
+                  <tr>
+                    <td><%= user.first_name %></td>
+                    <td><%= user.last_name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.rut %></td>
+                    <% if current_user.admin? %>
+                      <td class="text-center" style="width: 40px">
+                        <% asistances = user.meetings.where(date: (@from)..(@to)).count %>
+                        <%= asistances %>
+                      </td>
+                      <td class="text-center">
+                        <% if asistances >= @n.to_i %>
+                          <span class="glyphicon glyphicon-ok"></span>
+                        <% end %>
+                      </td>
+                    <% end %>
+                    <td>
+                      <%= user.agroups.map(&:name).join(", ")  %>
                     </td>
-                    <td class="text-center">
-                      <% if asistances >= @n.to_i %>
-                        <span class="glyphicon glyphicon-ok"></span>
+                    <td>
+                      <%= user.groups.map(&:name).join(", ")  %>
+                    </td>
+                    <td>
+                      <%= link_to user_path(user), class: "btn btn-default btn-sm" do %> <span class="glyphicon glyphicon-zoom-in"></span> <% end %>
+                      <% if can?(:edit, user) %>
+                        <%= link_to edit_user_path(user), class: "btn btn-default btn-sm" do %> <span class="glyphicon glyphicon-edit"></span> <% end %>
+                        <%= link_to user_path(user.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: t(:are_you_sure).humanize }, title: t(:destroy_user).humanize do %> <span class="glyphicon glyphicon-trash"></span> <% end %>
                       <% end %>
                     </td>
-                  <% end %>
-                  <td>
-                    <%= link_to user_path(user), class: "btn btn-default btn-sm" do %> <span class="glyphicon glyphicon-zoom-in"></span> <% end %>
-                    <% if can?(:edit, user) %>
-                      <%= link_to edit_user_path(user), class: "btn btn-default btn-sm" do %> <span class="glyphicon glyphicon-edit"></span> <% end %>
-                      <%= link_to user_path(user.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: t(:are_you_sure).humanize }, title: t(:destroy_user).humanize do %> <span class="glyphicon glyphicon-trash"></span> <% end %>
-                    <% end %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
 
         </div>
       </div>
@@ -96,15 +92,14 @@
       var exportTable = '<%= 'T' if current_user.admin? %>';
 
       var dt = $('#datatable').DataTable({
-        "autoWidth": true,
-        "responsive": true,
         "sDom": '<"pull-left"' + exportTable + '>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
         "tableTools": {
           "sSwfPath": "swf/copy_csv_xls.swf",
           "aButtons": [{
             "sExtends": "csv",
+            "sTitle": "listado_usuarios",
             "sButtonText": "Exportar Todo CSV",
-
+            "mColumns": [0, 1, 2, 3, 4, 5, 6, 7]
           }, {
             "sExtends": "copy",
             "sButtonText": "Copiar lista de correos",
@@ -136,7 +131,7 @@
 
       // Custom search by columns
       $("thead input").keyup( function () {
-        var COLUMN_INDEX = 4;
+        var COLUMN_INDEX = 6;
         var index = $("thead input").index(this);
         dt.columns( index + COLUMN_INDEX) .search( this.value ) .draw();
       });

@@ -55,10 +55,13 @@ cl:
   list: Lista
   meeting: reunión
   meetings: reuniones
+  member_of: miembro de
   member_of_territory: miembro de territorio
   member_of_group: miembro de espacio
   members: miembros
   minutes: acta
+  moderator: moderador
+  moderator_of: moderador de
   moderators: moderadores
   name: nombre
   names: nombres

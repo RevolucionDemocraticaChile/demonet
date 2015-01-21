@@ -32,10 +32,13 @@
             <table id="datatable" class="table table-bordered">
               <thead>
                 <tr>
-                  <th colspan="<%= current_user.admin? ? '5' : '4' %>"></th>
-                  <th style="width:40px"><select id="actives_users" class="form-control"><option value="">todos</option><option value="si">si</option><option value="no">no</option></select></th>
-                  <th style="width:100px"><%= text_field_tag :filter_moderators, nil , class: "col-sm-12", placeholder: t(:moderators).humanize %></th>
-                  <th style="width:100px"><%= text_field_tag :filter_members, nil, class: "col-sm-12", placeholder: t(:members).humanize %></th>
+                  <th colspan="4"></th>
+                  <% if current_user.admin? %>
+                    <th></th>
+                    <th style="width:40px"><select id="actives_users" class="form-control"><option value="">todos</option><option value="si">si</option><option value="no">no</option></select></th>
+                  <% end %>
+                    <th style="width:100px"><%= text_field_tag :filter_moderators, nil , class: "col-sm-12", placeholder: t(:moderators).humanize %></th>
+                    <th style="width:100px"><%= text_field_tag :filter_members, nil, class: "col-sm-12", placeholder: t(:members).humanize %></th>
                   <th style="width:75px"></th>
                 </tr>
                 <tr>
@@ -98,10 +101,15 @@
   (function() {
     $(document).ready(function() {
       var exportTable = '<%= 'T' if current_user.admin? %>';
+      var isAdmin =  '<%= '1' if current_user.admin? %>';
+      var columnsAdmin = 8;
+      if (!isAdmin) {
+        columnsAdmin -=2;
+      }
 
       var dt = $('#datatable').DataTable({
         "sDom": '<"pull-left"' + exportTable + '>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
-        "columnDefs": [ { "targets": 8, "orderable": false } ],
+        "columnDefs": [ { "targets": columnsAdmin, "orderable": false } ],
         "tableTools": {
           "sSwfPath": "swf/copy_csv_xls.swf",
           "aButtons": [{
@@ -141,14 +149,13 @@
       });
 
       // Custom search by columns
-      $("thead input").keyup( function () {
+      $("thead input").on('keyup', function () {
         var COLUMN_INDEX = 6;
         var index = $("thead input").index(this);
         dt.columns( index + COLUMN_INDEX) .search( this.value ) .draw();
       });
 
       $("#actives_users").on("change", function () {
-        console.log(this.value);
         var COLUMN_INDEX = 5;
         dt.columns(COLUMN_INDEX).search( this.value ) .draw();
       });

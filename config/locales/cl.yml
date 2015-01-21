@@ -59,6 +59,7 @@ cl:
   member_of_group: miembro de espacio
   members: miembros
   minutes: acta
+  moderators: moderadores
   name: nombre
   names: nombres
   new_group: nuevo espacio

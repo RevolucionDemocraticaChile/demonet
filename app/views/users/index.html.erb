@@ -23,8 +23,8 @@
             <thead>
               <tr>
                 <th colspan="4"></th>
-                <th><input class="form-control " type="text" /></th>
-                <th><input class="form-control" type="text" /></th>
+                <th><%= text_field_tag :filter_moderators, "", class: "form-control", placeholders: t(:moderators).humanize %></th>
+                <th><%= text_field_tag :filter_members, "", class: "form-control", placeholders: t(:members).humanize %></th>
                 <% if current_user.admin? %>
                   <th colspan="2"></th>
                 <% end %>
@@ -91,71 +91,76 @@
 </div>
 
 <script>
-  $(function() {
-    var dt = $('#datatable').DataTable({
-      "autoWidth": true,
-      "responsive": true,
-      "sDom": '<"pull-left"T>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
-      "tableTools": {
-        "sSwfPath": "swf/copy_csv_xls.swf",
-        "aButtons": [{
-          "sExtends": "csv",
-          "sButtonText": "Exportar Todo CSV",
+  (function() {
+    $(document).ready(function() {
+      var dt = $('#datatable').DataTable({
+        "autoWidth": true,
+        "responsive": true,
+        "sDom": '<"pull-left"T>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
+        "tableTools": {
+          "sSwfPath": "swf/copy_csv_xls.swf",
+          "aButtons": [{
+            "sExtends": "csv",
+            "sButtonText": "Exportar Todo CSV",
 
-        }, {
-          "sExtends": "copy",
-          "sButtonText": "Copiar lista de correos",
-          "mColumns": [2],
-          "bHeader": false,
-          "sNewLine": ",",
-          "oSelectorOpts": { filter: 'applied', order: 'current' },
-          "fnComplete": function(nButton, oConfig, flash, text) {
-            var lines = text.split(oConfig.sNewLine).length;
-            if (oConfig.bHeader) lines--;
-            if (this.s.dt.nTFoot !== null && oConfig.bFooter) lines--;
-            var plural = (lines==1) ? "" : "s";
-            this.fnInfo( '<h6>Lista de correos</h6>'+ '<p>Copiado '+lines+' fila'+plural+' al portapapeles.</p>', 1500);
+          }, {
+            "sExtends": "copy",
+            "sButtonText": "Copiar lista de correos",
+            "mColumns": [2],
+            "bHeader": false,
+            "sNewLine": ",",
+            "oSelectorOpts": { filter: 'applied', order: 'current' },
+            "fnComplete": function(nButton, oConfig, flash, text) {
+              var lines = text.split(oConfig.sNewLine).length;
+              if (oConfig.bHeader) lines--;
+              if (this.s.dt.nTFoot !== null && oConfig.bFooter) lines--;
+              var plural = (lines==1) ? "" : "s";
+              this.fnInfo( '<h6>Lista de correos</h6>'+ '<p>Copiado '+lines+' fila'+plural+' al portapapeles.</p>', 1500);
+            }
           }
-        }
-        ]},
-        "oLanguage": {
-          "sSearch": "Filtrar: ",
-          "sZeroRecords": "No se encontraron usuarios",
-          "sInfo": "Mostrando _START_ a _END_ usuarios de un total de _TOTAL_ ",
-          "sInfoEmpty": "Mostrando 0 a 0 usuarios de un total de 0",
-          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
-          "oPaginate": {
-            "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right'></span>",
-            "sPrevious": "<span class='glyphicon glyphicon-chevron-left'></span> Anterior",
+          ]},
+          "oLanguage": {
+            "sSearch": "Filtrar: ",
+            "sZeroRecords": "No se encontraron usuarios",
+            "sInfo": "Mostrando _START_ a _END_ usuarios de un total de _TOTAL_ ",
+            "sInfoEmpty": "Mostrando 0 a 0 usuarios de un total de 0",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "oPaginate": {
+              "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right'></span>",
+              "sPrevious": "<span class='glyphicon glyphicon-chevron-left'></span> Anterior",
+            }
           }
+      });
+
+      // Custom search by columns
+      $("thead input").keyup( function () {
+        var COLUMN_INDEX = 4;
+        var index = $("thead input").index(this);
+        dt.columns( index + COLUMN_INDEX) .search( this.value ) .draw();
+      });
+
+      $( "#from" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        dateFormat: 'yy-mm-dd',
+        onClose: function( selectedDate ) {
+          $( "#to" ).datepicker( "option", "minDate", selectedDate );
+
         }
-    });
+      });
+      $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        dateFormat: 'yy-mm-dd',
+        onClose: function( selectedDate ) {
+          $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+        }
+      });
 
-    // Custom search by columns
-    $("thead input").keyup( function () {
-      dt.columns( $("thead input").index(this) ) .search( this.value ) .draw();
     });
+  })();
 
-    $( "#from" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 1,
-      dateFormat: 'yy-mm-dd',
-      onClose: function( selectedDate ) {
-        $( "#to" ).datepicker( "option", "minDate", selectedDate );
-
-      }
-    });
-    $( "#to" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 1,
-      dateFormat: 'yy-mm-dd',
-      onClose: function( selectedDate ) {
-        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
-
-  });
 
 </script>

@@ -66,8 +66,10 @@
 
 <script>
   $(function() {
+    var exportTable = '<%= 'T' if current_user.admin? %>';
+
     $('#datatable').DataTable({
-      "sDom": '<"pull-left"T>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
+      "sDom": '<"pull-left"' + exportTable + '>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
       "tableTools": {
         "sSwfPath": "swf/copy_csv_xls.swf",
         "aButtons": [{

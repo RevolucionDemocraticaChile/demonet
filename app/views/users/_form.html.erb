@@ -79,6 +79,7 @@
               </div>
             <% end %>
 
+            <% if current_user.admin? %>
             <div class="form-group">
               <%= f.label t(:administrator), class: "col-sm-2 control-label" %>
               <label>
@@ -87,6 +88,7 @@
                 </div>
               </label>
             </div>
+            <% end %>
 
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">

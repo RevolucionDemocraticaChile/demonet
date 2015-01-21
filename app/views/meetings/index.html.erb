@@ -70,12 +70,14 @@
 
     $('#datatable').DataTable({
       "sDom": '<"pull-left"' + exportTable + '>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
+      "columnDefs": [ { "targets": 4, "orderable": false } ],
       "tableTools": {
         "sSwfPath": "swf/copy_csv_xls.swf",
         "aButtons": [{
           "sExtends": "csv",
+          "oSelectorOpts": { filter: 'applied', order: 'current' },
           "sTitle": "listado_reuniones",
-          "sButtonText": "Exportar Todo CSV",
+          "sButtonText": "Exportar CSV (omite filtradas)",
           "mColumns": [0, 1, 2, 3]
         },
         ]},

@@ -83,12 +83,14 @@
     var dt = $('#datatable').DataTable({
       "autoWidth": true,
       "sDom": '<"pull-left"' + exportTable + '>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
+      "columnDefs": [ { "targets": [0, 5], "orderable": false } ],
+      "order": [],
       "tableTools": {
         "sSwfPath": "swf/copy_csv_xls.swf",
         "aButtons": [{
           "sExtends": "csv",
           "sTitle": "listado_espacios",
-          "sButtonText": "Exportar Todo CSV",
+          "sButtonText": "Exportar CSV (omite filtradas)",
           "mColumns": [1, 2, 3, 4],
         },{
           "sExtends": "ajax",

@@ -11,9 +11,18 @@
           <h4><%= t(:users).humanize %></h4>
           <div class="pull-right">
             <form action="<%= users_path %>" method="get" class="form-inline">
-              <%= text_field_tag :from, @from, class: "form-control datepicker", placeholder: @from %>
-              <%= text_field_tag :to, @to, class: "form-control datepicker", placeholder: @to %>
-              <%= text_field_tag :n, @n, class: "form-control", placeholder: @n %>
+              <div class="form-group" style="margin-right:15px">
+                <%= label_tag 'Desde'%>
+                <%= text_field_tag :from, @from, class: "form-control datepicker", placeholder: @from, style: "width:100px" %>
+              </div>
+              <div class="form-group" style="margin-right:15px">
+                <%= label_tag 'Hasta'%>
+              <%= text_field_tag :to, @to, class: "form-control datepicker", placeholder: @to , style: "width:100px" %>
+              </div>
+              <div class="form-group" style="margin-right:15px">
+                <%= label_tag 'Minima asistencias'%>
+                <%= number_field_tag :n, @n, class: "form-control", placeholder: @n, style: "width:60px" %>
+              </div>
               <%= submit_tag "Enviar", :name => nil, class: "btn btn-default" %>
             </form>
           </div>
@@ -23,10 +32,11 @@
             <table id="datatable" class="table table-bordered">
               <thead>
                 <tr>
-                  <th colspan="<%= current_user.admin? ? "6" : '4' %>"></th>
-                  <th style="width:100px"><%= text_field_tag :filter_moderators, "", class: "col-sm-12", placeholders: t(:moderators).humanize %></th>
-                  <th style="width:100px"><%= text_field_tag :filter_members, "", class: "col-sm-12", placeholders: t(:members).humanize %></th>
-                  <th></th>
+                  <th colspan="<%= current_user.admin? ? '5' : '4' %>"></th>
+                  <th style="width:40px"><select id="actives_users" class="form-control"><option value="">todos</option><option value="si">si</option><option value="no">no</option></select></th>
+                  <th style="width:100px"><%= text_field_tag :filter_moderators, nil , class: "col-sm-12", placeholder: t(:moderators).humanize %></th>
+                  <th style="width:100px"><%= text_field_tag :filter_members, nil, class: "col-sm-12", placeholder: t(:members).humanize %></th>
+                  <th style="width:75px"></th>
                 </tr>
                 <tr>
                   <th><%= t(:names).humanize %></th>
@@ -39,7 +49,7 @@
                   <% end %>
                   <th><%= t(:moderator_of).humanize %></th>
                   <th><%= t(:member_of).humanize %></th>
-                  <th ><%= t(:action) %></th>
+                  <th><%= t(:action) %></th>
                 </tr>
               </thead>
 
@@ -56,9 +66,7 @@
                         <%= asistances %>
                       </td>
                       <td class="text-center">
-                        <% if asistances >= @n.to_i %>
-                          <span class="glyphicon glyphicon-ok"></span>
-                        <% end %>
+                        <%= if asistances >= @n.to_i then 'si' else 'no' end %>
                       </td>
                     <% end %>
                     <td>
@@ -93,13 +101,15 @@
 
       var dt = $('#datatable').DataTable({
         "sDom": '<"pull-left"' + exportTable + '>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
+        "columnDefs": [ { "targets": 8, "orderable": false } ],
         "tableTools": {
           "sSwfPath": "swf/copy_csv_xls.swf",
           "aButtons": [{
             "sExtends": "csv",
             "sTitle": "listado_usuarios",
-            "sButtonText": "Exportar Todo CSV",
-            "mColumns": [0, 1, 2, 3, 4, 5, 6, 7]
+            "sButtonText": "Exportar CSV (omite filtradas)",
+            "mColumns": [0, 1, 2, 3, 4, 5, 6, 7],
+            "oSelectorOpts": { filter: 'applied', order: 'current' },
           }, {
             "sExtends": "copy",
             "sButtonText": "Copiar lista de correos",
@@ -110,6 +120,7 @@
             "fnComplete": function(nButton, oConfig, flash, text) {
               var lines = text.split(oConfig.sNewLine).length;
               if (oConfig.bHeader) lines--;
+              console.log(lines);
               if (this.s.dt.nTFoot !== null && oConfig.bFooter) lines--;
               var plural = (lines==1) ? "" : "s";
               this.fnInfo( '<h6>Lista de correos</h6>'+ '<p>Copiado '+lines+' fila'+plural+' al portapapeles.</p>', 1500);
@@ -134,6 +145,12 @@
         var COLUMN_INDEX = 6;
         var index = $("thead input").index(this);
         dt.columns( index + COLUMN_INDEX) .search( this.value ) .draw();
+      });
+
+      $("#actives_users").on("change", function () {
+        console.log(this.value);
+        var COLUMN_INDEX = 5;
+        dt.columns(COLUMN_INDEX).search( this.value ) .draw();
       });
 
       $( "#from" ).datepicker({

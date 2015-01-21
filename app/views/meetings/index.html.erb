@@ -21,7 +21,7 @@
               <thead>
                 <tr>
                   <th><%= t(:title).humanize %></th>
-                  <th><%= t(:group).humanize %></th>
+                  <th><%= t(:groups).humanize %></th>
                   <th><%= t(:attendants).humanize %></th>
                   <th><%= t(:date_lit).humanize %></th>
                   <th width="75px">Acciones</th>
@@ -35,9 +35,7 @@
                       <%= link_to format_meeting_name(meeting), meeting %>
                     </td>
                     <td>
-                      <% meeting.groups.each do |group| %>
-                        <%= link_to group.name, group %>
-                      <% end %>
+                      <%= meeting.groups.map(&:name).join(", ")  %>
                     </td>
 
                     <td class="text-center">
@@ -76,7 +74,9 @@
         "sSwfPath": "swf/copy_csv_xls.swf",
         "aButtons": [{
           "sExtends": "csv",
+          "sTitle": "listado_reuniones",
           "sButtonText": "Exportar Todo CSV",
+          "mColumns": [0, 1, 2, 3]
         },
         ]},
         "oLanguage": {

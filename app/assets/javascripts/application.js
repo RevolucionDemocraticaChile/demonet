@@ -12,7 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require dataTables/extras/dataTables.tableTools
+//= require jquery-ui/datepicker
+//= require jquery-ui/datepicker-es
+//= require data-confirm-modal
+//= require select2
+//= require select2_locale_es
 //= require bootstrap
 //= require turbolinks
 //= require_tree .

@@ -2,13 +2,16 @@ cl:
   account: cuenta
   active: activo
   active_member: miembro activo
+  action: acción
   add: añadir
   add_meeting: agregar reunión
   add_member: agregar miembro
   add_territory: agregar territorio
   add_group: agregar espacio
+  add_user: agregar usuario
   add_user_to_territory: agregar usuario a territorio
   add_administrator: agregar administrador
+  admin_group: administrador de espacio
   administrator: administrador
   are_you_sure: Estás seguro?
   add_attendant: agregar asistente
@@ -27,7 +30,7 @@ cl:
   comission: comisión
   create: crear
   date_lit: fecha
-  demonet: demonet
+  demonet: Demonet - Revolución Democrática
   description: descripción
   destroy: eliminar
   destroy_user: eliminar usuario
@@ -38,19 +41,30 @@ cl:
   edit_group: editar espacio
   edit_meeting: editar reunión
   email: email
+  email_password_recovery: Email enviado con instrucciones de reinicio de contraseña
+  email_not_found: Email no encontrado
   error_creating_association: Hubo un error al crear la asociación.
   finish_time: hora de término
+  first_name: Primer nombre
   group: espacio
   groups: espacios
   has_no_meetings: no tiene reuniones
   invalid_email_pass: Combinación email/clave inválida.
+  invalid_rut: Rut inválido
+  last_name: Apellido
+  list: Lista
   meeting: reunión
   meetings: reuniones
+  member_of: miembro de
   member_of_territory: miembro de territorio
   member_of_group: miembro de espacio
   members: miembros
   minutes: acta
+  moderator: moderador
+  moderator_of: moderador de
+  moderators: moderadores
   name: nombre
+  names: nombres
   new_group: nuevo espacio
   new_meeting: nueva reunión
   new_territory: nuevo territorio
@@ -60,10 +74,15 @@ cl:
   not_signed_in: No estás ingresado.
   password: contraseña
   password_confirmation: confirmar contraseña
+  password_reset: Contraseña ha sido reseteada
+  password_expired: El plazo para cambiar la contraseña ha expirado
+  password_recovery: recuperar contraseña
   profile: perfil
   recent_attendances: asistencias recientes
   recent_meetings: reuniones recientes
+  rut: rut
   save: guardar
+  second_name: Segundo nombre
   select_territory: seleccionar territorio
   select_user: seleccionar usuario
   send: enviar
@@ -86,7 +105,6 @@ cl:
   user_created_successfully: Usuario creado exitosamente.
   user_destroyed_successfully: Usuario eliminado exitosamente.
   user_updated_successfully: Usuario actualizado exitosamente.
-  username: nombre de usuario
   users: usuarios
   welcome: bienvenido
   date:
@@ -280,3 +298,12 @@ cl:
       long: ! '%A %d de %B de %Y %H:%M'
       short: ! '%d de %b %H:%M'
     pm: pm
+  activerecord:
+    attributes:
+      user:
+        first_name: "Primer nombre"
+        second_name: "Segundo nombre"
+        last_name: "Apellido"
+  unauthorized:
+    manage:
+      all: "No tienes acceso a esta area!"

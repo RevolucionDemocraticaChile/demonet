@@ -1,52 +1,187 @@
-<div class="row">
-  <div class="col-lg-12">
-    <h1><%= t(:users).humanize %></h1>
-  </div>
-</div>
+<div class="container">
+  <ol class="breadcrumb">
+    <li > <%= link_to t(:users).humanize, users_path %> </li>
+    <li class="active"> <%= t(:list).humanize %></li>
+  </ol>
 
-<div class="row">
-  <div class="col-lg-2">
-    <% if can? :new, User %>
-      <div class="alert alert-info admin-panel">
-        <strong><%= t(:administration).humanize %></strong>
-        <%= link_to t(:new_user).humanize, new_user_path, class: "btn btn-primary" %>
-      </div>
-    <% end %>
-  </div>
-  <div class="col-lg-8">
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th><%= t(:name).humanize %></th>
-          <th><%= t(:email).humanize %></th>
-          <th><%= t(:username).humanize %></th>
-          <% if current_user.admin? %>
-            <th><%= t(:recent_attendances).humanize %></th>
-            <th><%= t(:active).humanize %>?</th>
-          <% end %>
-        </tr>
-      </thead>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h4><%= t(:users).humanize %></h4>
+          <div class="pull-right">
+            <form action="<%= users_path %>" method="get" class="form-inline">
+              <div class="form-group" style="margin-right:15px">
+                <%= label_tag 'Desde'%>
+                <%= text_field_tag :from, @from, class: "form-control datepicker", placeholder: @from, style: "width:100px" %>
+              </div>
+              <div class="form-group" style="margin-right:15px">
+                <%= label_tag 'Hasta'%>
+              <%= text_field_tag :to, @to, class: "form-control datepicker", placeholder: @to , style: "width:100px" %>
+              </div>
+              <div class="form-group" style="margin-right:15px">
+                <%= label_tag 'Minima asistencias'%>
+                <%= number_field_tag :n, @n, class: "form-control", placeholder: @n, style: "width:60px" %>
+              </div>
+              <%= submit_tag "Enviar", :name => nil, class: "btn btn-default" %>
+            </form>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table id="datatable" class="table table-bordered">
+              <thead>
+                <tr>
+                  <th colspan="4"></th>
+                  <% if current_user.admin? %>
+                    <th></th>
+                    <th style="width:40px"><select id="actives_users" class="form-control"><option value="">todos</option><option value="si">si</option><option value="no">no</option></select></th>
+                  <% end %>
+                    <th style="width:100px"><%= text_field_tag :filter_moderators, nil , class: "col-sm-12", placeholder: t(:moderators).humanize %></th>
+                    <th style="width:100px"><%= text_field_tag :filter_members, nil, class: "col-sm-12", placeholder: t(:members).humanize %></th>
+                  <th style="width:75px"></th>
+                </tr>
+                <tr>
+                  <th><%= t(:names).humanize %></th>
+                  <th><%= t(:last_name).humanize %></th>
+                  <th><%= t(:email).humanize %></th>
+                  <th><%= t(:rut).humanize %></th>
+                  <% if current_user.admin? %>
+                    <th ><%= t(:recent_attendances).humanize %></th>
+                    <th><%= t(:active).humanize %>?</th>
+                  <% end %>
+                  <th><%= t(:moderator_of).humanize %></th>
+                  <th><%= t(:member_of).humanize %></th>
+                  <th><%= t(:action) %></th>
+                </tr>
+              </thead>
 
-      <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <td><%= link_to user.name, user %></td>
-            <td><%= user.email %></td>
-            <td><%= user.username %></td>
-            <% if current_user.admin? %>
-              <td class="text-center">
-                <%= user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count %>
-              </td>
-              <td class="text-center">
-                <% if user.meetings.where(date: (DateTime.now-6.months)..(DateTime.now)).count >= 6 %>
-                  <span class="glyphicon glyphicon-ok"></span>
+              <tbody>
+                <% @users.each do |user| %>
+                  <tr>
+                    <td><%= user.first_name %></td>
+                    <td><%= user.last_name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.rut %></td>
+                    <% if current_user.admin? %>
+                      <td class="text-center" style="width: 40px">
+                        <% asistances = user.meetings.where(date: (@from)..(@to)).count %>
+                        <%= asistances %>
+                      </td>
+                      <td class="text-center">
+                        <%= if asistances >= @n.to_i then 'si' else 'no' end %>
+                      </td>
+                    <% end %>
+                    <td>
+                      <%= user.agroups.map(&:name).join(", ")  %>
+                    </td>
+                    <td>
+                      <%= user.groups.map(&:name).join(", ")  %>
+                    </td>
+                    <td>
+                      <%= link_to user_path(user), class: "btn btn-default btn-sm" do %> <span class="glyphicon glyphicon-zoom-in"></span> <% end %>
+                      <% if can?(:edit, user) %>
+                        <%= link_to edit_user_path(user), class: "btn btn-default btn-sm" do %> <span class="glyphicon glyphicon-edit"></span> <% end %>
+                        <%= link_to user_path(user.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: t(:are_you_sure).humanize }, title: t(:destroy_user).humanize do %> <span class="glyphicon glyphicon-trash"></span> <% end %>
+                      <% end %>
+                    </td>
+                  </tr>
                 <% end %>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+              </tbody>
+            </table>
+          </div>
 
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<script>
+  (function() {
+    $(document).ready(function() {
+      var exportTable = '<%= 'T' if current_user.admin? %>';
+      var isAdmin =  '<%= '1' if current_user.admin? %>';
+      var columnsAdmin = 8;
+      if (!isAdmin) {
+        columnsAdmin -=2;
+      }
+
+      var dt = $('#datatable').DataTable({
+        "sDom": '<"pull-left"' + exportTable + '>frt<"widget-foot" <"info_table pull-left"i><"pagination pull-right"p><"clearfix">>',
+        "columnDefs": [ { "targets": columnsAdmin, "orderable": false } ],
+        "tableTools": {
+          "sSwfPath": "swf/copy_csv_xls.swf",
+          "aButtons": [{
+            "sExtends": "csv",
+            "sTitle": "listado_usuarios",
+            "sButtonText": "Exportar CSV (omite filtradas)",
+            "mColumns": [0, 1, 2, 3, 4, 5, 6, 7],
+            "oSelectorOpts": { filter: 'applied', order: 'current' },
+          }, {
+            "sExtends": "copy",
+            "sButtonText": "Copiar lista de correos",
+            "mColumns": [2],
+            "bHeader": false,
+            "sNewLine": ",",
+            "oSelectorOpts": { filter: 'applied', order: 'current' },
+            "fnComplete": function(nButton, oConfig, flash, text) {
+              var lines = text.split(oConfig.sNewLine).length;
+              if (oConfig.bHeader) lines--;
+              console.log(lines);
+              if (this.s.dt.nTFoot !== null && oConfig.bFooter) lines--;
+              var plural = (lines==1) ? "" : "s";
+              this.fnInfo( '<h6>Lista de correos</h6>'+ '<p>Copiado '+lines+' fila'+plural+' al portapapeles.</p>', 1500);
+            }
+          }
+          ]},
+          "oLanguage": {
+            "sSearch": "Filtrar: ",
+            "sZeroRecords": "No se encontraron usuarios",
+            "sInfo": "Mostrando _START_ a _END_ usuarios de un total de _TOTAL_ ",
+            "sInfoEmpty": "Mostrando 0 a 0 usuarios de un total de 0",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "oPaginate": {
+              "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right'></span>",
+              "sPrevious": "<span class='glyphicon glyphicon-chevron-left'></span> Anterior",
+            }
+          }
+      });
+
+      // Custom search by columns
+      $("thead input").on('keyup', function () {
+        var COLUMN_INDEX = 6;
+        var index = $("thead input").index(this);
+        dt.columns( index + COLUMN_INDEX) .search( this.value ) .draw();
+      });
+
+      $("#actives_users").on("change", function () {
+        var COLUMN_INDEX = 5;
+        dt.columns(COLUMN_INDEX).search( this.value ) .draw();
+      });
+
+      $( "#from" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        dateFormat: 'yy-mm-dd',
+        onClose: function( selectedDate ) {
+          $( "#to" ).datepicker( "option", "minDate", selectedDate );
+
+        }
+      });
+      $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        dateFormat: 'yy-mm-dd',
+        onClose: function( selectedDate ) {
+          $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+        }
+      });
+
+    });
+  })();
+
+
+</script>

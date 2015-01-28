@@ -12,21 +12,33 @@
 </head>
 <body>
 
-  <div class="container">
+  <div>
     <%= render 'layouts/header' %>
+  </div>
 
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %> <%= "alert-danger" if key == "error" %> alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
-        <%= value %>
+    <div class="content">
+      <div class="sidebar" >
+        <%= render 'layouts/sidebar' %>
       </div>
-    <% end %>
 
-    <%= yield %>
+      <div id="mainbar">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %> <%= "alert-danger" if key == "error" %> alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Cerrar</span></button>
+            <%= value %>
+          </div>
+        <% end %>
 
-    <%= render 'layouts/footer' %>
+        <%= yield %>
 
-    <%= debug(params) if Rails.env.development? %>
+      <%= render 'layouts/footer' %>
+      <%= debug(params) if Rails.env.development? %>
+      </div>
+
+
+     <!-- Mainbar ends -->
+     <div class="clearfix">
+     </div>
   </div>
 
 </body>

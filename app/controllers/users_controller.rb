@@ -5,7 +5,11 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    @from = params['from'] || DateTime.now.to_date - 12.months
+    @to = params['to'] || DateTime.now.to_date
+    @n = params['n'] || 12
+    @labels = ['default', 'primary', 'success', 'info', 'warning', 'danger']
+    @users = User.eager_load(:groups, :agroups).all
   end
 
   # GET /users/1
@@ -29,7 +33,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      # sign_in @user
       flash[:success] = t(:user_created_successfully)
       redirect_to @user
     else
@@ -62,7 +65,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :name, :password, :password_confirmation)
+      params.require(:user).permit(:email, :first_name, :second_name, :last_name, :password, :password_confirmation, :rut, :admin)
     end
 
 end

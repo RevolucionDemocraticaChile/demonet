@@ -1,12 +1,5 @@
 <li data-group-id="<%= meeting_group.group_id %>">
   <span class="organizing_group">
     <%= link_to meeting_group.group.name, meeting_group.group %>
-    <% if removable %>
-      <%= form_for meeting_group, html: { method: :delete }, remote: true do |f| %>
-        <%= f.button type: "submit" do %>
-          <span class="glyphicon glyphicon-remove"></span>
-        <% end %>
-      <% end %>
-    <% end %>
   </span>
 </li>

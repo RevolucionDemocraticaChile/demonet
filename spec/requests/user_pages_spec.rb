@@ -59,7 +59,6 @@ describe "User pages" do
       before { visit user_path(signed_in_user) }
 
       it { should have_content("Perfil") }
-      it { should have_content(signed_in_user.username) }
       it { should have_content(signed_in_user.email) }
       it { should have_content(signed_in_user.name) }
       it { should have_link("Editar") }
@@ -70,7 +69,6 @@ describe "User pages" do
       before { visit user_path(another_user) }
 
       it { should have_content("Perfil") }
-      it { should have_content(another_user.username) }
       it { should have_content(another_user.email) }
       it { should have_content(another_user.name) }
       it { should_not have_link("Editar") }
@@ -88,7 +86,6 @@ describe "User pages" do
     #
     #   describe "with valid information" do
     #     before do
-    #       fill_in "Username",              with: "username"
     #       fill_in "Email",                 with: "email@email.com"
     #       fill_in "Name",                  with: "Name Surname"
     #       fill_in "Password",              with: "thepass"

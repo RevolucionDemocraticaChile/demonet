@@ -15,7 +15,6 @@
 /log/*.log
 /tmp
 
-database.yml
 doc/
 *.swp
 *~
@@ -23,3 +22,4 @@ doc/
 .DS_Store
 .idea
 .secret
+.ruby-version

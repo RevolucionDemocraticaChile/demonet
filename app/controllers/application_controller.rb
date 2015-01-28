@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   before_filter :check_session
-
   check_authorization
 
   rescue_from CanCan::AccessDenied do |e|

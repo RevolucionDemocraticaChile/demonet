@@ -1,34 +1,93 @@
-<%= form_for @group, html: { class: "form-horizontal" } do |f| %>
-  <% if @group.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(@group.errors.count, "error") %>:</h2>
+<div class="container">
+  <ol class="breadcrumb">
+    <li > <%= link_to t(:groups).humanize, groups_path %> </li>
+    <% if action_name == 'new' %>
+      <li class="active"> <%= t(:add).humanize %></li>
+    <% else %>
+      <li class="active"> <%= t(:edit).humanize %></li>
+    <% end %>
+  </ol>
+  <div class="row">
+    <div class="col-lg-12">
 
-      <ul>
-      <% @group.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <% if action_name == 'new' %>
+            <h4><%= t(:add_group).humanize %></h4>
+          <% else %>
+            <h4><%= t(:edit_group).humanize %></h4>
+          <% end %>
+        </div>
+        <div class="panel-body">
 
-  <div class="form-group">
-    <%= label_tag :group_type, t(:type).humanize, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <select name="group[type]" class="form-control">
-        <option value="Territory"><%= t(:territory).humanize %></option>
-        <option value="Comission"><%= t(:comission).humanize %></option>
-      </select>
+          <%= form_for @group, html: { class: "form-horizontal" } do |f| %>
+            <% if @group.errors.any? %>
+              <div id="error_explanation" class="alert alert-danger">
+                <h4><%= pluralize(@group.errors.count, "error") %>:</h4>
+
+                <ul>
+                  <% @group.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= label_tag :group_type, t(:type).humanize, class: "col-sm-2 control-label" %>
+              <div class="col-sm-10">
+                <select name="group[type]" class="form-control">
+                  <option value="Territory"><%= t(:territory).humanize %></option>
+                  <option value="Comission"><%= t(:comission).humanize %></option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= label_tag :group_name, t(:name).humanize, class: "col-sm-2 control-label" %>
+              <div class="col-sm-10">
+                <%= f.text_field :name, class: "form-control", placeholder: t(:name).humanize %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="group_type">Moderadores</label>
+              <div class="col-sm-10">
+                <%= collection_select(:adminGroup, :users, User.all, :id, :full_name, {:selected => @group.admin_groups.map(&:user_id), include_hidden: false}, {multiple: "multiple",class: "select2-container select2-container-multi form-control ng-valid ng-dirty"}) %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="group_type">Miembros
+              </label>
+              <div class="col-sm-10">
+                <%= collection_select(:memberGroup, :users, User.all, :id, :full_name, {:selected => @group.member_groups.map(&:user_id), include_hidden: false}, {multiple: "multiple", class: "select2-container select2-container-multi form-control ng-valid ng-dirty"}) %>
+              </div>
+            </div>
+            <div class="form-group">
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <%= f.submit t(:send).humanize, class: "btn btn-primary" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="form-group">
-    <%= label_tag :group_name, t(:name).humanize, class: "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.text_field :name, class: "form-control", placeholder: t(:name).humanize %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit t(:send).humanize, class: "btn btn-primary" %>
-    </div>
-  </div>
-<% end %>
+
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#adminGroup_users').select2({
+        placeholder: "Selecciona moderadores",
+        allowClear: true
+      });
+      $('#memberGroup_users').select2({
+        placeholder: "Selecciona miembros",
+        allowClear: true
+      });
+
+      // $('#adminGroup_users').select2('val',['2','3']);
+    });
+  </script>
+</div>
+

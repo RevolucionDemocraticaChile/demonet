@@ -92,7 +92,11 @@
 
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
-                <%= f.submit t(:create).humanize, class: "btn btn-primary" %>
+                <% if action_name == 'new' %>
+                  <%= f.submit t(:create).humanize, class: "btn btn-primary" %>
+                <% else %>
+                  <%= f.submit t(:edit).humanize, class: "btn btn-primary" %>
+                <% end%>
               </div>
             </div>
           <% end %>

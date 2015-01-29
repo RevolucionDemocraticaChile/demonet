@@ -29,6 +29,7 @@ cl:
   back: atrás
   comission: comisión
   create: crear
+  congressional_office: diputación
   date_lit: fecha
   demonet: Demonet - Revolución Democrática
   description: descripción
@@ -36,16 +37,19 @@ cl:
   destroy_user: eliminar usuario
   destroy_group: eliminar espacio
   destroy_meeting: eliminar reunión
+  directive: directiva
   edit: editar
   edit_user: editar usuario
   edit_group: editar espacio
   edit_meeting: editar reunión
+  executive: ejecutiva
   email: email
   email_password_recovery: Email enviado con instrucciones de reinicio de contraseña
   email_not_found: Email no encontrado
   error_creating_association: Hubo un error al crear la asociación.
   finish_time: hora de término
   first_name: Primer nombre
+  front: frente
   group: espacio
   groups: espacios
   has_no_meetings: no tiene reuniones
@@ -72,6 +76,7 @@ cl:
   need_more_attendances: "Necesitas más de %{number} asistencias recientes para ser miembro activo."
   not_authorized: No estás autorizado.
   not_signed_in: No estás ingresado.
+  others: otros
   password: contraseña
   password_confirmation: confirmar contraseña
   password_reset: Contraseña ha sido reseteada

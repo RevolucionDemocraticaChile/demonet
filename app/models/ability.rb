@@ -7,7 +7,7 @@ class Ability
 
     can :index, User
     can :show,  User
-    can :edit,  User, id: user.id
+    can [:edit, :update],  User, id: user.id
 
     can :index, Group
     can :show,  Group

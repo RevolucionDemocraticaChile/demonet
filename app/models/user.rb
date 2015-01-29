@@ -46,7 +46,6 @@ class User < ActiveRecord::Base
     length:     { maximum: FIRSTNAME_MAX_LENGTH }
 
   validates :second_name,
-    presence:   true,
     length:     { maximum: SECONDNAME_MAX_LENGTH}
 
   validates :last_name,

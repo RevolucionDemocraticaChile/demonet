@@ -17,13 +17,16 @@
 
 class Meeting < ActiveRecord::Base
 
+  MINUTES_MAX_LENGTH = 20000
+
   has_many :user_meetings
   has_many :users, through: :user_meetings
 
   has_many :meeting_groups
   has_many :groups, through: :meeting_groups
 
-  # validates :group,
-  #   presence: true
+  validates :minutes,
+    presence:   true,
+    length:     { maximum: MINUTES_MAX_LENGTH }
 
 end

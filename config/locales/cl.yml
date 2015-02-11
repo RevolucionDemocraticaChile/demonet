@@ -309,6 +309,8 @@ cl:
         first_name: "Primer nombre"
         second_name: "Segundo nombre"
         last_name: "Apellido"
+      meeting:
+        minutes: "acta"
   unauthorized:
     manage:
       all: "No tienes acceso a esta area!"

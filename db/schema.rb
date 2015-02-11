@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113041434) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20150211160349) do
 
   create_table "admin_groups", force: true do |t|
     t.integer  "user_id"
@@ -23,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150113041434) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_groups", ["user_id", "group_id"], name: "index_admin_groups_on_user_id_and_group_id", unique: true, using: :btree
+  add_index "admin_groups", ["user_id", "group_id"], name: "index_admin_groups_on_user_id_and_group_id", unique: true
 
   create_table "groups", force: true do |t|
     t.string   "name"
@@ -41,7 +38,7 @@ ActiveRecord::Schema.define(version: 20150113041434) do
     t.datetime "updated_at"
   end
 
-  add_index "meeting_groups", ["meeting_id", "group_id"], name: "index_meeting_groups_on_meeting_id_and_group_id", unique: true, using: :btree
+  add_index "meeting_groups", ["meeting_id", "group_id"], name: "index_meeting_groups_on_meeting_id_and_group_id", unique: true
 
   create_table "meetings", force: true do |t|
     t.date     "date"
@@ -49,7 +46,7 @@ ActiveRecord::Schema.define(version: 20150113041434) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state"
-    t.string   "minutes"
+    t.text     "minutes",    limit: 255
     t.string   "place"
     t.string   "title"
     t.datetime "start"
@@ -63,7 +60,7 @@ ActiveRecord::Schema.define(version: 20150113041434) do
     t.datetime "updated_at"
   end
 
-  add_index "member_groups", ["user_id", "group_id"], name: "index_member_groups_on_user_id_and_group_id", unique: true, using: :btree
+  add_index "member_groups", ["user_id", "group_id"], name: "index_member_groups_on_user_id_and_group_id", unique: true
 
   create_table "user_meetings", force: true do |t|
     t.integer  "user_id"
@@ -72,7 +69,7 @@ ActiveRecord::Schema.define(version: 20150113041434) do
     t.datetime "updated_at"
   end
 
-  add_index "user_meetings", ["user_id", "meeting_id"], name: "index_user_meetings_on_user_id_and_meeting_id", unique: true, using: :btree
+  add_index "user_meetings", ["user_id", "meeting_id"], name: "index_user_meetings_on_user_id_and_meeting_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email"
@@ -90,7 +87,7 @@ ActiveRecord::Schema.define(version: 20150113041434) do
     t.datetime "reset_sent_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end

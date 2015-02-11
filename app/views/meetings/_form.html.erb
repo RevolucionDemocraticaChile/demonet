@@ -92,7 +92,6 @@
               function Editor(input, preview) {
                 this.update = function () {
                   preview.innerHTML = markdown.toHTML(input.value);
-                  // preview.html( markdown.toHTML(input.value() ));
                 };
                 input.editor = this;
                 this.update();
@@ -104,7 +103,7 @@
 
               textArea.on('change keyup paste', function() {
                 $(this).css('height', preview.parent().height());
-              });
+              }).trigger('change');
             </script>
 
 
@@ -131,7 +130,6 @@
         allowClear: true
       });
 
-      // $('#adminGroup_users').select2('val',['2','3']);
     });
   </script>
 </div>

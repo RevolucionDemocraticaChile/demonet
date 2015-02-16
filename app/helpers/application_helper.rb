@@ -10,4 +10,10 @@ module ApplicationHelper
 
   MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP = 6
 
+  # @DEMONET_VERSION = "1.0"
+
+  def demonet_version
+    "0.1.0"
+  end
+
 end

@@ -22,7 +22,7 @@ class Group < ActiveRecord::Base
   has_many :meetings, through: :meeting_groups
 
   has_many :admin_groups
-  has_many :admins, through: :admin_groups
+  has_many :admins, through: :admin_groups, source: :user
 
   has_many :member_groups
   has_many :members, through: :member_groups, source: :user

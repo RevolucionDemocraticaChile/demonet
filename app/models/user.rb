@@ -16,6 +16,11 @@
 #  rut             :string(255)
 #  reset_digest    :string(255)
 #  reset_sent_at   :datetime
+#  birthdate       :date
+#  city            :string(255)
+#  description     :text
+#  mobile_number   :string(255)
+#  twitter_user    :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -28,6 +33,9 @@ class User < ActiveRecord::Base
   LASTNAME_MAX_LENGTH   = 50
   PASSWORD_MIN_LENGTH    = 6
   VALID_EMAIL_REGEX      = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP = 6
+  RECENT_TIME_MONTHS = 12
 
   has_many :member_groups
   has_many :groups, through: :member_groups
@@ -79,6 +87,16 @@ class User < ActiveRecord::Base
 
   def admin?
     admin
+  end
+
+  def active?
+    recent_attendances >= MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP
+  end
+
+  def recent_attendances
+    from = DateTime.now.to_date - RECENT_TIME_MONTHS.months
+    to   = DateTime.now.to_date
+    self.meetings.where(date: (from)..(to)).count
   end
 
   def remember

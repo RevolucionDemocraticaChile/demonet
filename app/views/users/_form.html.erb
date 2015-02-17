@@ -8,7 +8,7 @@
     <% end %>
   </ol>
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6 col-lg-offset-3">
 
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
@@ -34,46 +34,84 @@
             <% end %>
 
             <div class="form-group">
-              <%= f.label t(:email), class: "col-sm-2 control-label" %>
-              <div class="col-sm-10">
+              <%= f.label t(:email), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.text_field :email, class: "form-control", placeholder: t(:email).humanize %>
               </div>
             </div>
+
             <div class="form-group">
-              <%= f.label t(:first_name), class: "col-sm-2 control-label" %>
-              <div class="col-sm-10">
+              <%= f.label t(:first_name), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.text_field :first_name, class: "form-control", placeholder: t(:first_name).humanize %>
               </div>
             </div>
             <div class="form-group">
-              <%= f.label t(:second_name), class: "col-sm-2 control-label" %>
-              <div class="col-sm-10">
+              <%= f.label t(:second_name), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.text_field :second_name, class: "form-control", placeholder: t(:second_name).humanize %>
               </div>
             </div>
+
             <div class="form-group">
-              <%= f.label t(:last_name), class: "col-sm-2 control-label" %>
-              <div class="col-sm-10">
+              <%= f.label t(:last_name), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.text_field :last_name, class: "form-control", placeholder: t(:last_name).humanize %>
               </div>
             </div>
+
             <div class="form-group">
-              <%= f.label t(:rut), class: "col-sm-2 control-label" %>
-              <div class="col-sm-10">
+              <%= f.label t(:rut), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.text_field :rut, class: "form-control", placeholder: t(:rut).humanize %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label t(:birthdate), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.date_field :birthdate, class: "form-control", placeholder: t(:birthdate).humanize, include_blank: true %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label t(:city), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.text_field :city, class: "form-control", placeholder: t(:city).humanize, include_blank: true %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label t(:description), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.text_area :description, class: "form-control", placeholder: t(:description).humanize, include_blank: true %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label t(:mobile_number), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.text_field :mobile_number, class: "form-control", placeholder: t(:mobile_number).humanize, include_blank: true %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label t(:twitter_user), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.text_field :twitter_user, class: "form-control", placeholder: t(:twitter_user).humanize, include_blank: true %>
               </div>
             </div>
 
             <% if action_name != "new" %>
               <div class="form-group">
-                <%= f.label t(:password), class: "col-sm-2 control-label" %>
-                <div class="col-sm-10">
+                <%= f.label t(:password), class: "col-sm-3 control-label" %>
+                <div class="col-sm-9">
                   <%= f.password_field :password, class: "form-control", placeholder: t(:password).humanize %>
                 </div>
               </div>
               <div class="form-group">
-                <%= f.label t(:password_confirmation), class: "col-sm-2 control-label" %>
-                <div class="col-sm-10">
+                <%= f.label t(:password_confirmation), class: "col-sm-3 control-label" %>
+                <div class="col-sm-9">
                   <%= f.password_field :password_confirmation, class: "form-control", placeholder: t(:password_confirmation).humanize %>
                 </div>
               </div>
@@ -81,9 +119,9 @@
 
             <% if current_user.admin? %>
             <div class="form-group">
-              <%= f.label t(:administrator), class: "col-sm-2 control-label" %>
+              <%= f.label t(:administrator), class: "col-sm-3 control-label" %>
               <label>
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                   <%= f.check_box :admin, checked: @user.admin %>
                 </div>
               </label>
@@ -91,11 +129,11 @@
             <% end %>
 
             <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
+              <div class="col-sm-offset-3 col-sm-9">
                 <% if action_name == 'new' %>
                   <%= f.submit t(:create).humanize, class: "btn btn-primary" %>
                 <% else %>
-                  <%= f.submit t(:edit).humanize, class: "btn btn-primary" %>
+                  <%= f.submit t(:send).humanize, class: "btn btn-primary" %>
                 <% end%>
               </div>
             </div>

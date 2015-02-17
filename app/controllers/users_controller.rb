@@ -6,10 +6,19 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @from = params['from'] || DateTime.now.to_date - 12.months
-    @to = params['to'] || DateTime.now.to_date
-    @n = params['n'] || 12
+    @to =   params['to'] || DateTime.now.to_date
+    @n =    params['n'] || 12
     @labels = ['default', 'primary', 'success', 'info', 'warning', 'danger']
-    @users = User.eager_load(:groups, :agroups).all
+    # @users = User.eager_load(:groups, :agroups).all
+    @users = User.all
+
+    # puts "|| #{@users.count}"
+    # @users.each do |u|
+    #   puts "|| #{u.inspect}"
+    #   puts "|| #{u.groups.count}"
+    #   puts "|| #{u.groups.inspect}"
+    # end
+    # puts "|| #{@users.count}"
   end
 
   # GET /users/1
@@ -65,7 +74,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :first_name, :second_name, :last_name, :password, :password_confirmation, :rut, :admin)
+      params.require(:user).permit(:email, :first_name, :second_name, :last_name, :password, :password_confirmation, :rut, :admin, :birthdate, :city, :description, :mobile_number, :twitter_user)
     end
 
 end

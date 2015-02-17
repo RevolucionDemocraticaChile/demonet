@@ -16,6 +16,11 @@
 #  rut             :string(255)
 #  reset_digest    :string(255)
 #  reset_sent_at   :datetime
+#  birthdate       :date
+#  city            :string(255)
+#  description     :text
+#  mobile_number   :string(255)
+#  twitter_user    :string(255)
 #
 
 require 'rails_helper'

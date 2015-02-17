@@ -8,12 +8,16 @@ module ApplicationHelper
   #   groups.join(',')
   # end
 
-  MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP = 6
+  def min_recent
+    User::MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP
+  end
 
-  # @DEMONET_VERSION = "1.0"
+  def recent_time_months
+    User::RECENT_TIME_MONTHS
+  end
 
   def demonet_version
-    "0.1.0"
+    Demonet::Application::DEMONET_VERSION
   end
 
 end

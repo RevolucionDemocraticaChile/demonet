@@ -27,6 +27,8 @@ cl:
   administrators: administradores
   attendants: asistentes
   back: atrás
+  birthdate: Fecha de Nacimiento
+  city: Cuidad de residencia
   comission: comisión
   create: crear
   congressional_office: diputación
@@ -53,6 +55,7 @@ cl:
   group: espacio
   groups: espacios
   has_no_meetings: no tiene reuniones
+  has_no_groups: no tiene espacios
   invalid_email_pass: Combinación email/clave inválida.
   invalid_rut: Rut inválido
   last_name: Apellido
@@ -64,6 +67,7 @@ cl:
   member_of_group: miembro de espacio
   members: miembros
   minutes: acta
+  mobile_number: Número móvil
   moderator: moderador
   moderator_of: moderador de
   moderators: moderadores
@@ -105,6 +109,7 @@ cl:
   territory_name: nombre del territorio
   territory_updated_successfully: Territorio actualizado exitosamente.
   title: título
+  twitter_user: Usuario Twitter
   type: tipo
   user: usuario
   user_information: información del usuario

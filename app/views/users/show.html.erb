@@ -9,18 +9,31 @@
 
 <div class="row">
   <div class="col-lg-offset-3 col-lg-6">
-    <% if @user.active? %>
-      <div class="alert alert-success text-center">
-        <strong>Miembro Activo</strong>
-        <p>En los últimos <strong><%= min_recent %></strong> meses has asistido a <strong><%= @user.recent_attendances %></strong> reuniones.</p>
-      </div>
+    <% if current_user == @user %>
+      <% if @user.active? %>
+        <div class="alert alert-success text-center">
+          <strong>Miembro Activo</strong>
+          <p>En los últimos <strong><%= min_recent %></strong> meses has asistido a <strong><%= @user.recent_attendances %></strong> reuniones.</p>
+        </div>
+      <% else %>
+        <div class="alert alert-danger text-center" role="alert">
+          <strong>No eres Miembro Activo!</strong>
+          <p>En los últimos <strong><%= min_recent %></strong> meses sólo has asistido a <strong><%= @user.recent_attendances %></strong> reuniones.</p>
+          <p>Recuerda que debes haber asistido a al menos <strong><%= min_recent %></strong> reuniones en los últimos <strong><%= recent_time_months %></strong> meses para ser considerado Miembro Activo.</p>
+        </div>
+      <% end %>
     <% else %>
-      <div class="alert alert-danger text-center" role="alert">
-        <strong>No eres Miembro Activo!</strong>
-        <p>En los últimos <strong><%= min_recent %></strong> meses sólo has asistido a <strong><%= @user.recent_attendances %></strong> reuniones.</p>
-        <p>Recuerda que debes haber asistido a al menos <strong><%= min_recent %></strong> reuniones en los últimos <strong><%= recent_time_months %></strong> meses para ser considerado Miembro Activo.</p>
-      </div>
+      <% if @user.active? %>
+        <div class="alert alert-success text-center">
+          <strong>Miembro Activo</strong>
+        </div>
+      <% else %>
+        <div class="alert alert-warning text-center" role="alert">
+          <strong>Miembro Adherente</strong>
+        </div>
+      <% end %>
     <% end %>
+
   </div>
 </div>
 

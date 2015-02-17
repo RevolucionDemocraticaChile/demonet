@@ -14,6 +14,9 @@
 #  second_name     :string(255)
 #  last_name       :string(255)
 #  rut             :string(255)
+#  reset_digest    :string(255)
+#  reset_sent_at   :datetime
+#
 
 class User < ActiveRecord::Base
   include RunCl::ActAsRun

@@ -8,7 +8,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  state      :string(255)
-#  minutes    :string(255)
+#  minutes    :text
 #  place      :string(255)
 #  title      :string(255)
 #  start      :datetime

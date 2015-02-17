@@ -1,181 +1,92 @@
 <ol class="breadcrumb">
-  <li > <%= link_to t(:groups).humanize, groups_path %> </li>
-  <li class="active"></li>
+  <li><%= link_to t(:meetings).humanize, meetings_path %> </li>
+  <li class="active"><%= t(:meeting).humanize %></li>
 </ol>
-  
+
+<h1><%= format_meeting_name(@meeting) %></h1>
+
 <div class="row">
-  <div class="col-lg-2">
-    <% if can?(:edit, @meeting) || can?(:destroy, @meeting) %>
-      <div class="alert alert-info admin-panel">
-        <strong><%= t(:administration).humanize %></strong>
-        <% if can?(:destroy, @meeting) %>
-          <%= link_to t(:destroy_meeting).humanize, meeting_path(@meeting), method: :delete, class: "btn btn-danger", data: { confirm: t(:are_you_sure).humanize } %>
-        <% end %>
-        <hr />
-        <%= form_for UserMeeting.new, remote: true, html: {class: "form-inline"} do |f| %>
-          <%= f.hidden_field :meeting_id, value: @meeting.id %>
-          <!-- <div class="form-group"> -->
-            <%= f.collection_select :user_id, User.all, :id, :name, {}, {class: "form-control"} %>
-          <!-- </div> -->
-          <div class="form-group">
-            <%= f.submit t(:add_attendant).humanize, class: "btn btn-primary" %>
-          </div>
-        <% end %>
+  <div class="col-lg-offset-1 col-lg-10">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Información</h3>
       </div>
-    <% end %>
-  </div>
->>>>>>> 2d068c4a7f3da755d32b5b07a0207bc6cb9185a5
-
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-          <%= t(:meeting).humanize %>:
-        </div>
-        <div class="panel-body">
-
-      <strong><%= t(:description).humanize %>:</strong>
-      <%= @meeting.desc %>
-
-<<<<<<< HEAD
-      <h2><%= t(:groups).humanize %></h2>
-
-      <ul id="organizing_groups_ul">
-        <% @meeting.meeting_groups.each do |meeting_group| %>
-          <%= render partial: "organizing_group_li", locals: {meeting_group: meeting_group, removable: can?(:edit, @meeting) } %>
-        <% end %>
-      </ul>
-=======
-    <h2><%= t(:organized_by).humanize %></h2>
-
-    <ul id="organizing_groups_ul">
-      <% @meeting.meeting_groups.each do |meeting_group| %>
-        <!-- <%= render partial: "organizing_group_li", locals: {meeting_group: meeting_group, removable: can?(:edit, @meeting) } %> -->
-        <li data-group-id="<%= meeting_group.group_id %>">
-          <div class="form-inline">
-            <div class="input-group">
-              <div class="form-control">
-                <%= link_to meeting_group.group.name, meeting_group.group %>
-              </div>
-
-              <% if can?(:destroy,meeting_group) %>
-                <span class="input-group-btn">
-                  <%= form_for meeting_group, html: { method: :delete, class:"form-inline" }, remote: true do |f| %>
-                    <button name="commit" type="submit" class="btn btn-danger">
-                      <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                  <% end %>
-                </span>
-
+      <table class="table">
+        <tbody>
+          <tr>
+            <td class="text-right">
+              <strong><%= t(:description).humanize %>:</strong>
+            </td>
+            <td>
+              <%= @meeting.desc %>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-right">
+              <strong>Organiza:</strong>
+            </td>
+            <td>
+              <% @meeting.meeting_groups.each do |mg| %>
+                <%= link_to mg.group.name, mg.group %><br />
               <% end %>
-            </div>
-          </div>
-        </li>
-      <% end %>
-      <% if can? :edit, @meeting %>
-        <li>
-          <%= form_for MeetingGroup.new, remote: true, html: {class: "form-inline", id: "add_organizing_group"} do |f| %>
-            <%= f.hidden_field :meeting_id, value: @meeting.id %>
-              <div class="input-group">
-                <%= f.text_field :group_id, class: "form-control", onfocus: "alert('asdf')" %>
-                <span class="input-group-btn">
-                  <button class="btn btn-primary" type="submit">
-                    <span class="glyphicon glyphicon-plus"></span>
-                  </button>
-                </span>
-              </div>
-          <% end %>
-        </li>
-      <% end %>
-
-    </ul>
->>>>>>> 2d068c4a7f3da755d32b5b07a0207bc6cb9185a5
-
-    <h2><%= t(:attendants).humanize %></h2>
-
-    <ul id="attendants_ul">
-      <% @meeting.user_meetings.each do |user_meeting| %>
-        <%= render partial: "attendant_li", locals: {user_meeting: user_meeting, removable: can?(:edit, @meeting) } %>
-      <% end %>
-    </ul>
-
-
-    <% if can?(:edit, @meeting) %>
-      <%= form_for @meeting do |f| %>
-
-        <div class="meeting_time">
-          <h2><%= t(:start_time) %></h2>
-
-          <%= f.time_field :start, class: "meeting_time_field" %>
-        </div>
-
-        <h2><%= t(:minutes).humanize %></h2>
-
-        <div id="minutes_preview">
-        </div>
-        <%= f.text_area :minutes, class: "meeting_minutes_field form-control", id: "minutes_textarea", oninput: "this.editor.update()" %>
-
-        <script>
-          function Editor(input, preview) {
-            this.update = function () {
-              preview.innerHTML = markdown.toHTML(input.value);
-              // preview.html( markdown.toHTML(input.value() ));
-            };
-            input.editor = this;
-            this.update();
-          }
-          // var $ = function (id) { return document.getElementById(id); };
-          new Editor(document.getElementById("minutes_textarea"), document.getElementById("minutes_preview"));
-        </script>
-
-        <div class="meeting_time">
-          <h2><%= t(:finish_time) %></h2>
-
-          <%= f.time_field :finish, class: "meeting_time_field" %>
-        </div>
-
-        <div class="text-center">
-          <%= f.submit t(:send).humanize, class: "btn btn-lg btn-primary" %>
-        </div>
-
-
-      <% end %>
-    <% else %>
-      <div class="meeting_time">
-        <h2><%= t(:start_time) %></h2>
-
-        <%= datetime_field_tag :start, @meeting.start, class: "meeting_time_field" %>
-      </div>
-
-      <h2><%= t(:minutes).humanize %></h2>
-
-      <div id="minutes_preview">
-      </div>
-      <%= hidden_field_tag :minutes, @meeting.minutes, class: "meeting_minutes_field form-control", id: "minutes_textarea", oninput: "this.editor.update()" %>
-
-      <script>
-        function Editor(input, preview) {
-          this.update = function () {
-            preview.innerHTML = markdown.toHTML(input.value);
-            // preview.html( markdown.toHTML(input.value() ));
-          };
-          input.editor = this;
-          this.update();
-        }
-        // var $ = function (id) { return document.getElementById(id); };
-        new Editor(document.getElementById("minutes_textarea"), document.getElementById("minutes_preview"));
-      </script>
-
-      <div class="meeting_time">
-        <h2><%= t(:finish_time) %></h2>
-
-        <%= datetime_field_tag :finish, @meeting.finish, class: "meeting_time_field" %>
-      </div>
-    <% end %>
-
-
-
-
-
+            </td>
+          </tr>
+          <tr>
+            <td class="text-right">
+              <strong>Hora inicio:</strong>
+            </td>
+            <td>
+              <%= @meeting.start %>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-right">
+              <strong>Hora término:</strong>
+            </td>
+            <td>
+              <%= @meeting.finish %>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-right">
+              <strong>Asisten:</strong>
+            </td>
+            <td>
+              <% @meeting.user_meetings.each do |um| %>
+                <%= link_to format_user_name(um.user), um.user %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-lg-offset-1 col-lg-10">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h3 class="panel-title"><%= t(:minutes).humanize %></h3>
+      </div>
+      <div class="panel-body minutes_panel_body">
+        <div id="minutes_preview"></div>
+        <%= hidden_field_tag :minutes, @meeting.minutes, class: "meeting_minutes_field form-control", id: "minutes_textarea", oninput: "this.editor.update()" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function Editor(input, preview) {
+    this.update = function () {
+      preview.innerHTML = markdown.toHTML(input.value);
+      // preview.html( markdown.toHTML(input.value() ));
+    };
+    input.editor = this;
+    this.update();
+  }
+  // var $ = function (id) { return document.getElementById(id); };
+  new Editor(document.getElementById("minutes_textarea"), document.getElementById("minutes_preview"));
+</script>

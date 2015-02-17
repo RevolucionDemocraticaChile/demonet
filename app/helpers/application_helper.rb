@@ -4,6 +4,10 @@ module ApplicationHelper
     "#{t(:meeting).humanize} #{(meeting.groups.map { |g| g.name }).join(', ')} #{l(Date.parse(meeting.date.to_s))}"
   end
 
+  def format_user_name(user)
+    "#{user.first_name} #{user.last_name}"
+  end
+
   # def format_group_names(groups)
   #   groups.join(',')
   # end

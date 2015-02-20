@@ -53,7 +53,7 @@
             </td>
             <td>
               <% @meeting.user_meetings.each do |um| %>
-                <%= link_to format_user_name(um.user), um.user %>
+                <%= link_to format_user_name(um.user), um.user %><br />
               <% end %>
             </td>
           </tr>

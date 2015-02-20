@@ -9,16 +9,15 @@ class UsersController < ApplicationController
     @to =   params['to'] || DateTime.now.to_date
     @n =    params['n'] || 12
     @labels = ['default', 'primary', 'success', 'info', 'warning', 'danger']
-    # @users = User.eager_load(:groups, :agroups).all
-    @users = User.all
+    @users = User.eager_load(:groups, :agroups).all
+    # @users = User.all
 
-    # puts "|| #{@users.count}"
+    # puts "|| @users.count = #{@users.count}"
     # @users.each do |u|
-    #   puts "|| #{u.inspect}"
-    #   puts "|| #{u.groups.count}"
-    #   puts "|| #{u.groups.inspect}"
+    #   puts "|| u.inspect = #{u.inspect}"
+    #   puts "|| u.agroups.count = #{u.agroups.count}"
+    #   puts "|| u.agroups.inspect = #{u.agroups.inspect}"
     # end
-    # puts "|| #{@users.count}"
   end
 
   # GET /users/1

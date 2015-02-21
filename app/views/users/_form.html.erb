@@ -102,6 +102,17 @@
               </div>
             </div>
 
+            <hr />
+
+            <div class="form-group">
+              <%= f.label t(:active_member_until), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.date_field :active_member_until, class: "form-control", include_blank: true %>
+              </div>
+            </div>
+
+            <hr />
+
             <% if action_name != "new" %>
               <div class="form-group">
                 <%= f.label t(:password), class: "col-sm-3 control-label" %>

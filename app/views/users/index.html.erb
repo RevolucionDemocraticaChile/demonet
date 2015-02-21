@@ -1,8 +1,8 @@
 <div class="container">
-  <ol class="breadcrumb">
+  <!-- <ol class="breadcrumb">
     <li > <%= link_to t(:users).humanize, users_path %> </li>
     <li class="active"> <%= t(:list).humanize %></li>
-  </ol>
+  </ol> -->
 
   <div class="row">
     <div class="col-lg-12">
@@ -29,11 +29,13 @@
           </div>
           <% end %>
         </div>
+
         <div class="panel-body">
           <div class="table-responsive">
             <table id="datatable" class="table table-bordered">
               <thead>
                 <tr>
+                  <th></th> <!-- glyph icon col -->
                   <% if current_user.admin? %>
                     <th colspan="4"></th>
                   <% else %>
@@ -41,15 +43,24 @@
                   <% end %>
                   <% if current_user.admin? %>
                     <th></th>
-                    <th style="width:40px"><select id="actives_users" class="form-control"><option value="">todos</option><option value="si">si</option><option value="no">no</option></select></th>
+                    <th style="width:40px">
+                      <select id="actives_users" class="form-control">
+                        <option value="">todos</option>
+                        <option value="si">si</option>
+                        <option value="no">no</option>
+                      </select>
+                    </th>
                   <% end %>
                     <th style="width:100px"><%= text_field_tag :filter_moderators, nil , class: "col-sm-12", placeholder: t(:moderators).humanize %></th>
                     <th style="width:100px"><%= text_field_tag :filter_members, nil, class: "col-sm-12", placeholder: t(:members).humanize %></th>
                   <th style="width:75px"></th>
                 </tr>
+
+                <!-- Headers -->
                 <tr>
-                  <th><%= t(:names).humanize %></th>
+                  <th></th> <!-- glyph icon col -->
                   <th><%= t(:last_name).humanize %></th>
+                  <th><%= t(:names).humanize %></th>
                   <th><%= t(:email).humanize %></th>
                   <th><%= t(:rut).humanize %></th>
                   <% if current_user.admin? %>
@@ -59,19 +70,23 @@
                   <% end %>
                   <th><%= t(:moderator_of).humanize %></th>
                   <th><%= t(:member_of).humanize %></th>
-                  <th><%= t(:action) %></th>
+                  <th><%= t(:action).humanize %></th>
                 </tr>
               </thead>
 
               <tbody>
                 <% @users.each do |user| %>
                   <tr>
-                    <td><%= user.first_name %></td>
+                    <td class="text-center">
+                      <% if user.active_by_right? %>
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <% end %>
+                    </td>
                     <td><%= user.last_name %></td>
+                    <td><%= user.first_name %></td>
                     <td><%= user.email %></td>
                     <td><%= user.rut %></td>
                     <% if current_user.admin? %>
-
                       <td class="text-center" style="width: 40px">
                         <%= user.recent_attendances %>
                       </td>

@@ -27,12 +27,10 @@ class User < ActiveRecord::Base
   include RunCl::ActAsRun
   attr_accessor :remember_token, :reset_token
 
-  EMAIL_MAX_LENGTH       = 50
-  FIRSTNAME_MAX_LENGTH  = 50
-  SECONDNAME_MAX_LENGTH = 50
-  LASTNAME_MAX_LENGTH   = 50
-  PASSWORD_MIN_LENGTH    = 6
-  VALID_EMAIL_REGEX      = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  EMAIL_MAX_LENGTH    = 50
+  NAME_MAX_LENGTH     = 50
+  PASSWORD_MIN_LENGTH = 6
+  VALID_EMAIL_REGEX   = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP = 6
   RECENT_TIME_MONTHS = 12
@@ -54,14 +52,14 @@ class User < ActiveRecord::Base
 
   validates :first_name,
     presence:   true,
-    length:     { maximum: FIRSTNAME_MAX_LENGTH }
+    length:     { maximum: NAME_MAX_LENGTH }
 
   validates :second_name,
-    length:     { maximum: SECONDNAME_MAX_LENGTH}
+    length:     { maximum: NAME_MAX_LENGTH}
 
   validates :last_name,
     presence:   true,
-    length:     { maximum: LASTNAME_MAX_LENGTH }
+    length:     { maximum: NAME_MAX_LENGTH }
 
   validates :password,
     presence: true, on: :update,
@@ -74,6 +72,7 @@ class User < ActiveRecord::Base
   has_run_cl :rut, uniq_run: true, run: true, if: 'rut.present?'
 
   # Hooks:
+
   before_create do
     t = User.new_token
     send_welcome_email(t)
@@ -85,12 +84,23 @@ class User < ActiveRecord::Base
     self.rut      = Run.format(rut)
   end
 
+
+  # Methods:
+
   def admin?
     admin
   end
 
+  def active_by_right?
+    !active_member_until.nil? && active_member_until > Date.today
+  end
+
   def active?
-    recent_attendances >= MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP
+    if active_member_until.nil?
+      recent_attendances >= MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP
+    else
+      active_member_until > Date.today
+    end
   end
 
   def recent_attendances

@@ -2,6 +2,7 @@ cl:
   account: cuenta
   active: activo
   active_member: miembro activo
+  active_member_until: miembro activo hasta
   action: acción
   add: añadir
   add_meeting: agregar reunión

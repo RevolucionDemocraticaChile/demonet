@@ -23,7 +23,13 @@
         </div>
       <% end %>
     <% else %>
-      <% if @user.active? %>
+      <% if @user.active_by_right? %>
+        <div class="alert alert-success text-center member_status_panel_success">
+          <strong><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Miembro Activo Especial</strong>
+          <p>Este Miembro Activo no requiere asistencias para ser Miembro Activo.</p>
+          <p>Este privilegio expira: el día <%= @user.active_member_until %></p>
+        </div>
+      <% elsif @user.active? %>
         <div class="alert alert-success text-center">
           <strong>Miembro Activo</strong>
         </div>

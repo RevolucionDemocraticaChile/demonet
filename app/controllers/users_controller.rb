@@ -9,15 +9,8 @@ class UsersController < ApplicationController
     @to =   params['to'] || DateTime.now.to_date
     @n =    params['n'] || 12
     @labels = ['default', 'primary', 'success', 'info', 'warning', 'danger']
-    @users = User.eager_load(:groups, :agroups).all
+    @users = User.includes(:groups, :agroups).all
     # @users = User.all
-
-    # puts "|| @users.count = #{@users.count}"
-    # @users.each do |u|
-    #   puts "|| u.inspect = #{u.inspect}"
-    #   puts "|| u.agroups.count = #{u.agroups.count}"
-    #   puts "|| u.agroups.inspect = #{u.agroups.inspect}"
-    # end
   end
 
   # GET /users/1
@@ -74,6 +67,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email, :first_name, :second_name, :last_name, :password, :password_confirmation, :rut, :admin, :birthdate, :city, :description, :mobile_number, :twitter_user, :active_member_until)
+      # if current_user.admin?
+      #   params.permit(:active_member_until)
+      # end
     end
 
 end

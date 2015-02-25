@@ -86,7 +86,7 @@ h1 {
   margin-left: auto;
 }
 
-.logo{
+.logo {
   position: absolute;
 }
 
@@ -217,6 +217,7 @@ body {
   line-height: 23px;
   color: #666;
   background: #f4f4f4;
+  // background: #ffffff;
   /*padding-top: 45px; */
   -webkit-font-smoothing: antialiased;
 }
@@ -229,17 +230,7 @@ body {
   width: auto;
   background: #eee;
   min-height: 900px;
-  padding: 30px;
-}
-
-.mainbar {
-  /*  position: relative;
-  margin-left: 250px;
-  margin-right: 0px;
-  width: auto;
-  background: #eee;
-  min-height: 900px;*/
-  padding-top: 30px;
+  // padding: 30px;
 }
 
 .mainbar .row {
@@ -488,11 +479,11 @@ body {
     margin-left: 40px;
   }
 
-  .logo{
+  .logo {
     left: 10px;
   }
 
-  .logo img{
+  .logo img {
     width: 55px;
   }
 }

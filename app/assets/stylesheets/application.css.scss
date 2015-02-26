@@ -41,6 +41,16 @@ html {
   overflow-y: scroll;
 }
 
+body {
+  font-size: 13px;
+  line-height: 23px;
+  color: #666;
+  // background: #f4f4f4;
+  background: #ffffff;
+  padding-top: 75px;
+  -webkit-font-smoothing: antialiased;
+}
+
 footer {
   padding: 5em;
 }
@@ -52,25 +62,25 @@ h1 {
   text-align: center;
 }
 
-.admin-panel {
-  text-align: center;
-
-  .btn {
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .form-control {
-    width: 100%;
-  }
-}
+// .admin-panel {
+//   text-align: center;
+//
+//   .btn {
+//     width: 100%;
+//     margin-top: 10px;
+//   }
+//
+//   .form-control {
+//     width: 100%;
+//   }
+// }
 
 
 /* custom */
 
-.container {
-  width: 100%;
-}
+// .container {
+//   width: 100%;
+// }
 
 .navbar .nav-user-pic {
   width: 20px;
@@ -107,12 +117,12 @@ h1 {
 
 /* Sidebar */
 .sidebar {
+  position: relative;
   width: 200px;
   float: left;
-  display: block;
-  background: #f4f4f4;
+  // display: block;
+  // background: #f4f4f4;
   color: #eee;
-  position: relative;
   height: 100%;
   border-right: 1px solid #dfdfdf;
 }
@@ -212,23 +222,13 @@ h1 {
   border: none;
 }
 
-body {
-  font-size: 13px;
-  line-height: 23px;
-  color: #666;
-  background: #f4f4f4;
-  // background: #ffffff;
-  /*padding-top: 45px; */
-  -webkit-font-smoothing: antialiased;
-}
-
 #mainbar {
-  position: relative;
+  // position: relative;
   margin-left: 200px;
-  margin-right: 0px;
-  margin-top: 0px;
+  // margin-right: 0px;
+  // margin-top: 0px;
   width: auto;
-  background: #eee;
+  // background: #eee;
   min-height: 900px;
   // padding: 30px;
 }
@@ -655,7 +655,7 @@ a.botonera{
   margin-bottom: 5px;
 }
 
-.nav-tabs li a{
+.nav-tabs li a {
   cursor: pointer;
 }
 
@@ -685,18 +685,18 @@ a.botonera{
   padding: 1px;
 }
 
-.navbar-default {
-  background-color: #507577; /* 1D4C4F */
-  color: #fff;
-}
+// .navbar-default {
+//   background-color: #507577; /* 1D4C4F */
+//   color: #fff;
+// }
 
-.navbar-default .navbar-nav>li>a {
-  color: #fff;
-}
+// .navbar-default .navbar-nav>li>a {
+//   color: #fff;
+// }
 
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-  color: #FFEFCC;
-}
+// .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+//   color: #FFEFCC;
+// }
 
 .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
   z-index: 1;

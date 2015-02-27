@@ -28,6 +28,9 @@
 
 $grayMediumLight: #eaeaea;
 $grayLighter: #eaeaea;
+$rdGreen: #1d4c50;
+$rdLightGreen: #739092;
+$white: #ffffff;
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -36,6 +39,27 @@ $grayLighter: #eaeaea;
 }
 
 /* universal */
+
+.navbar {
+  // background: #dff0d8; // light_green
+  background: $rdGreen;
+  border-color: #d6e9c6;
+  border-bottom-width: 1px;
+
+  .navbar-brand {
+    color: $white;
+    font-weight: bold;
+  }
+
+  .navbar-text {
+    color: $white;
+  }
+
+  .navbar-link {
+    color: $white;
+  }
+
+}
 
 html {
   overflow-y: scroll;
@@ -147,8 +171,9 @@ h1 {
   margin: 0 auto;
   position: absolute;
   z-index: 60;
-  background: #f4f4f4;
-  padding-top: 30px;
+  // background: #ff0000;
+  // background: #f4f4f4;
+  // padding-top: 30px;
 }
 
 .sidebar .navi li i{

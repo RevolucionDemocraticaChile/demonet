@@ -1,17 +1,9 @@
 <div class="container">
-  <ol class="breadcrumb">
-    <li > <%= link_to t(:groups).humanize, groups_path %> </li>
-    <% if action_name == 'new' %>
-      <li class="active"> <%= t(:add).humanize %></li>
-    <% else %>
-      <li class="active"> <%= t(:edit).humanize %></li>
-    <% end %>
-  </ol>
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-offset-1 col-lg-10">
 
       <div class="panel panel-default">
-        <div class="panel-heading clearfix">
+        <div class="panel-heading">
           <% if action_name == 'new' %>
             <h4><%= t(:add_group).humanize %></h4>
           <% else %>
@@ -23,7 +15,7 @@
           <%= form_for @group, html: { class: "form-horizontal" } do |f| %>
             <% if @group.errors.any? %>
               <div id="error_explanation" class="alert alert-danger">
-                <h4><%= pluralize(@group.errors.count, "error") %>:</h4>
+                <h5><%= pluralize(@group.errors.count, "error") %>:</h5>
 
                 <ul>
                   <% @group.errors.full_messages.each do |message| %>
@@ -54,19 +46,22 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-2 control-label" for="group_type">Moderadores</label>
+              <label class="col-sm-2 control-label" for="group_type">Moderadores:</label>
               <div class="col-sm-10">
                 <%= collection_select(:adminGroup, :users, User.all, :id, :full_name, {:selected => @group.admin_groups.map(&:user_id), include_hidden: false}, {multiple: "multiple",class: "select2-container select2-container-multi form-control ng-valid ng-dirty"}) %>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-sm-2 control-label" for="group_type">Miembros
-              </label>
+              <label class="col-sm-2 control-label" for="group_type">Miembros:</label>
               <div class="col-sm-10">
                 <%= collection_select(:memberGroup, :users, User.all, :id, :full_name, {:selected => @group.member_groups.map(&:user_id), include_hidden: false}, {multiple: "multiple", class: "select2-container select2-container-multi form-control ng-valid ng-dirty"}) %>
               </div>
             </div>
             <div class="form-group">
+              <label class="col-sm-2 control-label">Descripción:</label>
+              <div class="col-sm-10">
+                <%= f.text_area :desc, class: "form-control" %>
+              </div>
             </div>
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
@@ -95,4 +90,3 @@
     });
   </script>
 </div>
-

@@ -2,25 +2,26 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  email           :string(255)
-#  name            :string(255)
-#  created_at      :datetime
-#  updated_at      :datetime
-#  password_digest :string(255)
-#  remember_token  :string(255)
-#  admin           :boolean
-#  first_name      :string(255)
-#  second_name     :string(255)
-#  last_name       :string(255)
-#  rut             :string(255)
-#  reset_digest    :string(255)
-#  reset_sent_at   :datetime
-#  birthdate       :date
-#  city            :string(255)
-#  description     :text
-#  mobile_number   :string(255)
-#  twitter_user    :string(255)
+#  id                  :integer          not null, primary key
+#  email               :string(255)
+#  name                :string(255)
+#  created_at          :datetime
+#  updated_at          :datetime
+#  password_digest     :string(255)
+#  remember_token      :string(255)
+#  admin               :boolean
+#  first_name          :string(255)
+#  second_name         :string(255)
+#  last_name           :string(255)
+#  rut                 :string(255)
+#  reset_digest        :string(255)
+#  reset_sent_at       :datetime
+#  birthdate           :date
+#  city                :string(255)
+#  description         :text
+#  mobile_number       :string(255)
+#  twitter_user        :string(255)
+#  active_member_until :date
 #
 
 class User < ActiveRecord::Base

@@ -8,6 +8,42 @@ module ApplicationHelper
     "#{user.first_name} #{user.last_name}"
   end
 
+  def format_payment_name(payment)
+    "Pago #{payment.id}"
+  end
+
+  def format_group_name(group)
+    case group.type
+    when "Territory"
+      "Territorio #{group.name}"
+    when "Comission"
+      "Comisión #{group.name}"
+    when "Front"
+      "Frente #{group.name}"
+    else
+      group.name
+    end
+  end
+
+  def format_group_type(group)
+    case group.type
+    when "Territory"
+      "Territorio"
+    when "Comission"
+      "Comisión"
+    when "Front"
+      "Frente"
+    when "Executive"
+      "Ejecutivo"
+    when "Directive"
+      "Directiva"
+    when "congressional_office"
+      "Diputación"
+    else
+      "Desconocido"
+    end
+  end
+
   # def format_group_names(groups)
   #   groups.join(',')
   # end

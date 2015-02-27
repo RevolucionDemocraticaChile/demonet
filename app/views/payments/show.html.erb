@@ -3,14 +3,14 @@
   <div class="row">
     <div class="col-lg-12">
       <h1>
-        <%= format_group_name(@group) %>
+        <%= format_payment_name(@payment) %>
       </h1>
     </div>
   </div>
 
 
   <div class="row">
-    <div class="col-lg-offset-1 col-lg-10">
+    <div class="col-lg-offset-3 col-lg-6">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Información</h3>
@@ -19,38 +19,26 @@
           <tbody>
             <tr>
               <td class="text-right">
-                <strong>Tipo:</strong>
+                <strong>Usuario:</strong>
               </td>
               <td>
-                <%= format_group_type(@group) %>
+                <%= format_user_name(@payment.user) %>
               </td>
             </tr>
             <tr>
               <td class="text-right">
-                <strong>Nombre:</strong>
+                <strong>Cantidad:</strong>
               </td>
               <td>
-                <%= format_group_name(@group) %>
+                <%= @payment.amount %>
               </td>
             </tr>
             <tr>
               <td class="text-right">
-                <strong>Moderadores:</strong>
+                <strong>Fecha:</strong>
               </td>
               <td>
-                <% @group.admin_groups.each do |admin_group| %>
-                  <%= link_to format_user_name(admin_group.user), admin_group.user %><br />
-                <% end %>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-right">
-                <strong>Miembros:</strong>
-              </td>
-              <td>
-                <% @group.member_groups.each do |member_group| %>
-                  <%= link_to format_user_name(member_group.user), member_group.user %>,
-                <% end %>
+                <%= @payment.date %>
               </td>
             </tr>
             <tr>
@@ -58,7 +46,7 @@
                 <strong>Descripción:</strong>
               </td>
               <td>
-                <%= @group.desc %>
+                <%= @payment.description %>
               </td>
             </tr>
           </tbody>

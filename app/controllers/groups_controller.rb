@@ -26,6 +26,7 @@ class GroupsController < ApplicationController
   def update
     @group.name = group_params['name']
     @group.type = group_params['type']
+    @group.desc = group_params['desc']
     create_or_update
   end
 

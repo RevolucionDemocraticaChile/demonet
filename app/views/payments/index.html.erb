@@ -1,0 +1,90 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-offset-1 col-lg-10">
+
+      <h1>Pagos</h1>
+
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h4 class="panel-title">Pagos</h4>
+          <div class="pull-right">
+            <% if can? :new, Payment %>
+              <%= link_to "Nuevo pago", new_payment_path, class: "btn btn-primary pull-right" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="panel-body">
+
+          <table id="datatable" class="table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Cantidad</th>
+                <th>Fecha</th>
+                <th>Decripción</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @payments.each do |payment| %>
+                <tr>
+                  <td>
+                    <%= link_to payment_path(payment), class: "btn btn-default btn-sm" do %>
+                    <span class="glyphicon glyphicon-zoom-in"/>
+                    <% end %>
+                    <% if can?(:edit, payment) %>
+                      <%= link_to edit_payment_path(payment), class: "btn btn-default btn-sm" do %>
+                      <span class="glyphicon glyphicon-edit" />
+                      <% end %>
+                    <% end %>
+                    <%= link_to payment_path(payment.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: t(:are_you_sure).humanize }, title: t(:destroy_payment).humanize do %>
+                    <span class="glyphicon glyphicon-trash" />
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= format_payment_name(payment) %>
+                  </td>
+                  <td><%= link_to format_user_name(payment.user), payment.user %></td>
+                  <td><%= payment.amount %></td>
+                  <td><%= payment.date %></td>
+                  <td><%= payment.description %></td>
+                </tr>
+              <% end %>
+            </tbody>
+
+          </table>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</div>
+
+
+<script charset="utf-8">
+$(document).ready(function() {
+  $('#datatable').DataTable(
+    {
+      "oLanguage": {
+        "sSearch": "Filtrar: ",
+        "sZeroRecords": "No se encontraron usuarios",
+        "sInfo": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+        "sInfoEmpty": "Mostrando 0 a 0 de 0 entradas",
+        "sInfoFiltered": "(filtrado de un total de _MAX_ entradas)",
+        "oPaginate": {
+          "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right' />",
+          "sPrevious": "<span class='glyphicon glyphicon-chevron-left' /> Anterior",
+        }
+      }
+    }
+  );
+});
+</script>

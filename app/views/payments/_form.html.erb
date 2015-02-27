@@ -1,0 +1,80 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <% if action_name == 'new' %>
+            <h4><%= t(:add_payment).humanize %></h4>
+          <% else %>
+            <h4><%= t(:edit_payment).humanize %></h4>
+          <% end %>
+        </div>
+        <div class="panel-body">
+
+          <%= form_for @payment, html: {class: "form-horizontal"} do |f| %>
+            <% if @payment.errors.any? %>
+              <div id="error_explanation" class="alert alert-danger">
+                <h2><%= pluralize(@payment.errors.count, "error") %>:</h2>
+
+                <ul>
+                  <% @payment.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= f.label t(:user), class: "col-sm-3 control-label", for: "payment_user_id" %>
+              <div class="col-sm-9">
+                <%= f.select :user_id, nil, {}, { class: "form-control" } do %>
+                  <% @users.each do |user| %>
+                    <%= content_tag :option, format_user_name(user), value: user.id %>
+                  <% end %>
+                <% end %>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <%= f.label t(:description), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.text_field :description, class: "form-control", placeholder: t(:description).humanize %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label t(:amount), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <div class="input-group">
+                  <div class="input-group-addon">$</div>
+                  <%= f.number_field :amount, class: "form-control", placeholder: t(:amount).humanize %>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label t(:date_lit), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.date_field :date, class: "form-control", placeholder: t(:date_lit).humanize %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-9">
+                <% if action_name == 'new' %>
+                  <%= f.submit t(:create).humanize, class: "btn btn-primary" %>
+                <% else %>
+                  <%= f.submit t(:send).humanize, class: "btn btn-primary" %>
+                <% end%>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

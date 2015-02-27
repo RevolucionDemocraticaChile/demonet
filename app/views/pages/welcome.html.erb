@@ -2,9 +2,18 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="jumbotron">
-        <h1 class="text-center">Bienvenido(a) a Demonet!</h1>
+        <h1 class="text-center">¡Bienvenido(a)!</h1>
         <p>
           En este sitio podrás ver y modificar tus datos personales, y podrás ver si actualmente estás considerado como Miembro Activo.
+        </p>
+        <p>
+          Por ahora, puedes revisar lo siguiente:
+        </p>
+        <p>
+          <%= link_to "Mi Perfil", current_user, class: "btn btn-primary btn-lg", role: "button" %>
+          <%= link_to "Lista de Usuarios", users_path, class: "btn btn-primary btn-lg", role: "button" %>
+          <%= link_to "Lista de Espacios", groups_path, class: "btn btn-primary btn-lg", role: "button" %>
+          <%= link_to "Lista de Reuniones", meetings_path, class: "btn btn-primary btn-lg", role: "button" %>
         </p>
       </div>
     </div>

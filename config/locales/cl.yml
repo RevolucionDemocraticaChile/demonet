@@ -5,17 +5,19 @@ cl:
   active_member_until: miembro activo hasta
   action: acción
   add: añadir
+  add_administrator: agregar administrador
+  add_attendant: agregar asistente
+  add_group: agregar espacio
   add_meeting: agregar reunión
   add_member: agregar miembro
+  add_payment: agregar pago
   add_territory: agregar territorio
-  add_group: agregar espacio
   add_user: agregar usuario
   add_user_to_territory: agregar usuario a territorio
-  add_administrator: agregar administrador
   admin_group: administrador de espacio
   administrator: administrador
+  amount: cantidad
   are_you_sure: Estás seguro?
-  add_attendant: agregar asistente
   association_created_successfully: Asociación creada exitosamente.
   association_destroyed_successfully: Asociación eliminada exitosamente.
   group_created_successfully: Espacio creado exitosamente.
@@ -37,14 +39,16 @@ cl:
   demonet: Demonet - Revolución Democrática
   description: descripción
   destroy: eliminar
-  destroy_user: eliminar usuario
   destroy_group: eliminar espacio
   destroy_meeting: eliminar reunión
+  destroy_payment: eliminar pago
+  destroy_user: eliminar usuario
   directive: directiva
   edit: editar
-  edit_user: editar usuario
   edit_group: editar espacio
   edit_meeting: editar reunión
+  edit_payment: editar pago
+  edit_user: editar usuario
   executive: ejecutiva
   email: email
   email_password_recovery: Email enviado con instrucciones de reinicio de contraseña
@@ -76,6 +80,7 @@ cl:
   names: nombres
   new_group: nuevo espacio
   new_meeting: nueva reunión
+  new_payment: nuevo pago
   new_territory: nuevo territorio
   new_user: nuevo usuario
   need_more_attendances: "Necesitas más de %{number} asistencias recientes para ser miembro activo."
@@ -88,6 +93,8 @@ cl:
   password_reset: Contraseña ha sido reseteada
   password_expired: El plazo para cambiar la contraseña ha expirado
   password_recovery: recuperar contraseña
+  payments: pagos
+  payment_created_successfully: pago creado exitosamente
   profile: perfil
   recent_attendances: asistencias recientes
   recent_meetings: reuniones recientes

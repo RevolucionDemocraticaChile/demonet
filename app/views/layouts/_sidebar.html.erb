@@ -1,53 +1,89 @@
-<div class="sidebar-dropdown visible-xs"><a href="#" class=""><i class="icon-double-angle-down"></i> Menú</a></div>
+<div class="sidebar-dropdown visible-xs">
+  <a href="#" class=""><i class="icon-double-angle-down"></i> Menú</a>
+</div>
+
 <div class="sidebar-inner" >
   <ul class="navi" id="accordion">
+
     <!-- users -->
     <li class="has_submenu nlightblue panel">
       <a data-toggle="collapse" data-parent="#accordion" data-target="#users_menu" >
-        <span class="glyphicon glyphicon-list-alt"></span> <%= t(:users).humanize %>
-      <span class="pull-right"><small><span class="glyphicon glyphicon-chevron-right"></span></small></span>
-    </a>
-    <ul id="users_menu" class="panel-collapse collapse">
-      <% if can? :new, User %>
-        <li> <%= link_to t(:new_user).humanize, new_user_path %> </li>
-      <% end %>
-      <li> <%= link_to t(:list), users_path %> </li>
-    </ul>
-  </li>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <%= t(:users).humanize %>
+        <span class="pull-right">
+          <small><span class="glyphicon glyphicon-chevron-right"></span></small>
+        </span>
+      </a>
+      <ul id="users_menu" class="panel-collapse collapse">
+        <% if can? :new, User %>
+          <li> <%= link_to t(:new_user).humanize, new_user_path %> </li>
+        <% end %>
+        <li> <%= link_to t(:list), users_path %> </li>
+      </ul>
+    </li>
 
-  <!-- groups -->
-  <li class="has_submenu nlightblue panel">
-    <a data-toggle="collapse" data-parent="#accordion" data-target="#groups_menu" >
-      <span class="glyphicon glyphicon-list-alt"></span> <%= t(:groups).humanize %>
-    <span class="pull-right"><small><span class="glyphicon glyphicon-chevron-right"></span></small></span>
-  </a>
-  <ul id="groups_menu" class="panel-collapse collapse">
-    <% if can? :new, Group %>
-      <li> <%= link_to t(:new_group).humanize, new_group_path %> </li>
+    <!-- groups -->
+    <li class="has_submenu nlightblue panel">
+      <a data-toggle="collapse" data-parent="#accordion" data-target="#groups_menu" >
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <%= t(:groups).humanize %>
+        <span class="pull-right">
+          <small><span class="glyphicon glyphicon-chevron-right"></span></small>
+        </span>
+      </a>
+      <ul id="groups_menu" class="panel-collapse collapse">
+        <% if can? :new, Group %>
+          <li> <%= link_to t(:new_group).humanize, new_group_path %> </li>
+        <% end %>
+        <li> <%= link_to t(:list), groups_path %> </li>
+      </ul>
+    </li>
+
+    <!-- meetings -->
+    <li class="has_submenu nlightblue panel">
+      <a data-toggle="collapse" data-parent="#accordion" data-target="#meetings_menu" >
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <%= t(:meetings).humanize %>
+        <span class="pull-right">
+          <small><span class="glyphicon glyphicon-chevron-right"></span></small>
+        </span>
+      </a>
+      <ul id="meetings_menu" class="panel-collapse collapse">
+        <% if can? :new, Meeting %>
+          <li> <%= link_to t(:new_meeting).humanize, new_meeting_path %> </li>
+        <% end %>
+        <li> <%= link_to t(:list), meetings_path %> </li>
+      </ul>
+    </li>
+
+    <% if current_user.admin? %>
+    <!-- payments -->
+    <li class="has_submenu nlightblue panel">
+      <a data-toggle="collapse" data-parent="#accordion" data-target="#payments_menu" >
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <%= t(:payments).humanize %>
+        <span class="pull-right">
+          <small><span class="glyphicon glyphicon-chevron-right"></span></small>
+        </span>
+      </a>
+      <ul id="payments_menu" class="panel-collapse collapse">
+        <% if can? :new, Payment %>
+          <li><%= link_to t(:new_payment).humanize, new_payment_path %></li>
+        <% end %>
+        <li><%= link_to t(:list), payments_path %></li>
+      </ul>
+    </li>
     <% end %>
-    <li> <%= link_to t(:list), groups_path %> </li>
+
   </ul>
-</li>
+</div>
 
-<!-- meetings -->
-<li class="has_submenu nlightblue panel">
-  <a data-toggle="collapse" data-parent="#accordion" data-target="#meetings_menu" >
-    <span class="glyphicon glyphicon-list-alt"></span> <%= t(:meetings).humanize %>
-  <span class="pull-right"><small><span class="glyphicon glyphicon-chevron-right"></span></small></span>
-</a>
-<ul id="meetings_menu" class="panel-collapse collapse">
-  <% if can? :new, Meeting %>
-    <li> <%= link_to t(:new_meeting).humanize, new_meeting_path %> </li>
-  <% end %>
-  <li> <%= link_to t(:list), meetings_path %> </li>
-</ul>
-         </li>
-       </ul>
-     </div>
 
-     <script type="text/javascript">
-       var active_menu = '<%= controller_name %>';
-       var select = $('#'+active_menu+"_menu");
-       select.addClass("in");
-     </script>
 
+
+
+<script type="text/javascript">
+ var active_menu = '<%= controller_name %>';
+ var select = $('#'+active_menu+"_menu");
+ select.addClass("in");
+</script>

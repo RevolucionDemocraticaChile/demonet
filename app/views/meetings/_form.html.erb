@@ -1,12 +1,5 @@
 <div class="container">
-  <ol class="breadcrumb">
-    <li > <%= link_to t(:meetings).humanize, meetings_path %> </li>
-    <% if action_name == 'new' %>
-      <li class="active"> <%= t(:add).humanize %></li>
-    <% else %>
-      <li class="active"> <%= t(:edit).humanize %></li>
-    <% end %>
-  </ol>
+
   <div class="row">
     <div class="col-lg-12">
 
@@ -18,14 +11,15 @@
             <h4><%= t(:edit_meeting).humanize %></h4>
           <% end %>
         </div>
-        <div class="panel-body">
 
+        <div class="panel-body">
           <%= form_for @meeting, html: {class: "form-horizontal"} do |f| %>
 
             <% if @meeting.errors.any? %>
               <div id="error_explanation" class="alert alert-danger">
-                <h2><%= pluralize(@meeting.errors.count, "error") %> impidieron que se grabara la reunións:</h2>
-
+                <h2>
+                  <%= pluralize(@meeting.errors.count, "error") %> impidieron que se grabara la reunión:
+                </h2>
                 <ul>
                   <% @meeting.errors.full_messages.each do |message| %>
                     <li><%= message %></li>
@@ -40,12 +34,14 @@
                 <%= f.date_select :date, :order => [:year, :month, :day], class: "form-control" %>
               </div>
             </div>
+
             <div class="form-group">
               <%= f.label t(:description).humanize, class: "col-sm-2 control-label" %>
               <div class="col-sm-10">
                 <%= f.text_area :desc, class: "form-control" %>
               </div>
             </div>
+
             <div class="form-group">
               <label class="col-sm-2 control-label" for="group_type">Espacios</label>
               <div class="col-sm-10">
@@ -56,55 +52,43 @@
                     <option <%= group.id.in?( selected_groups) ? "selected='selected'" : ''%> <%= current_user.admin? || group.id.in?(current_user.agroups.map(&:id)) ? "" : "locked=locked"%> value="<%= group.id %>"><%= group.name %></option>
                   <% end %>
                 </select>
-
               </div>
             </div>
+
             <div class="form-group">
               <label class="col-sm-2 control-label" for="group_type">Asistentes</label>
               <div class="col-sm-10">
                 <%= collection_select(:userMeeting, :users, User.all, :id, :full_name, {:selected => @meeting.user_meetings.map(&:user_id), include_hidden: false}, {multiple: "multiple",class: "select2-container select2-container-multi form-control ng-valid ng-dirty"}) %>
               </div>
             </div>
+
             <div class="form-group">
               <label class="col-sm-2 control-label" for="group_type"><%= t(:start_time).humanize %></label>
               <div class="col-sm-10">
                 <%= f.time_field :start, class: "meeting_time_field" %>
               </div>
             </div>
+
             <div class="form-group">
               <label class="col-sm-2 control-label" for="group_type"><%= t(:finish_time).humanize %></label>
               <div class="col-sm-10">
                 <%= f.time_field :finish, class: "meeting_time_field" %>
               </div>
             </div>
+
             <div class="form-group">
-              <label class="col-sm-2 control-label" for="group_type"><%= t(:minutes).humanize %></label>
-              <div class="col-sm-5">
-                <%= f.text_area :minutes, class: "meeting_minutes_field form-control", id: "minutes_textarea", oninput: "this.editor.update()" %>
-              </div>
-              <div class="col-sm-5">
-                <div id="minutes_preview">
-                </div>
+              <%= f.label t(:minutes), class: "col-sm-2 control-label" %>
+              <div class="col-sm-10">
+                <%= f.text_area :minutes, class: "form-control", oninput: "this.editor.update()" %>
               </div>
             </div>
 
-            <script>
-              function Editor(input, preview) {
-                this.update = function () {
-                  preview.innerHTML = markdown.toHTML(input.value);
-                };
-                input.editor = this;
-                this.update();
-              }
-              new Editor(document.getElementById("minutes_textarea"), document.getElementById("minutes_preview"));
+            <div class="col-sm-12">
+              <div id="minutes_preview">
+              </div>
+            </div>
 
-              var textArea = $('#minutes_textarea');
-              var preview = $('#minutes_preview');
 
-              textArea.on('change keyup paste', function() {
-                $(this).css('height', preview.parent().height());
-              }).trigger('change');
-            </script>
 
 
 
@@ -119,17 +103,39 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('#userMeeting_users').select2({
-        placeholder: "Selecciona Asistentes",
-        allowClear: true
-      });
-      $('#meetingGroup_groups').select2({
-        placeholder: "Selecciona Espacios",
-        allowClear: true
-      });
 
-    });
-  </script>
 </div>
+
+
+<script>
+  function Editor(input, preview) {
+    this.update = function () {
+      preview.innerHTML = markdown.toHTML(input.value);
+    };
+    input.editor = this;
+    this.update();
+  }
+  new Editor(document.getElementById("meeting_minutes"), document.getElementById("minutes_preview"));
+
+  var textArea = $('#meeting_minutes');
+  var preview = $('#minutes_preview');
+
+  textArea.on('change keyup paste', function() {
+    $(this).css('height', max(preview.parent().height(), '400px'));
+  }).trigger('change');
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#userMeeting_users').select2({
+      placeholder: "Selecciona Asistentes",
+      allowClear: true
+    });
+    $('#meetingGroup_groups').select2({
+      placeholder: "Selecciona Espacios",
+      allowClear: true
+    });
+
+  });
+</script>

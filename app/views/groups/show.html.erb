@@ -10,10 +10,10 @@
 
 
   <div class="row">
-    <div class="col-lg-offset-1 col-lg-10">
+    <div class="col-lg-offset-2 col-lg-8">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Información</h3>
+          <h2 class="panel-title">Información</h2>
         </div>
         <table class="table">
           <tbody>
@@ -66,5 +66,45 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-lg-offset-2 col-lg-8">
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h2 class="panel-title"><%= t(:recent_meetings).humanize %></h2>
+        </div>
+
+        <table class="table">
+          <tbody>
+            <% @meetings.each do |meeting| %>
+              <tr>
+                <td>
+                  <%= link_to format_meeting_name(meeting), meeting %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <% if current_user.admin_groups.include?(@group) || current_user.admin? %>
+  <!-- <div class="row">
+    <div class="col-lg-offset-2 col-lg-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Miembros Activos</h2>
+        </div>
+
+        <table class="table">
+          <tbody>
+            <% @group.meetings.where() %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div> -->
+  <% end %>
 
 </div>

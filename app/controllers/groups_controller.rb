@@ -18,6 +18,7 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @meetings = @group.meetings
   end
 
   def edit

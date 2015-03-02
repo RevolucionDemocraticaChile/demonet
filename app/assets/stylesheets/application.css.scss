@@ -356,13 +356,13 @@ h1 {
   text-align: center;
 }
 
-.panel .panel-heading h4 {
-  margin-top: 0;
-  margin-bottom: 0;
-  font-weight: 700;
-  color: #777777;
+.panel .panel-heading h2, h4 {
+  // margin-top: 0;
+//   margin-bottom: 0;
+//   font-weight: 700;
+//   color: #777777;
   display: inline-block;
-  padding: 7px 0px 0px 50px;
+//   padding: 7px 0px 0px 50px;
 }
 
 .panel .panel-heading .icon {

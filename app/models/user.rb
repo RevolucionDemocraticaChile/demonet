@@ -75,12 +75,25 @@ class User < ActiveRecord::Base
   # Hooks:
 
   before_create do
+    puts "|| User.before_create"
     t = User.new_token
     send_welcome_email(t)
+    puts "|| User.before_create sent email"
     self.password = t
+    self.admin = false
+    true
+  end
+
+  after_create do
+    puts "|| after create"
+  end
+
+  after_save do
+    puts "|| User.after_save"
   end
 
   before_save do
+    puts "|| User.before_save"
     self.email    = email.downcase
     self.rut      = Run.format(rut)
   end

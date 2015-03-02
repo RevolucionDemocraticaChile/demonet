@@ -13,16 +13,7 @@ module ApplicationHelper
   end
 
   def format_group_name(group)
-    case group.type
-    when "Territory"
-      "Territorio #{group.name}"
-    when "Comission"
-      "Comisión #{group.name}"
-    when "Front"
-      "Frente #{group.name}"
-    else
-      group.name
-    end
+    group.display_name
   end
 
   def format_group_type(group)

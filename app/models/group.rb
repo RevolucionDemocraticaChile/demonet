@@ -35,9 +35,18 @@ class Group < ActiveRecord::Base
     # presence: true,
     length:   { maximum: DESC_MAX_LENGTH }
 
-  # validates :state,
-  #   presence: true
 
-  # before_create { self.state = "created" }
+  def display_name
+    case type
+    when "Territory"
+      "Territorio #{name}"
+    when "Comission"
+      "Comisión #{name}"
+    when "Front"
+      "Frente #{name}"
+    else
+      name
+    end
+  end
 
 end

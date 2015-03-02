@@ -1,12 +1,5 @@
 <div class="container">
-  <ol class="breadcrumb">
-    <li > <%= link_to t(:users).humanize, users_path %> </li>
-    <% if action_name == 'new' %>
-      <li class="active"> <%= t(:add).humanize %></li>
-    <% else %>
-      <li class="active"> <%= t(:edit).humanize %></li>
-    <% end %>
-  </ol>
+
   <div class="row">
     <div class="col-lg-6 col-lg-offset-3">
 
@@ -32,6 +25,20 @@
                 </ul>
               </div>
             <% end %>
+
+            <div class="form-group">
+              <%= label_tag :groups, t(:groups).humanize, class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <select multiple id="member_group_groups" class="form-control select2-container select2-container-multi" name="member_group[groups][]">
+                  <% selected_groups = @user.member_groups.map(&:group_id) %>
+                  <% (current_user.admin? ? Group.all : (current_user.agroups | @user.groups)).each do |group| %>
+                    <option <%= group.id.in?(selected_groups) ? "selected='selected'" : ''%> <%= current_user.admin? || group.id.in?(current_user.agroups.map(&:id)) ? "" : "locked=locked"%> value="<%= group.id %>"><%= group.display_name %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+
+            <hr />
 
             <div class="form-group">
               <%= f.label t(:email), class: "col-sm-3 control-label" %>
@@ -128,17 +135,6 @@
                   <%= f.password_field :password_confirmation, class: "form-control", placeholder: t(:password_confirmation).humanize %>
                 </div>
               </div>
-            <% end %>
-
-            <% if current_user.admin? %>
-            <div class="form-group">
-              <%= f.label t(:administrator), class: "col-sm-3 control-label" %>
-              <label>
-                <div class="col-sm-9">
-                  <%= f.check_box :admin, checked: @user.admin %>
-                </div>
-              </label>
-            </div>
             <% end %>
 
             <div class="form-group">

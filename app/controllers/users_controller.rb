@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     @n =    params['n'] || 12
     @labels = ['default', 'primary', 'success', 'info', 'warning', 'danger']
     @users = User.includes(:groups, :agroups).all
-    # @users = User.all
   end
 
   # GET /users/1
@@ -33,17 +32,19 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if @user.save
+    if create_or_update
       flash[:success] = t(:user_created_successfully)
       redirect_to @user
     else
-      render 'new'
+      render :new
     end
   end
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
+    @user.assign_attributes(user_params)
+
+    if create_or_update
       flash[:success] = t(:user_updated_successfully)
       redirect_to @user
     else
@@ -59,18 +60,44 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      if current_user.admin?
-        params.require(:user).permit(:email, :first_name, :second_name, :last_name, :password, :password_confirmation, :rut, :admin, :birthdate, :city, :description, :mobile_number, :twitter_user, :active_member_until)
-      else
-        params.require(:user).permit(:email, :first_name, :second_name, :last_name, :password, :password_confirmation, :rut, :admin, :birthdate, :city, :description, :mobile_number, :twitter_user)
+
+  def create_or_update
+    if params["member_group"].nil? || params["member_group"]["groups"].empty?
+      @user.errors.add(:espacio, " es necesario")
+      false
+    else
+      success = false
+
+      User.transaction do
+        @user.save!
+
+        MemberGroup.where(user_id: @user.id).destroy_all
+
+        params["member_group"]["groups"].each do |group_id|
+          member_group = MemberGroup.new(user_id: @user.id, group_id: group_id)
+          member_group.save!
+        end
+
+        success = true
       end
+
+      success
     end
+  end
+
+
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    if current_user.admin?
+      params.require(:user).permit(:email, :first_name, :second_name, :last_name, :password, :password_confirmation, :rut, :birthdate, :city, :description, :mobile_number, :twitter_user, :active_member_until)
+    else
+      params.require(:user).permit(:email, :first_name, :second_name, :last_name, :password, :password_confirmation, :rut, :birthdate, :city, :description, :mobile_number, :twitter_user)
+    end
+  end
 
 end

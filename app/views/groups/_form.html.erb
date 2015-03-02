@@ -13,6 +13,7 @@
         <div class="panel-body">
 
           <%= form_for @group, html: { class: "form-horizontal" } do |f| %>
+
             <% if @group.errors.any? %>
               <div id="error_explanation" class="alert alert-danger">
                 <h5><%= pluralize(@group.errors.count, "error") %>:</h5>
@@ -28,15 +29,7 @@
             <div class="form-group">
               <%= label_tag :group_type, t(:type).humanize, class: "col-sm-2 control-label" %>
               <div class="col-sm-10">
-                <select name="group[type]" class="form-control">
-                  <option value="Territory"><%= t(:territory).humanize %></option>
-                  <option value="Comission"><%= t(:comission).humanize %></option>
-                  <option value="Front"><%= t(:front).humanize %></option>
-                  <option value="Executive"><%= t(:executive).humanize %></option>
-                  <option value="Directive"><%= t(:directive).humanize %></option>
-                  <option value="congressional_office"><%= t(:congressional_office).humanize %></option>
-                  <option value="Others"><%= t(:others).humanize %></option>
-                </select>
+                <%= f.select :type, options_for_select(options_for_group_type, @group.type), {}, class: "form-control" %>
               </div>
             </div>
             <div class="form-group">

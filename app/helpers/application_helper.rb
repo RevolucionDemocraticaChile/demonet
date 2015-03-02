@@ -44,6 +44,18 @@ module ApplicationHelper
     end
   end
 
+  def options_for_group_type
+    [
+      [t(:territory).humanize,            "Territory"],
+      [t(:comission).humanize,            "Comission"],
+      [t(:front).humanize,                "Front"],
+      [t(:executive).humanize,            "Executive"],
+      [t(:directive).humanize,            "Directive"],
+      [t(:congressional_office).humanize, "congressional_office"],
+      [t(:others).humanize,               "Others"]
+    ]
+  end
+
   # def format_group_names(groups)
   #   groups.join(',')
   # end

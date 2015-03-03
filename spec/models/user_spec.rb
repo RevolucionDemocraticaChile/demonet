@@ -22,6 +22,7 @@
 #  mobile_number       :string(255)
 #  twitter_user        :string(255)
 #  active_member_until :date
+#  roles_mask          :integer
 #
 
 require 'rails_helper'

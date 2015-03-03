@@ -22,10 +22,12 @@
 #  mobile_number       :string(255)
 #  twitter_user        :string(255)
 #  active_member_until :date
+#  roles_mask          :integer
 #
 
 class User < ActiveRecord::Base
   include RunCl::ActAsRun
+  include RoleModel
   attr_accessor :remember_token, :reset_token
 
   EMAIL_MAX_LENGTH    = 50
@@ -35,6 +37,9 @@ class User < ActiveRecord::Base
 
   MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP = 6
   RECENT_TIME_MONTHS = 12
+
+  # Never change the order of these roles!
+  roles :admin, :finance_manager
 
   has_many :member_groups
   has_many :groups, through: :member_groups

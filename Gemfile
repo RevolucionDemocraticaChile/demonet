@@ -12,7 +12,10 @@ gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'turbolinks'
 gem 'jbuilder',        '~> 2.0'
 gem 'bcrypt',          '~> 3.1.7'
+
 gem 'cancancan',       '~> 1.9'
+gem 'role_model',      '~> 0.8.2'
+
 gem 'annotate',        '~> 2.6.5'
 gem 'rb-readline'
 gem 'run_cl',          '~> 1.6'

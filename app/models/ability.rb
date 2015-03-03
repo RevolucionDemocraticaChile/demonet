@@ -5,17 +5,19 @@ class Ability
   def initialize(user)
     user ||= User.new
 
+    # User
     can :index, User
     can :show,  User
     can [:edit, :update],  User, id: user.id
 
+    # Group
     can :index, Group
     can :show,  Group
     can [:edit, :update, :destroy], Group do |group|
       user.agroups.include?(group)
     end
 
-    # Meetings
+    # Meeting
     can :index, Meeting
     can :show,  Meeting
 
@@ -31,6 +33,12 @@ class Ability
         end
       end
       ans
+    end
+
+
+    # Payment
+    if user.has_role? :finance_manager
+      can :manage, Payment
     end
 
 

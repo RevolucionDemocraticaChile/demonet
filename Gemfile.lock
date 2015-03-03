@@ -155,6 +155,7 @@ GEM
     rb-readline (0.5.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    role_model (0.8.2)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -241,6 +242,7 @@ DEPENDENCIES
   rails (= 4.1.4)
   rails_12factor (~> 0.0.2)
   rb-readline
+  role_model (~> 0.8.2)
   rspec-rails (~> 3.0.2)
   run_cl (~> 1.6)
   sass-rails (~> 4.0.3)

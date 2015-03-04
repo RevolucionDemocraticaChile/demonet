@@ -1,174 +1,139 @@
-<div class="row">
-  <div class="col-lg-12">
-    <h1>
-      <%= gravatar_for @user %>
-      <%= @user.full_name %>
-    </h1>
-  </div>
-</div>
+<div class="container">
 
-<div class="row">
-  <div class="col-lg-offset-3 col-lg-6">
-    <% if current_user == @user %>
-      <% if @user.active? %>
-        <div class="alert alert-success text-center">
-          <strong>Miembro Activo</strong>
-          <p>En los últimos <strong><%= min_recent %></strong> meses has asistido a <strong><%= @user.recent_attendances %></strong> reuniones.</p>
-        </div>
-      <% else %>
-        <div class="alert alert-danger text-center" role="alert">
-          <strong>No eres Miembro Activo!</strong>
-          <p>En los últimos <strong><%= min_recent %></strong> meses sólo has asistido a <strong><%= @user.recent_attendances %></strong> reuniones.</p>
-          <p>Recuerda que debes haber asistido a al menos <strong><%= min_recent %></strong> reuniones en los últimos <strong><%= recent_time_months %></strong> meses para ser considerado Miembro Activo.</p>
-        </div>
-      <% end %>
-    <% else %>
-      <% if @user.active_by_right? %>
-        <div class="alert alert-success text-center member_status_panel_success">
-          <strong><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Miembro Activo Especial</strong>
-          <p>Este Miembro Activo no requiere asistencias para ser Miembro Activo.</p>
-          <p>Este privilegio expira: el día <%= @user.active_member_until %></p>
-        </div>
-      <% elsif @user.active? %>
-        <div class="alert alert-success text-center">
-          <strong>Miembro Activo</strong>
-        </div>
-      <% else %>
-        <div class="alert alert-warning text-center" role="alert">
-          <strong>Miembro Adherente</strong>
-        </div>
-      <% end %>
-    <% end %>
-
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="col-lg-6">
-    <h2><%= t(:recent_meetings).humanize %></h2>
-
-    <% if @user.meetings.any? %>
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th><%= t(:date_lit).humanize %></th>
-            <th><%= t(:title).humanize %></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @user.meetings.order(date: :desc).each do |meeting| %>
-            <tr>
-              <td>
-                <%= Date.parse(meeting.date.to_s) %>
-              </td>
-              <td>
-                <%= link_to format_meeting_name(meeting), meeting %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p><%= t(:has_no_meetings).humanize %></p>
-    <% end %>
-
-    <h2><%= t(:groups).humanize %></h2>
-
-    <% if @user.groups.any? %>
-      <ul>
-        <% @user.groups.each do |g| %>
-          <li><%= link_to g.name, g %></li>
-        <% end %>
-      </ul>
-    <% else %>
-    <p><%= t(:has_no_groups).humanize %></p>
-    <% end %>
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.full_name %>
+      </h1>
+    </div>
   </div>
 
-  <div class="col-lg-offset-1 col-lg-5">
-
-    <!-- <div class="row"> -->
-
-      <!-- <div class="col-sm-7"> -->
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title"><%= t(:user_information).humanize %></h3>
+  <div class="row">
+    <div class="col-lg-offset-3 col-lg-6">
+      <% if current_user == @user %>
+        <% if @user.active? %>
+          <div class="alert alert-success text-center">
+            <strong>Miembro Activo</strong>
+            <p>En los últimos <strong><%= min_recent %></strong> meses has asistido a <strong><%= @user.recent_attendances %></strong> reuniones.</p>
           </div>
-          <table class="table">
-            <tbody>
-              <tr>
-                <td class="text-right">
-                  <strong><%= t(:email).humanize %>:</strong>
-                </td>
-                <td>
-                  <%= @user.email %>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-right">
-                  <strong><%= t(:name).humanize %>:</strong>
-                </td>
-                <td>
-                  <%= @user.full_name %>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-right">
-                  <strong><%= t(:rut).humanize %>:</strong>
-                </td>
-                <td>
-                  <%= @user.rut %>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-right">
-                  <strong><%= t(:birthdate).humanize %>:</strong>
-                </td>
-                <td>
-                  <%= @user.birthdate %>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-right">
-                  <strong><%= t(:city).humanize %>:</strong>
-                </td>
-                <td>
-                  <%= @user.city %>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-right">
-                  <strong><%= t(:description).humanize %>:</strong>
-                </td>
-                <td>
-                  <%= @user.description %>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-right">
-                  <strong><%= t(:mobile_number).humanize %>:</strong>
-                </td>
-                <td>
-                  <%= @user.mobile_number %>
-                </td>
-              </tr>
-              <tr>
-                <td class="text-right">
-                  <strong><%= t(:twitter_user).humanize %>:</strong>
-                </td>
-                <td>
-                  <%= @user.twitter_user %>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      <!-- </div> -->
+        <% else %>
+          <div class="alert alert-danger text-center" role="alert">
+            <strong>No eres Miembro Activo!</strong>
+            <p>En los últimos <strong><%= min_recent %></strong> meses sólo has asistido a <strong><%= @user.recent_attendances %></strong> reuniones.</p>
+            <p>Recuerda que debes haber asistido a al menos <strong><%= min_recent %></strong> reuniones en los últimos <strong><%= recent_time_months %></strong> meses para ser considerado Miembro Activo.</p>
+          </div>
+        <% end %>
+      <% else %>
+        <% if @user.active_by_right? %>
+          <div class="alert alert-success text-center member_status_panel_success">
+            <strong><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Miembro Activo Especial</strong>
+            <p>Este Miembro Activo no requiere asistencias para ser Miembro Activo.</p>
+            <p>Este privilegio expira: el día <%= @user.active_member_until %></p>
+          </div>
+        <% elsif @user.active? %>
+          <div class="alert alert-success text-center">
+            <strong>Miembro Activo</strong>
+          </div>
+        <% else %>
+          <div class="alert alert-warning text-center" role="alert">
+            <strong>Miembro Adherente</strong>
+          </div>
+        <% end %>
+      <% end %>
 
-      <!-- <div class="col-sm-5"></div> -->
-    <!-- </div> -->
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-lg-6">
+      <h2><%= t(:recent_meetings).humanize %></h2>
+
+      <% if @user.meetings.any? %>
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th><%= t(:date_lit).humanize %></th>
+              <th><%= t(:title).humanize %></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @user.meetings.order(date: :desc).each do |meeting| %>
+              <tr>
+                <td>
+                  <%= Date.parse(meeting.date.to_s) %>
+                </td>
+                <td>
+                  <%= link_to format_meeting_name(meeting), meeting %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <p><%= t(:has_no_meetings).humanize %></p>
+      <% end %>
+
+      <h2><%= t(:groups).humanize %></h2>
+
+      <% if @user.groups.any? %>
+        <ul>
+          <% @user.groups.each do |g| %>
+            <li><%= link_to g.name, g %></li>
+          <% end %>
+        </ul>
+      <% else %>
+      <p><%= t(:has_no_groups).humanize %></p>
+      <% end %>
+    </div>
+
+    <div class="col-lg-offset-1 col-lg-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= t(:user_information).humanize %></h3>
+        </div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="text-right"><strong><%= t(:email).humanize %>:</strong></td>
+              <td><%= @user.email %></td>
+            </tr>
+            <tr>
+              <td class="text-right"><strong><%= t(:name).humanize %>:</strong></td>
+              <td><%= @user.full_name %></td>
+            </tr>
+            <tr>
+              <td class="text-right"><strong><%= t(:birthdate).humanize %>:</strong></td>
+              <td><%= @user.birthdate %></td>
+            </tr>
+            <tr>
+              <td class="text-right"><strong><%= t(:city).humanize %>:</strong></td>
+              <td><%= @user.city %></td>
+            </tr>
+            <tr>
+              <td class="text-right"><strong><%= t(:description).humanize %>:</strong></td>
+              <td><%= @user.description %></td>
+            </tr>
+            <tr>
+              <td class="text-right"><strong><%= t(:twitter_user).humanize %>:</strong></td>
+              <td><%= @user.twitter_user %></td>
+            </tr>
+            <% if current_user.admin? || current_user.agroups.any? %>
+            <tr>
+              <td class="text-right"><strong><%= t(:rut).humanize %>:</strong></td>
+              <td><%= @user.rut %></td>
+            </tr>
+            <tr>
+              <td class="text-right"><strong><%= t(:mobile_number).humanize %>:</strong></td>
+              <td><%= @user.mobile_number %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
   </div>
 

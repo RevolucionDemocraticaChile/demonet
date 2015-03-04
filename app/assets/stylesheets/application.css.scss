@@ -30,6 +30,7 @@ $grayMediumLight: #eaeaea;
 $grayLighter: #eaeaea;
 $rdGreen: #1d4c50;
 $rdLightGreen: #739092;
+$rdMediumGreen: #d6e9c6;
 $white: #ffffff;
 
 @mixin box_sizing {
@@ -46,20 +47,34 @@ $white: #ffffff;
   border-color: #d6e9c6;
   border-bottom-width: 1px;
 
-  .navbar-brand {
+  a.navbar-brand {
     color: $white;
     font-weight: bold;
+  }
+
+  a.navbar-brand:hover {
+    color: $rdMediumGreen;
+    font-weight: bold;
+  }
+
+  a.navbar-link {
+    font-weight: bold;
+    color: $white;
+  }
+
+  a.navbar-link:hover {
+    color: $rdMediumGreen;
   }
 
   .navbar-text {
     color: $white;
   }
-
-  .navbar-link {
-    color: $white;
-  }
-
 }
+
+// .navbar-default {
+//   background-color: #ff0000; /* 1D4C4F */
+//   color: #fff;
+// }
 
 html {
   overflow-y: scroll;
@@ -112,7 +127,7 @@ h1 {
   display: inline-block;
 }
 
-.container-nav{
+.container-nav {
   max-width: 96%;
   padding-right: 15px;
   padding-left: 15px;
@@ -298,15 +313,15 @@ h1 {
   border-color: #285e8e;
 }
 
-.panel {
-  padding: 0;
-  border: 1px solid #c9c9c9;
-  margin-bottom: 1px;
-  background: #fefefe;
-  position: relative;
-}
+// .panel {
+//   padding: 0;
+//   border: 1px solid #c9c9c9;
+//   margin-bottom: 1px;
+//   background: #fefefe;
+//   position: relative;
+// }
 
-.panel .panel-heading {
+.panel .panel-heading.panel-aphix {
   height: auto;
   position: relative;
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -318,6 +333,11 @@ h1 {
   background: -ms-linear-gradient(top, #ffffff 0%,#f5f5f5 100%);
   background: linear-gradient(to bottom, #ffffff 0%,#f5f5f5 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f5f5f5',GradientType=0 );
+
+  h2, h4 {
+    display: inline;
+  }
+
 }
 
 .panel .panel-footer {
@@ -356,14 +376,14 @@ h1 {
   text-align: center;
 }
 
-.panel .panel-heading h2, h4 {
-  // margin-top: 0;
-//   margin-bottom: 0;
-//   font-weight: 700;
-//   color: #777777;
-  display: inline-block;
-//   padding: 7px 0px 0px 50px;
-}
+// .panel .panel-heading h2, h4 {
+//   // margin-top: 0;
+// //   margin-bottom: 0;
+// //   font-weight: 700;
+// //   color: #777777;
+//   display: inline-block;
+// //   padding: 7px 0px 0px 50px;
+// }
 
 .panel .panel-heading .icon {
   padding-top: 9px;
@@ -709,11 +729,6 @@ a.botonera{
 .col-md-4.block, .col-md-8.block, .col-md-3.block{
   padding: 1px;
 }
-
-// .navbar-default {
-//   background-color: #507577; /* 1D4C4F */
-//   color: #fff;
-// }
 
 // .navbar-default .navbar-nav>li>a {
 //   color: #fff;

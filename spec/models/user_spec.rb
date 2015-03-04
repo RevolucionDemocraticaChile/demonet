@@ -23,6 +23,7 @@
 #  twitter_user        :string(255)
 #  active_member_until :date
 #  roles_mask          :integer
+#  display_name        :string(255)
 #
 
 require 'rails_helper'

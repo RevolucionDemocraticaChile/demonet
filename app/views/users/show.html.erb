@@ -2,10 +2,25 @@
 
   <div class="row">
     <div class="col-lg-12">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.full_name %>
-      </h1>
+      <div class="page-header">
+        <h1>
+          <%= image_tag(gravatar_url_for(@user), alt: @user.name, class: "gravatar img-circle", size: UsersHelper::GRAVATAR_DEFAULT_SIZE) %>
+          <%= @user.full_name %>
+        </h1>
+      </div>
+
+      <!-- <div class="page-header text-center">
+        <div class="" style="background: #ff0000; width: 500px; margin: 0 auto;">
+          <div class="" style="">
+            <%= image_tag(gravatar_url_for(@user), alt: @user.name, class: "gravatar img-circle", style: "float:left;", size: UsersHelper::GRAVATAR_DEFAULT_SIZE) %>
+          </div>
+          <div class="" style="">
+            <span class="h1"><%= @user.full_name %></span><br />
+            <span>Coordinador Democracia Digital</span><br />
+          </div>
+        </div>
+
+      </div> -->
     </div>
   </div>
 
@@ -18,10 +33,19 @@
             <p>En los últimos <strong><%= min_recent %></strong> meses has asistido a <strong><%= @user.recent_attendances %></strong> reuniones.</p>
           </div>
         <% else %>
-          <div class="alert alert-danger text-center" role="alert">
+          <!-- <div class="alert alert-danger text-center" role="alert">
             <strong>No eres Miembro Activo!</strong>
             <p>En los últimos <strong><%= min_recent %></strong> meses sólo has asistido a <strong><%= @user.recent_attendances %></strong> reuniones.</p>
             <p>Recuerda que debes haber asistido a al menos <strong><%= min_recent %></strong> reuniones en los últimos <strong><%= recent_time_months %></strong> meses para ser considerado Miembro Activo.</p>
+          </div> -->
+          <div class="panel panel-danger">
+            <div class="panel-heading">
+              <h1 class="panel-title">No eres Miembro Activo!</h1>
+            </div>
+            <div class="panel-body">
+              En los últimos <strong><%= min_recent %></strong> meses sólo has asistido a <strong><%= @user.recent_attendances %></strong> reuniones.
+              Recuerda que debes haber asistido a al menos <strong><%= min_recent %></strong> reuniones en los últimos <strong><%= recent_time_months %></strong> meses para ser considerado Miembro Activo.
+            </div>
           </div>
         <% end %>
       <% else %>
@@ -91,7 +115,7 @@
 
     <div class="col-lg-offset-1 col-lg-5">
       <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading panel-aphix">
           <h3 class="panel-title"><%= t(:user_information).humanize %></h3>
         </div>
         <table class="table">

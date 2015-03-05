@@ -15,17 +15,18 @@
 
           <%= form_for @user, html: {class: "form-horizontal"} do |f| %>
             <% if @user.errors.any? %>
-              <div id="error_explanation" class="alert alert-danger">
-                <h2><%= pluralize(@user.errors.count, "error") %>:</h2>
+            <div id="error_explanation" class="alert alert-danger">
+              <h2><%= pluralize(@user.errors.count, "error") %>:</h2>
 
-                <ul>
-                  <% @user.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                  <% end %>
-                </ul>
-              </div>
+              <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
             <% end %>
 
+            <% if current_user.agroups.any? || current_user.admin? %>
             <div class="form-group">
               <%= label_tag :groups, t(:groups).humanize, class: "col-sm-3 control-label" %>
               <div class="col-sm-9">
@@ -39,6 +40,7 @@
             </div>
 
             <hr />
+            <% end %>
 
             <div class="form-group">
               <%= f.label t(:email), class: "col-sm-3 control-label" %>
@@ -110,14 +112,14 @@
             </div>
 
             <% if current_user.admin? %>
-              <hr />
+            <hr />
 
-              <div class="form-group">
-                <%= f.label t(:active_member_until), class: "col-sm-3 control-label" %>
-                <div class="col-sm-9">
-                  <%= f.date_field :active_member_until, class: "form-control", include_blank: true %>
-                </div>
+            <div class="form-group">
+              <%= f.label t(:active_member_until), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.date_field :active_member_until, class: "form-control", include_blank: true %>
               </div>
+            </div>
             <% end %>
 
             <hr />

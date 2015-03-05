@@ -64,26 +64,30 @@ class UsersController < ApplicationController
 
   def create_or_update
     if params["member_group"].nil? || params["member_group"]["groups"].empty?
-      @user.errors.add(:espacio, " es necesario")
-      false
-    else
-      success = false
+      if @user.member_groups.empty?
+        @user.errors.add(:espacio, " es necesario")
+        return false
+      end
+    end
 
-      User.transaction do
-        @user.save!
+    success = false
 
+    User.transaction do
+      @user.save!
+
+      if !params["member_group"].nil?
         MemberGroup.where(user_id: @user.id).destroy_all
 
         params["member_group"]["groups"].each do |group_id|
           member_group = MemberGroup.new(user_id: @user.id, group_id: group_id)
           member_group.save!
         end
-
-        success = true
       end
 
-      success
+      success = true
     end
+
+    return success
   end
 
 

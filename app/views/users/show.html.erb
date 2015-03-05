@@ -8,19 +8,6 @@
           <%= @user.full_name %>
         </h1>
       </div>
-
-      <!-- <div class="page-header text-center">
-        <div class="" style="background: #ff0000; width: 500px; margin: 0 auto;">
-          <div class="" style="">
-            <%= image_tag(gravatar_url_for(@user), alt: @user.name, class: "gravatar img-circle", style: "float:left;", size: UsersHelper::GRAVATAR_DEFAULT_SIZE) %>
-          </div>
-          <div class="" style="">
-            <span class="h1"><%= @user.full_name %></span><br />
-            <span>Coordinador Democracia Digital</span><br />
-          </div>
-        </div>
-
-      </div> -->
     </div>
   </div>
 
@@ -67,6 +54,19 @@
       <% end %>
 
     </div>
+
+    <div class="col-lg-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="panel-title">Recuerda cambiar tu clave!</h2>
+        </div>
+        <div class="panel-body text-center">
+          <!-- En el siguiente link puedes cambiar tu clave, además de tus datos personales:<br /> -->
+          <%= link_to "Editar mi datos", edit_user_path(@user), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="row">

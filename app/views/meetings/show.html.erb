@@ -1,76 +1,88 @@
-<h1><%= format_meeting_name(@meeting) %></h1>
+<div class="container">
 
-<div class="row">
-  <div class="col-lg-offset-1 col-lg-10">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Información</h3>
-      </div>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td class="text-right">
-              <strong><%= t(:description).humanize %>:</strong>
-            </td>
-            <td>
-              <%= @meeting.desc %>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right">
-              <strong>Organiza:</strong>
-            </td>
-            <td>
-              <% @meeting.meeting_groups.each do |mg| %>
-                <%= link_to mg.group.name, mg.group %><br />
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right">
-              <strong>Hora inicio:</strong>
-            </td>
-            <td>
-              <%= @meeting.start %>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right">
-              <strong>Hora término:</strong>
-            </td>
-            <td>
-              <%= @meeting.finish %>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right">
-              <strong>Asisten:</strong>
-            </td>
-            <td>
-              <% @meeting.user_meetings.each do |um| %>
-                <%= link_to format_user_name(um.user), um.user %><br />
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="page-header">
+    <h1><%= format_meeting_name(@meeting) %></h1>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-lg-offset-1 col-lg-10">
-    <div class="panel panel-default">
-      <div class="panel-heading clearfix">
-        <h3 class="panel-title"><%= t(:minutes).humanize %></h3>
-      </div>
-      <div class="panel-body minutes_panel_body">
-        <div id="minutes_preview"></div>
-        <%= hidden_field_tag :minutes, @meeting.minutes, class: "meeting_minutes_field form-control", id: "minutes_textarea", oninput: "this.editor.update()" %>
+  <div class="row">
+    <div class="col-lg-offset-1 col-lg-7">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Información</h3>
+        </div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="text-right">
+                <strong><%= t(:description).humanize %>:</strong>
+              </td>
+              <td>
+                <%= @meeting.desc %>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-right">
+                <strong>Organiza:</strong>
+              </td>
+              <td>
+                <% @meeting.meeting_groups.each do |mg| %>
+                  <%= link_to mg.group.name, mg.group %><br />
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-right">
+                <strong>Hora inicio:</strong>
+              </td>
+              <td>
+                <%= @meeting.start %>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-right">
+                <strong>Hora término:</strong>
+              </td>
+              <td>
+                <%= @meeting.finish %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+
+    <div class="col-lg-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Asistentes</h2>
+        </div>
+        <ul class="list-group">
+          <% @meeting.user_meetings.each do |um| %>
+            <li class="list-group-item"><%= link_to format_user_name(um.user), um.user %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
   </div>
+
+  <div class="row">
+    <div class="col-lg-offset-1 col-lg-10">
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h3 class="panel-title"><%= t(:minutes).humanize %></h3>
+        </div>
+        <div class="panel-body minutes_panel_body">
+          <div id="minutes_preview"></div>
+          <%= hidden_field_tag :minutes, @meeting.minutes, class: "meeting_minutes_field form-control", id: "minutes_textarea", oninput: "this.editor.update()" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+
 
 
 <script>

@@ -5,7 +5,7 @@
       <div class="page-header">
         <h1>
           <%= image_tag(gravatar_url_for(@user), alt: @user.name, class: "gravatar img-circle", size: UsersHelper::GRAVATAR_DEFAULT_SIZE) %>
-          <%= @user.display_name.empty? ? @user.full_name : @user.display_name %>
+          <%= (@user.display_name.nil? || @user.display_name.empty?) ? @user.full_name : @user.display_name %>
         </h1>
       </div>
     </div>

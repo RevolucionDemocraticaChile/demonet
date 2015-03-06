@@ -1,6 +1,8 @@
 module UsersHelper
 
   GRAVATAR_DEFAULT_SIZE = 100
+  GRAVATAR_DEFAULT_SIZE_SMALL = 10
+
   LOGO_RD_SMALL_URL = "https://raw.githubusercontent.com/RevolucionDemocraticaChile/demonet/development/app/assets/images/Logo_RD_small.png"
   RD_FACES_BW_URL = "https://raw.githubusercontent.com/RevolucionDemocraticaChile/demonet/development/app/assets/images/rd_faces.bw-trans.png"
 

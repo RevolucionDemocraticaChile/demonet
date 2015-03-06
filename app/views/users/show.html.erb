@@ -35,19 +35,19 @@
               <td><%= @user.birthdate %></td>
             </tr>
             <% end %>
-            <% if !@user.birthdate.nil? %>
+            <% if !(@user.city.nil? || @user.city.empty?) %>
             <tr>
               <td class="text-right"><strong><%= t(:city).humanize %>:</strong></td>
               <td><%= @user.city %></td>
             </tr>
             <% end %>
-            <% if !@user.description.empty? %>
+            <% if !(@user.description.nil? || @user.description.empty?) %>
             <tr>
               <td class="text-right"><strong><%= t(:description).humanize %>:</strong></td>
               <td><%= @user.description %></td>
             </tr>
             <% end %>
-            <% if !@user.twitter_user.empty? %>
+            <% if !(@user.twitter_user.nil? || @user.twitter_user.empty?) %>
             <tr>
               <td class="text-right"><strong><%= t(:twitter_user).humanize %>:</strong></td>
               <td><%= @user.twitter_user %></td>

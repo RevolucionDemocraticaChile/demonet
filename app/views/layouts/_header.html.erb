@@ -4,6 +4,9 @@
       <%= link_to "Revolución Democrática", root_path, class: "navbar-brand" %>
     </div>
     <p class="navbar-text">Conectado como <%= link_to current_user.full_name, current_user, class: "navbar-link" %></p>
+    <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to 'Salir', salir_path, method: :delete, class: "navbar-link" %></li>
+    </ul>
   </div>
 </nav>
 

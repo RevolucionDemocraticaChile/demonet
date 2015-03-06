@@ -20,12 +20,6 @@ cl:
   are_you_sure: Estás seguro?
   association_created_successfully: Asociación creada exitosamente.
   association_destroyed_successfully: Asociación eliminada exitosamente.
-  group_created_successfully: Espacio creado exitosamente.
-  group_updated_successfully: Espacio actualizado exitosamente.
-  group_destroyed_successfully: Espacio eliminado exitosamente.
-  meeting_created_successfully: Reunión creada exitosamente.
-  meeting_updated_successfully: Reunión actualizada exitosamente.
-  meeting_destroyed_successfully: Reunión eliminada exitosamente.
   administration: administración
   administrators: administradores
   attendants: asistentes
@@ -44,6 +38,7 @@ cl:
   destroy_payment: eliminar pago
   destroy_user: eliminar usuario
   directive: directiva
+  display_name: nombre preferido
   edit: editar
   edit_group: editar espacio
   edit_meeting: editar reunión
@@ -59,6 +54,12 @@ cl:
   front: frente
   group: espacio
   groups: espacios
+  group_created_successfully: Espacio creado exitosamente.
+  group_updated_successfully: Espacio actualizado exitosamente.
+  group_destroyed_successfully: Espacio eliminado exitosamente.
+  meeting_created_successfully: Reunión creada exitosamente.
+  meeting_updated_successfully: Reunión actualizada exitosamente.
+  meeting_destroyed_successfully: Reunión eliminada exitosamente.
   has_no_meetings: no tiene reuniones
   has_no_groups: no tiene espacios
   invalid_email_pass: Combinación email/clave inválida.

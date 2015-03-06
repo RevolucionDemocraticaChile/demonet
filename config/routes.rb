@@ -3,7 +3,7 @@
 
     get   '/ingresar'  => 'sessions#new'
     post  '/ingresar'  => 'sessions#create'
-    delete '/salir'    => 'sessions#destroy'
+    delete 'salir'    => 'sessions#destroy'
     get   'mails_user_groups' => 'member_groups#mails'
 
     resources :users

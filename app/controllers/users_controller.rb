@@ -25,6 +25,12 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     authorize! :edit, @user, message: t(:not_authorized)
+
+    if current_user.agroups.any? || current_user.admin?
+      render :edit_admin
+    else
+      render :edit
+    end
   end
 
   # POST /users
@@ -42,7 +48,11 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    @user.assign_attributes(user_params)
+    if current_user.agroups.any? || current_user.admin?
+      @user.assign_attributes(user_params_admin)
+    else
+      @user.assign_attributes(user_params)
+    end
 
     if create_or_update
       flash[:success] = t(:user_updated_successfully)
@@ -97,11 +107,11 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    if current_user.admin?
-      params.require(:user).permit(:email, :first_name, :second_name, :last_name, :password, :password_confirmation, :rut, :birthdate, :city, :description, :mobile_number, :twitter_user, :active_member_until)
-    else
-      params.require(:user).permit(:email, :first_name, :second_name, :last_name, :password, :password_confirmation, :rut, :birthdate, :city, :description, :mobile_number, :twitter_user)
-    end
+    params.require(:user).permit(:password, :password_confirmation, :rut, :birthdate, :city, :description, :mobile_number, :twitter_user, :display_name)
+  end
+
+  def user_params_admin
+    params.require(:user).permit(:email, :first_name, :second_name, :last_name, :password, :password_confirmation, :rut, :birthdate, :city, :description, :mobile_number, :twitter_user, :active_member_until, :display_name)
   end
 
 end

@@ -1,14 +1,14 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-lg-8 col-lg-offset-2">
+    <div class="col-lg-6 col-lg-offset-3">
 
       <div class="panel panel-default">
         <div class="panel-heading panel-aphix clearfix">
           <% if action_name == 'new' %>
             <h4><%= t(:add_user).humanize %></h4>
           <% else %>
-            <h4><%= t(:edit_user).humanize %></h4>
+            <h4><%= t(:edit_user).humanize %> (admin)</h4>
           <% end %>
         </div>
         <div class="panel-body">
@@ -26,80 +26,87 @@
             </div>
             <% end %>
 
+            <% if current_user.agroups.any? || current_user.admin? %>
             <div class="form-group">
-              <%= f.label t(:email), class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
-                <%= f.text_field :email, class: "form-control", placeholder: t(:email).humanize, disabled: true %>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <%= f.label t(:name), class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
-                <%= f.text_field :first_name, class: "form-control", placeholder: t(:first_name).humanize, disabled: true %>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <%= f.label t(:last_name), class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
-                <%= f.text_field :last_name, class: "form-control", placeholder: t(:last_name).humanize, disabled: true %>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="col-sm-offset-4 col-sm-8">
-                <small>Si hay un error en estos datos, por favor contacta al equipo!</small>
+              <%= label_tag :groups, t(:groups).humanize, class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <select multiple id="member_group_groups" class="form-control select2-container select2-container-multi" name="member_group[groups][]">
+                  <% selected_groups = @user.member_groups.map(&:group_id) %>
+                  <% (current_user.admin? ? Group.all : (current_user.agroups | @user.groups)).each do |group| %>
+                    <option <%= group.id.in?(selected_groups) ? "selected='selected'" : ''%> <%= current_user.admin? || group.id.in?(current_user.agroups.map(&:id)) ? "" : "locked=locked"%> value="<%= group.id %>"><%= group.display_name %></option>
+                  <% end %>
+                </select>
               </div>
             </div>
 
             <hr />
+            <% end %>
 
             <div class="form-group">
-              <%= f.label t(:display_name), class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
-                <%= f.text_field :display_name, class: "form-control", placeholder: t(:display_name).humanize %>
+              <%= f.label t(:email), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.text_field :email, class: "form-control", placeholder: t(:email).humanize %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= f.label t(:rut), class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
+              <%= f.label t(:first_name), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.text_field :first_name, class: "form-control", placeholder: t(:first_name).humanize %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label t(:second_name), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.text_field :second_name, class: "form-control", placeholder: t(:second_name).humanize %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label t(:last_name), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
+                <%= f.text_field :last_name, class: "form-control", placeholder: t(:last_name).humanize %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label t(:rut), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.text_field :rut, class: "form-control", placeholder: t(:rut).humanize %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= f.label t(:birthdate), class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
+              <%= f.label t(:birthdate), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.date_field :birthdate, class: "form-control", placeholder: t(:birthdate).humanize, include_blank: true %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= f.label t(:city), class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
+              <%= f.label t(:city), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.text_field :city, class: "form-control", placeholder: t(:city).humanize, include_blank: true %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= f.label t(:description), class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
+              <%= f.label t(:description), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.text_area :description, class: "form-control", placeholder: t(:description).humanize, include_blank: true %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= f.label t(:mobile_number), class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
+              <%= f.label t(:mobile_number), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.text_field :mobile_number, class: "form-control", placeholder: t(:mobile_number).humanize, include_blank: true %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= f.label t(:twitter_user), class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
+              <%= f.label t(:twitter_user), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.text_field :twitter_user, class: "form-control", placeholder: t(:twitter_user).humanize, include_blank: true %>
               </div>
             </div>
@@ -108,8 +115,8 @@
             <hr />
 
             <div class="form-group">
-              <%= f.label t(:active_member_until), class: "col-sm-4 control-label" %>
-              <div class="col-sm-8">
+              <%= f.label t(:active_member_until), class: "col-sm-3 control-label" %>
+              <div class="col-sm-9">
                 <%= f.date_field :active_member_until, class: "form-control", include_blank: true %>
               </div>
             </div>
@@ -119,21 +126,21 @@
 
             <% if action_name != "new" %>
               <div class="form-group">
-                <%= f.label t(:password), class: "col-sm-4 control-label" %>
-                <div class="col-sm-8">
+                <%= f.label t(:password), class: "col-sm-3 control-label" %>
+                <div class="col-sm-9">
                   <%= f.password_field :password, class: "form-control", placeholder: t(:password).humanize %>
                 </div>
               </div>
               <div class="form-group">
-                <%= f.label t(:password_confirmation), class: "col-sm-4 control-label" %>
-                <div class="col-sm-8">
+                <%= f.label t(:password_confirmation), class: "col-sm-3 control-label" %>
+                <div class="col-sm-9">
                   <%= f.password_field :password_confirmation, class: "form-control", placeholder: t(:password_confirmation).humanize %>
                 </div>
               </div>
             <% end %>
 
             <div class="form-group">
-              <div class="col-sm-offset-4 col-sm-8">
+              <div class="col-sm-offset-3 col-sm-9">
                 <% if action_name == 'new' %>
                   <%= f.submit t(:create).humanize, class: "btn btn-primary" %>
                 <% else %>

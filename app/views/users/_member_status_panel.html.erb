@@ -1,0 +1,43 @@
+<% if user.active_by_right? %>
+  <div class="panel panel-success text-center member_status_panel_success">
+    <div class="panel-heading">
+      <h2 class="panel-title"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Miembro Activo Especial</h2>
+    </div>
+    <div class="panel-body">
+      <% if user == current_user %>
+      No requieres asistencias para ser Miembro Activo.<br />
+      Este privilegio expira el día <%= user.active_member_until %>.
+      <% else %>
+      Este Miembro no requiere asistencias para ser Miembro Activo.<br />
+      Este privilegio expira el día <%= user.active_member_until %>
+      <% end %>
+    </div>
+  </div>
+<% elsif user.active? %>
+  <div class="panel panel-success text-center">
+    <div class="panel-heading">
+      <h2 class="panel-title">Miembro Activo</h2>
+    </div>
+    <div class="panel-body">
+      <% if user == current_user %>
+      En los últimos <strong><%= min_recent %></strong> meses has asistido a <strong><%= user.recent_attendances %></strong> reuniones.
+      <% else %>
+      Este Miembro cumple los requisitos para ser considerado Miembro Activo.
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="panel panel-warning text-center">
+    <div class="panel-heading">
+      <h2 class="panel-title">Miembro Adherente</h2>
+    </div>
+    <div class="panel-body">
+      <% if user == current_user %>
+      En los últimos <strong><%= min_recent %></strong> meses sólo has asistido a <strong><%= user.recent_attendances %></strong> reuniones.
+      Recuerda que debes haber asistido a al menos <strong><%= min_recent %></strong> reuniones en los últimos <strong><%= recent_time_months %></strong> meses para ser considerado Miembro Activo.
+      <% else %>
+      Este Miembro no cumple los requisitos para ser considerado Miembro Activo.
+      <% end %>
+    </div>
+  </div>
+<% end %>

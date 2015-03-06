@@ -5,7 +5,7 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-offset-1 col-lg-7">
+    <div class="col-lg-9">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Información</h3>
@@ -58,7 +58,9 @@
         </div>
         <ul class="list-group">
           <% @meeting.user_meetings.each do |um| %>
-            <li class="list-group-item"><%= link_to format_user_name(um.user), um.user %></li>
+            <li class="list-group-item">
+              <%= link_to format_user_name(um.user), um.user %>
+            </li>
           <% end %>
         </ul>
       </div>
@@ -67,7 +69,7 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-offset-1 col-lg-10">
+    <div class="col-lg-9">
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
           <h3 class="panel-title"><%= t(:minutes).humanize %></h3>

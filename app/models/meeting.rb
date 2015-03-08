@@ -19,10 +19,10 @@ class Meeting < ActiveRecord::Base
 
   MINUTES_MAX_LENGTH = 20000
 
-  has_many :user_meetings
+  has_many :user_meetings, dependent: :destroy
   has_many :users, through: :user_meetings
 
-  has_many :meeting_groups
+  has_many :meeting_groups, dependent: :destroy
   has_many :groups, through: :meeting_groups
 
   validates :minutes,

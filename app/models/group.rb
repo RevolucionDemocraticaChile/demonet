@@ -15,26 +15,27 @@ class Group < ActiveRecord::Base
   # Don't use the type column for inheritance
   self.inheritance_column = nil
 
-  NAME_MAX_LENGTH = 200
+  STRING_MAX_LENGTH = 200
   DESC_MAX_LENGTH = 10000
 
   has_many :meeting_groups
   has_many :meetings, through: :meeting_groups
 
-  has_many :admin_groups
+  has_many :admin_groups, dependent: :destroy
   has_many :admins, through: :admin_groups, source: :user
 
-  has_many :member_groups
+  has_many :member_groups, dependent: :destroy
   has_many :members, through: :member_groups, source: :user
 
   validates :name,
     presence: true,
-    length:   { maximum: NAME_MAX_LENGTH }
+    length:   { maximum: STRING_MAX_LENGTH }
 
   validates :desc,
-    # presence: true,
     length:   { maximum: DESC_MAX_LENGTH }
 
+  validates :type,
+    length:   { maximum: STRING_MAX_LENGTH }
 
   def display_name
     case type

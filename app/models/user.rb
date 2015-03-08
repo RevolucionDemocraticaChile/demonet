@@ -42,13 +42,13 @@ class User < ActiveRecord::Base
   # Never change the order of these roles!
   roles :admin, :finance_manager
 
-  has_many :member_groups
+  has_many :member_groups, dependent: :destroy
   has_many :groups, through: :member_groups
 
-  has_many :admin_groups
+  has_many :admin_groups, dependent: :destroy
   has_many :agroups, through: :admin_groups, source: :group
 
-  has_many :user_meetings
+  has_many :user_meetings, dependent: :destroy
   has_many :meetings, through: :user_meetings
 
   validates :email,
@@ -81,25 +81,14 @@ class User < ActiveRecord::Base
   # Hooks:
 
   before_create do
-    puts "|| User.before_create"
     t = User.new_token
     send_welcome_email(t)
-    puts "|| User.before_create sent email"
     self.password = t
     self.admin = false
     true
   end
 
-  after_create do
-    puts "|| after create"
-  end
-
-  after_save do
-    puts "|| User.after_save"
-  end
-
   before_save do
-    puts "|| User.before_save"
     self.email    = email.downcase
     self.rut      = Run.format(rut)
   end

@@ -16,7 +16,6 @@ gem 'bcrypt',          '~> 3.1.7'
 gem 'cancancan',       '~> 1.9'
 gem 'role_model',      '~> 0.8.2'
 
-gem 'annotate',        '~> 2.6.5'
 gem 'rb-readline'
 gem 'run_cl',          '~> 1.6'
 gem 'jquery-datatables-rails', '~> 3.1.1'
@@ -29,11 +28,12 @@ group :production do
 end
 
 group	:development, :test do
-  gem 'rspec-rails', '~> 3.0.2'
+  gem 'rspec-rails',  '~> 3.0.2'
   gem 'sqlite3'
-  gem 'guard-rspec', '~> 4.3.1'
+  gem 'guard-rspec',  '~> 4.3.1'
   gem 'spring'
   gem 'awesome_print'
+  gem 'annotate',     '~> 2.6.6'
 end
 
 group :test do

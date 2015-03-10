@@ -35,7 +35,7 @@
                 <strong>Hora inicio:</strong>
               </td>
               <td>
-                <%= @meeting.start %>
+                <%= l @meeting.start, format: :just_time %>
               </td>
             </tr>
             <tr>
@@ -43,15 +43,38 @@
                 <strong>Hora término:</strong>
               </td>
               <td>
-                <%= @meeting.finish %>
+                <%= l @meeting.finish, format: :just_time %>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h3 class="panel-title"><%= t(:minutes).humanize %></h3>
+        </div>
+        <div class="panel-body minutes_panel_body">
+          <div id="minutes_preview"></div>
+          <%= hidden_field_tag :minutes, @meeting.minutes, class: "meeting_minutes_field form-control", id: "minutes_textarea", oninput: "this.editor.update()" %>
+        </div>
+      </div>
+
     </div>
 
     <div class="col-lg-3">
+
+      <% if can? :edit, @meeting %>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="panel-title">Administración</h2>
+        </div>
+        <div class="panel-body text-center">
+          <%= link_to 'Editar reunión', edit_meeting_path(@meeting), class: "btn btn-primary" %>
+        </div>
+      </div>
+      <% end %>
+
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title">Asistentes</h2>
@@ -69,20 +92,6 @@
       </div>
     </div>
 
-  </div>
-
-  <div class="row">
-    <div class="col-lg-9">
-      <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-          <h3 class="panel-title"><%= t(:minutes).humanize %></h3>
-        </div>
-        <div class="panel-body minutes_panel_body">
-          <div id="minutes_preview"></div>
-          <%= hidden_field_tag :minutes, @meeting.minutes, class: "meeting_minutes_field form-control", id: "minutes_textarea", oninput: "this.editor.update()" %>
-        </div>
-      </div>
-    </div>
   </div>
 
 </div>

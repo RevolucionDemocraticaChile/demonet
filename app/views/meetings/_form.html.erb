@@ -1,14 +1,14 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-offset-1 col-lg-10">
 
       <div class="panel panel-default">
-        <div class="panel-heading panel-aphix clearfix">
+        <div class="panel-heading clearfix">
           <% if action_name == 'new' %>
-            <h4><%= t(:add_meeting).humanize %></h4>
+            <h2 class="panel-title"><%= t(:add_meeting).humanize %></h2>
           <% else %>
-            <h4><%= t(:edit_meeting).humanize %></h4>
+            <h2 class="panel-title"><%= t(:edit_meeting).humanize %></h2>
           <% end %>
         </div>
 
@@ -16,7 +16,7 @@
           <%= form_for @meeting, html: {class: "form-horizontal"} do |f| %>
 
             <% if @meeting.errors.any? %>
-              <div id="error_explanation" class="alert alert-danger">
+              <div id="error_explanation" class="alert alert-danger alert-dismissible" role="alert">
                 <h2>
                   <%= pluralize(@meeting.errors.count, "error") %> impidieron que se grabara la reunión:
                 </h2>
@@ -63,30 +63,63 @@
             </div>
 
             <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <div class="alert alert-info">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+                  Recuerda que aquí sólo puedes agregar usuarios que ya tienen cuenta en este sitio. Si quieres agregar a alguien que no tiene cuenta, primero <%= link_to 'Crea un usuario', new_user_path %>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
               <label class="col-sm-2 control-label" for="group_type"><%= t(:start_time).humanize %></label>
               <div class="col-sm-10">
-                <%= f.time_field :start, class: "meeting_time_field" %>
+                <%= f.time_field :start, class: "form-control meeting_time_field" %>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-sm-2 control-label" for="group_type"><%= t(:finish_time).humanize %></label>
               <div class="col-sm-10">
-                <%= f.time_field :finish, class: "meeting_time_field" %>
+                <%= f.time_field :finish, class: "form-control meeting_time_field" %>
               </div>
             </div>
 
             <div class="form-group">
               <%= f.label t(:minutes), class: "col-sm-2 control-label" %>
               <div class="col-sm-10">
-                <%= f.text_area :minutes, class: "form-control", oninput: "this.editor.update()" %>
+                <%= f.text_area :minutes, class: "form-control", oninput: "this.editor.update()", rows: "4" %>
               </div>
             </div>
 
-            <div class="col-sm-12">
-              <div id="minutes_preview">
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <div class="alert alert-info">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+                  En el cuadro de arriba puedes escribir el Acta. A medida que escribas, abajo aparecerá una vista previa del Acta. En este cuadro puedes usar comandos básicos para formatear el texto. Por ejemplo, usa <code>#</code> para obtener texto más grande (intenta escribir <code># Título del Acta</code>). Para un listado de posibilidades, visita <%= link_to 'esta guía', 'https://es.wikipedia.org/wiki/Markdown' %>. Aquí te dejamos un ejemplo de un Acta.
+                  <pre># Acta Primera Reunión de la Comisión Democracia Digital
+
+**Tabla:** En esta reunión se tratarán los siguientes temas:
+
+1. El primer tema
+2. El segundo tema (expone Cármen)
+
+**Se inicia la sesión a las 19:00**
+
+## Tema 1
+
+* Luis: Creo que hay que hacer algo urgente.
+* Cármen: De acuerdo
+
+## Tema 2
+
+* Cármen expone.
+* Todos aplauden.</pre>
+                </div>
               </div>
             </div>
+
+
 
 
 
@@ -99,6 +132,20 @@
             </div>
 
           <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-offset-1 col-lg-10">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Vista previa</h2>
+        </div>
+        <div class="panel-body">
+          <div id="minutes_preview">
+          </div>
         </div>
       </div>
     </div>

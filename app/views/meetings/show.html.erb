@@ -35,7 +35,7 @@
                 <strong>Hora inicio:</strong>
               </td>
               <td>
-                <%= l @meeting.start, format: :just_time %>
+                <%= l @meeting.start, format: :just_time unless @meeting.start.nil? %>
               </td>
             </tr>
             <tr>
@@ -43,7 +43,7 @@
                 <strong>Hora término:</strong>
               </td>
               <td>
-                <%= l @meeting.finish, format: :just_time %>
+                <%= l @meeting.finish, format: :just_time unless @meeting.finish.nil? %>
               </td>
             </tr>
           </tbody>

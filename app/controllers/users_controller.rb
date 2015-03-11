@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params_admin)
 
     if create_or_update
       flash[:success] = t(:user_created_successfully)

@@ -6,10 +6,10 @@
     <div class="panel-body">
       <% if user == current_user %>
       No requieres asistencias para ser Miembro Activo.<br />
-      Este privilegio expira el día <%= user.active_member_until %>.
+      Este privilegio expira el día <%= l user.active_member_until %>.
       <% else %>
       Este Miembro no requiere asistencias para ser Miembro Activo.<br />
-      Este privilegio expira el día <%= user.active_member_until %>
+      Este privilegio expira el día <%= l user.active_member_until %>
       <% end %>
     </div>
   </div>

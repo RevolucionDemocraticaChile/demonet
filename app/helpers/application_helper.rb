@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def format_meeting_name(meeting)
-    "#{t(:meeting).humanize} #{(meeting.groups.map { |g| g.display_name }).join(', ')} #{l(Date.parse(meeting.date.to_s))}"
+    "#{t(:meeting).humanize} #{(meeting.groups.map { |g| g.display_name }).join(', ')} #{l meeting.date}"
   end
 
   def format_user_name(user)

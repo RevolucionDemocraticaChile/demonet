@@ -32,7 +32,7 @@
             <% if !@user.birthdate.nil? %>
             <tr>
               <td class="text-right"><strong><%= t(:birthdate).humanize %>:</strong></td>
-              <td><%= @user.birthdate %></td>
+              <td><%= l @user.birthdate %></td>
             </tr>
             <% end %>
             <% if !(@user.city.nil? || @user.city.empty?) %>
@@ -83,7 +83,7 @@
             <% @user.meetings.order(date: :desc).each do |meeting| %>
               <tr>
                 <td>
-                  <%= Date.parse(meeting.date.to_s) %>
+                  <%= l meeting.date %>
                 </td>
                 <td>
                   <%= link_to format_meeting_name(meeting), meeting %>

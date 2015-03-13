@@ -100,6 +100,10 @@ class User < ActiveRecord::Base
     admin
   end
 
+  def moderator?
+    agroups.any?
+  end
+
   def active_by_right?
     !active_member_until.nil? && active_member_until > Date.today
   end

@@ -10,6 +10,10 @@ class Ability
     can :show,  User
     can [:edit, :update],  User, id: user.id
 
+    if user.moderator?
+      can [:new, :create], User
+    end
+
     # Group
     can :index, Group
     can :show,  Group

@@ -7,6 +7,8 @@ development:
   password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 production:
+  adapter: postgresql
+  database: demonet_development
   url: <%= ENV['DATABASE_URL'] %>
   pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
 

@@ -24,3 +24,4 @@ doc/
 .secret
 .ruby-version
 logfile
+public/assets

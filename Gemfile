@@ -22,6 +22,8 @@ gem 'jquery-datatables-rails', '~> 3.1.1'
 gem "select2-rails",   '~> 3.5.9.1'
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
+gem 'puma', '~> 2.11.1'
+
 group :production do
   gem 'pg',             '~> 0.17.1'
   gem 'rails_12factor', '~> 0.0.2'

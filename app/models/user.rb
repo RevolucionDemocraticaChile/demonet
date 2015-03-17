@@ -68,6 +68,10 @@ class User < ActiveRecord::Base
     presence:   true,
     length:     { maximum: NAME_MAX_LENGTH }
 
+  validates :display_name,
+    length:     { in: 2..NAME_MAX_LENGTH },
+    allow_nil:  true
+
   validates :password,
     presence: true, on: :update,
     length:     { minimum: PASSWORD_MIN_LENGTH },

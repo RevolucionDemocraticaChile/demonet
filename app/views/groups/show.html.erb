@@ -1,16 +1,12 @@
 <div class="container">
 
-  <div class="row">
-    <div class="col-lg-12">
-      <h1>
-        <%= format_group_name(@group) %>
-      </h1>
-    </div>
+  <div class="page-header">
+    <h1><%= format_group_name(@group) %></h1>
   </div>
 
 
   <div class="row">
-    <div class="col-lg-offset-2 col-lg-8">
+    <div class="col-lg-9">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title">Información</h2>
@@ -45,16 +41,6 @@
             </tr>
             <tr>
               <td class="text-right">
-                <strong>Miembros:</strong>
-              </td>
-              <td>
-                <% @group.member_groups.each do |member_group| %>
-                  <%= link_to format_user_name(member_group.user), member_group.user %>,
-                <% end %>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-right">
                 <strong>Descripción:</strong>
               </td>
               <td>
@@ -64,11 +50,7 @@
           </tbody>
         </table>
       </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-lg-offset-2 col-lg-8">
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
           <h2 class="panel-title"><%= t(:recent_meetings).humanize %></h2>
@@ -87,7 +69,54 @@
         </table>
       </div>
     </div>
+
+    <div class="col-lg-3">
+      <% if can? :edit, @group %>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="panel-title">Administración</h2>
+        </div>
+        <div class="panel-body text-center">
+          <%= link_to 'Editar grupo', edit_group_path(@group), class: "btn btn-primary" %>
+        </div>
+      </div>
+      <% end %>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Moderadores</h2>
+        </div>
+        <ul class="list-group">
+          <% @group.admins.each do |user| %>
+            <li class="list-group-item">
+              <%= link_to user do %>
+              <%= image_tag(gravatar_url_for(user), alt: format_user_name(user), class: "gravatar img-circle", size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL, style: "width: 30px;") %>
+              <%= format_user_name(user) %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Miembros</h2>
+        </div>
+        <ul class="list-group">
+          <% @group.members.each do |user| %>
+            <li class="list-group-item">
+              <%= link_to user do %>
+              <%= image_tag(gravatar_url_for(user), alt: format_user_name(user), class: "gravatar img-circle", size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL, style: "width: 30px;") %>
+              <%= format_user_name(user) %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
+
+
 
   <% if current_user.admin_groups.include?(@group) || current_user.admin? %>
   <!-- <div class="row">

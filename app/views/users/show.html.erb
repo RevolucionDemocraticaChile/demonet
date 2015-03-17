@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-12">
       <div class="page-header">
         <h1>
           <%= image_tag(gravatar_url_for(@user), alt: @user.name, class: "gravatar img-circle", size: UsersHelper::GRAVATAR_DEFAULT_SIZE) %>
@@ -14,7 +14,7 @@
   <div class="row">
 
 
-    <div class="col-lg-offset-1 col-lg-5">
+    <div class="col-md-offset-1 col-md-5">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title"><%= t(:user_information).humanize %></h2>
@@ -97,7 +97,7 @@
 
     </div>
 
-    <div class="col-lg-offset-2 col-lg-3">
+    <div class="col-md-offset-2 col-md-3">
       <% if current_user == @user %>
       <div class="panel panel-primary">
         <div class="panel-heading">

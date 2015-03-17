@@ -6,7 +6,7 @@
 
 
   <div class="row">
-    <div class="col-lg-9">
+    <div class="col-md-9">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title">Información</h2>
@@ -70,7 +70,7 @@
       </div>
     </div>
 
-    <div class="col-lg-3">
+    <div class="col-md-3">
       <% if can? :edit, @group %>
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -120,7 +120,7 @@
 
   <% if current_user.admin_groups.include?(@group) || current_user.admin? %>
   <!-- <div class="row">
-    <div class="col-lg-offset-2 col-lg-8">
+    <div class="col-md-offset-2 col-md-8">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title">Miembros Activos</h2>

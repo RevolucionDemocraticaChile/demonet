@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def small_avatar_for(user)
-    options = if user.display_name.length > 0
+    options = if user.display_name.present?
       {
         alt: format_user_name(user),
         class: "gravatar img-circle",
@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def format_user_name(user)
-    if user.display_name.length > 0
+    if user.display_name.present?
       user.display_name.titleize
     else
       user.full_name

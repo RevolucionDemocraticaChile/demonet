@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
     length:     { maximum: NAME_MAX_LENGTH }
 
   validates :display_name,
-    length:     { in: 2..NAME_MAX_LENGTH },
+    length:     { maximum: NAME_MAX_LENGTH },
     allow_nil:  true
 
   validates :password,

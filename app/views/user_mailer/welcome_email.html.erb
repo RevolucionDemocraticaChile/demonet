@@ -1,9 +1,13 @@
-<h1>Contraseña Demonet</h1>
+<h1>Contraseña Plataforma RD</h1>
 
-<p>Bienvenido a Demonet!</p>
-
-<p>Para logearse en el sistema, acceda al siguiente enlace <%= @url %></p>
-
-<p>Ingrese mediante su correo electronico y contraseña <%= @password %> <p>
-
-<p> Una vez ingresado a la plataforma, no olvide cambiar su contraseña </p>
+<p>Se te ha creado una cuenta en la Plataforma Interna de Revolución Democrática. Puedes ingresar visitando el siguiente enlace:
+</p>
+<p>
+  <%= link_to @url, @url %>
+</p>
+<p>
+  Ingrese mediante su correo electronico y la siguiente contraseña: <%= @password %>
+<p>
+<p>
+  Una vez ingresado a la plataforma, no olvide cambiar su contraseña!
+</p>

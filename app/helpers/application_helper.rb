@@ -5,7 +5,11 @@ module ApplicationHelper
   end
 
   def format_user_name(user)
-    "#{user.first_name} #{user.last_name}"
+    if user.display_name
+      user.display_name.titleize
+    else
+      user.full_name
+    end
   end
 
   def format_payment_name(payment)

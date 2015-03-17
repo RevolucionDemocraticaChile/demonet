@@ -100,6 +100,7 @@ cl:
   recent_attendances: asistencias recientes
   recent_meetings: reuniones recientes
   rut: rut
+  rut_example: 12.345.678-0
   save: guardar
   second_name: Segundo nombre
   select_territory: seleccionar territorio

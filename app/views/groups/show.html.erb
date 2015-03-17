@@ -31,16 +31,6 @@
             </tr>
             <tr>
               <td class="text-right">
-                <strong>Moderadores:</strong>
-              </td>
-              <td>
-                <% @group.admin_groups.each do |admin_group| %>
-                  <%= link_to format_user_name(admin_group.user), admin_group.user %><br />
-                <% end %>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-right">
                 <strong>Descripción:</strong>
               </td>
               <td>
@@ -105,8 +95,9 @@
         <ul class="list-group">
           <% @group.members.each do |user| %>
             <li class="list-group-item">
-              <%= link_to user do %>
-              <%= image_tag(gravatar_url_for(user), alt: format_user_name(user), class: "gravatar img-circle", size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL, style: "width: 30px;") %>
+              <% link_options = user.display_name.present? ? { title: user.full_name, data: { toggle: 'tooltip', placement: 'top' } } : { } %>
+              <%= link_to user, link_options do %>
+              <%= image_tag(gravatar_url_for(user), alt: user.full_name, class: "gravatar img-circle", size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL, style: "width: 30px;") %>
               <%= format_user_name(user) %>
               <% end %>
             </li>
@@ -137,3 +128,9 @@
   <% end %>
 
 </div>
+
+<script charset="utf-8">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>

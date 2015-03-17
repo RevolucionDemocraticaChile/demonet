@@ -4,11 +4,11 @@
     <div class="col-md-8 col-md-offset-2">
 
       <div class="panel panel-default">
-        <div class="panel-heading panel-aphix clearfix">
+        <div class="panel-heading clearfix">
           <% if action_name == 'new' %>
-            <h4><%= t(:add_user).humanize %></h4>
+            <h2 class="panel-title"><%= t(:add_user).humanize %></h2>
           <% else %>
-            <h4><%= t(:edit_user).humanize %></h4>
+            <h2 class="panel-title"><%= t(:edit_user).humanize %></h2>
           <% end %>
         </div>
         <div class="panel-body">
@@ -34,22 +34,22 @@
             </div>
 
             <div class="form-group">
-              <%= f.label t(:name), class: "col-sm-4 control-label" %>
+              <%= f.label 'Nombres', class: "col-sm-4 control-label" %>
               <div class="col-sm-8">
                 <%= f.text_field :first_name, class: "form-control", placeholder: t(:first_name).humanize, disabled: true %>
               </div>
             </div>
 
             <div class="form-group">
-              <%= f.label t(:last_name), class: "col-sm-4 control-label" %>
+              <%= f.label 'Apellidos', class: "col-sm-4 control-label" %>
               <div class="col-sm-8">
-                <%= f.text_field :last_name, class: "form-control", placeholder: t(:last_name).humanize, disabled: true %>
+                <%= f.text_field :last_name, class: "form-control", placeholder: 'Apellidos', disabled: true %>
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-sm-offset-4 col-sm-8">
-                <small>Si hay un error en estos datos, por favor contacta al equipo!</small>
+                <small>Estos datos no se pueden cambiar aquí. Si ves un error, por favor contacta al equipo!</small>
               </div>
             </div>
 
@@ -65,7 +65,7 @@
             <div class="form-group">
               <%= f.label t(:rut), class: "col-sm-4 control-label" %>
               <div class="col-sm-8">
-                <%= f.text_field :rut, class: "form-control", placeholder: t(:rut).humanize %>
+                <%= f.text_field :rut, class: "form-control", placeholder: t(:rut_example).humanize %>
               </div>
             </div>
 

@@ -25,7 +25,7 @@
           <h2 class="panel-title">Nuestros miembros</h2>
         </div>
         <div class="panel-body">
-          <table id="users_list_datatable" class="">
+          <table id="users_list_datatable">
             <thead>
               <th></th>
             </thead>
@@ -53,11 +53,13 @@ $(document).ready(function() {
     {
       "paging": true,
       "ordering": false,
-      "info": false,
+      "autoWidth": false,
+      "pagingType": "simple",
       "language": {
         "lengthMenu": "Mostrar _MENU_",
         "search": "Buscar",
         "emptyTable": "No se encontraron registros",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_.",
         "infoEmpty": "No se encontraron registros",
         "zeroRecords": "No se encontraron registros",
         "paginate": {

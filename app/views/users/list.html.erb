@@ -32,7 +32,8 @@
             <% @users.each do |user| %>
             <tr>
               <td>
-                <%= link_to user do %>
+                <% link_options = user.display_name.present? ? { data: { toggle: 'tooltip', placement: 'top' }, title: user.full_name } : { } %>
+                <%= link_to user, link_options do %>
                 <%= small_avatar_for(user) %>
                 <%= format_user_name(user) %>
                 <% end %>
@@ -72,11 +73,7 @@ $(document).ready(function() {
   );
 
   // "oLanguage": {
-  //   "sSearch": "Buscar:",
-  //   "sZeroRecords": "No se encontraron registros",
-  //   "sInfo": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
   //   "sInfoEmpty": "Mostrando 0 a 0 de 0 entradas",
-  //   "sInfoFiltered": "(filtrado de un total de _MAX_ entradas)",
   //   "oPaginate": {
   //     "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right' />",
   //     "sPrevious": "<span class='glyphicon glyphicon-chevron-left' /> Anterior",

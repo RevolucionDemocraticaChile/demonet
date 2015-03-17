@@ -8,7 +8,7 @@ module ApplicationHelper
         size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL,
         style: "width: 30px;",
         title: user.full_name,
-        data: { toggle: 'tooltip', placement: 'top' },
+        # data: { toggle: 'tooltip', placement: 'top' },
       }
     else
       {

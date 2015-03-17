@@ -56,7 +56,7 @@
       </ul>
     </li>
 
-    <% if current_user.admin? %>
+    <% if can? :show, Payment %>
     <!-- payments -->
     <li class="has_submenu nlightblue panel">
       <a data-toggle="collapse" data-parent="#accordion" data-target="#payments_menu" >

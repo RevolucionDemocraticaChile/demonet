@@ -1,0 +1,89 @@
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Info</h2>
+        </div>
+        <div class="panel-body">
+          <p>
+            Este panel está bajo construcción. Por ahora, puedes buscar miembros en el panel de la derecha.
+          </p>
+          <p>
+            Tenemos <%= @users.size %> usuarios inscritos en total.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">Nuestros miembros</h2>
+        </div>
+        <div class="panel-body">
+          <table id="users_list_datatable" class="">
+            <thead>
+              <th></th>
+            </thead>
+            <% @users.each do |user| %>
+            <tr>
+              <td>
+                <%= link_to user do %>
+                <%= small_avatar_for(user) %>
+                <%= format_user_name(user) %>
+                <% end %>
+              </td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+$(document).ready(function() {
+  $('#users_list_datatable').DataTable(
+    {
+      "paging": true,
+      "ordering": false,
+      "info": false,
+      "language": {
+        "lengthMenu": "Mostrar _MENU_",
+        "search": "Buscar",
+        "emptyTable": "No se encontraron registros",
+        "infoEmpty": "No se encontraron registros",
+        "zeroRecords": "No se encontraron registros",
+        "paginate": {
+          "previous": "Anterior",
+          "next": "Siguiente"
+        }
+      }
+    }
+  );
+
+  // "oLanguage": {
+  //   "sSearch": "Buscar:",
+  //   "sZeroRecords": "No se encontraron registros",
+  //   "sInfo": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+  //   "sInfoEmpty": "Mostrando 0 a 0 de 0 entradas",
+  //   "sInfoFiltered": "(filtrado de un total de _MAX_ entradas)",
+  //   "oPaginate": {
+  //     "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right' />",
+  //     "sPrevious": "<span class='glyphicon glyphicon-chevron-left' /> Anterior",
+  //   }
+  // }
+});
+</script>
+
+<script charset="utf-8">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>

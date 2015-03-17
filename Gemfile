@@ -13,6 +13,9 @@ gem 'turbolinks'
 gem 'jbuilder',        '~> 2.0'
 gem 'bcrypt',          '~> 3.1.7'
 
+gem 'chartkick',       '~> 1.3.2'
+gem 'groupdate',       '~> 2.4.0'
+
 gem 'cancancan',       '~> 1.9'
 gem 'role_model',      '~> 0.8.2'
 

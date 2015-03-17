@@ -8,6 +8,7 @@ class Ability
     # User
     can :index, User
     can :show,  User
+    can :list,  User
     can [:edit, :update],  User, id: user.id
 
     if user.moderator?

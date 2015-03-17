@@ -15,10 +15,13 @@
         </span>
       </a>
       <ul id="users_menu" class="panel-collapse collapse">
-        <% if can? :new, User %>
-          <li> <%= link_to t(:new_user).humanize, new_user_path %> </li>
+        <li><%= link_to 'Lista', users_list_path %></li>
+        <% if can? :index, User %>
+          <li><%= link_to 'Lista (admin)', users_path %></li>
         <% end %>
-        <li> <%= link_to t(:list), users_path %> </li>
+        <% if can? :new, User %>
+          <li><%= link_to t(:new_user).humanize, new_user_path %></li>
+        <% end %>
       </ul>
     </li>
 

@@ -1,5 +1,26 @@
 module ApplicationHelper
 
+  def small_avatar_for(user)
+    options = if user.display_name.present?
+      {
+        alt: format_user_name(user),
+        class: "gravatar img-circle",
+        size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL,
+        style: "width: 30px;",
+        title: user.full_name,
+        data: { toggle: 'tooltip', placement: 'top' },
+      }
+    else
+      {
+        alt: format_user_name(user),
+        class: "gravatar img-circle",
+        size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL,
+        style: "width: 30px;"
+      }
+    end
+    image_tag(gravatar_url_for(user), options)
+  end
+
   def format_meeting_name(meeting)
     "#{t(:meeting).humanize} #{(meeting.groups.map { |g| g.display_name }).join(', ')} #{l meeting.date}"
   end

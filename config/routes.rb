@@ -6,6 +6,8 @@
     delete 'salir'    => 'sessions#destroy'
     get   'mails_user_groups' => 'member_groups#mails'
 
+    get '/users/list' => 'users#list', as: :users_list
+
     resources :users
     resources :groups
     resources :meetings do

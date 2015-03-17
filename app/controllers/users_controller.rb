@@ -12,6 +12,10 @@ class UsersController < ApplicationController
     @users = User.includes(:groups, :agroups).all
   end
 
+  def list
+    @users = User.select(:id, :email, :first_name, :last_name, :display_name)
+  end
+
   # GET /users/1
   def show
     @member_group = MemberGroup.new

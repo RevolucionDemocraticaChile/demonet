@@ -6,13 +6,11 @@ class Ability
     user ||= User.new
 
     # User
-    can :index, User
-    can :show,  User
-    can :list,  User
-    can [:edit, :update],  User, id: user.id
+    can [:list, :show],   User
+    can [:edit, :update], User, id: user.id
 
     if user.moderator?
-      can [:new, :create], User
+      can [:index, :new, :create], User
     end
 
     # Group
@@ -23,14 +21,13 @@ class Ability
     end
 
     # Meeting
-    can :index, Meeting
-    can :show,  Meeting
+    can [:list, :show], Meeting
 
-    if user.agroups.any?
-      can [:new, :create], Meeting
+    if user.moderator?
+      can [:index, :new, :create], Meeting
     end
 
-    can [:edit, :update, :destroy],  Meeting do |meeting|
+    can [:edit, :update, :destroy], Meeting do |meeting|
       ans = false
       user.agroups.each do |group|
         if meeting.groups.include?(group)

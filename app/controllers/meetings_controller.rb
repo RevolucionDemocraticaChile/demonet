@@ -8,6 +8,10 @@ class MeetingsController < ApplicationController
     @meetings = Meeting.all
   end
 
+  def list
+    @meetings = Meeting.includes(:user_meetings).order(date: :desc).limit(100)
+  end
+
   def new
     @meeting = Meeting.new
   end

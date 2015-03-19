@@ -52,10 +52,13 @@
         </span>
       </a>
       <ul id="meetings_menu" class="panel-collapse collapse">
-        <% if can? :new, Meeting %>
-          <li> <%= link_to t(:new_meeting).humanize, new_meeting_path %> </li>
+        <li><%= link_to t(:list), meetings_list_path %></li>
+        <% if can? :index, Meeting %>
+        <li><%= link_to 'Lista (admin)', meetings_path %></li>
         <% end %>
-        <li> <%= link_to t(:list), meetings_path %> </li>
+        <% if can? :new, Meeting %>
+        <li><%= link_to t(:new_meeting).humanize, new_meeting_path %></li>
+        <% end %>
       </ul>
     </li>
 

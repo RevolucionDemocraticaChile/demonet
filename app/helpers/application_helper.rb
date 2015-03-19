@@ -25,6 +25,10 @@ module ApplicationHelper
     "#{t(:meeting).humanize} #{(meeting.groups.map { |g| g.display_name }).join(', ')} #{l meeting.date}"
   end
 
+  def format_meeting_name_short(meeting)
+    "#{t(:meeting).humanize} #{(meeting.groups.map { |g| g.display_name }).join(', ')}"
+  end
+
   def format_user_name(user)
     if user.display_name.present?
       user.display_name.titleize

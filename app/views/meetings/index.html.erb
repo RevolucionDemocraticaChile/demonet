@@ -3,13 +3,8 @@
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-default">
-        <div class="panel-heading panel-aphix clearfix">
-          <h4><%= t(:meetings).humanize %></h4>
-          <div class="pull-right">
-            <% if can? :new, Meeting %>
-              <%= link_to t(:new_meeting).humanize, new_meeting_path, class: "pull-right btn btn-primary btn-sm" %>
-            <% end %>
-          </div>
+        <div class="panel-heading clearfix">
+          <h2 class="panel-title"><%= t(:meetings).humanize %></h2>
         </div>
         <div class="panel-body">
           <div class="table-responsive">

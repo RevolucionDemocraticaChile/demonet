@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   before_filter :check_session
+  before_filter :miniprofiler
   check_authorization
 
   rescue_from CanCan::AccessDenied do |e|
@@ -13,13 +14,17 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  private
+private
 
-    def check_session
-      if current_user.nil?
-        flash[:error] = t(:signin_first)
-        redirect_to ingresar_path
-      end
+  def check_session
+    if current_user.nil?
+      flash[:error] = t(:signin_first)
+      redirect_to ingresar_path
     end
+  end
+
+  def miniprofiler
+    Rack::MiniProfiler.authorize_request if current_user.admin?
+  end
 
 end

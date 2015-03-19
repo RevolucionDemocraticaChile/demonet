@@ -27,18 +27,20 @@ gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
 gem 'puma', '~> 2.11.1'
 
+gem 'rack-mini-profiler', '~> 0.9.3'
+
 group :production do
   gem 'pg',             '~> 0.17.1'
   gem 'rails_12factor', '~> 0.0.2'
 end
 
-group	:development, :test do
-  gem 'rspec-rails',  '~> 3.0.2'
+group :development, :test do
+  gem 'rspec-rails',        '~> 3.0.2'
   gem 'sqlite3'
-  gem 'guard-rspec',  '~> 4.3.1'
+  gem 'guard-rspec',        '~> 4.3.1'
   gem 'spring'
   gem 'awesome_print'
-  gem 'annotate',     '~> 2.6.6'
+  gem 'annotate',           '~> 2.6.6'
 end
 
 group :test do

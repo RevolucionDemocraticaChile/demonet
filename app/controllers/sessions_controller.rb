@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   layout false
   skip_before_filter :check_session, only: [:new, :create]
   skip_authorization_check
+  skip_before_filter :miniprofiler, only: [:new, :create]
 
   def new
     redirect_to root_path if signed_in?

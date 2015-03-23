@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
 
   def welcome_email(user, password)
     # @url = ENV['APP_NAME']
-    @url = "plataforma.revoluciondemocratica.cl"
+    @url = "http://plataforma.revoluciondemocratica.cl"
     @password = password
     @user = user
     mail to: user.email, subject: "Contraseña para demonet"

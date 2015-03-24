@@ -2,7 +2,7 @@ class PasswordResetsController < ApplicationController
   layout false
   skip_authorization_check
   skip_before_filter :check_session
-  before_filter :miniprofiler
+  skip_before_filter :miniprofiler
 
   before_action :get_user,   only: [:edit, :update]
   before_action :valid_user, only: [:edit, :update]

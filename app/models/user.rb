@@ -93,8 +93,10 @@ class User < ActiveRecord::Base
   end
 
   before_save do
-    self.email    = email.downcase
-    self.rut      = Run.format(rut)
+    self.email      = email.downcase
+    self.rut        = Run.format(rut)
+    self.first_name = first_name.titleize
+    self.last_name  = last_name.titleize
   end
 
 
@@ -147,6 +149,10 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def full_name_with_email
+    "#{first_name} #{last_name} <#{email}>"
   end
 
   def create_reset_digest

@@ -82,10 +82,7 @@
         <ul class="list-group">
           <% @meeting.user_meetings.each do |um| %>
             <li class="list-group-item">
-              <%= link_to um.user do %>
-              <%= image_tag(gravatar_url_for(um.user), alt: format_user_name(um.user), class: "gravatar img-circle", size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL, style: "width: 30px;") %>
-              <%= format_user_name(um.user) %>
-              <% end %>
+              <%= render partial: 'users/user_link', locals: { user: um.user } %>
             </li>
           <% end %>
         </ul>
@@ -95,8 +92,6 @@
   </div>
 
 </div>
-
-
 
 
 <script>

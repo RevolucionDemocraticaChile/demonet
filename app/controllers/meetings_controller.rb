@@ -14,6 +14,7 @@ class MeetingsController < ApplicationController
 
   def new
     @meeting = Meeting.new
+    @users = User.select(:id, :email, :first_name, :last_name)
   end
 
   def create

@@ -32,11 +32,7 @@
             <% @users.each do |user| %>
             <tr>
               <td>
-                <% link_options = user.display_name.present? ? { data: { toggle: 'tooltip', placement: 'top' }, title: user.full_name } : { } %>
-                <%= link_to user, link_options do %>
-                <%= small_avatar_for(user) %>
-                <%= format_user_name(user) %>
-                <% end %>
+                <%= render partial: 'user_link', locals: { user: user } %>
               </td>
             </tr>
             <% end %>
@@ -80,10 +76,4 @@ $(document).ready(function() {
   //   }
   // }
 });
-</script>
-
-<script charset="utf-8">
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
 </script>

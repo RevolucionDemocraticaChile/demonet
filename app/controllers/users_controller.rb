@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def list
-    @users = User.select(:id, :email, :first_name, :last_name, :display_name)
+    @users = User.select(:id, :email, :first_name, :last_name, :admin)
   end
 
   # GET /users/1

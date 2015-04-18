@@ -1,23 +1,29 @@
 module ApplicationHelper
 
   def small_avatar_for(user)
-    options = if user.display_name.present?
-      {
-        alt: format_user_name(user),
-        class: "gravatar img-circle",
-        size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL,
-        style: "width: 30px;",
-        title: user.full_name,
-        # data: { toggle: 'tooltip', placement: 'top' },
-      }
-    else
-      {
-        alt: format_user_name(user),
+    options = {
+        alt: user.full_name,
         class: "gravatar img-circle",
         size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL,
         style: "width: 30px;"
       }
-    end
+    # options = if user.display_name.present?
+    #   {
+    #     alt: user.full_name,
+    #     class: "gravatar img-circle",
+    #     size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL,
+    #     style: "width: 30px;",
+    #     title: format_user_name(user),
+    #     # data: { toggle: 'tooltip', placement: 'top' },
+    #   }
+    # else
+    #   {
+    #     alt: user.full_name,
+    #     class: "gravatar img-circle",
+    #     size: UsersHelper::GRAVATAR_DEFAULT_SIZE_SMALL,
+    #     style: "width: 30px;"
+    #   }
+    # end
     image_tag(gravatar_url_for(user), options)
   end
 
@@ -30,11 +36,11 @@ module ApplicationHelper
   end
 
   def format_user_name(user)
-    if user.display_name.present?
-      user.display_name.titleize
-    else
-      user.full_name
-    end
+    # if user.display_name.present?
+    #   user.display_name.titleize
+    # else
+      user.full_name.titleize
+    # end
   end
 
   def format_payment_name(payment)
@@ -75,10 +81,6 @@ module ApplicationHelper
       [t(:others).humanize,               "Others"]
     ]
   end
-
-  # def format_group_names(groups)
-  #   groups.join(',')
-  # end
 
   def min_recent
     User::MIN_RECENT_ATTENDANCES_FOR_ACTIVE_MEMBERSHIP

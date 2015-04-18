@@ -58,7 +58,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label" for="group_type">Asistentes</label>
               <div class="col-sm-10">
-                <%= collection_select(:userMeeting, :users, User.all, :id, :full_name, {:selected => @meeting.user_meetings.map(&:user_id), include_hidden: false}, {multiple: "multiple",class: "select2-container select2-container-multi form-control ng-valid ng-dirty"}) %>
+                <%= collection_select(:userMeeting, :users, @users, :id, :full_name_with_email, {:selected => @meeting.user_meetings.map(&:user_id), include_hidden: false}, {multiple: "multiple",class: "select2-container select2-container-multi form-control ng-valid ng-dirty"}) %>
               </div>
             </div>
 
@@ -66,7 +66,7 @@
               <div class="col-sm-offset-2 col-sm-10">
                 <div class="alert alert-info">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
-                  Recuerda que aquí sólo puedes agregar usuarios que ya tienen cuenta en este sitio. Si quieres agregar a alguien que no tiene cuenta, primero <%= link_to 'Crea un usuario', new_user_path %>
+                  Recuerda que aquí sólo puedes agregar usuarios que ya tienen cuenta en este sitio. Si quieres agregar a alguien que no tiene cuenta, primero <%= link_to 'crea un usuario', new_user_path %>
                 </div>
               </div>
             </div>

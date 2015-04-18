@@ -1,0 +1,6 @@
+<%= link_to user do %>
+  <%= small_avatar_for(user) %>
+  <%= user.full_name %><% end %>
+<% if user.admin %>
+  <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Un Admin tiene privilegios de Moderador en todos los Espacios.">(admin)</span>
+<% end %>

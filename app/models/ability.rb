@@ -10,7 +10,13 @@ class Ability
     can [:edit, :update], User, id: user.id
 
     if user.moderator?
-      can [:index, :new, :create], User
+      can [:new, :create], User
+      can [:edit, :update], User
+    end
+
+    # users#index is getting way to heavy. Only admins should access:
+    if user.admin?
+      can :index, User
     end
 
     # Group

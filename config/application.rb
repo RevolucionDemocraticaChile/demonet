@@ -22,6 +22,6 @@ module Demonet
 
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
-    DEMONET_VERSION = '0.2.5'
+    DEMONET_VERSION = '0.2.6'
   end
 end

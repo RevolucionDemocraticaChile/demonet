@@ -9,7 +9,7 @@ class MeetingsController < ApplicationController
   end
 
   def list
-    @meetings = Meeting.includes(:user_meetings).order(date: :desc).limit(100)
+    @meetings = Meeting.includes(:user_meetings).order(date: :desc).limit(50)
   end
 
   def new

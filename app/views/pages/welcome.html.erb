@@ -1,26 +1,37 @@
 <div class="container">
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-12">
       <div class="jumbotron">
         <h1 class="text-center">¡Bienvenido(a)!</h1>
         <p>
           En este sitio podrás ver y modificar tus datos personales, y podrás ver si actualmente estás considerado como Miembro Activo.
         </p>
-        <p>
-          Por ahora, puedes revisar lo siguiente:
-        </p>
-        <p>
-          <%= link_to "Mi Perfil", current_user, class: "btn btn-primary btn-lg", role: "button" %>
-          <%= link_to "Lista de Usuarios", users_path, class: "btn btn-primary btn-lg", role: "button" %>
-          <%= link_to "Lista de Espacios", groups_path, class: "btn btn-primary btn-lg", role: "button" %>
-          <%= link_to "Lista de Reuniones", meetings_path, class: "btn btn-primary btn-lg", role: "button" %>
-        </p>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="row">
     <div class="col-md-6">
+
+      <% if current_user.active? || current_user.moderator? || current_user.admin? %>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="panel-title">¿Conoces el Repositorio RD?</h2>
+        </div>
+        <div class="panel-body">
+          <p>
+            El Repositorio RD es una carpeta Dropbox que contiene las Actas del Consejo Político, documentos ideológicos, circulares TRICEL, incluso videos!
+          </p>
+          <p class="text-center">
+            <%= link_to 'El Repositorio RD', 'https://www.dropbox.com/sh/r0c63yqhbnzgaeq/AAC9_sZHqstZmJm2E_AyxTtsa?dl=0', class: 'btn btn-primary' %>
+          </p>
+          <p>
+            Si eres Coordinador y quieres guardar material de tu Espacio en el Repositorio, contáctate con <%= link_to 'Gonzalo Diaz <gonzalo.diaz@cs.ox.ac.uk>', 'mailto:gonzalo.diaz@cs.ox.ac.uk' %>.
+          </p>
+        </div>
+      </div>
+      <% end %>
+
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h2 class="panel-title">Quieres una foto de perfil, <%= current_user.first_name %>?</h2>
@@ -41,6 +52,26 @@
         </div>
       </div>
     </div>
+
+
+    <div class="col-md-6">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title">¡Bienvenide a la Plataforma RD!</h2>
+        </div>
+        <div class="panel-body">
+          <p>
+            La Plataforma RD (este sitio) busca ser una herramienta para facilitar la administración del Movimiento, especialmente el ingreso de Actas y Asistencias.
+          </p>
+          <p>
+            Si eres Coordinador y necesitas ayuda para crear cuentas o Reuniones, envía un email a <%= link_to '<plataforma@revoluciondemocratica.cl>', 'mailto:plataforma@revoluciondemocratica.cl' %>.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 
 </div>

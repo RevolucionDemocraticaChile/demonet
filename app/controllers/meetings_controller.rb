@@ -26,6 +26,7 @@ class MeetingsController < ApplicationController
   end
 
   def edit
+    @users = User.select(:id, :email, :first_name, :last_name)
   end
 
   # PATCH/PUT /meetings/1

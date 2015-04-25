@@ -35,6 +35,9 @@
       <% if user == current_user %>
       En los últimos <strong><%= min_recent %></strong> meses sólo has asistido a <strong><%= user.recent_attendances %></strong> reuniones.
       Recuerda que debes haber asistido a al menos <strong><%= min_recent %></strong> reuniones en los últimos <strong><%= recent_time_months %></strong> meses para ser considerado Miembro Activo.
+      <% elsif current_user.moderator? %>
+      En los últimos <strong><%= min_recent %></strong> meses este usuario sólo ha asistido a <strong><%= user.recent_attendances %></strong> reuniones.
+      Este usuario debe haber asistido a al menos <strong><%= min_recent %></strong> reuniones en los últimos <strong><%= recent_time_months %></strong> meses para ser considerado Miembro Activo.
       <% else %>
       Este Miembro no cumple los requisitos para ser considerado Miembro Activo.
       <% end %>

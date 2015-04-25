@@ -74,7 +74,7 @@ class MeetingsController < ApplicationController
 
             flash[:success] = action_name == 'create' ? t(:meeting_created_successfully) : t(:meeting_updated_successfully)
             # redirect_to @group
-            redirect_to meetings_url
+            redirect_to @meeting
           else
             render 'new'
           end

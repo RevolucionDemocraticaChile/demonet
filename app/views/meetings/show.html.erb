@@ -26,7 +26,7 @@
               </td>
               <td>
                 <% @meeting.meeting_groups.each do |mg| %>
-                  <%= link_to mg.group.name, mg.group %><br />
+                  <%= link_to mg.group.display_name, mg.group %><br />
                 <% end %>
               </td>
             </tr>

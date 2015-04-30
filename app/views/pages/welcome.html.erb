@@ -25,6 +25,11 @@
           <p class="text-center">
             <%= link_to 'El Repositorio RD', 'https://www.dropbox.com/sh/r0c63yqhbnzgaeq/AAC9_sZHqstZmJm2E_AyxTtsa?dl=0', class: 'btn btn-primary' %>
           </p>
+          <% if current_user.active? || current_user.moderator? %>
+          <p class="text-center">
+            <strong>Clave:</strong> <kbd><%= Rails.application.secrets.rd_repository_pass %></kbd>
+          </p>
+          <% end %>
           <p>
             Si eres Coordinador y quieres guardar material de tu Espacio en el Repositorio, contáctate con <%= link_to 'Gonzalo Diaz <gonzalo.diaz@cs.ox.ac.uk>', 'mailto:gonzalo.diaz@cs.ox.ac.uk' %>.
           </p>

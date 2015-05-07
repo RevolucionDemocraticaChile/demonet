@@ -1,0 +1,124 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header">
+        <h1>
+          <%= t(:poll).titleize %>: <%= @poll.name %>
+        </h1>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <div class="panel panel-info">
+        <div class="panel-heading text-center">
+          <h2>
+            <%= @poll.description %>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-1 col-md-7">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Opciones</h3>
+        </div>
+        <table class="table">
+          <tbody>
+            <% @poll.options.each_with_index do |option,i| %>
+            <tr>
+              <td class="col-sm-2 text-right"><strong>Opción <%= i+1 %>:</strong></td>
+              <td><%= option %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Resultados</h3>
+        </div>
+        <div class="panel-body">
+          <%= pie_chart @data %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">¡Participa en esta Encuesta!</h3>
+        </div>
+        <div class="panel-body">
+          <p class="text-center">
+            <% if @opinion %>
+            <strong>¡Ya respondiste!</strong>
+            <% else %>
+            <%= link_to 'Responder', new_poll_opinion_path(@poll), class: 'btn btn-primary' %>
+            <% end %>
+          </p>
+        </div>
+      </div>
+
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <h3 class="panel-title">¡Atención!</h3>
+        </div>
+        <div class="panel-body">
+          <p>
+            ¡Esta encuesta <strong>no garantiza la privacidad de tu respuesta</strong>. Aunque no se publicarán las respuestas de este encuesta, es posible ingresar a la base de datos a mirar tu voto. Si no te sientes cómode con esto, <strong>no contestes</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Información</h3>
+        </div>
+        <div class="panel-body">
+          <p>
+            Esta encuesta cierra el día <%= l @poll.finish, format: :short_full %>
+          </p>
+        </div>
+      </div>
+
+      <% if current_user.admin? %>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Administración</h3>
+        </div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td class="text-right">
+                <strong><%= t(:start_date) %>:</strong>
+              </td>
+              <td>
+                <%= @poll.start %>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-right">
+                <strong><%= t(:finish_date) %>:</strong>
+              </td>
+              <td>
+                <%= @poll.finish %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>

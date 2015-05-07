@@ -17,6 +17,7 @@ cl:
   admin_group: administrador de espacio
   administrator: administrador
   amount: cantidad
+  answer: responder
   are_you_sure: Estás seguro?
   association_created_successfully: Asociación creada exitosamente.
   association_destroyed_successfully: Asociación eliminada exitosamente.
@@ -49,6 +50,7 @@ cl:
   email_password_recovery: Email enviado con instrucciones de reinicio de contraseña
   email_not_found: Email no encontrado
   error_creating_association: Hubo un error al crear la asociación.
+  finish_date: fecha de término
   finish_time: hora de término
   first_name: Primer nombre
   front: frente
@@ -81,14 +83,19 @@ cl:
   names: nombres
   new_group: nuevo espacio
   new_meeting: nueva reunión
+  new_opinion: nueva respuesta
   new_payment: nuevo pago
+  new_poll: nueva encuesta
   new_territory: nuevo territorio
   new_user: nuevo usuario
   need_more_attendances: "Necesitas más de %{number} asistencias recientes para ser miembro activo."
   not_authorized: No estás autorizado.
   not_signed_in: No estás ingresado.
-  others: otros
+  opinion_not_created: Error al guardar el voto.
+  opinion_created_successfully: Voto guardado con éxito.
+  option: opción
   organized_by: organizan
+  others: otros
   password: contraseña
   password_confirmation: confirmar contraseña
   password_reset: Contraseña ha sido reseteada
@@ -96,9 +103,13 @@ cl:
   password_recovery: recuperar contraseña
   payments: pagos
   payment_created_successfully: pago creado exitosamente
+  poll_created_successfully: encuesta creada exitosamente
+  poll: encuesta
+  polls: encuestas
   profile: perfil
   recent_attendances: asistencias recientes
   recent_meetings: reuniones recientes
+  recent_polls: encuestas recientes
   rut: rut
   rut_example: 12.345.678-0
   save: guardar
@@ -112,6 +123,7 @@ cl:
   signin_success: Has ingresado exitosamente.
   signout: salir
   start_time: hora de inicio
+  start_date: fecha de inicio
   supporting_member: miembro adherente
   territories: territorios
   territory: territorio
@@ -318,6 +330,7 @@ cl:
       default: ! '%A, %d de %B de %Y %H:%M:%S %z'
       long: ! '%A %d de %B de %Y %H:%M'
       short: ! '%d de %b %H:%M'
+      short_full: ! '%d de %B de %Y a las %H:%M'
       just_time: ! '%H:%M'
     pm: pm
   activerecord:

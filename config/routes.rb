@@ -21,4 +21,8 @@
     resources :password_resets,    only: [:new, :create, :edit, :update]
 
     resources :payments
+    resources :polls do
+      resources :opinions
+    end
+    resources :opinions
   end

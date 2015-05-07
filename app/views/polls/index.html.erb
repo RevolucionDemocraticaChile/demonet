@@ -1,0 +1,41 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h2 class="panel-title"><%= t(:recent_polls).humanize %></h2>
+        </div>
+        <table class="table">
+          <thead>
+            <th><%= t(:name).humanize %></th>
+            <th><%= t(:date_lit).humanize %></th>
+          </thead>
+          <tbody>
+            <% @polls.each do |poll| %>
+            <tr>
+              <td><%= link_to poll.name, poll %></td>
+              <td><%= l poll.start %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="col-md-3">
+      <% if can? :new, Poll %>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h2 class="panel-title"><%= t(:administration).humanize %></h2>
+        </div>
+        <div class="panel-body text-center">
+          <%= link_to t(:new_poll).humanize, new_poll_path, class: 'btn btn-primary' %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>

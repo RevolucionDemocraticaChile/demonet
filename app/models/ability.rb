@@ -61,6 +61,12 @@ class Ability
       can?(:edit, meeting) && group.admins.include?(user)
     end
 
+    # Polls
+    can :show, Poll
+
+    # Opinions
+    can [:new, :create], Opinion
+
     # Admin
     if user.admin?
       can :manage, :all

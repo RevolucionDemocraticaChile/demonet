@@ -16,6 +16,32 @@ class UsersController < ApplicationController
     @users = User.select(:id, :email, :first_name, :last_name, :admin)
   end
 
+  def manifest
+  end
+
+  def manifest_file
+    min_attendances = params[:manifest][:min_attendances].to_i || 6
+
+    start_date = Date.new params[:manifest]["start_date(1i)"].to_i, params[:manifest]["start_date(2i)"].to_i, params[:manifest]["start_date(3i)"].to_i
+    end_date = Date.new params[:manifest]["end_date(1i)"].to_i, params[:manifest]["end_date(2i)"].to_i, params[:manifest]["end_date(3i)"].to_i
+
+    # puts "min_attendances: #{min_attendances}"
+
+    @users = User.find_by_sql ["SELECT users.id, users.first_name, users.last_name, users.email, COUNT(user_meetings.meeting_id) AS meeting_count FROM (user_meetings INNER JOIN meetings ON user_meetings.meeting_id = meetings.id INNER JOIN users ON user_meetings.user_id = users.id AND meetings.date BETWEEN ? AND ?) GROUP BY users.id HAVING COUNT(user_meetings.meeting_id) > ?", start_date, end_date, min_attendances]
+
+    respond_to do |format|
+      format.csv {
+        csv_string = CSV.generate do |csv|
+          csv << ["Nombre", "Apellido", "Email", "Reuniones entre #{l start_date} y #{l end_date} (al menos #{min_attendances})"]
+          @users.each do |user|
+            csv << [user.first_name, user.last_name, user.email, user.meeting_count]
+          end
+        end
+        render text: csv_string
+      }
+    end
+  end
+
   # GET /users/1
   def show
     @member_group = MemberGroup.new

@@ -18,6 +18,7 @@
         <li><%= link_to 'Lista', users_list_path %></li>
         <% if can? :index, User %>
           <li><%= link_to 'Lista (admin)', users_path %></li>
+          <li><%= link_to 'Padrón (admin)', users_manifest_path %></li>
         <% end %>
         <% if can? :new, User %>
           <li><%= link_to t(:new_user).humanize, new_user_path %></li>

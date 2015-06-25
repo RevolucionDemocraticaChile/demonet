@@ -78,6 +78,7 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    fastercsv (1.5.5)
     ffi (1.9.6)
     formatador (0.2.5)
     globalid (0.3.3)
@@ -258,6 +259,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   data-confirm-modal!
   factory_girl_rails (~> 4.4.1)
+  fastercsv (~> 1.5.5)
   groupdate (~> 2.4.0)
   growl (~> 1.0.3)
   guard-rspec (~> 4.3.1)
@@ -282,3 +284,6 @@ DEPENDENCIES
   sqlite3
   turbolinks
   uglifier (>= 1.3.0)
+
+BUNDLED WITH
+   1.10.5

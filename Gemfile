@@ -39,7 +39,7 @@ group :development, :test do
   gem 'rspec-rails',        '~> 3.0.2'
   gem 'sqlite3'
   gem 'guard-rspec',        '~> 4.3.1'
-  gem 'spring'
+  gem 'spring',             '~> 1.3.6'
   gem 'awesome_print'
   gem 'annotate',           '~> 2.6.6'
 end

@@ -42,6 +42,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def manifest_full_file
+    @users = User.select(:id, :first_name, :last_name, :email)
+
+    respond_to do |format|
+      format.csv {
+        csv_string = CSV.generate do |csv|
+          csv << ["Nombre", "Apellido", "Email"]
+          @users.each do |user|
+            csv << [user.first_name, user.last_name, user.email]
+          end
+        end
+        render text: csv_string
+      }
+    end
+  end
+
   # GET /users/1
   def show
     @member_group = MemberGroup.new

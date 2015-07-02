@@ -8,8 +8,12 @@
 
     get '/users/list' => 'users#list', as: :users_list
     get '/users/manifest' => 'users#manifest', as: :users_manifest
+
     get '/users/manifest_file' => 'users#manifest_file', as: :users_manifest_file
     post '/users/manifest_file' => 'users#manifest_file'
+
+    get '/users/manifest_full_file' => 'users#manifest_full_file', as: :users_manifest_full_file
+
     get '/meetings/list' => 'meetings#list', as: :meetings_list
 
     resources :users

@@ -17,7 +17,13 @@
     get '/meetings/list' => 'meetings#list', as: :meetings_list
 
     resources :users, except: [:index]
-    resources :groups
+    resources :groups do
+      resources :meetings do
+        collection do
+          get 'list' => 'meetings#index_for_group'
+        end
+      end
+    end
     resources :meetings do
       get :autocomplete_user_name, on: :collection
     end

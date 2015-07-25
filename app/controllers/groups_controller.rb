@@ -18,7 +18,8 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @meetings = @group.meetings
+    # @meetings = @group.meetings
+    @meetings = @group.meetings.order(date: :desc).limit(5)
   end
 
   def edit

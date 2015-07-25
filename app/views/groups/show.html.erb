@@ -6,7 +6,7 @@
 
 
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-6 col-md-offset-1">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h2 class="panel-title">Información</h2>
@@ -14,28 +14,12 @@
         <table class="table">
           <tbody>
             <tr>
-              <td class="text-right">
-                <strong>Tipo:</strong>
-              </td>
-              <td>
-                <%= format_group_type(@group) %>
-              </td>
+              <td class="text-right"><strong>Tipo:</strong></td>
+              <td><%= format_group_type(@group) %></td>
             </tr>
             <tr>
-              <td class="text-right">
-                <strong>Nombre:</strong>
-              </td>
-              <td>
-                <%= format_group_name(@group) %>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-right">
-                <strong>Descripción:</strong>
-              </td>
-              <td>
-                <%= @group.desc %>
-              </td>
+              <td class="text-right"><strong>Descripción:</strong></td>
+              <td><%= @group.desc %></td>
             </tr>
           </tbody>
         </table>
@@ -46,13 +30,19 @@
           <h2 class="panel-title"><%= t(:recent_meetings).humanize %></h2>
         </div>
 
+        <div class="panel-body">
+          <p>
+            Aquí se muestran sólo las últimas reuniones del Espacio.<br />
+            Ver todas las
+            <%= link_to 'reuniones del espacio', list_group_meetings_path(@group) %>.
+          </p>
+        </div>
+
         <table class="table">
           <tbody>
             <% @meetings.each do |meeting| %>
               <tr>
-                <td>
-                  <%= link_to format_meeting_name(meeting), meeting %>
-                </td>
+                <td><%= link_to format_meeting_name(meeting), meeting %></td>
               </tr>
             <% end %>
           </tbody>

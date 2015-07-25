@@ -8,6 +8,11 @@ class MeetingsController < ApplicationController
     @meetings = Meeting.all
   end
 
+  def index_for_group
+    @group = Group.find(params[:group_id])
+    @meetings = @group.meetings.order(date: :desc)
+  end
+
   def list
     @meetings = Meeting.includes(:user_meetings).order(date: :desc).limit(50)
   end

@@ -13,17 +13,11 @@
         <table class="table">
           <tbody>
             <tr>
-              <td class="text-right">
-                <strong><%= t(:description).humanize %>:</strong>
-              </td>
-              <td>
-                <%= @meeting.desc %>
-              </td>
+              <td class="text-right"><strong><%= t(:description).humanize %>:</strong></td>
+              <td><%= @meeting.desc %></td>
             </tr>
             <tr>
-              <td class="text-right">
-                <strong>Organiza:</strong>
-              </td>
+              <td class="text-right"><strong>Organiza:</strong></td>
               <td>
                 <% @meeting.meeting_groups.each do |mg| %>
                   <%= link_to mg.group.display_name, mg.group %><br />
@@ -31,20 +25,12 @@
               </td>
             </tr>
             <tr>
-              <td class="text-right">
-                <strong>Hora inicio:</strong>
-              </td>
-              <td>
-                <%= l @meeting.start, format: :just_time unless @meeting.start.nil? %>
-              </td>
+              <td class="text-right"><strong>Hora inicio:</strong></td>
+              <td><%= l @meeting.start, format: :just_time unless @meeting.start.nil? %></td>
             </tr>
             <tr>
-              <td class="text-right">
-                <strong>Hora término:</strong>
-              </td>
-              <td>
-                <%= l @meeting.finish, format: :just_time unless @meeting.finish.nil? %>
-              </td>
+              <td class="text-right"><strong>Hora término:</strong></td>
+              <td><%= l @meeting.finish, format: :just_time unless @meeting.finish.nil? %></td>
             </tr>
           </tbody>
         </table>
@@ -72,6 +58,16 @@
         <div class="panel-body text-center">
           <%= link_to 'Editar reunión', edit_meeting_path(@meeting), class: "btn btn-primary" %>
         </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <strong>Fecha creación:</strong><br />
+            <%= l @meeting.created_at, format: :short_full %>
+          </li>
+          <li class="list-group-item">
+            <strong>Fecha última modificación:</strong><br />
+            <%= l @meeting.updated_at, format: :short_full %>
+          </li>
+        </ul>
       </div>
       <% end %>
 

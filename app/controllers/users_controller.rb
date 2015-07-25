@@ -4,13 +4,13 @@ class UsersController < ApplicationController
   authorize_resource
 
   # GET /users
-  def index
-    @from = params['from'] || DateTime.now.to_date - 12.months
-    @to =   params['to'] || DateTime.now.to_date
-    @n =    params['n'] || 12
-    @labels = ['default', 'primary', 'success', 'info', 'warning', 'danger']
-    @users = User.includes(:groups, :agroups).all
-  end
+  # def index
+  #   @from = params['from'] || DateTime.now.to_date - 12.months
+  #   @to =   params['to'] || DateTime.now.to_date
+  #   @n =    params['n'] || 12
+  #   @labels = ['default', 'primary', 'success', 'info', 'warning', 'danger']
+  #   @users = User.includes(:groups, :agroups).all
+  # end
 
   def list
     @users = User.select(:id, :email, :first_name, :last_name, :admin)

@@ -23,7 +23,7 @@
     </div>
 
     <div class="col-md-8 col-md-offset-2 text-center">
-      <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+      <%= will_paginate @users, renderer: BootstrapPagination::Rails, inner_window: 2 %>
     </div>
 
   </div>

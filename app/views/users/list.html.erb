@@ -11,7 +11,7 @@
         </div>
 
         <div class="panel-body text-center">
-          Tenemos <strong><%= @users_count %></strong> usuarios inscritos en total.
+          Tenemos <strong><%= @users_count %></strong> personas inscritas en total.
         </div>
 
         <ul class="list-group">
@@ -19,10 +19,11 @@
             <li class="list-group-item"><%= render partial: 'user_link', locals: { user: user } %></li>
           <% end %>
         </ul>
-        <div class="panel-body text-center">
-          <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
-        </div>
       </div>
+    </div>
+
+    <div class="col-md-8 col-md-offset-2 text-center">
+      <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
     </div>
 
   </div>

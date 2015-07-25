@@ -12,6 +12,8 @@ gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'turbolinks'
 gem 'jbuilder',        '~> 2.0'
 gem 'bcrypt',          '~> 3.1.7'
+gem 'will_paginate',    '~> 3.0.7'
+gem 'will_paginate-bootstrap', '~> 1.0.1'
 
 gem 'chartkick',       '~> 1.3.2'
 gem 'groupdate',       '~> 2.4.0'

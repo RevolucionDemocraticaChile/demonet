@@ -14,6 +14,11 @@ class UsersController < ApplicationController
 
   def list
     @users = User.select(:id, :email, :first_name, :last_name, :admin)
+    # @users = User.paginate()
+    @users = User
+    .select(:id, :email, :first_name, :last_name, :admin)
+    .page(params[:page])
+    @users_count = User.count
   end
 
   def manifest

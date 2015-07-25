@@ -3,77 +3,28 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-md-8">
+
+    <div class="col-md-4 col-md-offset-4">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h2 class="panel-title">Info</h2>
+          <h2 class="panel-title">Nuestres miembres</h2>
         </div>
-        <div class="panel-body">
-          <p>
-            Este panel está bajo construcción. Por ahora, puedes buscar miembros en el panel de la derecha.
-          </p>
-          <p>
-            Tenemos <%= @users.size %> usuarios inscritos en total.
-          </p>
+
+        <div class="panel-body text-center">
+          Tenemos <strong><%= @users_count %></strong> usuarios inscritos en total.
+        </div>
+
+        <ul class="list-group">
+          <% @users.each do |user| %>
+            <li class="list-group-item"><%= render partial: 'user_link', locals: { user: user } %></li>
+          <% end %>
+        </ul>
+        <div class="panel-body text-center">
+          <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
         </div>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h2 class="panel-title">Nuestros miembros</h2>
-        </div>
-        <div class="panel-body">
-          <table id="users_list_datatable">
-            <thead>
-              <th></th>
-            </thead>
-            <% @users.each do |user| %>
-            <tr>
-              <td>
-                <%= render partial: 'user_link', locals: { user: user } %>
-              </td>
-            </tr>
-            <% end %>
-          </table>
-        </div>
-      </div>
-    </div>
   </div>
 
 </div>
-
-<script>
-$(document).ready(function() {
-  $('#users_list_datatable').DataTable(
-    {
-      "paging": true,
-      "ordering": false,
-      "autoWidth": false,
-      "pagingType": "simple",
-      "language": {
-        "lengthMenu": "Mostrar _MENU_",
-        "search": "Buscar",
-        "emptyTable": "No se encontraron registros",
-        "info": "Mostrando _START_-_END_ de _TOTAL_",
-        "infoEmpty": "No se encontraron registros",
-        "infoFiltered": "(filtrado de _MAX_)",
-        "zeroRecords": "No se encontraron registros",
-        "paginate": {
-          "previous": "Anterior",
-          "next": "Siguiente"
-        }
-      }
-    }
-  );
-
-  // "oLanguage": {
-  //   "sInfoEmpty": "Mostrando 0 a 0 de 0 entradas",
-  //   "oPaginate": {
-  //     "sNext": "Siguiente <span class='glyphicon glyphicon-chevron-right' />",
-  //     "sPrevious": "<span class='glyphicon glyphicon-chevron-left' /> Anterior",
-  //   }
-  // }
-});
-</script>

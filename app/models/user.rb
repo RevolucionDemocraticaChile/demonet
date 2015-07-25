@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
   include RoleModel
   attr_accessor :remember_token, :reset_token
 
+  self.per_page = 5
+
   EMAIL_MAX_LENGTH    = 50
   NAME_MAX_LENGTH     = 50
   PASSWORD_MIN_LENGTH = 6
